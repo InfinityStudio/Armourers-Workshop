@@ -4,7 +4,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import riskyken.armourersWorkshop.common.blocks.ModBlocks;
-import riskyken.armourersWorkshop.common.items.ModItems;
 
 public final class ModBlockRecipes {
 

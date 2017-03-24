@@ -4,16 +4,12 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
-import net.minecraft.creativetab.CreativeTabs;
 import riskyken.armourersWorkshop.common.ApiRegistrar;
 import riskyken.armourersWorkshop.common.addons.ModAddonManager;
-import riskyken.armourersWorkshop.common.command.CommandArmourers;
-import riskyken.armourersWorkshop.common.command.CommandArmourersAdminPanel;
 import riskyken.armourersWorkshop.common.config.ConfigHandler;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.config.ConfigSynchronizeHandler;
 import riskyken.armourersWorkshop.common.creativetab.CreativeTabArmourersWorkshop;
-import riskyken.armourersWorkshop.common.items.ModItems;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.network.GuiHandler;
 import riskyken.armourersWorkshop.common.network.PacketHandler;
@@ -75,9 +71,6 @@ public class ArmourersWorkshop {
 
     public static ModCreativeTab creativeTabArmorersWorkshop = new ModCreativeTab(LibModInfo.ID);
 
-    public static ModItems modItems;
-//    public static ModBlocks modBlocks;
-    
     @Mod.EventHandler
     public void perInit(FMLPreInitializationEvent event) {
         ModLogger.log("Loading " + LibModInfo.NAME + " " + LibModInfo.VERSION);
@@ -92,18 +85,10 @@ public class ArmourersWorkshop {
         ConfigHandler.init(new File(configDir, "common.cfg"));
         ConfigHandlerClient.init(new File(configDir, "client.cfg"));
         
-//        EntityRegistry.registerModEntity(Seat.class, "seat", 1, instance, 10, 20, false);
-        
-        
         proxy.preInit();
         
         SkinIOUtils.makeLibraryDirectory();
-        UpdateCheck.checkForUpdates();
         SkinExtractor.extractSkins();
-        
-        modItems = new ModItems();
-//        modBlocks = new ModBlocks();
-        
         SkinTypeRegistry.init();
         CubeRegistry.init();
         proxy.initLibraryManager();

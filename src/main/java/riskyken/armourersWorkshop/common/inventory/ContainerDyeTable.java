@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.common.inventory.slot.SlotDyeBottle;
 import riskyken.armourersWorkshop.common.inventory.slot.SlotDyeableSkin;
-import riskyken.armourersWorkshop.common.items.ModItems;
 import riskyken.armourersWorkshop.common.painting.PaintType;
 import riskyken.armourersWorkshop.common.painting.PaintingHelper;
 import riskyken.armourersWorkshop.common.skin.data.SkinPointer;

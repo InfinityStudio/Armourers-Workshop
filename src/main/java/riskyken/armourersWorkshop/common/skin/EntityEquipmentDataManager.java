@@ -64,46 +64,47 @@ public final class EntityEquipmentDataManager {
         }
         return false;
     }
+
+    //server query skin tick... nop
+//    @SubscribeEvent
+//    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+//        if (event.side == Side.SERVER & event.type == Type.PLAYER & event.phase == Phase.END) {
+//            EntityPlayer player = event.player;
+//            ExPropsPlayerEquipmentData props = ExPropsPlayerEquipmentData.get(player);
+//            if (props == null) {
+//                return;
+//            }
+//            updateWeaponNBT(player, props);
+//        }
+//    }
     
-    @SubscribeEvent
-    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.side == Side.SERVER & event.type == Type.PLAYER & event.phase == Phase.END) {
-            EntityPlayer player = event.player;
-            ExPropsPlayerEquipmentData props = ExPropsPlayerEquipmentData.get(player);
-            if (props == null) {
-                return;
-            }
-            updateWeaponNBT(player, props);
-        }
-    }
-    
-    private void updateWeaponNBT(EntityPlayer player, ExPropsPlayerEquipmentData props) {
-        InventoryPlayer inventory = player.inventory;
-        EntityEquipmentData equipmentData = props.getEquipmentData();
-        ItemStack stack = inventory.getCurrentItem();
-        if (stack != null) {
-            if (isSwordRenderItem(stack.getItem())) {
-                if (equipmentData.haveEquipment(SkinTypeRegistry.skinSword, 0)) {
-                    SkinNBTHelper.addRenderIdToStack(
-                            stack, SkinTypeRegistry.skinSword,
-                            equipmentData.getEquipmentId(SkinTypeRegistry.skinSword, 0),
-                            equipmentData.getSkinDye(SkinTypeRegistry.skinSword, 0));
-                } else {
-                    SkinNBTHelper.removeRenderIdFromStack(stack);
-                }
-            }
-            if (isBowRenderItem(stack.getItem())) {
-                if (equipmentData.haveEquipment(SkinTypeRegistry.skinBow, 0)) {
-                    SkinNBTHelper.addRenderIdToStack(
-                            stack, SkinTypeRegistry.skinBow,
-                            equipmentData.getEquipmentId(SkinTypeRegistry.skinBow, 0),
-                            equipmentData.getSkinDye(SkinTypeRegistry.skinBow, 0));
-                } else {
-                    SkinNBTHelper.removeRenderIdFromStack(stack);
-                }
-            }
-        }
-    }
+//    private void updateWeaponNBT(EntityPlayer player, ExPropsPlayerEquipmentData props) {
+//        InventoryPlayer inventory = player.inventory;
+//        EntityEquipmentData equipmentData = props.getEquipmentData();
+//        ItemStack stack = inventory.getCurrentItem();
+//        if (stack != null) {
+//            if (isSwordRenderItem(stack.getItem())) {
+//                if (equipmentData.haveEquipment(SkinTypeRegistry.skinSword, 0)) {
+//                    SkinNBTHelper.addRenderIdToStack(
+//                            stack, SkinTypeRegistry.skinSword,
+//                            equipmentData.getEquipmentId(SkinTypeRegistry.skinSword, 0),
+//                            equipmentData.getSkinDye(SkinTypeRegistry.skinSword, 0));
+//                } else {
+//                    SkinNBTHelper.removeRenderIdFromStack(stack);
+//                }
+//            }
+//            if (isBowRenderItem(stack.getItem())) {
+//                if (equipmentData.haveEquipment(SkinTypeRegistry.skinBow, 0)) {
+//                    SkinNBTHelper.addRenderIdToStack(
+//                            stack, SkinTypeRegistry.skinBow,
+//                            equipmentData.getEquipmentId(SkinTypeRegistry.skinBow, 0),
+//                            equipmentData.getSkinDye(SkinTypeRegistry.skinBow, 0));
+//                } else {
+//                    SkinNBTHelper.removeRenderIdFromStack(stack);
+//                }
+//            }
+//        }
+//    }
     
     @SubscribeEvent
     public void onStartTracking(PlayerEvent.StartTracking event) {
@@ -138,49 +139,49 @@ public final class EntityEquipmentDataManager {
         }
     }
     
-    @SubscribeEvent
-    public void onLivingDeathEvent (LivingDeathEvent  event) {
-        if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayerMP) {
-            boolean dropSkins = true;
-            
-            GameRules gr = getGameRules();
-            boolean keepInventory = false;
-            if (gr.hasRule("keepInventory")) {
-                keepInventory = gr.getGameRuleBooleanValue("keepInventory");
-            }
-            
-            switch (ConfigHandler.dropSkinsOnDeath) {
-            case 0:
-                dropSkins = !keepInventory;
-                break;
-            case 1:
-                dropSkins = false;
-                break;
-            case 2:
-                dropSkins = true;
-                break;
-            default:
-                dropSkins = !keepInventory;
-                break;
-            }
-
-            ExPropsPlayerEquipmentData playerData = ExPropsPlayerEquipmentData.get((EntityPlayer) event.entity);
-            if (dropSkins) {
-                playerData.getWardrobeInventoryContainer().dropItems((EntityPlayer) event.entity);
-            }
-        }
-    }
+//    @SubscribeEvent
+//    public void onLivingDeathEvent (LivingDeathEvent  event) {
+//        if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayerMP) {
+//            boolean dropSkins = true;
+//
+//            GameRules gr = getGameRules();
+//            boolean keepInventory = false;
+//            if (gr.hasRule("keepInventory")) {
+//                keepInventory = gr.getGameRuleBooleanValue("keepInventory");
+//            }
+//
+//            switch (ConfigHandler.dropSkinsOnDeath) {
+//            case 0:
+//                dropSkins = !keepInventory;
+//                break;
+//            case 1:
+//                dropSkins = false;
+//                break;
+//            case 2:
+//                dropSkins = true;
+//                break;
+//            default:
+//                dropSkins = !keepInventory;
+//                break;
+//            }
+//
+//            ExPropsPlayerEquipmentData playerData = ExPropsPlayerEquipmentData.get((EntityPlayer) event.entity);
+//            if (dropSkins) {
+//                playerData.getWardrobeInventoryContainer().dropItems((EntityPlayer) event.entity);
+//            }
+//        }
+//    }
     
     private GameRules getGameRules() {
         return MinecraftServer.getServer().worldServerForDimension(0).getGameRules();
     }
     
-    @SubscribeEvent
-    public void onLivingDeathEvent (PlayerEvent.Clone  event) {
-        NBTTagCompound compound = new NBTTagCompound();
-        ExPropsPlayerEquipmentData oldProps = ExPropsPlayerEquipmentData.get(event.original);
-        ExPropsPlayerEquipmentData newProps = ExPropsPlayerEquipmentData.get(event.entityPlayer);
-        oldProps.saveNBTData(compound);
-        newProps.loadNBTData(compound);
-    }
+//    @SubscribeEvent
+//    public void onLivingDeathEvent (PlayerEvent.Clone  event) {
+//        NBTTagCompound compound = new NBTTagCompound();
+//        ExPropsPlayerEquipmentData oldProps = ExPropsPlayerEquipmentData.get(event.original);
+//        ExPropsPlayerEquipmentData newProps = ExPropsPlayerEquipmentData.get(event.entityPlayer);
+//        oldProps.saveNBTData(compound);
+//        newProps.loadNBTData(compound);
+//    }
 }

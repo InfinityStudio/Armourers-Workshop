@@ -3,7 +3,6 @@ package riskyken.armourersWorkshop.common.crafting.recipe;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
-import riskyken.armourersWorkshop.common.items.ModItems;
 import riskyken.armourersWorkshop.utils.SkinNBTHelper;
 
 

@@ -18,7 +18,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.common.items.ItemDebugTool.IDebug;
-import riskyken.armourersWorkshop.common.items.ModItems;
 
 import java.util.ArrayList;
 

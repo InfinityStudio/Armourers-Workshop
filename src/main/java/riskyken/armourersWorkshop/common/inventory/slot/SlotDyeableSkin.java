@@ -4,7 +4,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import riskyken.armourersWorkshop.common.inventory.ContainerDyeTable;
-import riskyken.armourersWorkshop.common.items.ModItems;
 import riskyken.armourersWorkshop.utils.SkinNBTHelper;
 
 public class SlotDyeableSkin extends Slot {

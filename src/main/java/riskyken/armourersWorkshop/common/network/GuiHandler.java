@@ -35,7 +35,6 @@ import riskyken.armourersWorkshop.common.inventory.ContainerMiniArmourer;
 import riskyken.armourersWorkshop.common.inventory.ContainerMiniArmourerBuilding;
 import riskyken.armourersWorkshop.common.inventory.ContainerSkinWardrobe;
 import riskyken.armourersWorkshop.common.inventory.ContainerSkinningTable;
-import riskyken.armourersWorkshop.common.items.ModItems;
 import riskyken.armourersWorkshop.common.lib.LibGuiIds;
 import riskyken.armourersWorkshop.common.painting.tool.IConfigurableTool;
 import riskyken.armourersWorkshop.common.skin.ExPropsPlayerEquipmentData;

@@ -22,7 +22,6 @@ import riskyken.armourersWorkshop.client.gui.controls.GuiDropDownList.DropDownLi
 import riskyken.armourersWorkshop.client.gui.controls.GuiDropDownList.IDropDownListCallback;
 import riskyken.armourersWorkshop.client.render.ModRenderHelper;
 import riskyken.armourersWorkshop.common.blocks.ModBlocks;
-import riskyken.armourersWorkshop.common.items.ModItems;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.network.PacketHandler;
 import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiSetArmourerSkinType;
