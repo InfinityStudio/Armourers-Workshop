@@ -9,8 +9,8 @@ public class CubeGlassGlowing extends CubeGlass {
         return true;
     }
     
-    @Override
-    public Block getMinecraftBlock() {
-        return ModBlocks.colourableGlassGlowing;
-    }
+//    @Override
+//    public Block getMinecraftBlock() {
+//        return ModBlocks.colourableGlassGlowing;
+//    }
 }
