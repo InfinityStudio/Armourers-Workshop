@@ -15,55 +15,55 @@ import riskyken.armourersWorkshop.common.skin.data.SkinDye;
 import riskyken.armourersWorkshop.common.skin.data.SkinPointer;
 
 public class EntityEquipmentData implements IEntityEquipment {
-    
+
     private static final String TAG_SKIN_LIST = "skinList";
     private static final String TAG_SKIN_TYPE = "skinType";
     private static final String TAG_EQUIPMENT_ID = "equipmentId";
-    
+
     private int slotCount = 1;
     private HashMap<String, Integer> skinId = new HashMap<String, Integer>();
     private HashMap<String, ISkinDye> skinDye = new HashMap<String, ISkinDye>();
-    
+
     public static EntityEquipmentData readFromByteBuf(ByteBuf buf) {
         int slotCount = buf.readByte();
         EntityEquipmentData eed = new EntityEquipmentData(slotCount);
         eed.fromBytes(buf);
         return eed;
     }
-    
-    public static void writeToByteBuf(EntityEquipmentData eed,ByteBuf buf) {
+
+    public static void writeToByteBuf(EntityEquipmentData eed, ByteBuf buf) {
         eed.toBytes(buf);
     }
-    
+
     public EntityEquipmentData(int slotCount) {
         this.slotCount = slotCount;
     }
-    
+
     @Override
     public void addEquipment(ISkinType skinType, int slotIndex, ISkinPointer skinPointer) {
         String key = skinType.getRegistryName() + ":" + slotIndex;
         skinId.remove(key);
         skinDye.remove(key);
-        
+
         skinId.put(key, skinPointer.getSkinId());
         if (skinPointer.getSkinDye() != null) {
             skinDye.put(key, skinPointer.getSkinDye());
         }
     }
-    
+
     @Override
     public void removeEquipment(ISkinType skinType, int slotIndex) {
         String key = skinType.getRegistryName() + ":" + slotIndex;
         skinId.remove(key);
         skinDye.remove(key);
     }
-    
+
     @Override
     public boolean haveEquipment(ISkinType skinType, int slotIndex) {
         String key = skinType.getRegistryName() + ":" + slotIndex;
         return this.skinId.containsKey(key);
     }
-    
+
     @Override
     public int getEquipmentId(ISkinType skinType, int slotIndex) {
         String key = skinType.getRegistryName() + ":" + slotIndex;
@@ -72,7 +72,7 @@ public class EntityEquipmentData implements IEntityEquipment {
         }
         return 0;
     }
-    
+
     @Override
     public ISkinPointer getSkinPointer(ISkinType skinType, int slotIndex) {
         String key = skinType.getRegistryName() + ":" + slotIndex;
@@ -87,18 +87,18 @@ public class EntityEquipmentData implements IEntityEquipment {
         }
         return null;
     }
-    
+
     @Override
     public ISkinDye getSkinDye(ISkinType skinType, int slotIndex) {
         String key = skinType.getRegistryName() + ":" + slotIndex;
         return skinDye.get(key);
     }
-    
+
     @Override
     public int getNumberOfSlots() {
         return slotCount;
     }
-    
+
     public void saveNBTData(NBTTagCompound compound) {
         NBTTagList items = new NBTTagList();
         for (int i = 0; i < skinId.size(); i++) {
@@ -111,18 +111,18 @@ public class EntityEquipmentData implements IEntityEquipment {
         }
         compound.setTag(TAG_SKIN_LIST, items);
     }
-    
+
     public void loadNBTData(NBTTagCompound compound) {
         NBTTagList itemsList = compound.getTagList(TAG_SKIN_LIST, NBT.TAG_COMPOUND);
         skinId.clear();
         for (int i = 0; i < itemsList.tagCount(); i++) {
-            NBTTagCompound item = (NBTTagCompound)itemsList.getCompoundTagAt(i);
+            NBTTagCompound item = (NBTTagCompound) itemsList.getCompoundTagAt(i);
             String skinName = item.getString(TAG_SKIN_TYPE);
             int equipmentId = item.getInteger(TAG_EQUIPMENT_ID);
             skinId.put(skinName, equipmentId);
         }
     }
-    
+
     private void toBytes(ByteBuf buf) {
         buf.writeByte(slotCount);
         buf.writeByte(skinId.size());
@@ -135,7 +135,7 @@ public class EntityEquipmentData implements IEntityEquipment {
             dye.writeToBuf(buf);
         }
     }
-    
+
     private void fromBytes(ByteBuf buf) {
         int itemCount = buf.readByte();
         skinId.clear();
