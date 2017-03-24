@@ -115,32 +115,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void initRenderers() {
         SkinModelRenderer.init();
-        EntitySkinRenderHandler.init();
-        new BlockHighlightRenderHandler();
         new ItemTooltipHandler();
-        Render arrowRender = new RenderSkinnedArrow();
-        arrowRender.setRenderManager(RenderManager.instance);
-        RenderManager.instance.entityRenderMap.put(EntityArrow.class, arrowRender);
-        
-        //Register tile entity renderers.
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityArmourer.class, new RenderBlockArmourer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMannequin.class, new RenderBlockMannequin());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMiniArmourer.class, new RenderBlockMiniArmourer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySkinnable.class, new RenderBlockSkinnable());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityColourable.class, new RenderBlockColourable());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBoundingBox.class, new RenderBlockColourable());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlobalSkinLibrary.class, new RenderBlockGlobalSkinLibrary());
-        
-        //Register item renderers.
-        ModelMannequin modelMannequin = new ModelMannequin();
-        MinecraftForgeClient.registerItemRenderer(ModItems.equipmentSkin, new RenderItemEquipmentSkin());
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.miniArmourer), new RenderItemBlockMiniArmourer());
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.mannequin), new RenderItemMannequin(modelMannequin));
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.doll), new RenderItemMannequin(modelMannequin));
-        
-        //Register block renderers.
-        RenderingRegistry.registerBlockHandler(new RenderBlockColourMixer());
-        RenderingRegistry.registerBlockHandler(new RenderBlockGlowing());
     }
     
     @Override
@@ -155,7 +130,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void postInit() {
         ModAddonManager.initRenderers();
-        EntitySkinRenderHandler.INSTANCE.initRenderer();
         if (HolidayHelper.valentins.isHolidayActive()) {
             enableValentinsClouds();
         }

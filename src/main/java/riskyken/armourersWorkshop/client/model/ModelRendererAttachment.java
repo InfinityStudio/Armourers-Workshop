@@ -16,7 +16,6 @@ import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
-import riskyken.armourersWorkshop.client.render.MannequinFakePlayer;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
 import riskyken.armourersWorkshop.client.render.SkinPartRenderer;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;

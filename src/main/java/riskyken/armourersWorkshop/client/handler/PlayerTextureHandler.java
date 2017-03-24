@@ -16,7 +16,6 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.render.EntityTextureInfo;
-import riskyken.armourersWorkshop.client.render.MannequinFakePlayer;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;

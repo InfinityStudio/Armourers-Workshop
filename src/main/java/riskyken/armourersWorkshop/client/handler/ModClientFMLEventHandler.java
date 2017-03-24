@@ -24,21 +24,21 @@ import riskyken.armourersWorkshop.common.update.UpdateCheck;
 import riskyken.armourersWorkshop.utils.TranslateUtils;
 
 public class ModClientFMLEventHandler {
-    
+
     private static final String DOWNLOAD_URL = "http://minecraft.curseforge.com/mc-mods/229523-armourers-workshop/files";
     private boolean shownUpdateInfo = false;
     private boolean showmDevWarning;
     public static float renderTickTime;
     public static int skinRendersThisTick = 0;
     public static int skinRenderLastTick = 0;
-    
+
     @SubscribeEvent
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
         if (eventArgs.modID.equals(LibModInfo.ID)) {
             ConfigHandlerClient.loadConfigFile();
         }
     }
-    
+
     public void onPlayerTickEndEvent() {
         EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
         if (!shownUpdateInfo && UpdateCheck.updateFound) {
@@ -59,28 +59,30 @@ public class ModClientFMLEventHandler {
             showmDevWarning = true;
         }
     }
-    
-    @SubscribeEvent
-    public void onKeyInputEvent(InputEvent.KeyInputEvent event) {
-        if (Keybindings.openCustomArmourGui.isPressed() & ConfigHandler.allowEquipmentWardrobe) {
-            PacketHandler.networkWrapper.sendToServer(new MessageClientKeyPress((byte) 0));
-        }
-        if (Keybindings.undo.isPressed()) {
-            PacketHandler.networkWrapper.sendToServer(new MessageClientKeyPress((byte) 1));
-        }
-    }
-    
-    @SubscribeEvent
-    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.side == Side.CLIENT) {
-            if (event.type == Type.PLAYER) {
-                if (event.phase == Phase.END) {
-                    onPlayerTickEndEvent();
-                }
-            }
-        }
-    }
-    
+
+    //cancel the key message sending...
+//    @SubscribeEvent
+//    public void onKeyInputEvent(InputEvent.KeyInputEvent event) {
+//        if (Keybindings.openCustomArmourGui.isPressed() & ConfigHandler.allowEquipmentWardrobe) {
+//            PacketHandler.networkWrapper.sendToServer(new MessageClientKeyPress((byte) 0));
+//        }
+//        if (Keybindings.undo.isPressed()) {
+//            PacketHandler.networkWrapper.sendToServer(new MessageClientKeyPress((byte) 1));
+//        }
+//    }
+
+    //cancel official update...
+//    @SubscribeEvent
+//    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+//        if (event.side == Side.CLIENT) {
+//            if (event.type == Type.PLAYER) {
+//                if (event.phase == Phase.END) {
+//                    onPlayerTickEndEvent();
+//                }
+//            }
+//        }
+//    }
+
     @SubscribeEvent
     public void onRenderTickEvent(RenderTickEvent event) {
         if (event.phase == Phase.START) {

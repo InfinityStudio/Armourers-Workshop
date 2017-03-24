@@ -1,28 +1,17 @@
 package riskyken.armourersWorkshop;
 
-import java.io.File;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.event.FMLServerStoppedEvent;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import riskyken.armourersWorkshop.common.ApiRegistrar;
 import riskyken.armourersWorkshop.common.addons.ModAddonManager;
-import riskyken.armourersWorkshop.common.blocks.BlockSkinnable.Seat;
-import riskyken.armourersWorkshop.common.blocks.ModBlocks;
 import riskyken.armourersWorkshop.common.command.CommandArmourers;
 import riskyken.armourersWorkshop.common.command.CommandArmourersAdminPanel;
 import riskyken.armourersWorkshop.common.config.ConfigHandler;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.config.ConfigSynchronizeHandler;
-import riskyken.armourersWorkshop.common.crafting.CraftingManager;
 import riskyken.armourersWorkshop.common.creativetab.CreativeTabArmourersWorkshop;
 import riskyken.armourersWorkshop.common.items.ModItems;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
@@ -39,6 +28,8 @@ import riskyken.armourersWorkshop.proxies.CommonProxy;
 import riskyken.armourersWorkshop.utils.ModLogger;
 import riskyken.armourersWorkshop.utils.SkinIOUtils;
 import riskyken.plushieWrapper.common.creativetab.ModCreativeTab;
+
+import java.io.File;
 
 @Mod(modid = LibModInfo.ID, name = LibModInfo.NAME, version = LibModInfo.VERSION, guiFactory = LibModInfo.GUI_FACTORY_CLASS)
 public class ArmourersWorkshop {
@@ -86,7 +77,7 @@ public class ArmourersWorkshop {
     public static CreativeTabArmourersWorkshop tabArmorersWorkshop = new CreativeTabArmourersWorkshop(CreativeTabs.getNextID(), LibModInfo.ID.toLowerCase());
 
     public static ModItems modItems;
-    public static ModBlocks modBlocks;
+//    public static ModBlocks modBlocks;
     
     @Mod.EventHandler
     public void perInit(FMLPreInitializationEvent event) {
@@ -103,7 +94,7 @@ public class ArmourersWorkshop {
         ConfigHandler.init(new File(configDir, "common.cfg"));
         ConfigHandlerClient.init(new File(configDir, "client.cfg"));
         
-        EntityRegistry.registerModEntity(Seat.class, "seat", 1, instance, 10, 20, false);
+//        EntityRegistry.registerModEntity(Seat.class, "seat", 1, instance, 10, 20, false);
         
         
         proxy.preInit();
@@ -113,7 +104,7 @@ public class ArmourersWorkshop {
         SkinExtractor.extractSkins();
         
         modItems = new ModItems();
-        modBlocks = new ModBlocks();
+//        modBlocks = new ModBlocks();
         
         SkinTypeRegistry.init();
         CubeRegistry.init();
@@ -124,7 +115,7 @@ public class ArmourersWorkshop {
     public void load(FMLInitializationEvent event) {
         CraftingManager.init();
 
-        modBlocks.registerTileEntities();
+//        modBlocks.registerTileEntities();
 
         new GuiHandler();
         new ConfigSynchronizeHandler();

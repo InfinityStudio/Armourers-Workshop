@@ -1,7 +1,5 @@
 package riskyken.armourersWorkshop.client.handler;
 
-import java.util.HashMap;
-
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -13,12 +11,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
-import riskyken.armourersWorkshop.client.render.MannequinFakePlayer;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.skin.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.common.skin.ExPropsPlayerEquipmentData;
 import riskyken.armourersWorkshop.utils.SkinNBTHelper;
+
+import java.util.HashMap;
 
 @SideOnly(Side.CLIENT)
 public final class EquipmentWardrobeHandler {
@@ -69,9 +68,9 @@ public final class EquipmentWardrobeHandler {
     @SubscribeEvent
     public void onRender(RenderPlayerEvent.Pre event) {
         EntityPlayer player = event.entityPlayer;
-        if (player instanceof MannequinFakePlayer) {
-            return;
-        }
+//        if (player instanceof MannequinFakePlayer) {
+//            return;
+//        }
         if (player.getGameProfile() == null) {
             return;
         }
@@ -97,9 +96,9 @@ public final class EquipmentWardrobeHandler {
     @SubscribeEvent
     public void onRender(RenderPlayerEvent.Post event) {
         EntityPlayer player = event.entityPlayer;
-        if (player instanceof MannequinFakePlayer) {
-            return;
-        }
+//        if (player instanceof MannequinFakePlayer) {
+//            return;
+//        }
         if (player.getGameProfile() == null) {
             return;
         }
@@ -122,9 +121,9 @@ public final class EquipmentWardrobeHandler {
             return;
         }
         EntityPlayer player = event.entityPlayer;
-        if (player instanceof MannequinFakePlayer) {
-            return;
-        }
+//        if (player instanceof MannequinFakePlayer) {
+//            return;
+//        }
         if (player.getGameProfile() == null) {
             return;
         }

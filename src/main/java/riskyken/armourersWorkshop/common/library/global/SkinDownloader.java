@@ -18,7 +18,7 @@ import riskyken.armourersWorkshop.utils.ModLogger;
 import riskyken.armourersWorkshop.utils.SkinIOUtils;
 
 public final class SkinDownloader {
-    
+
     public static void downloadSkins(CompletionService<Skin> skinCompletion, JsonArray json) {
         for (int i = 0; i < json.size(); i++) {
             JsonObject obj = json.get(i).getAsJsonObject();
@@ -29,21 +29,21 @@ public final class SkinDownloader {
     }
     
     public static class DownloadSkinCallable implements Callable<Skin> {
-        
+
         private final String name;
         private final int serverId;
-        
+
         public DownloadSkinCallable(String name, int serverId) {
             this.name = name;
             this.serverId = serverId;
         }
-        
+
         @Override
         public Skin call() throws Exception {
             Skin skin = downloadSkin(name, serverId);
             return skin;
         }
-        
+
         private Skin downloadSkin(String name, int serverId) throws InterruptedException {
             //Check if we already have the skin in the cache.
             Skin skin = ClientSkinCache.INSTANCE.getSkinFromServerId(serverId);
@@ -51,10 +51,10 @@ public final class SkinDownloader {
                 skin.serverId = serverId;
                 return skin;
             }
-            
+
             long startTime = System.currentTimeMillis();
             long maxRate = 100;
-            
+
             ModLogger.log(String.format("Downloading skin: %s", name));
             InputStream in = null;
             String data = null;
@@ -66,12 +66,12 @@ public final class SkinDownloader {
             } finally {
                 IOUtils.closeQuietly(in);
             }
-            
+
             long waitTime = maxRate - (System.currentTimeMillis() - startTime);
             if (waitTime > 0) {
                 Thread.sleep(waitTime);
             }
-            
+
             if (skin != null) {
                 skin.serverId = serverId;
             } else {

@@ -1,9 +1,5 @@
 package riskyken.armourersWorkshop.client.handler;
 
-import java.util.ArrayList;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,13 +13,14 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.common.MinecraftForge;
-import riskyken.armourersWorkshop.common.blocks.ModBlocks;
+import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.common.items.ItemDebugTool.IDebug;
 import riskyken.armourersWorkshop.common.items.ModItems;
+
+import java.util.ArrayList;
 
 @SideOnly(Side.CLIENT)
 public class BlockHighlightRenderHandler {
@@ -31,28 +28,28 @@ public class BlockHighlightRenderHandler {
     public BlockHighlightRenderHandler() {
         MinecraftForge.EVENT_BUS.register(this);
     }
-    
-    @SubscribeEvent
-    public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event) {
-        EntityPlayer player = event.player;
-        World world = event.player.worldObj;
-        MovingObjectPosition target = event.target;
-        
-        if (target != null && target.typeOfHit != MovingObjectType.BLOCK) {
-            return;
-        }
-        
-        int x = target.blockX;
-        int y = target.blockY;
-        int z = target.blockZ;
-        
-        Block block = world.getBlock(x, y, z);
-        
-        if (block == ModBlocks.mannequin) {
-            drawMannequinBlockBounds(world, x, y, z, player, block, event.partialTicks);
-            event.setCanceled(true);
-        }
-    }
+//
+//    @SubscribeEvent
+//    public void onDrawBlockHighlightEvent(DrawBlockHighlightEvent event) {
+//        EntityPlayer player = event.player;
+//        World world = event.player.worldObj;
+//        MovingObjectPosition target = event.target;
+//
+//        if (target != null && target.typeOfHit != MovingObjectType.BLOCK) {
+//            return;
+//        }
+//
+//        int x = target.blockX;
+//        int y = target.blockY;
+//        int z = target.blockZ;
+//
+//        Block block = world.getBlock(x, y, z);
+//
+//        if (block == ModBlocks.mannequin) {
+//            drawMannequinBlockBounds(world, x, y, z, player, block, event.partialTicks);
+//            event.setCanceled(true);
+//        }
+//    }
     
     @SubscribeEvent
     public void onRenderGameOverlayEvent(RenderGameOverlayEvent event) {
