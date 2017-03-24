@@ -7,7 +7,6 @@ import net.minecraft.entity.passive.EntityChicken;
 import riskyken.armourersWorkshop.api.client.render.entity.ISkinnableEntityRenderer;
 import riskyken.armourersWorkshop.api.common.skin.entity.ISkinnableEntity;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
-import riskyken.armourersWorkshop.client.render.entity.SkinnableEntityChickenRenderer;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 
 public class SkinnableEntityChicken implements ISkinnableEntity {
@@ -19,8 +18,13 @@ public class SkinnableEntityChicken implements ISkinnableEntity {
 
     @Override
     public Class<? extends ISkinnableEntityRenderer> getRendererClass() {
-        return SkinnableEntityChickenRenderer.class;
+        return null;
     }
+
+//    @Override
+//    public Class<? extends ISkinnableEntityRenderer> getRendererClass() {
+//        return SkinnableEntityChickenRenderer.class;
+//    }
 
     @Override
     public boolean canUseWandOfStyle() {
