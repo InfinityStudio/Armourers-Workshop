@@ -58,7 +58,7 @@ public class ArmourersWorkshop {
      * SkinTextureKey
      * SkinPartModelKey
      */
-    
+
     @Mod.Instance(LibModInfo.ID)
     public static ArmourersWorkshop instance;
 
@@ -73,40 +73,24 @@ public class ArmourersWorkshop {
 
         File configDir = event.getSuggestedConfigurationFile().getParentFile();
         configDir = new File(configDir, LibModInfo.ID);
-        if (!configDir.exists()) {
+        if (!configDir.exists())
             configDir.mkdirs();
-        }
-        
-        ConfigHandler.init(new File(configDir, "common.cfg"));
-        ConfigHandlerClient.init(new File(configDir, "client.cfg"));
-        
-        proxy.preInit();
-        
-        SkinIOUtils.makeLibraryDirectory();
-        SkinExtractor.extractSkins();
-        SkinTypeRegistry.init();
-        CubeRegistry.init();
-        proxy.initLibraryManager();
+
+        proxy.preInit(configDir);
     }
 
     @Mod.EventHandler
     public void load(FMLInitializationEvent event) {
-        new ConfigSynchronizeHandler();
-        
-        PacketHandler.init();
-        EntityEquipmentDataManager.init();
-        EntitySkinHandler.init();
-        
+//        new ConfigSynchronizeHandler();
+// no packet
+//        PacketHandler.init();
         proxy.init();
-        proxy.registerKeyBindings();
-        proxy.initRenderers();
-        
     }
-    
+
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit();
-        proxy.libraryManager.reloadLibrary();
+
     }
 
     //client mod!
@@ -116,23 +100,24 @@ public class ArmourersWorkshop {
 //        event.registerServerCommand(new CommandArmourersAdminPanel());
 //        CommonSkinCache.INSTANCE.serverStarted();
 //    }
-    
+
     @Mod.EventHandler
     public void serverStopped(FMLServerStoppedEvent event) {
         CommonSkinCache.INSTANCE.serverStopped();
     }
-    
-    @Mod.EventHandler
-    public void processIMC(FMLInterModComms.IMCEvent event) {
-        for (IMCMessage imcMessage : event.getMessages()) {
-            if (!imcMessage.isStringMessage()) continue;
-            if (imcMessage.key.equalsIgnoreCase("register")) {
-                ModLogger.log(String.format("Receiving registration request from %s for class %s", imcMessage.getSender(), imcMessage.getStringValue()));
-                ApiRegistrar.INSTANCE.addApiRequest(imcMessage.getSender(), imcMessage.getStringValue());
-            }
-        }
-    }
-    
+
+    //NOP
+//    @Mod.EventHandler
+//    public void processIMC(FMLInterModComms.IMCEvent event) {
+//        for (IMCMessage imcMessage : event.getMessages()) {
+//            if (!imcMessage.isStringMessage()) continue;
+//            if (imcMessage.key.equalsIgnoreCase("register")) {
+//                ModLogger.log(String.format("Receiving registration request from %s for class %s", imcMessage.getSender(), imcMessage.getStringValue()));
+//                ApiRegistrar.INSTANCE.addApiRequest(imcMessage.getSender(), imcMessage.getStringValue());
+//            }
+//        }
+//    }
+
     public static boolean isDedicated() {
         return proxy.getClass() == CommonProxy.class;
     }

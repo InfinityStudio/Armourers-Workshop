@@ -38,6 +38,7 @@ import riskyken.armourersWorkshop.utils.HolidayHelper;
 import riskyken.armourersWorkshop.utils.ModLogger;
 import riskyken.armourersWorkshop.utils.SkinIOUtils;
 
+import java.io.File;
 import java.lang.reflect.Field;
 
 @SideOnly(Side.CLIENT)
@@ -64,12 +65,16 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void preInit() {
+    public void preInit(File configDir) {
+        super.preInit(configDir);
         enableCrossModSupport();
         spamSillyMessages();
     }
 
-    @Override
+    public void preInit() {
+
+    }
+
     public void initLibraryManager() {
         libraryManager = new ClientLibraryManager();
     }
@@ -84,6 +89,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
+        super.init();
         equipmentWardrobeHandler = new EquipmentWardrobeHandler();
         playerTextureHandler = new PlayerTextureHandler();
         ClientSkinCache.init();
@@ -93,6 +99,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void postInit() {
+        super.postInit();
         if (HolidayHelper.valentins.isHolidayActive()) {
             enableValentinsClouds();
         }
