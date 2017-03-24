@@ -19,8 +19,6 @@ import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
 import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.exception.NewerFileVersionException;
-import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
-import riskyken.armourersWorkshop.common.skin.cubes.ICube;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 
 public class Skin implements ISkin {
