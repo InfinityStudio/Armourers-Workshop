@@ -63,10 +63,10 @@ public class ModelRendererAttachment extends ModelRenderer {
             mc.mcProfiler.endSection();
             return;
         }
-        if (player instanceof MannequinFakePlayer) {
-            mc.mcProfiler.endSection();
-            return;
-        }
+//        if (player instanceof MannequinFakePlayer) {
+//            mc.mcProfiler.endSection();
+//            return;
+//        }
         
         double distance = Minecraft.getMinecraft().thePlayer.getDistance(
                 player.posX,

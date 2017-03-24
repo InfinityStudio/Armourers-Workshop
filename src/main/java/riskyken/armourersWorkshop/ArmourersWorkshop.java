@@ -74,7 +74,6 @@ public class ArmourersWorkshop {
     public static CommonProxy proxy;
 
     public static ModCreativeTab creativeTabArmorersWorkshop = new ModCreativeTab(LibModInfo.ID);
-    public static CreativeTabArmourersWorkshop tabArmorersWorkshop = new CreativeTabArmourersWorkshop(CreativeTabs.getNextID(), LibModInfo.ID.toLowerCase());
 
     public static ModItems modItems;
 //    public static ModBlocks modBlocks;
@@ -82,8 +81,7 @@ public class ArmourersWorkshop {
     @Mod.EventHandler
     public void perInit(FMLPreInitializationEvent event) {
         ModLogger.log("Loading " + LibModInfo.NAME + " " + LibModInfo.VERSION);
-        creativeTabArmorersWorkshop.setMinecraftCreativeTab(tabArmorersWorkshop);
-        
+
         File configDir = event.getSuggestedConfigurationFile().getParentFile();
         configDir = new File(configDir, LibModInfo.ID);
         if (!configDir.exists()) {
@@ -113,10 +111,6 @@ public class ArmourersWorkshop {
 
     @Mod.EventHandler
     public void load(FMLInitializationEvent event) {
-        CraftingManager.init();
-
-//        modBlocks.registerTileEntities();
-
         new GuiHandler();
         new ConfigSynchronizeHandler();
         
@@ -137,13 +131,14 @@ public class ArmourersWorkshop {
         ModAddonManager.postInit();
         proxy.libraryManager.reloadLibrary();
     }
-    
-    @Mod.EventHandler
-    public void serverStart(FMLServerStartingEvent event) {
-        event.registerServerCommand(new CommandArmourers());
-        event.registerServerCommand(new CommandArmourersAdminPanel());
-        CommonSkinCache.INSTANCE.serverStarted();
-    }
+
+    //client mod!
+//    @Mod.EventHandler
+//    public void serverStart(FMLServerStartingEvent event) {
+//        event.registerServerCommand(new CommandArmourers());
+//        event.registerServerCommand(new CommandArmourersAdminPanel());
+//        CommonSkinCache.INSTANCE.serverStarted();
+//    }
     
     @Mod.EventHandler
     public void serverStopped(FMLServerStoppedEvent event) {

@@ -53,9 +53,9 @@ public class PlayerTextureHandler {
             return;
         }
         AbstractClientPlayer player = (AbstractClientPlayer) event.entityPlayer;
-        if (player instanceof MannequinFakePlayer) {
-            return;
-        }
+//        if (player instanceof MannequinFakePlayer) {
+//            return;
+//        }
         if (player.getGameProfile() == null) {
             return;
         }
@@ -104,9 +104,9 @@ public class PlayerTextureHandler {
             return;
         }
         AbstractClientPlayer player = (AbstractClientPlayer) event.entityPlayer;
-        if (player instanceof MannequinFakePlayer) {
-            return;
-        }
+//        if (player instanceof MannequinFakePlayer) {
+//            return;
+//        }
         if (player.getGameProfile() == null) {
             return;
         }

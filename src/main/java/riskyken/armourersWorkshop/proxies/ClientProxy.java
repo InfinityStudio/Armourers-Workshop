@@ -1,11 +1,6 @@
 package riskyken.armourersWorkshop.proxies;
 
-import java.lang.reflect.Field;
-
-import org.apache.logging.log4j.Level;
-
 import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -15,50 +10,23 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderGlobal;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.Level;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
-import riskyken.armourersWorkshop.client.handler.BlockHighlightRenderHandler;
-import riskyken.armourersWorkshop.client.handler.DebugTextHandler;
-import riskyken.armourersWorkshop.client.handler.EquipmentWardrobeHandler;
-import riskyken.armourersWorkshop.client.handler.ItemTooltipHandler;
-import riskyken.armourersWorkshop.client.handler.ModClientFMLEventHandler;
-import riskyken.armourersWorkshop.client.handler.PlayerTextureHandler;
+import riskyken.armourersWorkshop.client.handler.*;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
 import riskyken.armourersWorkshop.client.library.ClientLibraryManager;
-import riskyken.armourersWorkshop.client.model.ModelMannequin;
 import riskyken.armourersWorkshop.client.model.bake.ModelBakery;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
-import riskyken.armourersWorkshop.client.render.block.RenderBlockColourMixer;
-import riskyken.armourersWorkshop.client.render.block.RenderBlockGlowing;
-import riskyken.armourersWorkshop.client.render.entity.EntitySkinRenderHandler;
-import riskyken.armourersWorkshop.client.render.entity.RenderSkinnedArrow;
-import riskyken.armourersWorkshop.client.render.item.RenderItemBlockMiniArmourer;
-import riskyken.armourersWorkshop.client.render.item.RenderItemEquipmentSkin;
-import riskyken.armourersWorkshop.client.render.item.RenderItemMannequin;
-import riskyken.armourersWorkshop.client.render.tileEntity.RenderBlockArmourer;
-import riskyken.armourersWorkshop.client.render.tileEntity.RenderBlockColourable;
-import riskyken.armourersWorkshop.client.render.tileEntity.RenderBlockGlobalSkinLibrary;
-import riskyken.armourersWorkshop.client.render.tileEntity.RenderBlockMannequin;
-import riskyken.armourersWorkshop.client.render.tileEntity.RenderBlockMiniArmourer;
-import riskyken.armourersWorkshop.client.render.tileEntity.RenderBlockSkinnable;
 import riskyken.armourersWorkshop.client.settings.Keybindings;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
 import riskyken.armourersWorkshop.common.addons.ModAddonManager;
-import riskyken.armourersWorkshop.common.blocks.BlockColourMixer;
-import riskyken.armourersWorkshop.common.blocks.BlockColourable;
-import riskyken.armourersWorkshop.common.blocks.ModBlocks;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import riskyken.armourersWorkshop.common.items.ModItems;
 import riskyken.armourersWorkshop.common.lib.LibGuiIds;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.library.LibraryFile;
@@ -67,16 +35,11 @@ import riskyken.armourersWorkshop.common.network.messages.server.MessageServerCl
 import riskyken.armourersWorkshop.common.skin.EntityEquipmentData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.entity.EntitySkinHandler;
-import riskyken.armourersWorkshop.common.tileentities.TileEntityArmourer;
-import riskyken.armourersWorkshop.common.tileentities.TileEntityBoundingBox;
-import riskyken.armourersWorkshop.common.tileentities.TileEntityColourable;
-import riskyken.armourersWorkshop.common.tileentities.TileEntityGlobalSkinLibrary;
-import riskyken.armourersWorkshop.common.tileentities.TileEntityMannequin;
-import riskyken.armourersWorkshop.common.tileentities.TileEntityMiniArmourer;
-import riskyken.armourersWorkshop.common.tileentities.TileEntitySkinnable;
 import riskyken.armourersWorkshop.utils.HolidayHelper;
 import riskyken.armourersWorkshop.utils.ModLogger;
 import riskyken.armourersWorkshop.utils.SkinIOUtils;
+
+import java.lang.reflect.Field;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
