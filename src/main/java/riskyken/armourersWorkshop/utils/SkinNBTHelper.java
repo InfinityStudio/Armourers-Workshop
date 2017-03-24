@@ -167,33 +167,33 @@ public class SkinNBTHelper {
         return skinDataCompound.getInteger(TAG_OLD_SKIN_ID);
     }
     
-    public static ItemStack makeEquipmentSkinStack(Skin equipmentItemData) {
-        ItemStack stack = new ItemStack(ModItems.equipmentSkin, 1);
-        stack.setTagCompound(new NBTTagCompound());
-        addSkinDataToStack(stack, equipmentItemData.getSkinType(), equipmentItemData.hashCode(), false, null);
-        return stack;
-    }
-    
-    public static ItemStack makeEquipmentSkinStack(SkinPointer skinPointer) {
-        ItemStack stack = new ItemStack(ModItems.equipmentSkin, 1);
-        stack.setTagCompound(new NBTTagCompound());
-        addSkinDataToStack(stack, skinPointer.getSkinType(), skinPointer.getSkinId(), false, new SkinDye(skinPointer.getSkinDye()));
-        return stack;
-    }
-    
-    public static ItemStack makeArmouerContainerStack(Skin equipmentItemData) {
-        ItemStack stack = new ItemStack(ModItems.armourContainer[equipmentItemData.getSkinType().getVanillaArmourSlotId()], 1);
-        stack.setTagCompound(new NBTTagCompound());
-        addSkinDataToStack(stack, equipmentItemData.getSkinType(), equipmentItemData.hashCode(), false, null);
-        return stack;
-    }
-    
-    public static ItemStack makeArmouerContainerStack(SkinPointer skinPointer) {
-        ItemStack stack = new ItemStack(ModItems.armourContainer[skinPointer.getSkinType().getVanillaArmourSlotId()], 1);
-        stack.setTagCompound(new NBTTagCompound());
-        addSkinDataToStack(stack, skinPointer.getSkinType(), skinPointer.skinId, false, new SkinDye(skinPointer.getSkinDye()));
-        return stack;
-    }
+//    public static ItemStack makeEquipmentSkinStack(Skin equipmentItemData) {
+//        ItemStack stack = new ItemStack(ModItems.equipmentSkin, 1);
+//        stack.setTagCompound(new NBTTagCompound());
+//        addSkinDataToStack(stack, equipmentItemData.getSkinType(), equipmentItemData.hashCode(), false, null);
+//        return stack;
+//    }
+//
+//    public static ItemStack makeEquipmentSkinStack(SkinPointer skinPointer) {
+//        ItemStack stack = new ItemStack(ModItems.equipmentSkin, 1);
+//        stack.setTagCompound(new NBTTagCompound());
+//        addSkinDataToStack(stack, skinPointer.getSkinType(), skinPointer.getSkinId(), false, new SkinDye(skinPointer.getSkinDye()));
+//        return stack;
+//    }
+//
+//    public static ItemStack makeArmouerContainerStack(Skin equipmentItemData) {
+//        ItemStack stack = new ItemStack(ModItems.armourContainer[equipmentItemData.getSkinType().getVanillaArmourSlotId()], 1);
+//        stack.setTagCompound(new NBTTagCompound());
+//        addSkinDataToStack(stack, equipmentItemData.getSkinType(), equipmentItemData.hashCode(), false, null);
+//        return stack;
+//    }
+//
+//    public static ItemStack makeArmouerContainerStack(SkinPointer skinPointer) {
+//        ItemStack stack = new ItemStack(ModItems.armourContainer[skinPointer.getSkinType().getVanillaArmourSlotId()], 1);
+//        stack.setTagCompound(new NBTTagCompound());
+//        addSkinDataToStack(stack, skinPointer.getSkinType(), skinPointer.skinId, false, new SkinDye(skinPointer.getSkinDye()));
+//        return stack;
+//    }
     
     public static void addRenderIdToStack(ItemStack stack, ISkinType skinType, int skinId, ISkinDye skinDye) {
         if (stackHasSkinData(stack)) {

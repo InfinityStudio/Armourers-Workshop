@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
+import riskyken.armourersWorkshop.client.model.ModelHelper;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinPaintCache;
 import riskyken.armourersWorkshop.common.ApiRegistrar;
@@ -43,9 +44,9 @@ public class ModelSkinLegs extends AbstractModelSkin {
         RenderHelper.enableGUIStandardItemLighting();
         
         if (armourData.hasPaintData() & showSkinPaint) {
-//            if (extraColour == null) {
-//                extraColour = PaintingHelper.getLocalPlayerExtraColours();
-//            }
+            if (extraColour == null) {
+                extraColour = ModelHelper.getLocalPlayerExtraColours();
+            }
             SkinModelTexture st = ClientSkinPaintCache.INSTANCE.getTextureForSkin(armourData, skinDye, extraColour);
             st.bindTexture();
             GL11.glPushMatrix();
