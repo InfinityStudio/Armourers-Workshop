@@ -11,8 +11,10 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Level;
@@ -22,6 +24,7 @@ import riskyken.armourersWorkshop.client.lib.LibItemResources;
 import riskyken.armourersWorkshop.client.library.ClientLibraryManager;
 import riskyken.armourersWorkshop.client.model.bake.ModelBakery;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
+import riskyken.armourersWorkshop.client.render.item.RenderItemEquipmentSkin;
 import riskyken.armourersWorkshop.client.settings.Keybindings;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
 import riskyken.armourersWorkshop.common.addons.ModAddonManager;
@@ -43,33 +46,33 @@ import java.lang.reflect.Field;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
-    
+
     public static EquipmentWardrobeHandler equipmentWardrobeHandler;
     public static PlayerTextureHandler playerTextureHandler;
-    
+
     private static boolean shadersModLoaded;
     private static boolean moreplayermodelsLoaded;
     private static boolean coloredLightsLoaded;
     private static boolean smartMovingLoaded;
     private static boolean jrbaClientLoaded;
-    
+
     public static int renderPass;
     public static IIcon dyeBottleSlotIcon;
-    
+
     public static boolean isJrbaClientLoaded() {
         return jrbaClientLoaded;
     }
-    
+
     public ClientProxy() {
         MinecraftForge.EVENT_BUS.register(this);
     }
-    
+
     @Override
     public void preInit() {
         enableCrossModSupport();
         spamSillyMessages();
     }
-    
+
     @Override
     public void initLibraryManager() {
         libraryManager = new ClientLibraryManager();
@@ -78,9 +81,11 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void initRenderers() {
         SkinModelRenderer.init();
+        //TODO this renderer need to be hook on other things...
+//        MinecraftForgeClient.registerItemRenderer(Items.diamond_boots, new RenderItemEquipmentSkin());
         new ItemTooltipHandler();
     }
-    
+
     @Override
     public void init() {
         equipmentWardrobeHandler = new EquipmentWardrobeHandler();
@@ -89,7 +94,7 @@ public class ClientProxy extends CommonProxy {
         FMLCommonHandler.instance().bus().register(new ModClientFMLEventHandler());
         MinecraftForge.EVENT_BUS.register(new DebugTextHandler());
     }
-    
+
     @Override
     public void postInit() {
         ModAddonManager.initRenderers();
@@ -97,14 +102,14 @@ public class ClientProxy extends CommonProxy {
             enableValentinsClouds();
         }
     }
-    
+
     @SubscribeEvent
     public void onTextureStitchEvent(TextureStitchEvent.Pre event) {
         if (event.map.getTextureType() == 1) {
             dyeBottleSlotIcon = event.map.registerIcon(LibItemResources.SLOT_DYE_BOTTLE);
         }
     }
-    
+
     private void enableValentinsClouds() {
         ModLogger.log("Love is in the air!");
         try {
@@ -116,7 +121,7 @@ public class ClientProxy extends CommonProxy {
             e.printStackTrace();
         }
     }
-    
+
     private void enableCrossModSupport() {
         try {
             Class.forName("shadersmodcore.client.Shaders");
@@ -148,35 +153,35 @@ public class ClientProxy extends CommonProxy {
         if (coloredLightsLoaded & smartMovingLoaded) {
             ModLogger.log(Level.WARN, "Colored Lights and Smart Moving are both installed. Armourer's Workshop cannot support this.");
         }
-        
+
         ModLogger.log("Skin render type set to: " + getSkinRenderType().toString().toLowerCase());
     }
-    
+
     public static SkinRenderType getSkinRenderType() {
         switch (ConfigHandlerClient.skinRenderType) {
-        case 1: //Force render event
-            return SkinRenderType.RENDER_EVENT;
-        case 2: //Force model attachment
-            return SkinRenderType.MODEL_ATTACHMENT;
-        case 3: //Force render layer
-            return SkinRenderType.RENDER_LAYER;
-        default: //Auto
-            if (moreplayermodelsLoaded) {
+            case 1: //Force render event
                 return SkinRenderType.RENDER_EVENT;
-            }
-            if (shadersModLoaded & !smartMovingLoaded) {
-                return SkinRenderType.RENDER_EVENT;
-            }
-            if (coloredLightsLoaded & !smartMovingLoaded) {
-                return SkinRenderType.RENDER_EVENT;
-            }
-            if (jrbaClientLoaded) {
-                return SkinRenderType.RENDER_EVENT;
-            }
-            return SkinRenderType.MODEL_ATTACHMENT;
+            case 2: //Force model attachment
+                return SkinRenderType.MODEL_ATTACHMENT;
+            case 3: //Force render layer
+                return SkinRenderType.RENDER_LAYER;
+            default: //Auto
+                if (moreplayermodelsLoaded) {
+                    return SkinRenderType.RENDER_EVENT;
+                }
+                if (shadersModLoaded & !smartMovingLoaded) {
+                    return SkinRenderType.RENDER_EVENT;
+                }
+                if (coloredLightsLoaded & !smartMovingLoaded) {
+                    return SkinRenderType.RENDER_EVENT;
+                }
+                if (jrbaClientLoaded) {
+                    return SkinRenderType.RENDER_EVENT;
+                }
+                return SkinRenderType.MODEL_ATTACHMENT;
         }
     }
-    
+
     public static boolean useSafeTextureRender() {
         if (shadersModLoaded) {
             return true;
@@ -189,11 +194,11 @@ public class ClientProxy extends CommonProxy {
         }
         return false;
     }
-    
+
     public static boolean useMultipassSkinRendering() {
         return ConfigHandlerClient.multipassSkinRendering;
     }
-    
+
     public static int getNumberOfRenderLayers() {
         if (useMultipassSkinRendering()) {
             return 4;
@@ -201,7 +206,7 @@ public class ClientProxy extends CommonProxy {
             return 2;
         }
     }
-    
+
     private void spamSillyMessages() {
         if (Loader.isModLoaded("Tails")) {
             ModLogger.log("Tails detected! - Sand praising module active.");
@@ -213,7 +218,7 @@ public class ClientProxy extends CommonProxy {
             ModLogger.log("Integrated Circuits detected! - Applying cosplay to mannequins.");
         }
     }
-    
+
     //TODO Remove this and use IWorldAccess
     public static void playerLeftTrackingRange(PlayerPointer playerPointer) {
         SkinModelRenderer.INSTANCE.removeEquipmentData(playerPointer);
@@ -225,7 +230,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.registerKeyBinding(Keybindings.openCustomArmourGui);
         ClientRegistry.registerKeyBinding(Keybindings.undo);
     }
-    
+
     @Override
     public void addEquipmentData(PlayerPointer playerPointer, EntityEquipmentData equipmentData) {
         SkinModelRenderer.INSTANCE.addEquipmentData(playerPointer, equipmentData);
@@ -240,44 +245,44 @@ public class ClientProxy extends CommonProxy {
     public void receivedEquipmentData(Skin skin) {
         ModelBakery.INSTANCE.receivedUnbakedModel(skin);
     }
-    
+
     @Override
     public void receivedCommandFromSever(CommandType command) {
         switch (command) {
-        case CLEAR_MODEL_CACHE:
-            ClientSkinCache.INSTANCE.clearCache();
-            break;
-        case OPEN_ADMIN_PANEL:
-            EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-            player.openGui(ArmourersWorkshop.instance, LibGuiIds.ADMIN_PANEL, player.getEntityWorld(), 0, 0, 0);
-            break;
-        default:
-            break;
+            case CLEAR_MODEL_CACHE:
+                ClientSkinCache.INSTANCE.clearCache();
+                break;
+            case OPEN_ADMIN_PANEL:
+                EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+                player.openGui(ArmourersWorkshop.instance, LibGuiIds.ADMIN_PANEL, player.getEntityWorld(), 0, 0, 0);
+                break;
+            default:
+                break;
         }
     }
-    
+
     @Override
     public void receivedEquipmentData(EntityEquipmentData equipmentData, int entityId) {
         EntitySkinHandler.INSTANCE.receivedEquipmentData(equipmentData, entityId);
     }
-    
+
     @Override
     public void receivedSkinFromLibrary(String fileName, Skin skin) {
         SkinIOUtils.saveSkinFromFileName(fileName + ".armour", skin);
         ArmourersWorkshop.proxy.libraryManager.addFileToListType(new LibraryFile(fileName, skin.getSkinType()), LibraryFileType.LOCAL, null);
     }
-    
+
     @Override
     public int getBlockRenderType(Block block) {
-        if (block instanceof BlockColourable) {
-            return RenderBlockGlowing.renderId;
-        }
-        if (block instanceof BlockColourMixer) {
-            return RenderBlockColourMixer.renderId;
-        }
+//        if (block instanceof BlockColourable) {
+//            return RenderBlockGlowing.renderId;
+//        }
+//        if (block instanceof BlockColourMixer) {
+//            return RenderBlockColourMixer.renderId;
+//        }
         return super.getBlockRenderType(block);
     }
-    
+
     public static enum SkinRenderType {
         RENDER_EVENT,
         MODEL_ATTACHMENT,

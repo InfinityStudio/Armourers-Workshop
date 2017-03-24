@@ -1,12 +1,6 @@
 package riskyken.armourersWorkshop.common.addons;
 
-import java.util.ArrayList;
-import java.util.IdentityHashMap;
-
-import org.apache.logging.log4j.Level;
-
 import com.google.common.collect.Maps;
-
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
@@ -15,10 +9,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 import net.minecraftforge.client.MinecraftForgeClient;
-import riskyken.armourersWorkshop.client.render.item.RenderItemBowSkin;
-import riskyken.armourersWorkshop.client.render.item.RenderItemSwordSkin;
+import org.apache.logging.log4j.Level;
 import riskyken.armourersWorkshop.utils.EventState;
 import riskyken.armourersWorkshop.utils.ModLogger;
+
+import java.util.ArrayList;
+import java.util.IdentityHashMap;
 
 public final class ModAddonManager {
     

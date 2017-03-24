@@ -17,7 +17,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.common.items.ItemDebugTool.IDebug;
 
 import java.util.ArrayList;
 
@@ -55,9 +54,9 @@ public class BlockHighlightRenderHandler {
         Minecraft mc = Minecraft.getMinecraft();
         EntityPlayer player  = mc.thePlayer;
         World world = player.worldObj;
-        if (player.getCurrentEquippedItem() == null || player.getCurrentEquippedItem().getItem() != ModItems.debugTool) {
-            return;
-        }
+//        if (player.getCurrentEquippedItem() == null || player.getCurrentEquippedItem().getItem() != ModItems.debugTool) {
+//            return;
+//        }
         
         if (event.type != ElementType.TEXT) {
             return;
@@ -80,10 +79,10 @@ public class BlockHighlightRenderHandler {
         textLines.add("name: " + block.getLocalizedName());
         textLines.add("meta: " + world.getBlockMetadata(x, y, z));
         
-        if (block instanceof IDebug) {
-            IDebug debug = (IDebug) block;
-            debug.getDebugHoverText(world, x, y, z, textLines);
-        }
+//        if (block instanceof IDebug) {
+//            IDebug debug = (IDebug) block;
+//            debug.getDebugHoverText(world, x, y, z, textLines);
+//        }
         int centerX = event.resolution.getScaledWidth() / 2;
         int centerY = event.resolution.getScaledHeight() / 2;
         

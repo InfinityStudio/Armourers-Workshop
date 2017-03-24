@@ -11,7 +11,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 import riskyken.armourersWorkshop.client.gui.controls.GuiIconButton;
 import riskyken.armourersWorkshop.client.gui.controls.GuiPanel;
-import riskyken.armourersWorkshop.client.gui.globallibrary.GuiGlobalLibrary;
 import riskyken.armourersWorkshop.client.gui.globallibrary.GuiGlobalLibrary.Screen;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;

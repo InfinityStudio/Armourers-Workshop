@@ -1,23 +1,21 @@
 package riskyken.armourersWorkshop.client.model.skin;
 
-import java.util.ArrayList;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinPaintCache;
 import riskyken.armourersWorkshop.common.ApiRegistrar;
-import riskyken.armourersWorkshop.common.painting.PaintingHelper;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.proxies.ClientProxy;
+
+import java.util.ArrayList;
 
 @SideOnly(Side.CLIENT)
 public class ModelSkinFeet extends AbstractModelSkin {
@@ -45,9 +43,9 @@ public class ModelSkinFeet extends AbstractModelSkin {
         RenderHelper.enableGUIStandardItemLighting();
         
         if (armourData.hasPaintData() & showSkinPaint) {
-            if (extraColour == null) {
-                extraColour = PaintingHelper.getLocalPlayerExtraColours();
-            }
+//            if (extraColour == null) {
+//                extraColour = PaintingHelper.getLocalPlayerExtraColours();
+//            }
             SkinModelTexture st = ClientSkinPaintCache.INSTANCE.getTextureForSkin(armourData, skinDye, extraColour);
             st.bindTexture();
             GL11.glPushMatrix();

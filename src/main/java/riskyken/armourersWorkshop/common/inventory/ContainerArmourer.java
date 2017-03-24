@@ -9,7 +9,6 @@ import riskyken.armourersWorkshop.common.inventory.slot.SlotSkinTemplate;
 import riskyken.armourersWorkshop.common.inventory.slot.SlotOutput;
 import riskyken.armourersWorkshop.common.items.ItemArmourContainerItem;
 import riskyken.armourersWorkshop.common.items.ItemSkin;
-import riskyken.armourersWorkshop.common.items.ItemSkinTemplate;
 import riskyken.armourersWorkshop.common.tileentities.TileEntityArmourer;
 
 public class ContainerArmourer extends Container {

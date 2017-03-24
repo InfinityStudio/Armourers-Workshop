@@ -12,7 +12,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
 import riskyken.armourersWorkshop.client.gui.controls.GuiLabeledTextField;
 import riskyken.armourersWorkshop.client.gui.controls.GuiPanel;
-import riskyken.armourersWorkshop.client.gui.globallibrary.GuiGlobalLibrary;
 import riskyken.armourersWorkshop.client.gui.globallibrary.GuiGlobalLibrary.Screen;
 import riskyken.armourersWorkshop.common.library.global.DownloadUtils.DownloadJsonCallable;
 
