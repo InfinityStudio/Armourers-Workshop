@@ -1,12 +1,10 @@
 package riskyken.armourersWorkshop.common.config;
 
-import java.io.File;
-
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-import riskyken.armourersWorkshop.common.addons.ModAddonManager;
 import riskyken.armourersWorkshop.common.undo.UndoManager;
-import riskyken.armourersWorkshop.common.update.UpdateCheck;
+
+import java.io.File;
 
 public class ConfigHandler {
 
@@ -88,9 +86,9 @@ public class ConfigHandler {
                 .get(CATEGORY_GENERAL, "maxUndos", 100,
                 "Max number of undos a player has for block painting.")
                 .getInt(100);
-        
-        UpdateCheck.checkForUpdates = config.get(CATEGORY_GENERAL, "checkForUpdates", true,
-                "Should the mod check for new versions?").getBoolean(true);
+
+//        UpdateCheck.checkForUpdates = config.get(CATEGORY_GENERAL, "checkForUpdates", true,
+//                "Should the mod check for new versions?").getBoolean(true);
         
         dropSkinsOnDeath = config.get(CATEGORY_GENERAL, "dropSkinsOnDeath", 0,
                 "Should skins be dropped on player death.\n"
@@ -148,19 +146,19 @@ public class ConfigHandler {
                 .getBoolean(true);
         
         
-        Property prop = config.get(CATEGORY_COMPATIBILITY, "itemOverrides", ModAddonManager.getDefaultOverrides());
-        prop.setLanguageKey("itemOverrides");
-        prop.comment = "List of items that can have skins applied.\n"
-                + "Format [override type:mod id:item name]\n"
-                + "Valid override types are:\n"
-                + "sword\n"
-                + "item\n"
-                + "pickaxe\n"
-                + "axe\n"
-                + "shovel\n"
-                + "hoe\n"
-                + "bow";
-        ModAddonManager.itemOverrides =  prop.getStringList();
+//        Property prop = config.get(CATEGORY_COMPATIBILITY, "itemOverrides", ModAddonManager.getDefaultOverrides());
+//        prop.setLanguageKey("itemOverrides");
+//        prop.comment = "List of items that can have skins applied.\n"
+//                + "Format [override type:mod id:item name]\n"
+//                + "Valid override types are:\n"
+//                + "sword\n"
+//                + "item\n"
+//                + "pickaxe\n"
+//                + "axe\n"
+//                + "shovel\n"
+//                + "hoe\n"
+//                + "bow";
+//        ModAddonManager.itemOverrides =  prop.getStringList();
     }
     
 

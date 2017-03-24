@@ -5,13 +5,10 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import riskyken.armourersWorkshop.common.ApiRegistrar;
-import riskyken.armourersWorkshop.common.addons.ModAddonManager;
 import riskyken.armourersWorkshop.common.config.ConfigHandler;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.config.ConfigSynchronizeHandler;
-import riskyken.armourersWorkshop.common.creativetab.CreativeTabArmourersWorkshop;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
-import riskyken.armourersWorkshop.common.network.GuiHandler;
 import riskyken.armourersWorkshop.common.network.PacketHandler;
 import riskyken.armourersWorkshop.common.skin.EntityEquipmentDataManager;
 import riskyken.armourersWorkshop.common.skin.SkinExtractor;
@@ -19,7 +16,6 @@ import riskyken.armourersWorkshop.common.skin.cache.CommonSkinCache;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 import riskyken.armourersWorkshop.common.skin.entity.EntitySkinHandler;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
-import riskyken.armourersWorkshop.common.update.UpdateCheck;
 import riskyken.armourersWorkshop.proxies.CommonProxy;
 import riskyken.armourersWorkshop.utils.ModLogger;
 import riskyken.armourersWorkshop.utils.SkinIOUtils;
@@ -81,7 +77,6 @@ public class ArmourersWorkshop {
             configDir.mkdirs();
         }
         
-        ModAddonManager.preInit();
         ConfigHandler.init(new File(configDir, "common.cfg"));
         ConfigHandlerClient.init(new File(configDir, "client.cfg"));
         
@@ -96,7 +91,6 @@ public class ArmourersWorkshop {
 
     @Mod.EventHandler
     public void load(FMLInitializationEvent event) {
-        new GuiHandler();
         new ConfigSynchronizeHandler();
         
         PacketHandler.init();
@@ -107,13 +101,11 @@ public class ArmourersWorkshop {
         proxy.registerKeyBindings();
         proxy.initRenderers();
         
-        ModAddonManager.init();
     }
     
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit();
-        ModAddonManager.postInit();
         proxy.libraryManager.reloadLibrary();
     }
 

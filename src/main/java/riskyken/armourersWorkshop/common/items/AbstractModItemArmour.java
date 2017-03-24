@@ -1,7 +1,5 @@
 package riskyken.armourersWorkshop.common.items;
 
-import java.util.List;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.client.model.skin.AbstractModelSkin;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
@@ -20,12 +17,14 @@ import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPointer;
 import riskyken.armourersWorkshop.utils.SkinNBTHelper;
 
+import java.util.List;
+
 public class AbstractModItemArmour extends ItemArmor {
 
     public AbstractModItemArmour(String name, ArmorMaterial armorMaterial, int armorType, boolean addCreativeTab) {
         super(armorMaterial, 2, armorType);
         if (addCreativeTab) {
-            setCreativeTab(ArmourersWorkshop.tabArmorersWorkshop);
+//            setCreativeTab(ArmourersWorkshop.tabArmorersWorkshop);
         }
         setUnlocalizedName(name);
         setHasSubtypes(false);

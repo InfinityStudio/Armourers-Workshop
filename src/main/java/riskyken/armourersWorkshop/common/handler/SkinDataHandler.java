@@ -10,7 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import riskyken.armourersWorkshop.api.common.skin.ISkinDataHandler;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
-import riskyken.armourersWorkshop.common.crafting.ItemSkinningRecipes;
 import riskyken.armourersWorkshop.common.skin.ExPropsPlayerEquipmentData;
 import riskyken.armourersWorkshop.common.skin.cache.CommonSkinCache;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
@@ -20,7 +19,7 @@ import riskyken.armourersWorkshop.utils.SkinNBTHelper;
 public class SkinDataHandler implements ISkinDataHandler {
 
     public static final SkinDataHandler INSTANCE = new SkinDataHandler();
-    
+
     @Override
     public boolean setSkinOnPlayer(EntityPlayer player, ItemStack stack) {
         ExPropsPlayerEquipmentData entityProps = getExtendedPropsPlayerForPlayer(player);
@@ -39,10 +38,10 @@ public class SkinDataHandler implements ISkinDataHandler {
         ExPropsPlayerEquipmentData entityProps = getExtendedPropsPlayerForPlayer(player);
         entityProps.clearEquipmentStack(skinType);
     }
-    
+
     @Override
     public boolean isValidEquipmentSkin(ItemStack stack) {
-        return (stack != null && stack.getItem() == ModItems.equipmentSkin && stackHasSkinPointer(stack));
+        return/* (stack != null && stack.getItem() == ModItems.equipmentSkin && */stackHasSkinPointer(stack);
     }
 
     @Override
@@ -63,7 +62,7 @@ public class SkinDataHandler implements ISkinDataHandler {
         SkinPointer sp = new SkinPointer(skinPointer);
         SkinNBTHelper.addSkinDataToStack(stack, sp);
     }
-    
+
     @Override
     public boolean compoundHasSkinPointer(NBTTagCompound compound) {
         return SkinNBTHelper.compoundHasSkinData(compound);
@@ -87,7 +86,7 @@ public class SkinDataHandler implements ISkinDataHandler {
         SkinPointer sp = new SkinPointer(skinPointer);
         sp.writeToCompound(compound);
     }
-    
+
     @Override
     public boolean isArmourRenderOverridden(EntityPlayer player, int slotId) {
         ExPropsPlayerEquipmentData entityProps = ExPropsPlayerEquipmentData.get(player);
@@ -97,7 +96,7 @@ public class SkinDataHandler implements ISkinDataHandler {
         }
         return false;
     }
-    
+
     private ExPropsPlayerEquipmentData getExtendedPropsPlayerForPlayer(EntityPlayer player) {
         ExPropsPlayerEquipmentData entityProps = ExPropsPlayerEquipmentData.get(player);
         if (entityProps == null) {
@@ -108,7 +107,7 @@ public class SkinDataHandler implements ISkinDataHandler {
 
     @Override
     public void setItemAsSkinnable(Item item) {
-        ItemSkinningRecipes.addSkinnableItem(item);
+//        ItemSkinningRecipes.addSkinnableItem(item);
     }
 
     @Override

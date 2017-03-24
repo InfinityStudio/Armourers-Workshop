@@ -2,31 +2,18 @@ package riskyken.armourersWorkshop.common.skin;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.Type;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import riskyken.armourersWorkshop.common.addons.ModAddonManager;
-import riskyken.armourersWorkshop.common.config.ConfigHandler;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.network.PacketHandler;
 import riskyken.armourersWorkshop.common.network.messages.server.MessageServerPlayerLeftTrackingRange;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.utils.HolidayHelper;
-import riskyken.armourersWorkshop.utils.SkinNBTHelper;
 
 public final class EntityEquipmentDataManager {
     
@@ -41,29 +28,29 @@ public final class EntityEquipmentDataManager {
         FMLCommonHandler.instance().bus().register(this);
     }
     
-    public boolean isSwordRenderItem(Item item) {
-        String itemName = item.itemRegistry.getNameForObject(item);
-        if (itemName != null && !itemName.equals("")) {
-            for (int i = 0; i < ModAddonManager.itemOverrides.length; i++) {
-                if (ModAddonManager.itemOverrides[i].equals("sword:" + itemName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    
-    public boolean isBowRenderItem(Item item) {
-        String itemName = item.itemRegistry.getNameForObject(item);
-        if (itemName != null && !itemName.equals("")) {
-            for (int i = 0; i < ModAddonManager.itemOverrides.length; i++) {
-                if (ModAddonManager.itemOverrides[i].equals("bow:" + itemName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+//    public boolean isSwordRenderItem(Item item) {
+//        String itemName = item.itemRegistry.getNameForObject(item);
+//        if (itemName != null && !itemName.equals("")) {
+//            for (int i = 0; i < ModAddonManager.itemOverrides.length; i++) {
+//                if (ModAddonManager.itemOverrides[i].equals("sword:" + itemName)) {
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public boolean isBowRenderItem(Item item) {
+//        String itemName = item.itemRegistry.getNameForObject(item);
+//        if (itemName != null && !itemName.equals("")) {
+//            for (int i = 0; i < ModAddonManager.itemOverrides.length; i++) {
+//                if (ModAddonManager.itemOverrides[i].equals("bow:" + itemName)) {
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
     //server query skin tick... nop
 //    @SubscribeEvent

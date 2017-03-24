@@ -1,7 +1,5 @@
 package riskyken.armourersWorkshop.common.skin;
 
-import java.util.ArrayList;
-
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -11,7 +9,6 @@ import riskyken.armourersWorkshop.api.common.IRectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.cubes.ICubeColour;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
-import riskyken.armourersWorkshop.common.blocks.ModBlocks;
 import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.exception.SkinSaveException;
 import riskyken.armourersWorkshop.common.exception.SkinSaveException.SkinSaveExceptionType;
@@ -23,10 +20,10 @@ import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.data.SkinProperties;
-import riskyken.armourersWorkshop.common.tileentities.TileEntityBoundingBox;
-import riskyken.armourersWorkshop.common.tileentities.TileEntityColourable;
 import riskyken.armourersWorkshop.utils.BlockUtils;
 import riskyken.plushieWrapper.common.world.BlockLocation;
+
+import java.util.ArrayList;
 /**
  * Helper class for converting back and forth from
  * in world blocks to skin classes.

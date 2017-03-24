@@ -9,7 +9,6 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiScreen;
-import riskyken.armourersWorkshop.client.gui.miniarmourer.GuiMiniArmourerBuilding;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 
 /**

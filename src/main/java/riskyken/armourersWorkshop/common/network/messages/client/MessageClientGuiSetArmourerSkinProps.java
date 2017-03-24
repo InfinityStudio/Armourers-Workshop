@@ -8,9 +8,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
-import riskyken.armourersWorkshop.common.inventory.ContainerArmourer;
 import riskyken.armourersWorkshop.common.skin.data.SkinProperties;
-import riskyken.armourersWorkshop.common.tileentities.TileEntityArmourer;
 
 public class MessageClientGuiSetArmourerSkinProps implements IMessage, IMessageHandler<MessageClientGuiSetArmourerSkinProps, IMessage> {
 
@@ -43,10 +41,10 @@ public class MessageClientGuiSetArmourerSkinProps implements IMessage, IMessageH
         if (player == null) { return null; }
         Container container = player.openContainer;
         
-        if (container != null && container instanceof ContainerArmourer) {
-            TileEntityArmourer te = ((ContainerArmourer)container).getTileEntity();
-            te.setSkinProps(message.skinProps);
-        }
+//        if (container != null && container instanceof ContainerArmourer) {
+//            TileEntityArmourer te = ((ContainerArmourer)container).getTileEntity();
+//            te.setSkinProps(message.skinProps);
+//        }
         return null;
     }
 }

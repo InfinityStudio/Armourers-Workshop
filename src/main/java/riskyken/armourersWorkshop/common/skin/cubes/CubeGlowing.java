@@ -1,7 +1,6 @@
 package riskyken.armourersWorkshop.common.skin.cubes;
 
 import net.minecraft.block.Block;
-import riskyken.armourersWorkshop.common.blocks.ModBlocks;
 
 public class CubeGlowing extends Cube {
 
@@ -10,8 +9,8 @@ public class CubeGlowing extends Cube {
         return true;
     }
     
-    @Override
-    public Block getMinecraftBlock() {
-        return ModBlocks.colourableGlowing;
-    }
+//    @Override
+//    public Block getMinecraftBlock() {
+//        return ModBlocks.colourableGlowing;
+//    }
 }

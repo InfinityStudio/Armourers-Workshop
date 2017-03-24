@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import riskyken.armourersWorkshop.api.common.painting.IPantable;
 import riskyken.armourersWorkshop.api.common.skin.cubes.ICubeColour;
-import riskyken.armourersWorkshop.common.blocks.BlockColourable;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeColour;
 import riskyken.armourersWorkshop.utils.UtilColour.ColourFamily;
 import riskyken.plushieWrapper.common.world.BlockLocation;
@@ -86,9 +85,9 @@ public final class BlockUtils {
             BlockLocation loc = openList.get(0);
             openList.remove(0);
             Block block = world.getBlock(loc.x, loc.y, loc.z);
-            if (block instanceof BlockColourable) {
-                blockFaces.add(loc);
-            }
+//            if (block instanceof BlockColourable) {
+//                blockFaces.add(loc);
+//            }
             if (world.isAirBlock(loc.x, loc.y, loc.z)) {
                 for (int i = 0; i < sides.length; i++) {
                     BlockLocation sideLoc = loc.offset(sides[i]);
@@ -100,9 +99,9 @@ public final class BlockUtils {
                             for (int iy = 0; iy < 3; iy++) {
                                 for (int iz = 0; iz < 3; iz++) {
                                     Block validBlock = world.getBlock(sideLoc.x + ix - 1, sideLoc.y + iy - 1, sideLoc.z + iz - 1);
-                                    if (validBlock instanceof BlockColourable) {
-                                        validCube = true;
-                                    }
+//                                    if (validBlock instanceof BlockColourable) {
+//                                        validCube = true;
+//                                    }
                                 }
                             }
                         }

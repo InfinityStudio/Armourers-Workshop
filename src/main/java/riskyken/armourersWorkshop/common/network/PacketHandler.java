@@ -7,18 +7,9 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiAdminPanel;
-import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiBipedRotations;
-import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiButton;
-import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiColourUpdate;
-import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiLoadSaveArmour;
-import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiMannequinData;
-import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiMiniArmourerCubeEdit;
 import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiSetArmourerSkinProps;
-import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiSetArmourerSkinType;
-import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiSetSkin;
 import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiToolOptionUpdate;
 import riskyken.armourersWorkshop.common.network.messages.client.MessageClientKeyPress;
-import riskyken.armourersWorkshop.common.network.messages.client.MessageClientLoadArmour;
 import riskyken.armourersWorkshop.common.network.messages.client.MessageClientRequestSkinData;
 import riskyken.armourersWorkshop.common.network.messages.client.MessageClientRequestSkinId;
 import riskyken.armourersWorkshop.common.network.messages.client.MessageClientSkinPart;
@@ -35,7 +26,6 @@ import riskyken.armourersWorkshop.common.network.messages.server.MessageServerSk
 import riskyken.armourersWorkshop.common.network.messages.server.MessageServerSkinIdSend;
 import riskyken.armourersWorkshop.common.network.messages.server.MessageServerSkinInfoUpdate;
 import riskyken.armourersWorkshop.common.network.messages.server.MessageServerSkinWardrobeUpdate;
-import riskyken.armourersWorkshop.common.network.messages.server.MessageServerSyncConfig;
 
 public class PacketHandler {
 

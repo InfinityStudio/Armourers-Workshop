@@ -8,37 +8,35 @@ import org.apache.commons.lang3.ArrayUtils;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import riskyken.armourersWorkshop.common.config.ConfigHandler;
-import riskyken.armourersWorkshop.common.inventory.ContainerArmourLibrary;
 import riskyken.armourersWorkshop.common.network.messages.client.MessageClientSkinPart;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.tileentities.TileEntitySkinLibrary;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
 /**
  * Helps clients upload skins onto servers. Skin will
  * be split into multiple packet if needed.
- * @author RiskyKen
  *
+ * @author RiskyKen
  */
 public final class SkinUploadHelper {
-    
+
     private static final HashMap<Integer, byte[]> unfinishedSkins = new HashMap<Integer, byte[]>();
     //Forge packet limit is 32k
     private static final int MAX_PACKET_SIZE = 30000;
-    
+
     public static void uploadSkinToServer(Skin skin) {
         if (!ConfigHandler.allowClientsToUploadSkins) {
             return;
         }
         ModLogger.log("Uploading skin to server: " + skin);
         byte[] skinData = ByteBufHelper.convertSkinToByteArray(skin);
-        
+
         ArrayList<MessageClientSkinPart> packetQueue = new ArrayList<MessageClientSkinPart>();
-        
-        int packetsNeeded = (int) Math.ceil((double)skinData.length / (double)MAX_PACKET_SIZE);
+
+        int packetsNeeded = (int) Math.ceil((double) skinData.length / (double) MAX_PACKET_SIZE);
         int bytesLeftToSend = skinData.length;
         int bytesSent = 0;
-        
+
         for (int i = 0; i < packetsNeeded; i++) {
             boolean lastPacket = i == packetsNeeded - 1;
             byte[] messageData;
@@ -53,16 +51,16 @@ public final class SkinUploadHelper {
             bytesLeftToSend -= messageData.length;
             bytesSent += messageData.length;
         }
-        
+
         for (int i = 0; i < packetQueue.size(); i++) {
             PacketHandler.networkWrapper.sendToServer(packetQueue.get(i));
         }
     }
-    
+
     public static void gotSkinPartFromClient(int skinId, byte packetId, byte[] skinData, EntityPlayerMP player) {
         boolean lastPacket = skinData.length < MAX_PACKET_SIZE;
         byte[] oldSkinData = unfinishedSkins.get(skinId);
-        
+
         byte[] newSkinData = null;
         if (oldSkinData != null) {
             newSkinData = ArrayUtils.addAll(oldSkinData, skinData);
@@ -70,22 +68,22 @@ public final class SkinUploadHelper {
         } else {
             newSkinData = skinData;
         }
-        
+
         if (!lastPacket) {
             unfinishedSkins.put(skinId, newSkinData);
         } else {
             Skin skin = ByteBufHelper.convertByteArrayToSkin(newSkinData);
             ModLogger.log("Downloaded skin " + skin + " from client " + player);
             Container container = player.openContainer;
-            
+
             if (!ConfigHandler.allowClientsToUploadSkins) {
                 return;
             }
-            
-            if (container != null && container instanceof ContainerArmourLibrary) {
-                TileEntitySkinLibrary te = ((ContainerArmourLibrary) container).getTileEntity();
-                te.loadArmour(skin, player);
-            }
+
+//            if (container != null && container instanceof ContainerArmourLibrary) {
+//                TileEntitySkinLibrary te = ((ContainerArmourLibrary) container).getTileEntity();
+//                te.loadArmour(skin, player);
+//            }
         }
     }
 }

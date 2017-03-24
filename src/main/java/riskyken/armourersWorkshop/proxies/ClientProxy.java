@@ -24,7 +24,6 @@ import riskyken.armourersWorkshop.client.model.bake.ModelBakery;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
 import riskyken.armourersWorkshop.client.settings.Keybindings;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
-import riskyken.armourersWorkshop.common.addons.ModAddonManager;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.lib.LibGuiIds;
@@ -94,7 +93,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void postInit() {
-        ModAddonManager.initRenderers();
         if (HolidayHelper.valentins.isHolidayActive()) {
             enableValentinsClouds();
         }
