@@ -10,6 +10,7 @@ import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.CommonProxy;
+import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
@@ -94,7 +95,7 @@ public class ArmourersWorkshopMod extends ArmourersWorkshop {
 
     @Override
     public int getFileVersion() {
-        return 0;
+        return Skin.FILE_VERSION;
     }
 
     @Override

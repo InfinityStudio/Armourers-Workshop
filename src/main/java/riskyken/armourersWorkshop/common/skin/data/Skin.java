@@ -1,16 +1,8 @@
 package riskyken.armourersWorkshop.common.skin.data;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.IRectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkin;
@@ -18,11 +10,13 @@ import riskyken.armourersWorkshop.api.common.skin.data.ISkinPart;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
-import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
-import riskyken.armourersWorkshop.common.exception.NewerFileVersionException;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 import riskyken.armourersWorkshop.common.skin.cubes.ICube;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Skin implements ISkin {
 

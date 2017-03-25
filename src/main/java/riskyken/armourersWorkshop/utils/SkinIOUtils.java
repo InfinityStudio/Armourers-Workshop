@@ -20,7 +20,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StringUtils;
 import net.minecraftforge.common.DimensionManager;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.exception.NewerFileVersionException;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
@@ -43,9 +43,8 @@ public final class SkinIOUtils {
 
     public static boolean saveSkinToFile(File file, Skin skin) {
         File dir = file.getParentFile();
-        if (!dir.exists()) {
+        if (!dir.exists())
             dir.mkdirs();
-        }
         DataOutputStream stream = null;
 
         try {
@@ -80,30 +79,13 @@ public final class SkinIOUtils {
     }
 
     public static Skin loadSkinFromFile(File file) {
-        DataInputStream stream = null;
-        Skin skin = null;
-
         try {
-            stream = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
-            new SkinReader().readSkin(stream, new )
-//            skin = new Skin(stream);
+            return loadSkinFromStream(new FileInputStream(file));
         } catch (FileNotFoundException e) {
             ModLogger.log(Level.WARN, "Skin file not found.");
             ModLogger.log(Level.WARN, file);
-        } catch (IOException e) {
-            ModLogger.log(Level.ERROR, "Skin file load failed.");
-            e.printStackTrace();
-        } catch (NewerFileVersionException e) {
-            ModLogger.log(Level.ERROR, "Can not load skin file it was saved in newer version.");
-            e.printStackTrace();
-        } catch (InvalidCubeTypeException e) {
-            ModLogger.log(Level.ERROR, "Unable to load skin. Unknown cube types found.");
-            e.printStackTrace();
-        } finally {
-            IOUtils.closeQuietly(stream);
         }
-
-        return skin;
+        return null;
     }
 
 
@@ -113,7 +95,7 @@ public final class SkinIOUtils {
 
         try {
             stream = new DataInputStream(new BufferedInputStream(inputStream));
-            skin = new Skin(stream);
+            skin = new SkinReader().readSkin(stream, ArmourersWorkshop.instance());
         } catch (FileNotFoundException e) {
             ModLogger.log(Level.WARN, "Skin file not found.");
             e.printStackTrace();
@@ -137,11 +119,9 @@ public final class SkinIOUtils {
         File directory = getSkinDatabaseDirectory();
         ModLogger.log("Loading skin database at: " + directory.getAbsolutePath());
         copyGlobalDatabase();
-        if (!directory.exists()) {
-            if (directory.mkdir()) {
+        if (!directory.exists())
+            if (directory.mkdir())
                 copyOldDatabase();
-            }
-        }
     }
 
 
