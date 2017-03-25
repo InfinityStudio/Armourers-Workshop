@@ -6,11 +6,11 @@ import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 
 public interface ISkinPart {
 
-    public ISkinPartType getPartType();
+    ISkinPartType getPartType();
     
-    public int getMarkerCount();
+    int getMarkerCount();
     
-    public Point3D getMarker(int index);
+    Point3D getMarker(int index);
     
-    public ForgeDirection getMarkerSide(int index);
+    ForgeDirection getMarkerSide(int index);
 }

@@ -1,6 +1,7 @@
 package riskyken.armourersWorkshop.common.skin.type.bow;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,7 +22,7 @@ public class SkinBow extends AbstractSkinTypeBase {
     }
     
     @Override
-    public ArrayList<ISkinPartType> getSkinParts() {
+    public List<ISkinPartType> getSkinParts() {
         return this.skinParts;
     }
 

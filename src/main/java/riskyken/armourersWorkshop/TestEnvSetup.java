@@ -1,15 +1,18 @@
 package riskyken.armourersWorkshop;
 
 import net.cijhn.SkinIdentity;
+import net.cijhn.SkinInfo;
 import net.cijhn.SkinProvider;
 import net.minecraft.entity.Entity;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
+import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.client.render.bake.QueueModelBakery;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
+import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.utils.SkinIOUtils;
 
 import java.io.File;
@@ -41,6 +44,16 @@ public class TestEnvSetup implements SkinProvider {
     }
 
     @Override
+    public SkinInfo getSkin(Entity entity) {
+        return null;
+    }
+
+    @Override
+    public SkinPart getSkin(Entity entity, ISkinType skinType, ISkinPartType skinPart) {
+        return null;
+    }
+
+    @Override
     public Skin getSkin(Entity entity, ISkinType skinType, int slotIndex) {
         return skin;
     }
@@ -48,10 +61,5 @@ public class TestEnvSetup implements SkinProvider {
     @Override
     public ISkinDye getPlayerDyeData(Entity entity, ISkinType skinType, int slotIndex) {
         return null;
-    }
-
-    @Override
-    public byte[] getPlayerExtraColours(Entity entity) {
-        return new byte[0];
     }
 }

@@ -343,9 +343,8 @@ public class Skin implements ISkin {
     @Override
     public List<ISkinPart> getSubParts() {
         ArrayList<ISkinPart> partList = new ArrayList<ISkinPart>();
-        for (int i = 0; i < parts.size(); i++) {
+        for (int i = 0; i < parts.size(); i++)
             partList.add(parts.get(i));
-        }
         return partList;
     }
 

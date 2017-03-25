@@ -1,6 +1,6 @@
 package riskyken.armourersWorkshop.api.common.skin.type;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,7 +14,7 @@ import net.minecraft.util.IIcon;
  */
 public interface ISkinType {
 
-    ArrayList<ISkinPartType> getSkinParts();
+    List<ISkinPartType> getSkinParts();
     
     /**
      * Gets the name this skin will be registered with.

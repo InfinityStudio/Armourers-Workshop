@@ -3,6 +3,7 @@ package riskyken.armourersWorkshop.common.skin.type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.apache.logging.log4j.Level;
 
@@ -101,7 +102,7 @@ public final class SkinTypeRegistry implements ISkinTypeRegistry {
         
         ModLogger.log(String.format("Registering skin: %s", skinType.getRegistryName()));
         skinTypeMap.put(skinType.getRegistryName(), skinType);
-        ArrayList<ISkinPartType> skinParts = skinType.getSkinParts();
+        List<ISkinPartType> skinParts = skinType.getSkinParts();
         for (int i = 0; i < skinParts.size(); i++) {
             ISkinPartType skinPart = skinParts.get(i);
             skinPartMap.put(skinPart.getRegistryName(), skinPart);

@@ -1,6 +1,7 @@
 package riskyken.armourersWorkshop.common.skin.type.wings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,7 +21,7 @@ public class SkinWings extends AbstractSkinTypeBase {
     }
     
     @Override
-    public ArrayList<ISkinPartType> getSkinParts() {
+    public List<ISkinPartType> getSkinParts() {
         return this.skinParts;
     }
 

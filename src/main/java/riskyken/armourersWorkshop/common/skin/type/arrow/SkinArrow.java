@@ -1,6 +1,7 @@
 package riskyken.armourersWorkshop.common.skin.type.arrow;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
@@ -21,7 +22,7 @@ public class SkinArrow extends AbstractSkinTypeBase {
     }
     
     @Override
-    public ArrayList<ISkinPartType> getSkinParts() {
+    public List<ISkinPartType> getSkinParts() {
         return skinParts;
     }
 

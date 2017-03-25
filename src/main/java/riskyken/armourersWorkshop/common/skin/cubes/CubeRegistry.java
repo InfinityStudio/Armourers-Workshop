@@ -1,9 +1,8 @@
 package riskyken.armourersWorkshop.common.skin.cubes;
 
-import java.util.ArrayList;
-
-import net.minecraft.block.Block;
 import riskyken.armourersWorkshop.utils.ModLogger;
+
+import java.util.ArrayList;
 
 
 public final class CubeRegistry {
@@ -42,23 +41,5 @@ public final class CubeRegistry {
         registerCube(new CubeGlowing());
         registerCube(new CubeGlass());
         registerCube(new CubeGlassGlowing());
-    }
-
-    public boolean isBuildingBlock(Block block) {
-        for (int i = 0; i < cubeList.size(); i++) {
-            if (cubeList.get(i).getMinecraftBlock() == block) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public ICube getCubeFromBlock(Block block) {
-        for (int i = 0; i < cubeList.size(); i++) {
-            if (cubeList.get(i).getMinecraftBlock() == block) {
-                return cubeList.get(i);
-            }
-        }
-        return null;
     }
 }
