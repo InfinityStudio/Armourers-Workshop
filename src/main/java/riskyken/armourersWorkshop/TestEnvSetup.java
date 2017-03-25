@@ -1,18 +1,12 @@
 package riskyken.armourersWorkshop;
 
-import net.cijhn.SkinIdentity;
 import net.cijhn.SkinInfo;
-import net.cijhn.SkinProvider;
+import net.cijhn.SkinInfoProvider;
 import net.minecraft.entity.Entity;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
-import riskyken.armourersWorkshop.client.render.bake.QueueModelBakery;
-import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.utils.SkinIOUtils;
 
 import java.io.File;
@@ -20,8 +14,9 @@ import java.io.File;
 /**
  * @author ci010
  */
-public class TestEnvSetup implements SkinProvider {
+public class TestEnvSetup implements SkinInfoProvider {
     private static Skin skin;
+    public static final Object KEY = new Object();
 
     //
     private static String loc = "D:\\Storage\\Desktop\\Angel Wings.armour";
@@ -29,28 +24,23 @@ public class TestEnvSetup implements SkinProvider {
     static void setup() {
         File file = new File(loc);
         skin = SkinIOUtils.loadSkinFromFile(file);
+        System.out.println(skin.getSkinType().getRegistryName());
         System.out.println(skin);
         ConfigHandlerClient.skinRenderType = 2;
         System.out.println("==============================");
         System.out.println(skin.serverId);
         System.out.println("==============================");
-        QueueModelBakery.INSTANCE.receivedUnbakedModel(skin);
-        ClientSkinCache.INSTANCE.addServerIdMap(skin);
+        ArmourersWorkshopMod.proxy.getSkinRepository().registerSkin(KEY, skin);
     }
 
     @Override
-    public Skin getSkin(SkinIdentity identity) {
-        return null;
+    public void deploy() {
+
     }
 
     @Override
     public SkinInfo getSkin(Entity entity) {
-        return null;
-    }
-
-    @Override
-    public SkinPart getSkin(Entity entity, ISkinType skinType, ISkinPartType skinPart) {
-        return null;
+        return SkinInfo.EMPTY;
     }
 
     @Override

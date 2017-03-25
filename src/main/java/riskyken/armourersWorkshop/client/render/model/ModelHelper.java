@@ -4,10 +4,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.ArmourersWorkshop;
+import riskyken.armourersWorkshop.ArmourersWorkshopMod;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.skin.EquipmentWardrobeData;
-import riskyken.armourersWorkshop.client.ClientProxy;
 
 import java.awt.*;
 
@@ -33,7 +32,7 @@ public final class ModelHelper {
     @SideOnly(Side.CLIENT)
     public static int getLocalPlayersSkinColour() {
         PlayerPointer playerPointer = new PlayerPointer(Minecraft.getMinecraft().thePlayer);
-        EquipmentWardrobeData ewd = ArmourersWorkshop.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = ArmourersWorkshopMod.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
         if (ewd != null) {
             return ewd.skinColour;
         }
@@ -43,7 +42,7 @@ public final class ModelHelper {
     @SideOnly(Side.CLIENT)
     public static int getLocalPlayersHairColour() {
         PlayerPointer playerPointer = new PlayerPointer(Minecraft.getMinecraft().thePlayer);
-        EquipmentWardrobeData ewd = ArmourersWorkshop.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = ArmourersWorkshopMod.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
         if (ewd != null) {
             return ewd.hairColour;
         }

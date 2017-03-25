@@ -1,7 +1,8 @@
 package riskyken.armourersWorkshop.common.skin.cubes;
 
+import java.io.DataInput;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class CubeMarkerData {
@@ -18,18 +19,18 @@ public class CubeMarkerData {
         this.meta = meta;
     }
     
-    public CubeMarkerData(DataInputStream stream, int version) throws IOException {
-        readFromStream(stream, version);
+    public CubeMarkerData(DataInputStream stream) throws IOException {
+        readFromStream(stream);
     }
     
-    public void writeToStream(DataOutputStream stream) throws IOException {
+    public void writeToStream(DataOutput stream) throws IOException {
         stream.writeByte(x);
         stream.writeByte(y);
         stream.writeByte(z);
         stream.writeByte(meta);
     }
     
-    private void readFromStream(DataInputStream stream, int version) throws IOException {
+    private void readFromStream(DataInput stream) throws IOException {
         x = stream.readByte();
         y = stream.readByte();
         z = stream.readByte();

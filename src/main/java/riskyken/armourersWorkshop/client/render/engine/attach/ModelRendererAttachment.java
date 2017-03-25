@@ -3,7 +3,7 @@ package riskyken.armourersWorkshop.client.render.engine.attach;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.cijhn.SkinInfo;
-import net.cijhn.SkinProvider;
+import net.cijhn.SkinInfoProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
@@ -11,10 +11,9 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.ArmourersWorkshop;
+import riskyken.armourersWorkshop.ArmourersWorkshopMod;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinPart;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.client.ClientProxy;
@@ -71,15 +70,13 @@ public class ModelRendererAttachment extends ModelRenderer {
 //                    (byte) skinColour.getRed(), (byte) skinColour.getGreen(), (byte) skinColour.getBlue(),
 //                    (byte) hairColour.getRed(), (byte) hairColour.getGreen(), (byte) hairColour.getBlue()};
 //        }
-        SkinProvider provider = ArmourersWorkshop.proxy.getSkinProvider();
+        SkinInfoProvider provider = ArmourersWorkshopMod.proxy.getSkinProvider();
 //        SkinInfo info = provider.getSkin(player);
 //        Skin data = info.getSkin(skinType);
 //        SkinPart partData = info.getSkinPart(skinType, skinPart);
-        Skin data = provider.getSkin(player, skinType, 0);
-        SkinPart partData = null;
-        for (SkinPart part : data.getParts())
-            if (part.getPartType() == this.skinPart)
-                partData = part;
+        SkinInfo skin = provider.getSkin(player);
+        Skin data = skin.getSkin(skinType);
+        SkinPart partData = skin.getSkinPart(skinType, skinPart);
         if (partData != null) {
             GL11.glPushMatrix();
             if (skinType == SkinTypeRegistry.skinLegs && skinPart.getRegistryName().equals("armourers:legs.skirt")) {

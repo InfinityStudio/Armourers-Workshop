@@ -6,14 +6,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.cijhn.*;
 import net.minecraft.block.Block;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import org.apache.logging.log4j.Level;
 import riskyken.armourersWorkshop.TestEnvSetup;
 import riskyken.armourersWorkshop.client.handler.EquipmentWardrobeHandler;
@@ -21,7 +18,6 @@ import riskyken.armourersWorkshop.client.lib.LibItemResources;
 import riskyken.armourersWorkshop.client.render.PlayerTextureHandler;
 import riskyken.armourersWorkshop.client.render.RenderEngine;
 import riskyken.armourersWorkshop.client.render.bake.AsyncModelBakery;
-import riskyken.armourersWorkshop.client.render.bake.QueueModelBakery;
 import riskyken.armourersWorkshop.client.render.engine.attach.RenderEngineAttach;
 import riskyken.armourersWorkshop.client.render.engine.special.RenderEngineSpecial;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
@@ -35,13 +31,13 @@ import java.io.File;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
-    private SkinProvider provider;
+    private SkinInfoProvider provider;
     private EquipmentWardrobeProvider equipmentWardrobeHandler;
     private RenderEngine renderEngine;
     private SkinRepository skinRepository;
     private SkinRequester requester;
 
-    public SkinProvider getSkinProvider() {
+    public SkinInfoProvider getSkinProvider() {
         return provider;
     }
 
@@ -75,6 +71,7 @@ public class ClientProxy extends CommonProxy {
         super.preInit(configDir);
         provider = new TestEnvSetup();
         skinRepository = new SkinStorageImpl(new AsyncModelBakery(2));
+//        Minecraft.getMinecraft().theWorld.addWorldAccess(new WorldListener());
 //        provider = new AbstractSkinProvider(skinRepository);
         //TODO init skinProvider
         enableCrossModSupport();
@@ -82,7 +79,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void initRenderers() {
+    public void init() {
         SkinRenderType type = getSkinRenderType();
         if (type == SkinRenderType.MODEL_ATTACHMENT)
             this.renderEngine = new RenderEngineAttach();
@@ -90,16 +87,9 @@ public class ClientProxy extends CommonProxy {
             this.renderEngine = new RenderEngineSpecial();
         else this.renderEngine = new RenderEngineAttach();//TODO handle this exception
         this.renderEngine.deploy();
-    }
-
-    @Override
-    public void init() {
-        super.init();
         this.equipmentWardrobeHandler = new EquipmentWardrobeHandler();
         ClientSkinCache.init();
         MinecraftForge.EVENT_BUS.register(new PlayerTextureHandler());
-//        FMLCommonHandler.instance().bus().register(new ModClientFMLEventHandler());
-//        MinecraftForge.EVENT_BUS.register(new DebugTextHandler());
     }
 
     @Override
@@ -218,26 +208,6 @@ public class ClientProxy extends CommonProxy {
         if (Loader.isModLoaded("integratedcircuits")) {
             ModLogger.log("Integrated Circuits detected! - Applying cosplay to mannequins.");
         }
-    }
-
-    @Override
-    public int getPlayerModelCacheSize() {
-        return ClientSkinCache.INSTANCE.getCacheSize();
-    }
-
-    @Override
-    public void receivedEquipmentData(Skin skin) {
-        QueueModelBakery.INSTANCE.receivedUnbakedModel(skin);
-    }
-
-
-    @Override
-    public void receivedEquipmentData(EntityEquipmentData equipmentData, int entityId) {
-    }
-
-    @Override
-    public int getBlockRenderType(Block block) {
-        return super.getBlockRenderType(block);
     }
 
     public enum SkinRenderType {

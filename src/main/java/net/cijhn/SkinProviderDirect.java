@@ -5,15 +5,25 @@ import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 
-
 /**
  * @author ci010
  */
-public abstract class AbstractSkinProvider implements SkinInfoProvider {
-    private SkinRepository skinStorage;
+public class SkinProviderDirect implements SkinInfoProvider {
+    private SkinRepository repository;
 
-    public AbstractSkinProvider(SkinRepository skinStorage) {
-        this.skinStorage = skinStorage;
+    @Override
+    public void deploy() {
+
+    }
+
+    @Override
+    public SkinInfo getSkin(Entity entity) {
+        return null;
+    }
+
+    @Override
+    public Skin getSkin(Entity entity, ISkinType skinType, int slotIndex) {
+        return null;
     }
 
     @Override

@@ -11,12 +11,10 @@ import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 /**
  * @author ci010
  */
-public interface SkinProvider {
-    Skin getSkin(SkinIdentity identity);
+public interface SkinInfoProvider {
+    void deploy();
 
     SkinInfo getSkin(Entity entity);
-
-    SkinPart getSkin(Entity entity, ISkinType skinType, ISkinPartType skinPart);
 
     Skin getSkin(Entity entity, ISkinType skinType, int slotIndex);
 

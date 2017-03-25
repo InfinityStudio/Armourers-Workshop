@@ -1,14 +1,14 @@
 package riskyken.armourersWorkshop.client.render.engine.special;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.cijhn.SkinProvider;
+import net.cijhn.SkinInfoProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.ArmourersWorkshop;
+import riskyken.armourersWorkshop.ArmourersWorkshopMod;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.render.RenderEngine;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
@@ -61,8 +61,8 @@ public class RenderEngineSpecial implements RenderEngine {
             return;
         }
 
-        SkinProvider skinProvider = ArmourersWorkshop.proxy.getSkinProvider();
-        EquipmentWardrobeData ewd = ArmourersWorkshop.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(new PlayerPointer(player));
+        SkinInfoProvider skinProvider = ArmourersWorkshopMod.proxy.getSkinProvider();
+        EquipmentWardrobeData ewd = ArmourersWorkshopMod.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(new PlayerPointer(player));
         byte[] extraColours = null;
         if (ewd != null) {
             Color skinColour = new Color(ewd.skinColour);
@@ -76,7 +76,6 @@ public class RenderEngineSpecial implements RenderEngine {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glEnable(GL11.GL_BLEND);
         for (int slot = 0; slot < 4; slot++) {
-
             for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
                 if (slot == SkinTypeRegistry.skinHead.getVanillaArmourSlotId()) {
                     Skin data = skinProvider.getSkin(player, SkinTypeRegistry.skinHead, skinIndex);

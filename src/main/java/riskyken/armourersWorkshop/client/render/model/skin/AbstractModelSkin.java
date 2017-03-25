@@ -57,10 +57,10 @@ public abstract class AbstractModelSkin extends ModelBiped implements IEquipment
                 if (((EntityLivingBase)entity).getHeldItem() != null) {
                     this.heldItemRight = 1;
                 }
-                if (((EntityLivingBase)entity).isRiding()) {
+                if (entity.isRiding()) {
                     this.isRiding = true;
                 }
-                if (((EntityLivingBase)entity).isSneaking()) {
+                if (entity.isSneaking()) {
                     this.isSneak = true;
                 }
                 if (((EntityLivingBase)entity).isChild()) {

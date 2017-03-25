@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.Level;
 
@@ -24,12 +25,12 @@ public class SkinPart implements ISkinPart {
     
     private Rectangle3D partBounds;
     private SkinCubeData cubeData;
-    private ArrayList<CubeMarkerData> markerBlocks;
+    private List<CubeMarkerData> markerBlocks;
     private ISkinPartType skinPart;
     @SideOnly(Side.CLIENT)
     private ClientSkinPartData clientSkinPartData;
     
-    public SkinPart(SkinCubeData cubeData, ISkinPartType skinPart, ArrayList<CubeMarkerData> markerBlocks) {
+    public SkinPart(SkinCubeData cubeData, ISkinPartType skinPart, List<CubeMarkerData> markerBlocks) {
         this.cubeData = cubeData;
         this.skinPart = skinPart;
         this.markerBlocks = markerBlocks;
@@ -122,7 +123,7 @@ public class SkinPart implements ISkinPart {
         return this.skinPart;
     }
     
-    public ArrayList<CubeMarkerData> getMarkerBlocks() {
+    public List<CubeMarkerData> getMarkerBlocks() {
         return markerBlocks;
     }
     
@@ -182,12 +183,12 @@ public class SkinPart implements ISkinPart {
         }
         
         cubeData = new SkinCubeData();
-        cubeData.readFromStream(stream, version, this);
+        cubeData.readFromStream(stream, version, this.skinPart);
         markerBlocks = new ArrayList<CubeMarkerData>();
         if (version > 8) {
             int markerCount = stream.readInt();
             for (int i = 0; i < markerCount; i++) {
-                markerBlocks.add(new CubeMarkerData(stream, version));
+                markerBlocks.add(new CubeMarkerData(stream));
             }
         }
     }

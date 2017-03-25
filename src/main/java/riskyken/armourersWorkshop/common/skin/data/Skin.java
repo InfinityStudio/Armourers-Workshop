@@ -50,7 +50,7 @@ public class Skin implements ISkin {
     private SkinProperties properties;
     private ISkinType equipmentSkinType;
     private int[] paintData;
-    private ArrayList<SkinPart> parts;
+    private List<SkinPart> parts;
     public int requestId;
     public int serverId = -1;
     private int lightHash = 0;
@@ -138,7 +138,7 @@ public class Skin implements ISkin {
         return properties;
     }
 
-    public Skin(SkinProperties properties, ISkinType equipmentSkinType, int[] paintData, ArrayList<SkinPart> equipmentSkinParts) {
+    public Skin(SkinProperties properties, ISkinType equipmentSkinType, int[] paintData, List<SkinPart> equipmentSkinParts) {
         this.properties = properties;
         this.equipmentSkinType = equipmentSkinType;
         this.paintData = null;
@@ -327,7 +327,7 @@ public class Skin implements ISkin {
         return paintData;
     }
 
-    public ArrayList<SkinPart> getParts() {
+    public List<SkinPart> getParts() {
         return parts;
     }
 

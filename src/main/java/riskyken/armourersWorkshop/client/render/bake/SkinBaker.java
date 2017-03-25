@@ -210,9 +210,9 @@ final class SkinBaker {
 
 
                         byte a = (byte) 255;
-                        if (cube.needsPostRender()) {
+                        if (cube.needsPostRender())
                             a = (byte) 127;
-                        }
+
 
                         byte[] r = cubeData.getCubeColourR(i);
                         byte[] g = cubeData.getCubeColourG(i);

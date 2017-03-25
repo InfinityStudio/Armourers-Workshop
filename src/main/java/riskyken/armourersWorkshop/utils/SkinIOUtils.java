@@ -27,26 +27,26 @@ import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 
 public final class SkinIOUtils {
-    
+
     public static boolean saveSkinFromFileName(String fileName, Skin skin) {
         File file = new File(getSkinLibraryDirectory(), fileName);
         return saveSkinToFile(file, skin);
     }
-    
+
     public static boolean saveSkinFromFileName(String fileName, Skin skin, EntityPlayerMP player) {
         File file = new File(getSkinLibraryDirectory(), "private");
         file = new File(file, player.getUniqueID().toString());
         file = new File(file, fileName);
         return saveSkinToFile(file, skin);
     }
-    
+
     public static boolean saveSkinToFile(File file, Skin skin) {
         File dir = file.getParentFile();
         if (!dir.exists()) {
             dir.mkdirs();
         }
         DataOutputStream stream = null;
-        
+
         try {
             stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
             skin.writeToStream(stream);
@@ -62,26 +62,26 @@ public final class SkinIOUtils {
         } finally {
             IOUtils.closeQuietly(stream);
         }
-        
+
         return true;
     }
-    
+
     public static Skin loadSkinFromFileName(String fileName, EntityPlayerMP player) {
         File file = new File(getSkinLibraryDirectory(), "private");
         file = new File(file, player.getUniqueID().toString());
         file = new File(file, fileName);
         return loadSkinFromFile(file);
     }
-    
+
     public static Skin loadSkinFromFileName(String fileName) {
         File file = new File(getSkinLibraryDirectory(), fileName);
         return loadSkinFromFile(file);
     }
-    
+
     public static Skin loadSkinFromFile(File file) {
         DataInputStream stream = null;
         Skin skin = null;
-        
+
         try {
             stream = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
             skin = new Skin(stream);
@@ -100,15 +100,15 @@ public final class SkinIOUtils {
         } finally {
             IOUtils.closeQuietly(stream);
         }
-        
+
         return skin;
     }
-    
-    
+
+
     public static Skin loadSkinFromStream(InputStream inputStream) {
         DataInputStream stream = null;
         Skin skin = null;
-        
+
         try {
             stream = new DataInputStream(new BufferedInputStream(inputStream));
             skin = new Skin(stream);
@@ -130,27 +130,7 @@ public final class SkinIOUtils {
         }
         return skin;
     }
-    
-    public static ISkinType getSkinTypeNameFromFile(File file) {
-        DataInputStream stream = null;
-        ISkinType skinType = null;
-        
-        try {
-            stream = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
-            skinType = Skin.readSkinTypeNameFromStream(stream);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NewerFileVersionException e) {
-            e.printStackTrace();
-        } finally {
-            IOUtils.closeQuietly(stream);
-        }
-    
-        return skinType;
-    }
-    
+
     public static void makeDatabaseDirectory() {
         File directory = getSkinDatabaseDirectory();
         ModLogger.log("Loading skin database at: " + directory.getAbsolutePath());
@@ -161,24 +141,18 @@ public final class SkinIOUtils {
             }
         }
     }
-    
-    public static void makeLibraryDirectory() {
-        File directory = getSkinLibraryDirectory();
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-    }
-    
+
+
     public static void copyOldDatabase() {
         ModLogger.log("Moving skin database to a new location.");
-        
+
         File dirNewDatabase = getSkinDatabaseDirectory();
         File dirOldDatabase = getOldSkinDatabaseDirectory();
         if (!dirOldDatabase.exists()) {
             ModLogger.log("Old database not found.");
             return;
         }
-        
+
         File[] oldFiles = dirOldDatabase.listFiles();
         for (int i = 0; i < oldFiles.length; i++) {
             File oldFile = oldFiles[i];
@@ -191,7 +165,7 @@ public final class SkinIOUtils {
             }
         }
     }
-    
+
     public static void copyGlobalDatabase() {
         File dirGlobalDatabase = getGlobalSkinDatabaseDirectory();
         if (dirGlobalDatabase.exists()) {
@@ -211,7 +185,7 @@ public final class SkinIOUtils {
         }
         createGlobalDatabaseReadme();
     }
-    
+
     private static void createGlobalDatabaseReadme() {
         File globalDatabaseReadme = new File(getGlobalSkinDatabaseDirectory(), "readme.txt");
         if (!getGlobalSkinDatabaseDirectory().exists()) {
@@ -233,30 +207,30 @@ public final class SkinIOUtils {
             }
         }
     }
-    
+
     public static File getSkinDatabaseDirectory() {
         return new File(DimensionManager.getCurrentSaveRootDirectory(), "skin-database");
     }
-    
+
     public static File getOldSkinDatabaseDirectory() {
         return new File(System.getProperty("user.dir"), "equipment-database");
     }
-    
+
     public static File getGlobalSkinDatabaseDirectory() {
         return new File(System.getProperty("user.dir"), "global-skin-database");
     }
-    
+
     public static File getSkinLibraryDirectory() {
         return new File(System.getProperty("user.dir"), LibModInfo.ID);
     }
-    
+
     public static boolean createDirectory(File file) {
         if (!file.exists()) {
             return file.mkdirs();
         }
         return true;
     }
-    
+
     public static void recoverSkins(EntityPlayer player) {
         player.addChatComponentMessage(new ChatComponentText("Starting skin recovery."));
         File skinDir = getSkinDatabaseDirectory();
@@ -271,7 +245,7 @@ public final class SkinIOUtils {
             int unnamedSkinCount = 0;
             int successCount = 0;
             int failCount = 0;
-            
+
             for (int i = 0; i < skinFiles.length; i++) {
                 File skinFile = skinFiles[i];
                 Skin skin = loadSkinFromFile(skinFile);
@@ -313,7 +287,7 @@ public final class SkinIOUtils {
                         continue;
                     }
                     unnamedSkinCount++;
-                    saveSkinToFile(new File(recoverDir,"unnamed-skin-" + unnamedSkinCount), skin);
+                    saveSkinToFile(new File(recoverDir, "unnamed-skin-" + unnamedSkinCount), skin);
                     successCount++;
                 } else {
                     failCount++;

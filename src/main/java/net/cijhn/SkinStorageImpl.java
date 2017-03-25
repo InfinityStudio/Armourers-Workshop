@@ -1,5 +1,6 @@
 package net.cijhn;
 
+import com.google.common.cache.Cache;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkin;
 import riskyken.armourersWorkshop.client.render.bake.SkinBakery;
 
@@ -11,6 +12,8 @@ import java.util.Map;
  * @author ci010
  */
 public class SkinStorageImpl implements SkinRepository {
+//    private Cache<Object, SkinInfo> skinCache;
+
     private Map<Object, ISkin> skinHashMap;
     private SkinBakery skinBakery;
 
