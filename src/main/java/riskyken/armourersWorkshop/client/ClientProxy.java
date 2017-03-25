@@ -8,7 +8,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.cijhn.EquipmentWardrobeProvider;
 import net.cijhn.SkinProvider;
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,12 +18,13 @@ import riskyken.armourersWorkshop.client.handler.EquipmentWardrobeHandler;
 import riskyken.armourersWorkshop.client.handler.ModClientFMLEventHandler;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
 import riskyken.armourersWorkshop.client.render.PlayerTextureHandler;
-import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
+import riskyken.armourersWorkshop.client.render.RenderEngine;
 import riskyken.armourersWorkshop.client.render.bake.QueueModelBakery;
+import riskyken.armourersWorkshop.client.render.engine.attach.RenderEngineAttach;
+import riskyken.armourersWorkshop.client.render.engine.special.RenderEngineSpecial;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
 import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
-import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.skin.EntityEquipmentData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.utils.ModLogger;
@@ -35,11 +35,7 @@ import java.io.File;
 public class ClientProxy extends CommonProxy {
     private SkinProvider provider;
     private EquipmentWardrobeProvider equipmentWardrobeHandler;
-
-    @Override
-    public EntityPlayer getLocalPlayer() {
-        return SkinModelRenderer.INSTANCE.targetPlayer;
-    }
+    private RenderEngine renderEngine;
 
     public SkinProvider getSkinProvider() {
         return provider;
@@ -75,15 +71,15 @@ public class ClientProxy extends CommonProxy {
         spamSillyMessages();
     }
 
-    public void preInit() {
-
-    }
-
     @Override
     public void initRenderers() {
-        SkinModelRenderer.init();
-        //TODO this renderer need to be hook on other things...
-//        MinecraftForgeClient.registerItemRenderer(Items.diamond_boots, new RenderItemEquipmentSkin());
+        SkinRenderType type = getSkinRenderType();
+        if (type == SkinRenderType.MODEL_ATTACHMENT)
+            this.renderEngine = new RenderEngineAttach();
+        else if (type == SkinRenderType.RENDER_EVENT)
+            this.renderEngine = new RenderEngineSpecial();
+        else this.renderEngine = new RenderEngineAttach();//TODO handle this exception
+        this.renderEngine.deploy();
     }
 
     @Override
@@ -92,8 +88,8 @@ public class ClientProxy extends CommonProxy {
         equipmentWardrobeHandler = new EquipmentWardrobeHandler();
         ClientSkinCache.init();
         MinecraftForge.EVENT_BUS.register(new PlayerTextureHandler());
-        FMLCommonHandler.instance().bus().register(new ModClientFMLEventHandler());
-        MinecraftForge.EVENT_BUS.register(new DebugTextHandler());
+//        FMLCommonHandler.instance().bus().register(new ModClientFMLEventHandler());
+//        MinecraftForge.EVENT_BUS.register(new DebugTextHandler());
     }
 
     @Override
@@ -203,11 +199,6 @@ public class ClientProxy extends CommonProxy {
         if (Loader.isModLoaded("integratedcircuits")) {
             ModLogger.log("Integrated Circuits detected! - Applying cosplay to mannequins.");
         }
-    }
-
-    //TODO Remove this and use IWorldAccess
-    public static void playerLeftTrackingRange(PlayerPointer playerPointer) {
-        equipmentWardrobeHandler.removeEquipmentWardrobeData(playerPointer);
     }
 
     @Override

@@ -7,14 +7,13 @@ import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
-import riskyken.armourersWorkshop.common.network.ByteBufHelper;
 
 public class PlayerPointer {
-    
+
     private static final boolean USE_UUID_TO_SYNC = false;
     private UUID uuid = null;
     private String name = null;
-    
+
     public PlayerPointer(EntityPlayer entityPlayer) {
         if (USE_UUID_TO_SYNC) {
             this.uuid = entityPlayer.getGameProfile().getId();
@@ -22,7 +21,7 @@ public class PlayerPointer {
             this.name = entityPlayer.getGameProfile().getName();
         }
     }
-    
+
     public PlayerPointer(GameProfile gameProfile) {
         if (USE_UUID_TO_SYNC) {
             this.uuid = gameProfile.getId();
@@ -30,27 +29,27 @@ public class PlayerPointer {
             this.name = gameProfile.getName();
         }
     }
-    
-    public PlayerPointer(ByteBuf buf) {
-        readFromByteBuffer(buf);
-    }
-    
-    private void readFromByteBuffer(ByteBuf buf) {
-        if (USE_UUID_TO_SYNC) {
-            this.uuid = ByteBufHelper.readUUID(buf);
-        } else {
-            this.name = ByteBufUtils.readUTF8String(buf);
-        }
-    }
-    
-    public void writeToByteBuffer(ByteBuf buf) {
-        if (USE_UUID_TO_SYNC) {
-            ByteBufHelper.writeUUID(buf, this.uuid);
-        } else {
-            ByteBufUtils.writeUTF8String(buf, this.name);
-        }
-    }
-    
+
+//    public PlayerPointer(ByteBuf buf) {
+//        readFromByteBuffer(buf);
+//    }
+
+//    private void readFromByteBuffer(ByteBuf buf) {
+//        if (USE_UUID_TO_SYNC) {
+//            this.uuid = ByteBufHelper.readUUID(buf);
+//        } else {
+//            this.name = ByteBufUtils.readUTF8String(buf);
+//        }
+//    }
+//
+//    public void writeToByteBuffer(ByteBuf buf) {
+//        if (USE_UUID_TO_SYNC) {
+//            ByteBufHelper.writeUUID(buf, this.uuid);
+//        } else {
+//            ByteBufUtils.writeUTF8String(buf, this.name);
+//        }
+//    }
+
     @Override
     public String toString() {
         return "PlayerPointer [uuid=" + uuid + ", name=" + name + "]";

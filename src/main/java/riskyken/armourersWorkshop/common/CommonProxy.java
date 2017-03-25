@@ -29,10 +29,6 @@ public class CommonProxy {
         CubeRegistry.init();
     }
 
-    public EntityPlayer getLocalPlayer() {
-        throw new IllegalArgumentException();
-    }
-
     public SkinProvider getSkinProvider() {
         throw new UnsupportedOperationException();
     }

@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.render.model;
+package riskyken.armourersWorkshop.client.render.engine.attach;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -16,7 +16,6 @@ import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.client.ClientProxy;
-import riskyken.armourersWorkshop.client.ClientProxy.SkinRenderType;
 import riskyken.armourersWorkshop.client.render.SkinPartRenderer;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
@@ -36,11 +35,11 @@ public class ModelRendererAttachment extends ModelRenderer {
     private final ISkinType skinType;
     private final ISkinPartType skinPart;
     private final Minecraft mc;
-    private ModelBiped baseModel;
+    private RenderEngineAttach engineAttach;
 
-    public ModelRendererAttachment(ModelBiped modelBase, ISkinType skinType, ISkinPartType skinPart) {
+    public ModelRendererAttachment(ModelBiped modelBase, ISkinType skinType, ISkinPartType skinPart, RenderEngineAttach engineAttach) {
         super(modelBase);
-        this.baseModel = modelBase;
+        this.engineAttach = engineAttach;
         mc = Minecraft.getMinecraft();
         this.skinType = skinType;
         this.skinPart = skinPart;
@@ -49,20 +48,16 @@ public class ModelRendererAttachment extends ModelRenderer {
 
     @Override
     public void render(float scale) {
-        if (ClientProxy.getSkinRenderType() != SkinRenderType.MODEL_ATTACHMENT) {
-            return;
-        }
+//        if (ClientProxy.getSkinRenderType() != SkinRenderType.MODEL_ATTACHMENT) {
+//            return;
+//        }
         mc.mcProfiler.startSection("armourers player render");
         SkinProvider provider = ArmourersWorkshop.proxy.getSkinProvider();
-        EntityPlayer player = ArmourersWorkshop.proxy.getLocalPlayer();
+        EntityPlayer player = engineAttach.targetPlayer;
         if (player == null) {
             mc.mcProfiler.endSection();
             return;
         }
-//        if (player instanceof MannequinFakePlayer) {
-//            mc.mcProfiler.endSection();
-//            return;
-//        }
 
         double distance = Minecraft.getMinecraft().thePlayer.getDistance(
                 player.posX,

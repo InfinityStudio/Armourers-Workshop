@@ -11,11 +11,11 @@ import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 
 @SideOnly(Side.CLIENT)
 public class SkinModel {
-    
+
     public DisplayList[] displayList;
     public boolean[] haveList;
     public long loadedTime;
-    
+
     public SkinModel(ArrayList<ColouredFace>[] vertexLists) {
         displayList = new DisplayList[vertexLists.length];
         haveList = new boolean[vertexLists.length];
@@ -28,11 +28,11 @@ public class SkinModel {
             }
         }
     }
-    
+
     public void setLoaded() {
         loadedTime = System.currentTimeMillis();
     }
-    
+
     public int getLoadingLod() {
         long time = System.currentTimeMillis();
         if (time < loadedTime + 500) {
@@ -41,7 +41,7 @@ public class SkinModel {
         }
         return 0;
     }
-    
+
     public void cleanUpDisplayLists() {
         for (int i = 0; i < displayList.length; i++) {
             if (haveList[i]) {

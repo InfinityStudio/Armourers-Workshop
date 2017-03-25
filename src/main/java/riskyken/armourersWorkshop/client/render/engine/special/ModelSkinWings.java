@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.render.model.skin;
+package riskyken.armourersWorkshop.client.render.engine.special;
 
 import java.util.ArrayList;
 
@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.util.ForgeDirection;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
+import riskyken.armourersWorkshop.client.render.model.skin.AbstractModelSkin;
 import riskyken.armourersWorkshop.common.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
@@ -16,7 +17,7 @@ import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.utils.SkinUtils;
 
-public class ModelSkinWings extends AbstractModelSkin  {
+public class ModelSkinWings extends AbstractModelSkin {
 
     @Override
     public void render(Entity entity, Skin skin, boolean showSkinPaint, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {

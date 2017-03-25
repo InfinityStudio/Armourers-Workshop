@@ -14,7 +14,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.client.render.bake.QueueModelBakery;
 import riskyken.armourersWorkshop.client.render.DisplayList;
-import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinPaintCache;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
