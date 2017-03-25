@@ -82,10 +82,7 @@ public class ArmourersWorkshop {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit();
-        File file = new File("D:\\Storage\\Desktop\\Pika Hood.armour");
-        Skin skin = SkinIOUtils.loadSkinFromFile(file);
-        System.out.println(skin);
-        ConfigHandlerClient.skinRenderType = 2;
+        TestEnvSetup.setup();
     }
 
     //client mod!

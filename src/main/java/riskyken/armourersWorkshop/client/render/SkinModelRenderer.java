@@ -269,6 +269,8 @@ public final class SkinModelRenderer implements SkinProvider, PlayerEquipmentDat
     private void attachModelsToBiped(ModelBiped modelBiped, RenderPlayer renderPlayer) {
         if (attachedBipedSet.contains(modelBiped))
             return;
+
+        System.out.println("ATTACHING THE DATA!");
         attachedBipedSet.add(modelBiped);
         modelBiped.bipedHead.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinHead, SkinTypeRegistry.INSTANCE.getSkinPartFromRegistryName("armourers:head.base")));
         modelBiped.bipedBody.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinChest, SkinTypeRegistry.INSTANCE.getSkinPartFromRegistryName("armourers:chest.base")));

@@ -24,34 +24,35 @@ import riskyken.plushieWrapper.client.RenderBridge;
 
 @SideOnly(Side.CLIENT)
 public class SkinPartRenderer extends ModelBase {
-    
+
     private static final ResourceLocation texture = new ResourceLocation(LibModInfo.ID.toLowerCase(), "textures/armour/cube.png");
     public static final SkinPartRenderer INSTANCE = new SkinPartRenderer();
     private final Minecraft mc;
-    
+
     public SkinPartRenderer() {
         mc = Minecraft.getMinecraft();
     }
-    
+
     public void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, boolean doLodLoading) {
         renderPart(skinPart, scale, skinDye, extraColour, 0, doLodLoading);
     }
-    
+
     public void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, double distance, boolean doLodLoading) {
         int lod = MathHelper.floor_double(distance / ConfigHandlerClient.lodDistance);
         lod = MathHelper.clamp_int(lod, 0, ConfigHandlerClient.maxLodLevels);
         renderPart(skinPart, scale, skinDye, extraColour, lod, doLodLoading);
     }
-    
+
     private void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, int lod, boolean doLodLoading) {
         //mc.mcProfiler.startSection(skinPart.getPartType().getPartName());
         ModClientFMLEventHandler.skinRendersThisTick++;
         //GL11.glColor3f(1F, 1F, 1F);
-        
+
         ClientSkinPartData cspd = skinPart.getClientSkinPartData();
+        if (cspd == null) return;
         SkinModel skinModel = cspd.getModelForDye(skinDye, extraColour);
         boolean multipassSkinRendering = ClientProxy.useMultipassSkinRendering();
-        
+
         for (int i = 0; i < skinModel.displayList.length; i++) {
             if (skinModel.haveList[i]) {
                 if (!skinModel.displayList[i].isCompiled()) {
@@ -62,16 +63,18 @@ public class SkinPartRenderer extends ModelBase {
                 }
             }
         }
-        
+
         if (ClientProxy.useSafeTextureRender()) {
             mc.renderEngine.bindTexture(texture);
         } else {
             GL11.glDisable(GL11.GL_TEXTURE_2D);
         }
-        
-        int startIndex = 0;;
-        int endIndex = 0;;
-        
+
+        int startIndex = 0;
+        ;
+        int endIndex = 0;
+        ;
+
         int loadingLod = skinModel.getLoadingLod();
         if (!doLodLoading) {
             loadingLod = 0;
@@ -79,7 +82,7 @@ public class SkinPartRenderer extends ModelBase {
         if (loadingLod > lod) {
             lod = loadingLod;
         }
-        
+
         if (lod != 0) {
             if (multipassSkinRendering) {
                 startIndex = lod * 4;
@@ -87,14 +90,14 @@ public class SkinPartRenderer extends ModelBase {
                 startIndex = lod * 2;
             }
         }
-        
+
         if (multipassSkinRendering) {
             endIndex = startIndex + 4;
         } else {
             endIndex = startIndex + 2;
         }
 
-        
+
         int listCount = skinModel.displayList.length;
         for (int i = startIndex; i < endIndex; i++) {
             if (i >= startIndex & i < endIndex) {
@@ -125,15 +128,15 @@ public class SkinPartRenderer extends ModelBase {
                 }
             }
         }
-        
+
         if (!ClientProxy.useSafeTextureRender()) {
             GL11.glEnable(GL11.GL_TEXTURE_2D);
         }
-        
+
         GL11.glColor3f(1F, 1F, 1F);
         //mc.mcProfiler.endSection();
     }
-    
+
     private void renderVertexList(ArrayList<ColouredFace> vertexList, float scale, ISkinDye skinDye, byte[] extraColour, ClientSkinPartData cspd) {
         IRenderBuffer renderBuffer = RenderBridge.INSTANCE;
         renderBuffer.startDrawingQuads();

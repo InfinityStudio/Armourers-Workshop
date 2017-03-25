@@ -18,6 +18,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Level;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
+import riskyken.armourersWorkshop.TestEnvSetup;
 import riskyken.armourersWorkshop.client.handler.*;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
 import riskyken.armourersWorkshop.client.library.ClientLibraryManager;
@@ -87,6 +88,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(File configDir) {
         super.preInit(configDir);
+        provider = new TestEnvSetup();
         //TODO init skinProvider
         enableCrossModSupport();
         spamSillyMessages();

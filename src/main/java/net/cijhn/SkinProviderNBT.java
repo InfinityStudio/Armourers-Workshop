@@ -23,6 +23,11 @@ public class SkinProviderNBT implements SkinProvider {
     }
 
     @Override
+    public Skin getSkin(SkinIdentity identity) {
+        return null;
+    }
+
+    @Override
     public Skin getSkin(ISkinPointer skinPointer) {
         return ClientSkinCache.INSTANCE.getSkin(skinPointer);
     }

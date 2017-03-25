@@ -3,20 +3,19 @@ package riskyken.armourersWorkshop.api.common.skin.data;
 import io.netty.buffer.ByteBuf;
 
 public interface ISkinDye {
+    byte[] getDyeColour(int index);
     
-    public byte[] getDyeColour(int index);
+    boolean haveDyeInSlot(int index);
     
-    public boolean haveDyeInSlot(int index);
+    void addDye(byte[] rgbt);
     
-    public void addDye(byte[] rgbt);
+    void addDye(int index, byte[] rgbt);
     
-    public void addDye(int index, byte[] rgbt);
+    void removeDye(int index);
     
-    public void removeDye(int index);
+    int getNumberOfDyes();
     
-    public int getNumberOfDyes();
+    void writeToBuf(ByteBuf buf);
     
-    public void writeToBuf(ByteBuf buf);
-    
-    public void readFromBuf(ByteBuf buf);
+    void readFromBuf(ByteBuf buf);
 }

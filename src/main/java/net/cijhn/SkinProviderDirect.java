@@ -11,6 +11,14 @@ import riskyken.armourersWorkshop.common.skin.data.Skin;
  * @author ci010
  */
 public class SkinProviderDirect implements SkinProvider {
+    private SkinRepository skinStorage;
+
+    @Override
+    public Skin getSkin(SkinIdentity identity) {
+        Skin skin = (Skin) skinStorage.getSkin(identity);
+        return skin;
+    }
+
     @Override
     public Skin getSkin(ISkinPointer skinPointer) {
         return ClientSkinCache.INSTANCE.getSkin(skinPointer);
@@ -18,7 +26,6 @@ public class SkinProviderDirect implements SkinProvider {
 
     @Override
     public Skin getSkin(Entity entity, ISkinType skinType, int slotIndex) {
-
         return null;
     }
 

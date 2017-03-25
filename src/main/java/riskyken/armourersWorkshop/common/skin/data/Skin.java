@@ -24,28 +24,28 @@ import riskyken.armourersWorkshop.common.skin.cubes.ICube;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 
 public class Skin implements ISkin {
-    
+
     public static final int FILE_VERSION = 12;
-    
+
     public static final String KEY_AUTHOR_NAME = "authorName";
     public static final String KEY_AUTHOR_UUID = "authorUUID";
     public static final String KEY_CUSTOM_NAME = "customName";
     public static final String KEY_TAGS = "tags";
-    
+
     public static final String KEY_BLOCK_GLOWING = "blockGlowing";
     public static final String KEY_BLOCK_LADDER = "blockLadder";
     public static final String KEY_BLOCK_NO_COLLISION = "blockNoCollision";
-    public static final String KEY_BLOCK_SEAT= "blockSeat";
-    
+    public static final String KEY_BLOCK_SEAT = "blockSeat";
+
     public static final String KEY_WINGS_MAX_ANGLE = "wingsMaxAngle";
     public static final String KEY_WINGS_MIN_ANGLE = "wingsMinAngle";
     public static final String KEY_WINGS_IDLE_SPEED = "wingsIdleSpeed";
     public static final String KEY_WINGS_FLYING_SPEED = "wingsFlyingSpeed";
 
     public static final String KEY_ARMOUR_OVERRIDE = "armourOverride";
-    
+
     public static final String KEY_FILE_NAME = "fileName";
-    
+
     private SkinProperties properties;
     private ISkinType equipmentSkinType;
     private int[] paintData;
@@ -53,55 +53,55 @@ public class Skin implements ISkin {
     public int requestId;
     public int serverId = -1;
     private int lightHash = 0;
-    
+
     @SideOnly(Side.CLIENT)
     public SkinModelTexture skinModelTexture;
-    
-    
+
+
     @SideOnly(Side.CLIENT)
     public int paintTextureId;
-    
+
     private int[] averageR = new int[10];
     private int[] averageG = new int[10];
     private int[] averageB = new int[10];
-    
+
     public void setAverageDyeValues(int[] r, int[] g, int[] b) {
         this.averageR = r;
         this.averageG = g;
         this.averageB = b;
     }
-    
+
     @SideOnly(Side.CLIENT)
     public Rectangle3D getSkinBounds() {
         int x = 0;
         int y = 0;
         int z = 0;
-        
+
         int width = 1;
         int height = 1;
         int depth = 1;
-        
+
         for (int i = 0; i < getPartCount(); i++) {
             if (!(getSkinType() == SkinTypeRegistry.skinBow && i > 0)) {
-                
+
                 SkinPart skinPart = getParts().get(i);
                 Rectangle3D bounds = skinPart.getPartBounds();
-                
+
                 width = Math.max(width, bounds.getWidth());
                 height = Math.max(height, bounds.getHeight());
                 depth = Math.max(depth, bounds.getDepth());
-                
+
                 x = bounds.getX();
                 y = bounds.getY();
                 z = bounds.getZ();
-                
+
                 if (hasPaintData()) {
                     IRectangle3D skinRec = skinPart.getPartType().getGuideSpace();
-                    
+
                     width = Math.max(width, skinRec.getWidth());
                     height = Math.max(height, skinRec.getHeight());
                     depth = Math.max(depth, skinRec.getDepth());
-                    
+
                     x = Math.max(x, skinRec.getX());
                     y = Math.max(y, skinRec.getY());
                     z = Math.max(z, skinRec.getZ());
@@ -109,34 +109,34 @@ public class Skin implements ISkin {
 
             }
         }
-        
+
         if (getPartCount() == 0) {
             for (int i = 0; i < getSkinType().getSkinParts().size(); i++) {
                 ISkinPartType part = getSkinType().getSkinParts().get(i);
-                
+
                 IRectangle3D skinRec = part.getGuideSpace();
-                
+
                 width = Math.max(width, skinRec.getWidth());
                 height = Math.max(height, skinRec.getHeight());
                 depth = Math.max(depth, skinRec.getDepth());
-                
+
                 x = Math.min(x, skinRec.getX());
                 y = Math.max(y, skinRec.getY());
                 z = Math.min(z, skinRec.getZ());
             }
         }
-        
+
         return new Rectangle3D(x, y, z, width, height, depth);
     }
-    
+
     public int[] getAverageDyeColour(int dyeNumber) {
-        return new int[] { averageR[dyeNumber], averageG[dyeNumber], averageB[dyeNumber] };
+        return new int[]{averageR[dyeNumber], averageG[dyeNumber], averageB[dyeNumber]};
     }
-    
+
     public SkinProperties getProperties() {
         return properties;
     }
-    
+
     public Skin(SkinProperties properties, ISkinType equipmentSkinType, int[] paintData, ArrayList<SkinPart> equipmentSkinParts) {
         this.properties = properties;
         this.equipmentSkinType = equipmentSkinType;
@@ -154,7 +154,7 @@ public class Skin implements ISkin {
                 this.paintData = paintData;
             }
         }
-        
+
         this.parts = equipmentSkinParts;
     }
 
@@ -167,39 +167,39 @@ public class Skin implements ISkin {
             skinModelTexture.deleteGlTexture();
         }
     }
-    
+
     @SideOnly(Side.CLIENT)
     public void blindPaintTexture() {
         if (hasPaintData()) {
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, paintTextureId);
         }
     }
-    
+
     @SideOnly(Side.CLIENT)
     public int getModelCount() {
         int count = 0;
-            for (int i = 0; i < parts.size(); i++) {
-                count += parts.get(i).getModelCount();
-            }
+        for (int i = 0; i < parts.size(); i++) {
+            count += parts.get(i).getModelCount();
+        }
         return count;
     }
-    
+
     public int getPartCount() {
         return parts.size();
     }
-    
+
     public int lightHash() {
         if (lightHash == 0) {
             lightHash = this.hashCode();
         }
         return lightHash;
     }
-    
+
     public Skin(DataInputStream stream) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
         this.properties = new SkinProperties();
         readFromStream(stream);
     }
-    
+
     public void writeToStream(DataOutputStream stream) throws IOException {
         stream.writeInt(FILE_VERSION);
         properties.writeToStream(stream);
@@ -217,19 +217,19 @@ public class Skin implements ISkin {
             parts.get(i).writeToStream(stream);
         }
     }
-    
+
     private void readFromStream(DataInputStream stream) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
         int fileVersion = stream.readInt();
         if (fileVersion > FILE_VERSION) {
             throw new NewerFileVersionException();
         }
-        
+
         if (fileVersion < 12) {
             String authorName = stream.readUTF();
             String customName = stream.readUTF();
             String tags = "";
             if (!(fileVersion < 4)) {
-                tags = stream.readUTF(); 
+                tags = stream.readUTF();
             } else {
                 tags = "";
             }
@@ -251,11 +251,11 @@ public class Skin implements ISkin {
             }
             equipmentSkinType = SkinTypeRegistry.INSTANCE.getSkinTypeFromRegistryName(regName);
         }
-        
+
         if (equipmentSkinType == null) {
             throw new InvalidCubeTypeException();
         }
-        
+
         this.paintData = null;
         if (fileVersion > 7) {
             boolean hasPaintData = stream.readBoolean();
@@ -266,14 +266,14 @@ public class Skin implements ISkin {
                 }
             }
         }
-        
+
         int size = stream.readByte();
         parts = new ArrayList<SkinPart>();
         for (int i = 0; i < size; i++) {
             parts.add(new SkinPart(stream, fileVersion));
         }
     }
-    
+
     public static ISkinType readSkinTypeNameFromStream(DataInputStream stream) throws IOException, NewerFileVersionException {
         int fileVersion = stream.readInt();
         if (fileVersion > FILE_VERSION) {
@@ -285,7 +285,7 @@ public class Skin implements ISkin {
             String customName = stream.readUTF();
             String tags = "";
             if (!(fileVersion < 4)) {
-                tags = stream.readUTF(); 
+                tags = stream.readUTF();
             } else {
                 tags = "";
             }
@@ -297,10 +297,10 @@ public class Skin implements ISkin {
         } else {
             properties.readFromStream(stream);
         }
-        
-        
+
+
         ISkinType skinType;
-        
+
         if (fileVersion < 5) {
             skinType = SkinTypeRegistry.INSTANCE.getSkinTypeFromLegacyId(stream.readByte() - 1);
         } else {
@@ -312,24 +312,24 @@ public class Skin implements ISkin {
         }
         return skinType;
     }
-    
+
     @Override
     public ISkinType getSkinType() {
         return equipmentSkinType;
     }
-    
+
     public boolean hasPaintData() {
         return paintData != null;
     }
-    
+
     public int[] getPaintData() {
         return paintData;
     }
-    
+
     public ArrayList<SkinPart> getParts() {
         return parts;
     }
-    
+
     public SkinPart getSkinPartFromType(ISkinPartType skinPartType) {
         for (int i = 0; i < parts.size(); i++) {
             if (parts.get(i).getPartType() == skinPartType) {
@@ -338,7 +338,7 @@ public class Skin implements ISkin {
         }
         return null;
     }
-    
+
     @Override
     public ArrayList<ISkinPart> getSubParts() {
         ArrayList<ISkinPart> partList = new ArrayList<ISkinPart>();
@@ -347,15 +347,15 @@ public class Skin implements ISkin {
         }
         return partList;
     }
-    
+
     public String getCustomName() {
         return properties.getPropertyString(KEY_CUSTOM_NAME, "");
     }
-    
+
     public String getAuthorName() {
         return properties.getPropertyString(KEY_AUTHOR_NAME, "");
     }
-    
+
     public int getTotalCubes() {
         int totalCubes = 0;
         for (int i = 0; i < CubeRegistry.INSTANCE.getTotalCubes(); i++) {
@@ -364,7 +364,7 @@ public class Skin implements ISkin {
         }
         return totalCubes;
     }
-    
+
     public int getTotalOfCubeType(ICube cube) {
         int totalOfCube = 0;
         int cubeId = cube.getId();
