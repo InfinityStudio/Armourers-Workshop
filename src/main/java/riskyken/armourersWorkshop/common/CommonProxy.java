@@ -1,5 +1,6 @@
-package riskyken.armourersWorkshop.proxies;
+package riskyken.armourersWorkshop.common;
 
+import net.cijhn.SkinProvider;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import riskyken.armourersWorkshop.common.config.ConfigHandler;
@@ -33,11 +34,20 @@ public class CommonProxy {
         initLibraryManager();
     }
 
+    public EntityPlayer getLocalPlayer() {
+        throw new IllegalArgumentException();
+    }
+
+    public SkinProvider getSkinProvider() {
+        throw new UnsupportedOperationException();
+    }
+
     public void initLibraryManager() {
         libraryManager = new CommonLibraryManager();
     }
 
-    public void initRenderers() {}
+    public void initRenderers() {
+    }
 
     public void init() {
         initRenderers();
@@ -86,4 +96,6 @@ public class CommonProxy {
     public int getBlockRenderType(Block block) {
         return 0;
     }
+
+
 }

@@ -20,7 +20,7 @@ import riskyken.armourersWorkshop.common.skin.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.data.SkinPointer;
-import riskyken.armourersWorkshop.proxies.ClientProxy;
+import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.utils.SkinNBTHelper;
 
 public class EquipmentRenderHandler implements ISkinRenderHandler {

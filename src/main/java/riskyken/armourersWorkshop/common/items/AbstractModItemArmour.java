@@ -95,7 +95,7 @@ public class AbstractModItemArmour extends ItemArmor {
         
         AbstractModelSkin targetModel = null;
         SkinModelRenderer emr = SkinModelRenderer.INSTANCE;
-        Skin data = emr.getCustomArmourItemData(skinData);
+        Skin data = emr.getSkin(skinData);
         if (data == null) {
             return null;
         }

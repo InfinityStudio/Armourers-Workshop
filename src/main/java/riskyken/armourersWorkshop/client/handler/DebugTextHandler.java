@@ -20,7 +20,7 @@ import riskyken.armourersWorkshop.client.skin.cache.ClientSkinPaintCache;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.skin.cache.CommonSkinCache;
-import riskyken.armourersWorkshop.proxies.ClientProxy;
+import riskyken.armourersWorkshop.client.ClientProxy;
 
 @SideOnly(Side.CLIENT)
 public class DebugTextHandler {

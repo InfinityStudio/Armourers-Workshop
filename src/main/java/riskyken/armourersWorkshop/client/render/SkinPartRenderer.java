@@ -18,7 +18,7 @@ import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
-import riskyken.armourersWorkshop.proxies.ClientProxy;
+import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.plushieWrapper.client.IRenderBuffer;
 import riskyken.plushieWrapper.client.RenderBridge;
 

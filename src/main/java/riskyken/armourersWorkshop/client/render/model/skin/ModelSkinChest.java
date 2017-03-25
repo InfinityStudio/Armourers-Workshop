@@ -17,7 +17,7 @@ import riskyken.armourersWorkshop.common.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
-import riskyken.armourersWorkshop.proxies.ClientProxy;
+import riskyken.armourersWorkshop.client.ClientProxy;
 
 @SideOnly(Side.CLIENT)
 public class ModelSkinChest extends AbstractModelSkin {

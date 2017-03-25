@@ -6,18 +6,17 @@ import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 
 
 public interface IEntityEquipment {
+    void addEquipment(ISkinType skinType, int slotIndex, ISkinPointer skinPointer);
     
-    public void addEquipment(ISkinType skinType, int slotIndex, ISkinPointer skinPointer);
+    void removeEquipment(ISkinType skinType, int slotIndex);
     
-    public void removeEquipment(ISkinType skinType, int slotIndex);
+    boolean haveEquipment(ISkinType skinType, int slotIndex);
     
-    public boolean haveEquipment(ISkinType skinType, int slotIndex);
+    int getEquipmentId(ISkinType skinType, int slotIndex);
     
-    public int getEquipmentId(ISkinType skinType, int slotIndex);
+    ISkinPointer getSkinPointer(ISkinType skinType, int slotIndex);
     
-    public ISkinPointer getSkinPointer(ISkinType skinType, int slotIndex);
+    ISkinDye getSkinDye(ISkinType skinType, int slotIndex);
     
-    public ISkinDye getSkinDye(ISkinType skinType, int slotIndex);
-    
-    public int getNumberOfSlots();
+    int getNumberOfSlots();
 }

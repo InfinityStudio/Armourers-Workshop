@@ -8,12 +8,14 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.cijhn.SkinProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.profiler.Profiler;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
+import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.render.EntityTextureInfo;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
@@ -22,31 +24,31 @@ import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.skin.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
-import riskyken.armourersWorkshop.proxies.ClientProxy;
+import riskyken.armourersWorkshop.client.ClientProxy;
 
 /**
  * Handles replacing the players texture with the painted version.
- * @author RiskyKen
  *
+ * @author RiskyKen
  */
 @SideOnly(Side.CLIENT)
 public class PlayerTextureHandler {
 
     public static PlayerTextureHandler INSTANCE;
-    
+
     private HashMap<PlayerPointer, EntityTextureInfo> playerTextureMap = new HashMap<PlayerPointer, EntityTextureInfo>();
     private final Profiler profiler;
     private boolean disableTexturePainting;
-    
+
     public PlayerTextureHandler() {
         MinecraftForge.EVENT_BUS.register(this);
         profiler = Minecraft.getMinecraft().mcProfiler;
     }
-    
+
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onRender(RenderPlayerEvent.Pre event) {
         disableTexturePainting = ConfigHandlerClient.disableTexturePainting;
-        if(disableTexturePainting) {
+        if (disableTexturePainting) {
             return;
         }
         if (!(event.entityPlayer instanceof AbstractClientPlayer)) {
@@ -71,33 +73,34 @@ public class PlayerTextureHandler {
             textureInfo.updateHairColour(ewd.hairColour);
             textureInfo.updateSkinColour(ewd.skinColour);
             Skin[] skins = new Skin[4 * 5];
-            
+
+            SkinProvider skinProvider = ArmourersWorkshop.proxy.getSkinProvider();
             for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
-                skins[0 + skinIndex * 4] = SkinModelRenderer.INSTANCE.getPlayerCustomArmour(player, SkinTypeRegistry.skinHead, skinIndex);
-                skins[1 + skinIndex * 4] = SkinModelRenderer.INSTANCE.getPlayerCustomArmour(player, SkinTypeRegistry.skinChest, skinIndex);
-                skins[2 + skinIndex * 4] = SkinModelRenderer.INSTANCE.getPlayerCustomArmour(player, SkinTypeRegistry.skinLegs, skinIndex);
-                skins[3 + skinIndex * 4] = SkinModelRenderer.INSTANCE.getPlayerCustomArmour(player, SkinTypeRegistry.skinFeet, skinIndex);
+                skins[skinIndex * 4] = skinProvider.getSkin(player, SkinTypeRegistry.skinHead, skinIndex);
+                skins[1 + skinIndex * 4] = skinProvider.getSkin(player, SkinTypeRegistry.skinChest, skinIndex);
+                skins[2 + skinIndex * 4] = skinProvider.getSkin(player, SkinTypeRegistry.skinLegs, skinIndex);
+                skins[3 + skinIndex * 4] = skinProvider.getSkin(player, SkinTypeRegistry.skinFeet, skinIndex);
             }
             ISkinDye[] dyes = new ISkinDye[4 * 5];
             for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
-                dyes[0 + skinIndex * 4] = SkinModelRenderer.INSTANCE.getPlayerDyeData(player, SkinTypeRegistry.skinHead, skinIndex);
-                dyes[1 + skinIndex * 4] = SkinModelRenderer.INSTANCE.getPlayerDyeData(player, SkinTypeRegistry.skinChest, skinIndex);
-                dyes[2 + skinIndex * 4] = SkinModelRenderer.INSTANCE.getPlayerDyeData(player, SkinTypeRegistry.skinLegs, skinIndex);
-                dyes[3 + skinIndex * 4] = SkinModelRenderer.INSTANCE.getPlayerDyeData(player, SkinTypeRegistry.skinFeet, skinIndex);
+                dyes[skinIndex * 4] = skinProvider.getPlayerDyeData(player, SkinTypeRegistry.skinHead, skinIndex);
+                dyes[1 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, SkinTypeRegistry.skinChest, skinIndex);
+                dyes[2 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, SkinTypeRegistry.skinLegs, skinIndex);
+                dyes[3 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, SkinTypeRegistry.skinFeet, skinIndex);
             }
-            
+
             textureInfo.updateSkins(skins);
             textureInfo.updateDyes(dyes);
-            
+
             ResourceLocation replacmentTexture = textureInfo.preRender();
             player.func_152121_a(Type.SKIN, replacmentTexture);
         }
         profiler.endSection();
     }
-    
+
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void onRender(RenderPlayerEvent.Post event) {
-        if(disableTexturePainting) {
+        if (disableTexturePainting) {
             return;
         }
         if (!(event.entityPlayer instanceof AbstractClientPlayer)) {
@@ -115,7 +118,7 @@ public class PlayerTextureHandler {
         if (ewd == null) {
             return;
         }
-        
+
         profiler.startSection("textureReset");
         if (playerTextureMap.containsKey(playerPointer)) {
             EntityTextureInfo textureInfo = playerTextureMap.get(playerPointer);

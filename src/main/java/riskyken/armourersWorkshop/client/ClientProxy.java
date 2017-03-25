@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.proxies;
+package riskyken.armourersWorkshop.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -7,6 +7,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.cijhn.SkinProvider;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderGlobal;
@@ -34,6 +35,7 @@ import riskyken.armourersWorkshop.common.network.messages.server.MessageServerCl
 import riskyken.armourersWorkshop.common.skin.EntityEquipmentData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.entity.EntitySkinHandler;
+import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.utils.HolidayHelper;
 import riskyken.armourersWorkshop.utils.ModLogger;
 import riskyken.armourersWorkshop.utils.SkinIOUtils;
@@ -43,6 +45,24 @@ import java.lang.reflect.Field;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
+    private SkinProvider provider;
+
+    @Override
+    public EntityPlayer getLocalPlayer() {
+        return SkinModelRenderer.INSTANCE.targetPlayer;
+    }
+
+    public SkinProvider getSkinProvider() {
+        return provider;
+    }
+
+    public PlayerTextureHandler getPlayerTextureHandler() {
+        return playerTextureHandler;
+    }
+
+    public EquipmentWardrobeHandler getEquipmentWardrobeHandler() {
+        return equipmentWardrobeHandler;
+    }
 
     public static EquipmentWardrobeHandler equipmentWardrobeHandler;
     public static PlayerTextureHandler playerTextureHandler;
@@ -67,6 +87,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(File configDir) {
         super.preInit(configDir);
+        //TODO init skinProvider
         enableCrossModSupport();
         spamSillyMessages();
     }

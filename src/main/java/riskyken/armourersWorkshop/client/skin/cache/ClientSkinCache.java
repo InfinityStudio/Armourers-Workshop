@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import net.cijhn.SkinRequester;
 import org.apache.logging.log4j.Level;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -25,7 +26,7 @@ import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
 @SideOnly(Side.CLIENT)
-public class ClientSkinCache implements IExpiringMapCallback<Skin> {
+public class ClientSkinCache implements IExpiringMapCallback<Skin>, SkinRequester {
     
     public static ClientSkinCache INSTANCE;
     
@@ -50,11 +51,13 @@ public class ClientSkinCache implements IExpiringMapCallback<Skin> {
         FMLCommonHandler.instance().bus().register(this);
     }
     
+    @Override
     public void requestSkinFromServer(ISkinPointer skinPointer) {
         requestSkinFromServer(skinPointer.getSkinId());
     }
     
-    private void requestSkinFromServer(int skinId) {
+    @Override
+    public void requestSkinFromServer(int skinId) {
         synchronized (requestedSkinIDs) {
             if (!requestedSkinIDs.contains(skinId)) {
                 skinRequestExecutor.execute(new SkinRequestThread(skinId));
