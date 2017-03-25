@@ -1,8 +1,6 @@
 package riskyken.armourersWorkshop.common.config;
 
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-import riskyken.armourersWorkshop.common.undo.UndoManager;
 
 import java.io.File;
 
@@ -82,10 +80,10 @@ public class ConfigHandler {
                 "Allow the mod to extract the official skins that come with the mod into the library folder.")
                 .getBoolean(true);
         
-        UndoManager.maxUndos = config
-                .get(CATEGORY_GENERAL, "maxUndos", 100,
-                "Max number of undos a player has for block painting.")
-                .getInt(100);
+//        UndoManager.maxUndos = config
+//                .get(CATEGORY_GENERAL, "maxUndos", 100,
+//                "Max number of undos a player has for block painting.")
+//                .getInt(100);
 
 //        UpdateCheck.checkForUpdates = config.get(CATEGORY_GENERAL, "checkForUpdates", true,
 //                "Should the mod check for new versions?").getBoolean(true);

@@ -2,15 +2,12 @@ package riskyken.armourersWorkshop.common.skin;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import riskyken.armourersWorkshop.utils.HolidayHelper;
 
 public final class EntityEquipmentDataManager {
     
@@ -94,7 +91,7 @@ public final class EntityEquipmentDataManager {
     public void onStartTracking(PlayerEvent.StartTracking event) {
         if (event.target instanceof EntityPlayerMP) {
             EntityPlayerMP targetPlayer = (EntityPlayerMP) event.target;
-            ExPropsPlayerEquipmentData.get((EntityPlayer) event.entity).sendCustomArmourDataToPlayer(targetPlayer);
+//            ExPropsPlayerEquipmentData.get((EntityPlayer) event.entity).sendCustomArmourDataToPlayer(targetPlayer);
         }
     }
     
@@ -109,20 +106,20 @@ public final class EntityEquipmentDataManager {
     
     @SubscribeEvent
     public void onEntityConstructing(EntityConstructing event) {
-        if (event.entity instanceof EntityPlayer && ExPropsPlayerEquipmentData.get((EntityPlayer) event.entity) == null) {
-            ExPropsPlayerEquipmentData.register((EntityPlayer) event.entity);
-        }
+//        if (event.entity instanceof EntityPlayer && ExPropsPlayerEquipmentData.get((EntityPlayer) event.entity) == null) {
+//            ExPropsPlayerEquipmentData.register((EntityPlayer) event.entity);
+//        }
     }
     
-    @SubscribeEvent
-    public void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayerMP) {
-            ExPropsPlayerEquipmentData playerData = ExPropsPlayerEquipmentData.get((EntityPlayer) event.entity);
-            playerData.sendCustomArmourDataToPlayer((EntityPlayerMP) event.entity);
-            HolidayHelper.giftPlayer((EntityPlayerMP) event.entity);
-        }
-    }
-    
+//    @SubscribeEvent
+//    public void onEntityJoinWorld(EntityJoinWorldEvent event) {
+//        if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayerMP) {
+//            ExPropsPlayerEquipmentData playerData = ExPropsPlayerEquipmentData.get((EntityPlayer) event.entity);
+//            playerData.sendCustomArmourDataToPlayer((EntityPlayerMP) event.entity);
+//            HolidayHelper.giftPlayer((EntityPlayerMP) event.entity);
+//        }
+//    }
+//
 //    @SubscribeEvent
 //    public void onLivingDeathEvent (LivingDeathEvent  event) {
 //        if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayerMP) {

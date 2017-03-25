@@ -12,7 +12,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
-import riskyken.armourersWorkshop.client.render.model.bake.ModelBakery;
+import riskyken.armourersWorkshop.client.render.bake.QueueModelBakery;
 import riskyken.armourersWorkshop.client.render.DisplayList;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
@@ -44,8 +44,8 @@ public class DebugTextHandler {
                     event.left.add("Common Skin Count: " + CommonSkinCache.INSTANCE.size());
                 }
                 event.left.add("Part Count: " + ClientSkinCache.INSTANCE.getPartCount());
-                event.left.add("Player Data: " + SkinModelRenderer.INSTANCE.getSkinDataMapSize());
-                int bakeQueue = ModelBakery.INSTANCE.getBakingQueueSize();
+//                event.left.add("Player Data: " + SkinModelRenderer.INSTANCE.getSkinDataMapSize());
+                int bakeQueue = QueueModelBakery.INSTANCE.getBakingQueueSize();
                 event.left.add("Baking Queue: " + bakeQueue);
                 event.left.add("Request Queue: " + (ClientSkinCache.INSTANCE.getRequestQueueSize() - bakeQueue));
                 event.left.add("Texture Count: " + ClientSkinPaintCache.INSTANCE.size());

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.MathHelper;
-import riskyken.armourersWorkshop.client.render.model.bake.ColouredFace;
+import riskyken.armourersWorkshop.client.render.bake.ColouredFace;
 import riskyken.armourersWorkshop.client.render.DisplayList;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 

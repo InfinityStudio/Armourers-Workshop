@@ -12,11 +12,7 @@ import riskyken.armourersWorkshop.api.client.IArmourersClientManager;
 import riskyken.armourersWorkshop.api.common.IArmourersCommonManager;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
-import riskyken.armourersWorkshop.client.handler.EquipmentRenderHandler;
 import riskyken.armourersWorkshop.common.config.ConfigHandler;
-import riskyken.armourersWorkshop.common.handler.SkinDataHandler;
-import riskyken.armourersWorkshop.common.skin.entity.EntitySkinHandler;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
 import com.mojang.authlib.GameProfile;
@@ -38,8 +34,8 @@ public final class ApiRegistrar {
             if (classObject instanceof IArmourersCommonManager) {
                 ModLogger.log(String.format("Loading %s API addon for %s", "data manager", modName));
                 equipmentDataManagers.put(modName, ((IArmourersCommonManager)classObject));
-                ((IArmourersCommonManager)classObject).onLoad(SkinDataHandler.INSTANCE,
-                        SkinTypeRegistry.INSTANCE, EntitySkinHandler.INSTANCE);
+//                ((IArmourersCommonManager)classObject).onLoad(SkinDataHandler.INSTANCE,
+//                        SkinTypeRegistry.INSTANCE, EntitySkinHandler.INSTANCE);
             }
             if (classObject instanceof IArmourersClientManager) {
                 if (ArmourersWorkshop.isDedicated()) {
@@ -48,7 +44,7 @@ public final class ApiRegistrar {
                 }
                 ModLogger.log(String.format("Loading %s API addon for %s", "render manager", modName));
                 equipmentRenderManagers.put(modName, ((IArmourersClientManager)classObject)) ;
-                ((IArmourersClientManager)classObject).onLoad(EquipmentRenderHandler.INSTANCE);
+//                ((IArmourersClientManager)classObject).onLoad(EquipmentRenderHandler.INSTANCE);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

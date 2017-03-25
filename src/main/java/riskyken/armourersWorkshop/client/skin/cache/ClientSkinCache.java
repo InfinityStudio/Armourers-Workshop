@@ -167,8 +167,6 @@ public class ClientSkinCache implements IExpiringMapCallback<Skin>, SkinRequeste
                     ModLogger.log("removing skin");
                 }
                 
-                
-                
                 if (requestedSkinIDs.contains(skinID)) {
                     skinIDMap.put(skinID, skin);
                     requestedSkinIDs.remove(skinID);
@@ -183,9 +181,6 @@ public class ClientSkinCache implements IExpiringMapCallback<Skin>, SkinRequeste
                     skinIDMap.put(skinID, skin);
                     ModLogger.log(Level.WARN, "Got an unknown skin ID: " + skinID);
                 }
-                
-                
-                
             }
         }
     }

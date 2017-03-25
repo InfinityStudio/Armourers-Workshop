@@ -1,12 +1,12 @@
 package riskyken.armourersWorkshop.client;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.cijhn.EquipmentWardrobeProvider;
 import net.cijhn.SkinProvider;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderGlobal;
@@ -21,8 +21,7 @@ import riskyken.armourersWorkshop.client.handler.*;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
 import riskyken.armourersWorkshop.client.render.PlayerTextureHandler;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
-import riskyken.armourersWorkshop.client.render.model.bake.ModelBakery;
-import riskyken.armourersWorkshop.client.settings.Keybindings;
+import riskyken.armourersWorkshop.client.render.bake.QueueModelBakery;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
 import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
@@ -30,8 +29,6 @@ import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.skin.EntityEquipmentData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.entity.EntitySkinHandler;
-import riskyken.armourersWorkshop.utils.HolidayHelper;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
 import java.io.File;
@@ -54,11 +51,11 @@ public class ClientProxy extends CommonProxy {
         return playerTextureHandler;
     }
 
-    public EquipmentWardrobeHandler getEquipmentWardrobeHandler() {
+    public EquipmentWardrobeProvider getEquipmentWardrobeHandler() {
         return equipmentWardrobeHandler;
     }
 
-    public static EquipmentWardrobeHandler equipmentWardrobeHandler;
+    public static EquipmentWardrobeProvider equipmentWardrobeHandler;
     public static PlayerTextureHandler playerTextureHandler;
 
     private static boolean shadersModLoaded;
@@ -111,27 +108,12 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void postInit() {
         super.postInit();
-        if (HolidayHelper.valentins.isHolidayActive()) {
-            enableValentinsClouds();
-        }
     }
 
     @SubscribeEvent
     public void onTextureStitchEvent(TextureStitchEvent.Pre event) {
         if (event.map.getTextureType() == 1) {
             dyeBottleSlotIcon = event.map.registerIcon(LibItemResources.SLOT_DYE_BOTTLE);
-        }
-    }
-
-    private void enableValentinsClouds() {
-        ModLogger.log("Love is in the air!");
-        try {
-            Object o = ReflectionHelper.getPrivateValue(RenderGlobal.class, null, "locationCloudsPng", "field_110925_j");
-            Field f = ReflectionHelper.findField(ResourceLocation.class, "resourceDomain", "field_110626_a");
-            f.setAccessible(true);
-            f.set(o, LibModInfo.ID.toLowerCase());
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -234,19 +216,7 @@ public class ClientProxy extends CommonProxy {
 
     //TODO Remove this and use IWorldAccess
     public static void playerLeftTrackingRange(PlayerPointer playerPointer) {
-        SkinModelRenderer.INSTANCE.removeEquipmentData(playerPointer);
         equipmentWardrobeHandler.removeEquipmentWardrobeData(playerPointer);
-    }
-
-    @Override
-    public void registerKeyBindings() {
-        ClientRegistry.registerKeyBinding(Keybindings.openCustomArmourGui);
-        ClientRegistry.registerKeyBinding(Keybindings.undo);
-    }
-
-    @Override
-    public void addEquipmentData(PlayerPointer playerPointer, EntityEquipmentData equipmentData) {
-        SkinModelRenderer.INSTANCE.addEquipmentData(playerPointer, equipmentData);
     }
 
     @Override
@@ -256,13 +226,12 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void receivedEquipmentData(Skin skin) {
-        ModelBakery.INSTANCE.receivedUnbakedModel(skin);
+        QueueModelBakery.INSTANCE.receivedUnbakedModel(skin);
     }
 
 
     @Override
     public void receivedEquipmentData(EntityEquipmentData equipmentData, int entityId) {
-        EntitySkinHandler.INSTANCE.receivedEquipmentData(equipmentData, entityId);
     }
 
     @Override

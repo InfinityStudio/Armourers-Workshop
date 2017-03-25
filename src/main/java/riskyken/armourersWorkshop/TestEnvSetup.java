@@ -6,8 +6,7 @@ import net.minecraft.entity.Entity;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
-import riskyken.armourersWorkshop.client.ClientProxy;
-import riskyken.armourersWorkshop.client.render.model.bake.ModelBakery;
+import riskyken.armourersWorkshop.client.render.bake.QueueModelBakery;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
@@ -32,7 +31,7 @@ public class TestEnvSetup implements SkinProvider {
         System.out.println("==============================");
         System.out.println(skin.serverId);
         System.out.println("==============================");
-        ModelBakery.INSTANCE.receivedUnbakedModel(skin);
+        QueueModelBakery.INSTANCE.receivedUnbakedModel(skin);
         ClientSkinCache.INSTANCE.addServerIdMap(skin);
     }
 
