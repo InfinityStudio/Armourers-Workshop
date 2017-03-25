@@ -96,6 +96,7 @@ public class ArmourersWorkshop {
         File file = new File("D:\\Storage\\Desktop\\Pika Hood.armour");
         Skin skin = SkinIOUtils.loadSkinFromFile(file);
         System.out.println(skin);
+        ConfigHandlerClient.skinRenderType = 2;
     }
 
     //client mod!

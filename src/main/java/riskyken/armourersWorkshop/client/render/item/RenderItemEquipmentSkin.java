@@ -15,6 +15,7 @@ import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
 import riskyken.armourersWorkshop.common.skin.data.SkinPointer;
 import riskyken.armourersWorkshop.utils.SkinNBTHelper;
 
+//Render item stack entity in world view
 public class RenderItemEquipmentSkin implements IItemRenderer {
     private final RenderItem renderItem;
     private final Minecraft mc;

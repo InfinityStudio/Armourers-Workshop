@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.model.armourer;
+package riskyken.armourersWorkshop.client.render.model.armourer;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

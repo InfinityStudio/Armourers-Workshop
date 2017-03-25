@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.model.bake;
+package riskyken.armourersWorkshop.client.render.model.bake;
 
 import java.util.ArrayList;
 import java.util.HashSet;

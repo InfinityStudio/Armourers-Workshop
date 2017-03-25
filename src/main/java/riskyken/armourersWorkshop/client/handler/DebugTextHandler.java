@@ -12,7 +12,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
-import riskyken.armourersWorkshop.client.model.bake.ModelBakery;
+import riskyken.armourersWorkshop.client.render.model.bake.ModelBakery;
 import riskyken.armourersWorkshop.client.render.DisplayList;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;

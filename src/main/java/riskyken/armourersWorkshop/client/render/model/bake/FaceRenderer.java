@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.model.bake;
+package riskyken.armourersWorkshop.client.render.model.bake;
 
 import riskyken.plushieWrapper.client.IRenderBuffer;
 import riskyken.plushieWrapper.client.RenderBridge;

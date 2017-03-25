@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.model.armourer;
+package riskyken.armourersWorkshop.client.render.model.armourer;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;

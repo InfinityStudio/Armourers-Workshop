@@ -12,8 +12,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.handler.ModClientFMLEventHandler;
-import riskyken.armourersWorkshop.client.model.SkinModel;
-import riskyken.armourersWorkshop.client.model.bake.ColouredFace;
+import riskyken.armourersWorkshop.client.render.model.SkinModel;
+import riskyken.armourersWorkshop.client.render.model.bake.ColouredFace;
 import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
@@ -135,7 +135,7 @@ public class SkinPartRenderer extends ModelBase {
     }
     
     private void renderVertexList(ArrayList<ColouredFace> vertexList, float scale, ISkinDye skinDye, byte[] extraColour, ClientSkinPartData cspd) {
-        IRenderBuffer renderBuffer = new RenderBridge().INSTANCE;
+        IRenderBuffer renderBuffer = RenderBridge.INSTANCE;
         renderBuffer.startDrawingQuads();
         for (int i = 0; i < vertexList.size(); i++) {
             ColouredFace cVert = vertexList.get(i);

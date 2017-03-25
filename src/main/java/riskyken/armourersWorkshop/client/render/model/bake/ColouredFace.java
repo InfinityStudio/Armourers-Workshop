@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.model.bake;
+package riskyken.armourersWorkshop.client.render.model.bake;
 
 import net.minecraft.util.MathHelper;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;

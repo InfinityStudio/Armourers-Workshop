@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.model.skin;
+package riskyken.armourersWorkshop.client.render.model.skin;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.model.ModelHelper;
+import riskyken.armourersWorkshop.client.render.model.ModelHelper;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinPaintCache;
 import riskyken.armourersWorkshop.common.ApiRegistrar;
