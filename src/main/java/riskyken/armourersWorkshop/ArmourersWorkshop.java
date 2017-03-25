@@ -14,14 +14,17 @@ import riskyken.armourersWorkshop.common.skin.EntityEquipmentDataManager;
 import riskyken.armourersWorkshop.common.skin.SkinExtractor;
 import riskyken.armourersWorkshop.common.skin.cache.CommonSkinCache;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
+import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.entity.EntitySkinHandler;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
+import riskyken.armourersWorkshop.proxies.ClientProxy;
 import riskyken.armourersWorkshop.proxies.CommonProxy;
 import riskyken.armourersWorkshop.utils.ModLogger;
 import riskyken.armourersWorkshop.utils.SkinIOUtils;
 import riskyken.plushieWrapper.common.creativetab.ModCreativeTab;
 
 import java.io.File;
+import java.net.URISyntaxException;
 
 @Mod(modid = LibModInfo.ID, name = LibModInfo.NAME, version = LibModInfo.VERSION, guiFactory = LibModInfo.GUI_FACTORY_CLASS)
 public class ArmourersWorkshop {
@@ -68,8 +71,9 @@ public class ArmourersWorkshop {
     public static ModCreativeTab creativeTabArmorersWorkshop = new ModCreativeTab(LibModInfo.ID);
 
     @Mod.EventHandler
-    public void perInit(FMLPreInitializationEvent event) {
+    public void perInit(FMLPreInitializationEvent event) throws URISyntaxException {
         ModLogger.log("Loading " + LibModInfo.NAME + " " + LibModInfo.VERSION);
+
 
         File configDir = event.getSuggestedConfigurationFile().getParentFile();
         configDir = new File(configDir, LibModInfo.ID);
@@ -81,7 +85,6 @@ public class ArmourersWorkshop {
 
     @Mod.EventHandler
     public void load(FMLInitializationEvent event) {
-//        new ConfigSynchronizeHandler();
 // no packet
 //        PacketHandler.init();
         proxy.init();
@@ -90,7 +93,9 @@ public class ArmourersWorkshop {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit();
-
+        File file = new File("D:\\Storage\\Desktop\\Pika Hood.armour");
+        Skin skin = SkinIOUtils.loadSkinFromFile(file);
+        System.out.println(skin);
     }
 
     //client mod!
