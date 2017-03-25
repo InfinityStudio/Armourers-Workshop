@@ -1,7 +1,9 @@
 package riskyken.armourersWorkshop.common.skin.data.serialize;
 
+import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.exception.NewerFileVersionException;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
@@ -25,24 +27,11 @@ import static riskyken.armourersWorkshop.common.skin.data.Skin.*;
 public class SkinReader {
     private SkinPartReader partSerializer;
 
-    interface Context {
-        ISkinType getSkinTypeFromLegacyId(int id);
-
-        ISkinType getSkinTypeFromRegistryName(String regName);
-
-        ISkinPartType getSkinPartTypeFromId(int id);
-
-        ISkinPartType getSkinPartTypeFromName(String regName);
-
-        int getTextureSize();
-
-        int getFileVersion();
-    }
-
-    public Skin readSkin(DataInput stream, Context context) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
+    public Skin readSkin(DataInput stream, ArmourersWorkshop context) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
         int fileVersion = stream.readInt();
         if (fileVersion > context.getFileVersion())
             throw new NewerFileVersionException();
+        ISkinTypeRegistry skinRegistry = context.getSkinRegistry();
         SkinProperties properties = new SkinProperties();
         ISkinType skinType;
         List<SkinPart> parts;
@@ -62,12 +51,12 @@ public class SkinReader {
             properties.readFromStream(stream);
 
         if (fileVersion < 5) {
-            skinType = context.getSkinTypeFromLegacyId(stream.readByte() - 1);
+            skinType = skinRegistry.getSkinTypeFromLegacyId(stream.readByte() - 1);
         } else {
             String regName = stream.readUTF();
             if (regName.equals(SkinTypeRegistry.skinSkirt.getRegistryName()))
                 regName = SkinTypeRegistry.skinLegs.getRegistryName();
-            skinType = context.getSkinTypeFromRegistryName(regName);
+            skinType = skinRegistry.getSkinTypeFromRegistryName(regName);
         }
 
         if (skinType == null) throw new InvalidCubeTypeException();
@@ -87,7 +76,7 @@ public class SkinReader {
         return new Skin(properties, skinType, paintData, parts);
     }
 
-    public void writeSkin(Skin skin, DataOutputStream stream, Context context) throws IOException {
+    public void writeSkin(Skin skin, DataOutputStream stream, ArmourersWorkshop context) throws IOException {
         stream.writeInt(context.getFileVersion());
         skin.getProperties().writeToStream(stream);
         stream.writeUTF(skin.getSkinType().getRegistryName());

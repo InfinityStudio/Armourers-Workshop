@@ -20,11 +20,8 @@ import riskyken.armourersWorkshop.client.render.RenderEngine;
 import riskyken.armourersWorkshop.client.render.bake.AsyncModelBakery;
 import riskyken.armourersWorkshop.client.render.engine.attach.RenderEngineAttach;
 import riskyken.armourersWorkshop.client.render.engine.special.RenderEngineSpecial;
-import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
 import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
-import riskyken.armourersWorkshop.common.skin.EntityEquipmentData;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
 import java.io.File;
@@ -88,7 +85,7 @@ public class ClientProxy extends CommonProxy {
         else this.renderEngine = new RenderEngineAttach();//TODO handle this exception
         this.renderEngine.deploy();
         this.equipmentWardrobeHandler = new EquipmentWardrobeHandler();
-        ClientSkinCache.init();
+//        ClientSkinCache.init();
         MinecraftForge.EVENT_BUS.register(new PlayerTextureHandler());
     }
 

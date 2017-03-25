@@ -25,6 +25,7 @@ import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.exception.NewerFileVersionException;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
+import riskyken.armourersWorkshop.common.skin.data.serialize.SkinReader;
 
 public final class SkinIOUtils {
 
@@ -49,7 +50,7 @@ public final class SkinIOUtils {
 
         try {
             stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
-            skin.writeToStream(stream);
+//            skin.writeToStream(stream);
             stream.flush();
         } catch (FileNotFoundException e) {
             ModLogger.log(Level.WARN, "Skin file not found.");
@@ -84,7 +85,8 @@ public final class SkinIOUtils {
 
         try {
             stream = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
-            skin = new Skin(stream);
+            new SkinReader().readSkin(stream, new )
+//            skin = new Skin(stream);
         } catch (FileNotFoundException e) {
             ModLogger.log(Level.WARN, "Skin file not found.");
             ModLogger.log(Level.WARN, file);

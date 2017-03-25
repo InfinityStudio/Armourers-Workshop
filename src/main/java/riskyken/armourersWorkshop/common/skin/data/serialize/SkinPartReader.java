@@ -1,6 +1,7 @@
 package riskyken.armourersWorkshop.common.skin.data.serialize;
 
 import org.apache.logging.log4j.Level;
+import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeMarkerData;
@@ -27,10 +28,10 @@ public class SkinPartReader {
             writeCubeMaker(output, markerBlock);
     }
 
-    public SkinPart readSkinPart(DataInput input, SkinReader.Context context) throws IOException, InvalidCubeTypeException {
+    public SkinPart readSkinPart(DataInput input, ArmourersWorkshop context) throws IOException, InvalidCubeTypeException {
         ISkinPartType skinPart;
         if (context.getFileVersion() < 6) {
-            skinPart = context.getSkinPartTypeFromId(input.readByte());
+            skinPart = context.getSkinRegistry().getSkinPartTypeFromId(input.readByte());
             if (skinPart == null) {
                 ModLogger.log(Level.ERROR, "Skin part was null");
                 throw new IOException("Skin part was null");
@@ -41,7 +42,7 @@ public class SkinPartReader {
                 regName = "armourers:legs.skirt";
             if (regName.equals("armourers:bow.base"))
                 regName = "armourers:bow.frame1";
-            skinPart = context.getSkinPartTypeFromName(regName);
+            skinPart = context.getSkinRegistry().getSkinPartTypeFromName(regName);
 
             if (skinPart == null) {
                 ModLogger.log(Level.ERROR, "Skin part was null - reg name: " + regName);

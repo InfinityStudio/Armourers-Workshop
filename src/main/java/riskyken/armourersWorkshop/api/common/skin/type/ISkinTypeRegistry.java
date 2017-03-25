@@ -1,36 +1,41 @@
 package riskyken.armourersWorkshop.api.common.skin.type;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Skin type registry is used to register new ISkinType's
  * and get register ISkinType's and ISkinPart's.
- * 
- * @author RiskyKen
  *
+ * @author RiskyKen
  */
 public interface ISkinTypeRegistry {
-    
+
     /**
      * Register a new skin type.
+     *
      * @param skinType
      */
-    public boolean registerSkin(ISkinType skinType) ;
-    
-    public ISkinType getSkinTypeFromRegistryName(String registryName);
-    
-    public ISkinPartType getSkinPartFromRegistryName(String registryName);
-    
-    public ArrayList<ISkinType> getRegisteredSkinTypes();
-    
-    public ISkinType getSkinTypeHead();
-    
-    public ISkinType getSkinTypeChest();
-    
-    public ISkinType getSkinTypeLegs();
-    
+    boolean registerSkin(ISkinType skinType);
+
+    ISkinType getSkinTypeFromLegacyId(int id);
+
+    ISkinType getSkinTypeFromRegistryName(String registryName);
+
+    ISkinPartType getSkinPartTypeFromId(int id);
+
+    ISkinPartType getSkinPartTypeFromName(String regName);
+
+    List<ISkinType> getRegisteredSkinTypes();
+
+    ISkinType getSkinTypeHead();
+
+    ISkinType getSkinTypeChest();
+
+    ISkinType getSkinTypeLegs();
+
     @Deprecated
-    public ISkinType getSkinTypeSkirt();
-    
-    public ISkinType getSkinTypeFeet();
+    ISkinType getSkinTypeSkirt();
+
+    ISkinType getSkinTypeFeet();
 }

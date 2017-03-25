@@ -5,8 +5,12 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import net.cijhn.EquipmentWardrobeProvider;
 import net.cijhn.SkinInfoProvider;
+import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
+import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.CommonProxy;
+import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
 import java.io.File;
@@ -54,6 +58,8 @@ public class ArmourersWorkshopMod extends ArmourersWorkshop {
     @SidedProxy(clientSide = LibModInfo.PROXY_CLIENT_CLASS, serverSide = LibModInfo.PROXY_COMMNON_CLASS)
     public static CommonProxy proxy;
 
+    private SkinTypeRegistry registry;
+
     @Mod.EventHandler
     public void perInit(FMLPreInitializationEvent event) throws URISyntaxException {
         ModLogger.log("Loading " + LibModInfo.NAME + " " + LibModInfo.VERSION);
@@ -62,17 +68,33 @@ public class ArmourersWorkshopMod extends ArmourersWorkshop {
         configDir = new File(configDir, LibModInfo.ID);
         if (!configDir.exists())
             configDir.mkdirs();
+        registry = new SkinTypeRegistry();
         proxy.preInit(configDir);
     }
 
     @Mod.EventHandler
-    public void load(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event) {
         proxy.init();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit();
+    }
+
+    @Override
+    public ISkinTypeRegistry getSkinRegistry() {
+        return registry;
+    }
+
+    @Override
+    public int getTextureSize() {
+        return 0;
+    }
+
+    @Override
+    public int getFileVersion() {
+        return 0;
     }
 
     @Override

@@ -14,7 +14,6 @@ import java.io.File;
 
 public class CommonProxy {
     public void preInit(File configDir) {
-        SkinTypeRegistry.init();
         CubeRegistry.init();
 //        ConfigHandler.init(new File(configDir, "common.cfg"));
 //        ConfigHandlerClient.init(new File(configDir, "client.cfg"));
