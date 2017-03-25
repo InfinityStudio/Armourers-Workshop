@@ -3,21 +3,20 @@ package riskyken.armourersWorkshop.client;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.cijhn.EquipmentWardrobeProvider;
 import net.cijhn.SkinProvider;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Level;
 import riskyken.armourersWorkshop.TestEnvSetup;
-import riskyken.armourersWorkshop.client.handler.*;
+import riskyken.armourersWorkshop.client.handler.DebugTextHandler;
+import riskyken.armourersWorkshop.client.handler.EquipmentWardrobeHandler;
+import riskyken.armourersWorkshop.client.handler.ModClientFMLEventHandler;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
 import riskyken.armourersWorkshop.client.render.PlayerTextureHandler;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
@@ -26,17 +25,16 @@ import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
 import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.skin.EntityEquipmentData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
 import java.io.File;
-import java.lang.reflect.Field;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
     private SkinProvider provider;
+    private EquipmentWardrobeProvider equipmentWardrobeHandler;
 
     @Override
     public EntityPlayer getLocalPlayer() {
@@ -47,16 +45,9 @@ public class ClientProxy extends CommonProxy {
         return provider;
     }
 
-    public PlayerTextureHandler getPlayerTextureHandler() {
-        return playerTextureHandler;
-    }
-
-    public EquipmentWardrobeProvider getEquipmentWardrobeHandler() {
+    public EquipmentWardrobeProvider getEquipmentWardrobeProvider() {
         return equipmentWardrobeHandler;
     }
-
-    public static EquipmentWardrobeProvider equipmentWardrobeHandler;
-    public static PlayerTextureHandler playerTextureHandler;
 
     private static boolean shadersModLoaded;
     private static boolean moreplayermodelsLoaded;
@@ -99,8 +90,8 @@ public class ClientProxy extends CommonProxy {
     public void init() {
         super.init();
         equipmentWardrobeHandler = new EquipmentWardrobeHandler();
-        playerTextureHandler = new PlayerTextureHandler();
         ClientSkinCache.init();
+        MinecraftForge.EVENT_BUS.register(new PlayerTextureHandler());
         FMLCommonHandler.instance().bus().register(new ModClientFMLEventHandler());
         MinecraftForge.EVENT_BUS.register(new DebugTextHandler());
     }

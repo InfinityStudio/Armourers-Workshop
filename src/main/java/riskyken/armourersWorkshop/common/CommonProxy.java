@@ -1,5 +1,6 @@
 package riskyken.armourersWorkshop.common;
 
+import net.cijhn.EquipmentWardrobeProvider;
 import net.cijhn.SkinProvider;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,6 +37,7 @@ public class CommonProxy {
         throw new UnsupportedOperationException();
     }
 
+    public EquipmentWardrobeProvider getEquipmentWardrobeProvider(){throw new UnsupportedOperationException();}
     public void initRenderers() {
     }
 

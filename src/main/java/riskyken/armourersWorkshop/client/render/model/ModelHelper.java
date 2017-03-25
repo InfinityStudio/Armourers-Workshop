@@ -4,6 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
+import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.skin.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.client.ClientProxy;
@@ -11,9 +12,9 @@ import riskyken.armourersWorkshop.client.ClientProxy;
 import java.awt.*;
 
 public final class ModelHelper {
-    
+
     private static final float CHILD_SCALE = 2.0F;
-    
+
     public static void enableChildModelScale(boolean headScale, float scale) {
         GL11.glPushMatrix();
         if (headScale) {
@@ -24,7 +25,7 @@ public final class ModelHelper {
             GL11.glTranslatef(0.0F, 24.0F * scale, 0.0F);
         }
     }
-    
+
     public static void disableChildModelScale() {
         GL11.glPopMatrix();
     }
@@ -32,7 +33,7 @@ public final class ModelHelper {
     @SideOnly(Side.CLIENT)
     public static int getLocalPlayersSkinColour() {
         PlayerPointer playerPointer = new PlayerPointer(Minecraft.getMinecraft().thePlayer);
-        EquipmentWardrobeData ewd = ClientProxy.equipmentWardrobeHandler.getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = ArmourersWorkshop.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
         if (ewd != null) {
             return ewd.skinColour;
         }
@@ -42,7 +43,7 @@ public final class ModelHelper {
     @SideOnly(Side.CLIENT)
     public static int getLocalPlayersHairColour() {
         PlayerPointer playerPointer = new PlayerPointer(Minecraft.getMinecraft().thePlayer);
-        EquipmentWardrobeData ewd = ClientProxy.equipmentWardrobeHandler.getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = ArmourersWorkshop.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
         if (ewd != null) {
             return ewd.hairColour;
         }

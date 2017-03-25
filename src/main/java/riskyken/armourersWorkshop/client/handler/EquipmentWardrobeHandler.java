@@ -20,19 +20,23 @@ import java.util.HashMap;
 
 @SideOnly(Side.CLIENT)
 public final class EquipmentWardrobeHandler implements EquipmentWardrobeProvider {
-    
-    /** Map holding the equipment wardrobe data for all players in tracking range. */
+
+    /**
+     * Map holding the equipment wardrobe data for all players in tracking range.
+     */
     private final HashMap<PlayerPointer, EquipmentWardrobeData> equipmentWardrobeMap;
-    
-    /** Lock object use to keep threads in sync. */
+
+    /**
+     * Lock object use to keep threads in sync.
+     */
     private final Object threadLock;
-    
+
     public EquipmentWardrobeHandler() {
         MinecraftForge.EVENT_BUS.register(this);
         this.equipmentWardrobeMap = new HashMap<PlayerPointer, EquipmentWardrobeData>();
         this.threadLock = new Object();
     }
-    
+
     @Override
     public void setEquipmentWardrobeData(PlayerPointer playerPointer, EquipmentWardrobeData ewd) {
         synchronized (threadLock) {
@@ -41,23 +45,23 @@ public final class EquipmentWardrobeHandler implements EquipmentWardrobeProvider
             }
             equipmentWardrobeMap.put(playerPointer, ewd);
         }
-        
+
         EntityPlayer localPlayer = Minecraft.getMinecraft().thePlayer;
         PlayerPointer localPointer = new PlayerPointer(localPlayer);
         if (playerPointer.equals(localPointer)) {
 //            ExPropsPlayerEquipmentData.get(localPlayer).setSkinInfo(ewd, false);
         }
     }
-    
+
     @Override
     public EquipmentWardrobeData getEquipmentWardrobeData(PlayerPointer playerPointer) {
-        EquipmentWardrobeData ewd = null;
+        EquipmentWardrobeData ewd;
         synchronized (threadLock) {
             ewd = equipmentWardrobeMap.get(playerPointer);
         }
         return ewd;
     }
-    
+
     @Override
     public void removeEquipmentWardrobeData(PlayerPointer playerPointer) {
         synchronized (threadLock) {
@@ -66,7 +70,7 @@ public final class EquipmentWardrobeHandler implements EquipmentWardrobeProvider
             }
         }
     }
-    
+
     @SubscribeEvent
     public void onRender(RenderPlayerEvent.Pre event) {
         EntityPlayer player = event.entityPlayer;
@@ -79,7 +83,7 @@ public final class EquipmentWardrobeHandler implements EquipmentWardrobeProvider
         if (player instanceof FakePlayer) {
             return;
         }
-        
+
         //Hide the head overlay if the player has turned it off.
         PlayerPointer playerPointer = new PlayerPointer(player);
         RenderPlayer renderer = event.renderer;
@@ -92,10 +96,10 @@ public final class EquipmentWardrobeHandler implements EquipmentWardrobeProvider
 //                    renderer.modelBipedMain.bipedHeadwear.isHidden = true;
 //                }
             }
-            
+
         }
     }
-    
+
     @SubscribeEvent
     public void onRender(RenderPlayerEvent.Post event) {
         EntityPlayer player = event.entityPlayer;
@@ -108,7 +112,7 @@ public final class EquipmentWardrobeHandler implements EquipmentWardrobeProvider
         if (player instanceof FakePlayer) {
             return;
         }
-        
+
         //Restore the head overlay.
         PlayerPointer playerPointer = new PlayerPointer(player);
         RenderPlayer renderer = event.renderer;
@@ -116,8 +120,8 @@ public final class EquipmentWardrobeHandler implements EquipmentWardrobeProvider
             renderer.modelBipedMain.bipedHeadwear.isHidden = false;
         }
     }
-    
-    @SubscribeEvent(priority=EventPriority.HIGH)
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
     public void onRender(RenderPlayerEvent.SetArmorModel event) {
         int slot = -event.slot + 3;
         if (slot > 3) {
@@ -133,14 +137,14 @@ public final class EquipmentWardrobeHandler implements EquipmentWardrobeProvider
         if (player instanceof FakePlayer) {
             return;
         }
-        
+
         int result = -1;
         //Hide the armour if it had been skinned.
         ItemStack stack = player.getCurrentArmor(event.slot);
         if (SkinNBTHelper.stackHasSkinData(stack)) {
             result = -2;
         }
-        
+
         //Hide the armour if the player has turned it off.
         PlayerPointer playerPointer = new PlayerPointer(player);
         if (equipmentWardrobeMap.containsKey(playerPointer)) {

@@ -31,15 +31,11 @@ import riskyken.armourersWorkshop.client.ClientProxy;
  */
 @SideOnly(Side.CLIENT)
 public class PlayerTextureHandler {
-
-    public static PlayerTextureHandler INSTANCE;
-
     private HashMap<PlayerPointer, EntityTextureInfo> playerTextureMap = new HashMap<PlayerPointer, EntityTextureInfo>();
     private final Profiler profiler;
     private boolean disableTexturePainting;
 
     public PlayerTextureHandler() {
-        MinecraftForge.EVENT_BUS.register(this);
         profiler = Minecraft.getMinecraft().mcProfiler;
     }
 
@@ -57,7 +53,7 @@ public class PlayerTextureHandler {
             return;
         }
         PlayerPointer playerPointer = new PlayerPointer(player);
-        EquipmentWardrobeData ewd = ClientProxy.equipmentWardrobeHandler.getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = ArmourersWorkshop.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
         if (ewd == null) {
             return;
         }
@@ -109,7 +105,7 @@ public class PlayerTextureHandler {
             return;
         }
         PlayerPointer playerPointer = new PlayerPointer(player);
-        EquipmentWardrobeData ewd = ClientProxy.equipmentWardrobeHandler.getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = ArmourersWorkshop.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
         if (ewd == null) {
             return;
         }
