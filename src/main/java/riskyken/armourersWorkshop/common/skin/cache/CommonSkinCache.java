@@ -17,9 +17,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.StringUtils;
 import riskyken.armourersWorkshop.common.config.ConfigHandler;
 import riskyken.armourersWorkshop.common.data.ExpiringHashMap;
-import riskyken.armourersWorkshop.common.network.PacketHandler;
-import riskyken.armourersWorkshop.common.network.messages.server.MessageServerSkinDataSend;
-import riskyken.armourersWorkshop.common.network.messages.server.MessageServerSkinIdSend;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.utils.ModLogger;
 import riskyken.armourersWorkshop.utils.SkinIOUtils;
@@ -184,7 +181,7 @@ public final class CommonSkinCache implements Runnable {
             if (skinDataCache.containsKey(skinId)) {
                 Skin skin = skinDataCache.get(skinId);
                 skin.requestId = skinId;
-                PacketHandler.networkWrapper.sendTo(new MessageServerSkinDataSend(skin), player);
+//                PacketHandler.networkWrapper.sendTo(new MessageServerSkinDataSend(skin), player);
             } else {
                 ModLogger.log(Level.ERROR, "Equipment id:" + skinId +" was requested by "
             + player.getCommandSenderName() + " but was not found.");
@@ -224,8 +221,8 @@ public final class CommonSkinCache implements Runnable {
         }
         
         if (fileNameIdLinkMap.containsKey(fileName)) {
-            MessageServerSkinIdSend message = new MessageServerSkinIdSend(fileName, fileNameIdLinkMap.get(fileName));
-            PacketHandler.networkWrapper.sendTo(message, player);
+//            MessageServerSkinIdSend message = new MessageServerSkinIdSend(fileName, fileNameIdLinkMap.get(fileName));
+//            PacketHandler.networkWrapper.sendTo(message, player);
         }
     }
     

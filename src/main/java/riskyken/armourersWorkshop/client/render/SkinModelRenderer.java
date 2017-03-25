@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import net.cijhn.PlayerEquipmentDataProvider;
+import net.cijhn.SkinIdentity;
 import net.cijhn.SkinProvider;
 import org.lwjgl.opengl.GL11;
 
@@ -179,6 +180,11 @@ public final class SkinModelRenderer implements SkinProvider, PlayerEquipmentDat
     @Override
     public int getSkinDataMapSize() {
         return playerEquipmentMap.size();
+    }
+
+    @Override
+    public Skin getSkin(SkinIdentity identity) {
+        return null;
     }
 
     @Override

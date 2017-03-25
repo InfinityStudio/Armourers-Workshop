@@ -9,8 +9,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraft.entity.player.EntityPlayerMP;
-import riskyken.armourersWorkshop.common.network.PacketHandler;
-import riskyken.armourersWorkshop.common.network.messages.server.MessageServerLibraryFileList;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
 public class LibraryFileList {
@@ -99,8 +97,8 @@ public class LibraryFileList {
             if (!syncedClients.contains(player.getUniqueID())) {
                 syncedClients.add(player.getUniqueID());
                 ModLogger.log(String.format("Sending file list type %s to %s", listType.toString(), player.getDisplayName()));
-                MessageServerLibraryFileList message = new MessageServerLibraryFileList(fileList, this.listType);
-                PacketHandler.networkWrapper.sendTo(message, player);
+//                MessageServerLibraryFileList message = new MessageServerLibraryFileList(fileList, this.listType);
+//                PacketHandler.networkWrapper.sendTo(message, player);
             }
         }
     }

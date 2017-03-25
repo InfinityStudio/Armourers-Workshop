@@ -19,9 +19,6 @@ import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.ExpiringHashMap;
 import riskyken.armourersWorkshop.common.data.ExpiringHashMap.IExpiringMapCallback;
-import riskyken.armourersWorkshop.common.network.PacketHandler;
-import riskyken.armourersWorkshop.common.network.messages.client.MessageClientRequestSkinData;
-import riskyken.armourersWorkshop.common.network.messages.client.MessageClientRequestSkinId;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
@@ -136,8 +133,8 @@ public class ClientSkinCache implements IExpiringMapCallback<Skin>, SkinRequeste
         synchronized (requestedSkinNames) {
             if (!requestedSkinNames.contains(fileName)) {
                 requestedSkinNames.add(fileName);
-                MessageClientRequestSkinId message = new MessageClientRequestSkinId(fileName);
-                PacketHandler.networkWrapper.sendToServer(message);
+//                MessageClientRequestSkinId message = new MessageClientRequestSkinId(fileName);
+//                PacketHandler.networkWrapper.sendToServer(message);
             }
         }
     }
@@ -284,7 +281,7 @@ public class ClientSkinCache implements IExpiringMapCallback<Skin>, SkinRequeste
         @Override
         public void run() {
             Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-            PacketHandler.networkWrapper.sendToServer(new MessageClientRequestSkinData(skinId));
+//            PacketHandler.networkWrapper.sendToServer(new MessageClientRequestSkinData(skinId));
         }
     }
 }

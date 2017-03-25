@@ -10,9 +10,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import riskyken.armourersWorkshop.common.network.PacketHandler;
-import riskyken.armourersWorkshop.common.network.messages.server.MessageServerPlayerLeftTrackingRange;
 import riskyken.armourersWorkshop.utils.HolidayHelper;
 
 public final class EntityEquipmentDataManager {
@@ -105,8 +102,8 @@ public final class EntityEquipmentDataManager {
     public void onStopTracking(PlayerEvent.StopTracking event) {
         if (event.target instanceof EntityPlayerMP) {
             EntityPlayerMP target = (EntityPlayerMP) event.target;
-            MessageServerPlayerLeftTrackingRange message = new MessageServerPlayerLeftTrackingRange(new PlayerPointer(target));
-            PacketHandler.networkWrapper.sendTo(message, (EntityPlayerMP) event.entityPlayer);
+//            MessageServerPlayerLeftTrackingRange message = new MessageServerPlayerLeftTrackingRange(new PlayerPointer(target));
+//            PacketHandler.networkWrapper.sendTo(message, (EntityPlayerMP) event.entityPlayer);
         }
     }
     

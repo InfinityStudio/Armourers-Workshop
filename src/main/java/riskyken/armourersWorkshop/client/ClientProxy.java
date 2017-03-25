@@ -9,7 +9,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.cijhn.SkinProvider;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IIcon;
@@ -17,29 +16,23 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Level;
-import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.TestEnvSetup;
 import riskyken.armourersWorkshop.client.handler.*;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
 import riskyken.armourersWorkshop.client.library.ClientLibraryManager;
-import riskyken.armourersWorkshop.client.render.model.bake.ModelBakery;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
+import riskyken.armourersWorkshop.client.render.model.bake.ModelBakery;
 import riskyken.armourersWorkshop.client.settings.Keybindings;
 import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
+import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import riskyken.armourersWorkshop.common.lib.LibGuiIds;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
-import riskyken.armourersWorkshop.common.library.LibraryFile;
-import riskyken.armourersWorkshop.common.library.LibraryFileType;
-import riskyken.armourersWorkshop.common.network.messages.server.MessageServerClientCommand.CommandType;
 import riskyken.armourersWorkshop.common.skin.EntityEquipmentData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.entity.EntitySkinHandler;
-import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.utils.HolidayHelper;
 import riskyken.armourersWorkshop.utils.ModLogger;
-import riskyken.armourersWorkshop.utils.SkinIOUtils;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -96,10 +89,6 @@ public class ClientProxy extends CommonProxy {
 
     public void preInit() {
 
-    }
-
-    public void initLibraryManager() {
-        libraryManager = new ClientLibraryManager();
     }
 
     @Override
@@ -271,31 +260,31 @@ public class ClientProxy extends CommonProxy {
         ModelBakery.INSTANCE.receivedUnbakedModel(skin);
     }
 
-    @Override
-    public void receivedCommandFromSever(CommandType command) {
-        switch (command) {
-            case CLEAR_MODEL_CACHE:
-                ClientSkinCache.INSTANCE.clearCache();
-                break;
-            case OPEN_ADMIN_PANEL:
-                EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-                player.openGui(ArmourersWorkshop.instance, LibGuiIds.ADMIN_PANEL, player.getEntityWorld(), 0, 0, 0);
-                break;
-            default:
-                break;
-        }
-    }
+//    @Override
+//    public void receivedCommandFromSever(CommandType command) {
+//        switch (command) {
+//            case CLEAR_MODEL_CACHE:
+//                ClientSkinCache.INSTANCE.clearCache();
+//                break;
+//            case OPEN_ADMIN_PANEL:
+//                EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+//                player.openGui(ArmourersWorkshop.instance, LibGuiIds.ADMIN_PANEL, player.getEntityWorld(), 0, 0, 0);
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 
     @Override
     public void receivedEquipmentData(EntityEquipmentData equipmentData, int entityId) {
         EntitySkinHandler.INSTANCE.receivedEquipmentData(equipmentData, entityId);
     }
 
-    @Override
-    public void receivedSkinFromLibrary(String fileName, Skin skin) {
-        SkinIOUtils.saveSkinFromFileName(fileName + ".armour", skin);
-        ArmourersWorkshop.proxy.libraryManager.addFileToListType(new LibraryFile(fileName, skin.getSkinType()), LibraryFileType.LOCAL, null);
-    }
+//    @Override
+//    public void receivedSkinFromLibrary(String fileName, Skin skin) {
+//        SkinIOUtils.saveSkinFromFileName(fileName + ".armour", skin);
+//        ArmourersWorkshop.proxy.libraryManager.addFileToListType(new LibraryFile(fileName, skin.getSkinType()), LibraryFileType.LOCAL, null);
+//    }
 
     @Override
     public int getBlockRenderType(Block block) {

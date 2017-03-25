@@ -6,10 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import riskyken.armourersWorkshop.common.config.ConfigHandler;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import riskyken.armourersWorkshop.common.library.CommonLibraryManager;
-import riskyken.armourersWorkshop.common.library.ILibraryManager;
-import riskyken.armourersWorkshop.common.network.messages.client.MessageClientGuiAdminPanel.AdminPanelCommand;
-import riskyken.armourersWorkshop.common.network.messages.server.MessageServerClientCommand.CommandType;
 import riskyken.armourersWorkshop.common.skin.EntityEquipmentData;
 import riskyken.armourersWorkshop.common.skin.SkinExtractor;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
@@ -21,7 +17,6 @@ import java.io.File;
 
 public class CommonProxy {
 
-    public ILibraryManager libraryManager;
 
     public void preInit(File configDir) {
         SkinTypeRegistry.init();
@@ -31,7 +26,6 @@ public class CommonProxy {
         SkinExtractor.extractSkins();
         SkinTypeRegistry.init();
         CubeRegistry.init();
-        initLibraryManager();
     }
 
     public EntityPlayer getLocalPlayer() {
@@ -42,10 +36,6 @@ public class CommonProxy {
         throw new UnsupportedOperationException();
     }
 
-    public void initLibraryManager() {
-        libraryManager = new CommonLibraryManager();
-    }
-
     public void initRenderers() {
     }
 
@@ -53,8 +43,7 @@ public class CommonProxy {
         initRenderers();
     }
 
-    public void postInit() {
-        libraryManager.reloadLibrary();
+    public void postInit(){
     }
 
     public void registerKeyBindings() {
@@ -73,17 +62,17 @@ public class CommonProxy {
 
     }
 
-    public void receivedCommandFromSever(CommandType command) {
-
-    }
-
-    public void receivedAdminPanelCommand(EntityPlayer player, AdminPanelCommand command) {
-        switch (command) {
-            case RECOVER_SKINS:
-                SkinIOUtils.recoverSkins(player);
-                break;
-        }
-    }
+//    public void receivedCommandFromSever(CommandType command) {
+//
+//    }
+//
+//    public void receivedAdminPanelCommand(EntityPlayer player, AdminPanelCommand command) {
+//        switch (command) {
+//            case RECOVER_SKINS:
+//                SkinIOUtils.recoverSkins(player);
+//                break;
+//        }
+//    }
 
     public void receivedEquipmentData(EntityEquipmentData equipmentData, int entityId) {
 

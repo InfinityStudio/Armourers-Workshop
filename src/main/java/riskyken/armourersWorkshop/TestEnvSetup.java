@@ -1,5 +1,6 @@
 package riskyken.armourersWorkshop;
 
+import net.cijhn.SkinIdentity;
 import net.cijhn.SkinProvider;
 import net.minecraft.entity.Entity;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
@@ -18,9 +19,10 @@ import java.io.File;
  * @author ci010
  */
 public class TestEnvSetup implements SkinProvider {
-    static Skin skin;
+    private static Skin skin;
 
-    static String loc = "D:\\Storage\\Desktop\\Pika Hood.armour";
+    //
+    private static String loc = "D:\\Storage\\Desktop\\Angel Wings.armour";
 
     static void setup() {
         File file = new File(loc);
@@ -32,6 +34,11 @@ public class TestEnvSetup implements SkinProvider {
         System.out.println("==============================");
         ModelBakery.INSTANCE.receivedUnbakedModel(skin);
         ClientSkinCache.INSTANCE.addServerIdMap(skin);
+    }
+
+    @Override
+    public Skin getSkin(SkinIdentity identity) {
+        return null;
     }
 
     @Override
