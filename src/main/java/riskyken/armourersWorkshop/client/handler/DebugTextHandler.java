@@ -44,9 +44,9 @@ public class DebugTextHandler {
                 }
                 event.left.add("Part Count: " + ClientSkinCache.INSTANCE.getPartCount());
 //                event.left.add("Player Data: " + SkinModelRenderer.INSTANCE.getSkinDataMapSize());
-                int bakeQueue = QueueModelBakery.INSTANCE.getBakingQueueSize();
-                event.left.add("Baking Queue: " + bakeQueue);
-                event.left.add("Request Queue: " + (ClientSkinCache.INSTANCE.getRequestQueueSize() - bakeQueue));
+//                int bakeQueue = QueueModelBakery.INSTANCE.getBakingQueueSize();
+//                event.left.add("Baking Queue: " + bakeQueue);
+//                event.left.add("Request Queue: " + (ClientSkinCache.INSTANCE.getRequestQueueSize() - bakeQueue));
                 event.left.add("Texture Count: " + ClientSkinPaintCache.INSTANCE.size());
                 event.left.add("Skin Render Type: " + ClientProxy.getSkinRenderType().toString().toLowerCase());
                 event.left.add("Texture Render: " + ClientProxy.useSafeTextureRender());

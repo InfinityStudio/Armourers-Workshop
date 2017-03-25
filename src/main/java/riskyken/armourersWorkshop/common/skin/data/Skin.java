@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
@@ -340,7 +341,7 @@ public class Skin implements ISkin {
     }
 
     @Override
-    public ArrayList<ISkinPart> getSubParts() {
+    public List<ISkinPart> getSubParts() {
         ArrayList<ISkinPart> partList = new ArrayList<ISkinPart>();
         for (int i = 0; i < parts.size(); i++) {
             partList.add(parts.get(i));

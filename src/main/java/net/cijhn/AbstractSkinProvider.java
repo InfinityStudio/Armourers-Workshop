@@ -1,32 +1,30 @@
 package net.cijhn;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
-import riskyken.armourersWorkshop.client.skin.cache.ClientSkinCache;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
+
 
 /**
  * @author ci010
  */
-public class SkinProviderDirect implements SkinProvider {
+public abstract class AbstractSkinProvider implements SkinProvider {
     private SkinRepository skinStorage;
 
-    @Override
-    public Skin getSkin(SkinIdentity identity) {
-        Skin skin = (Skin) skinStorage.getSkin(identity);
-        return skin;
+    public AbstractSkinProvider(SkinRepository skinStorage) {
+        this.skinStorage = skinStorage;
     }
 
     @Override
-    public Skin getSkin(ISkinPointer skinPointer) {
-        return ClientSkinCache.INSTANCE.getSkin(skinPointer);
+    public Skin getSkin(SkinIdentity identity) {
+        return (Skin) skinStorage.getSkin(identity);
     }
 
     @Override
     public Skin getSkin(Entity entity, ISkinType skinType, int slotIndex) {
-        return null;
+        return getSkin(new SkinIdentity(entity.getUniqueID(), skinType.getRegistryName(), slotIndex));
     }
 
     @Override

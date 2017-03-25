@@ -41,11 +41,6 @@ public class TestEnvSetup implements SkinProvider {
     }
 
     @Override
-    public Skin getSkin(ISkinPointer skinPointer) {
-        return skin;
-    }
-
-    @Override
     public Skin getSkin(Entity entity, ISkinType skinType, int slotIndex) {
         return skin;
     }

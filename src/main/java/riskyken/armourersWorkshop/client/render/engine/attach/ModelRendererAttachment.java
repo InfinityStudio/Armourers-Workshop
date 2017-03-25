@@ -81,9 +81,7 @@ public class ModelRendererAttachment extends ModelRenderer {
 
         for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
             Skin data = provider.getSkin(player, skinType, skinIndex);
-            if (data == null) {
-                continue;
-            }
+            if (data == null) continue;
             ISkinDye skinDye = provider.getPlayerDyeData(player, skinType, skinIndex);
 
             int size = data.getParts().size();

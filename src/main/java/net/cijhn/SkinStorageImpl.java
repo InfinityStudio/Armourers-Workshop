@@ -1,8 +1,7 @@
 package net.cijhn;
 
 import riskyken.armourersWorkshop.api.common.skin.data.ISkin;
-import riskyken.armourersWorkshop.client.render.bake.QueueModelBakery;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
+import riskyken.armourersWorkshop.client.render.bake.SkinBakery;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,8 +12,10 @@ import java.util.Map;
  */
 public class SkinStorageImpl implements SkinRepository {
     private Map<Object, ISkin> skinHashMap;
+    private SkinBakery skinBakery;
 
-    public SkinStorageImpl() {
+    public SkinStorageImpl(SkinBakery skinBakery) {
+        this.skinBakery = skinBakery;
         this.skinHashMap = new HashMap<Object, ISkin>();
     }
 
@@ -23,7 +24,7 @@ public class SkinStorageImpl implements SkinRepository {
         if (skinHashMap.containsKey(key))
             return false;
         skinHashMap.put(key, skin);
-        QueueModelBakery.INSTANCE.receivedUnbakedModel((Skin) skin);
+        skinBakery.bake(skin);
         return true;
     }
 
