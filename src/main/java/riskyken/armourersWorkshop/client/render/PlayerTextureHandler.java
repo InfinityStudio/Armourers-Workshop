@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.handler;
+package riskyken.armourersWorkshop.client.render;
 
 import java.util.HashMap;
 
@@ -17,8 +17,6 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.render.EntityTextureInfo;
-import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.skin.EquipmentWardrobeData;
@@ -55,9 +53,6 @@ public class PlayerTextureHandler {
             return;
         }
         AbstractClientPlayer player = (AbstractClientPlayer) event.entityPlayer;
-//        if (player instanceof MannequinFakePlayer) {
-//            return;
-//        }
         if (player.getGameProfile() == null) {
             return;
         }

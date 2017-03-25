@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Level;
 import riskyken.armourersWorkshop.TestEnvSetup;
 import riskyken.armourersWorkshop.client.handler.*;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
-import riskyken.armourersWorkshop.client.library.ClientLibraryManager;
+import riskyken.armourersWorkshop.client.render.PlayerTextureHandler;
 import riskyken.armourersWorkshop.client.render.SkinModelRenderer;
 import riskyken.armourersWorkshop.client.render.model.bake.ModelBakery;
 import riskyken.armourersWorkshop.client.settings.Keybindings;
@@ -96,7 +96,6 @@ public class ClientProxy extends CommonProxy {
         SkinModelRenderer.init();
         //TODO this renderer need to be hook on other things...
 //        MinecraftForgeClient.registerItemRenderer(Items.diamond_boots, new RenderItemEquipmentSkin());
-        new ItemTooltipHandler();
     }
 
     @Override
@@ -260,44 +259,18 @@ public class ClientProxy extends CommonProxy {
         ModelBakery.INSTANCE.receivedUnbakedModel(skin);
     }
 
-//    @Override
-//    public void receivedCommandFromSever(CommandType command) {
-//        switch (command) {
-//            case CLEAR_MODEL_CACHE:
-//                ClientSkinCache.INSTANCE.clearCache();
-//                break;
-//            case OPEN_ADMIN_PANEL:
-//                EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-//                player.openGui(ArmourersWorkshop.instance, LibGuiIds.ADMIN_PANEL, player.getEntityWorld(), 0, 0, 0);
-//                break;
-//            default:
-//                break;
-//        }
-//    }
 
     @Override
     public void receivedEquipmentData(EntityEquipmentData equipmentData, int entityId) {
         EntitySkinHandler.INSTANCE.receivedEquipmentData(equipmentData, entityId);
     }
 
-//    @Override
-//    public void receivedSkinFromLibrary(String fileName, Skin skin) {
-//        SkinIOUtils.saveSkinFromFileName(fileName + ".armour", skin);
-//        ArmourersWorkshop.proxy.libraryManager.addFileToListType(new LibraryFile(fileName, skin.getSkinType()), LibraryFileType.LOCAL, null);
-//    }
-
     @Override
     public int getBlockRenderType(Block block) {
-//        if (block instanceof BlockColourable) {
-//            return RenderBlockGlowing.renderId;
-//        }
-//        if (block instanceof BlockColourMixer) {
-//            return RenderBlockColourMixer.renderId;
-//        }
         return super.getBlockRenderType(block);
     }
 
-    public static enum SkinRenderType {
+    public enum SkinRenderType {
         RENDER_EVENT,
         MODEL_ATTACHMENT,
         RENDER_LAYER
