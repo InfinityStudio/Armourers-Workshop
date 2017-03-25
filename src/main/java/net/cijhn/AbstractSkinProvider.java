@@ -31,9 +31,4 @@ public abstract class AbstractSkinProvider implements SkinProvider {
     public ISkinDye getPlayerDyeData(Entity entity, ISkinType skinType, int slotIndex) {
         return null;
     }
-
-    @Override
-    public byte[] getPlayerExtraColours(Entity entity) {
-        return new byte[0];
-    }
 }
