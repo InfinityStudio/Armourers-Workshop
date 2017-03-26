@@ -1,8 +1,9 @@
-package net.skin43d.utils;
+package removequ;
 
 import java.awt.Color;
 import java.util.Random;
 
+import net.skin43d.utils.TranslateUtils;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 
 public class UtilColour {

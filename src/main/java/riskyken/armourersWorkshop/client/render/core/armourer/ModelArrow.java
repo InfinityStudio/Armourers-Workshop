@@ -1,5 +1,6 @@
 package riskyken.armourersWorkshop.client.render.core.armourer;
 
+import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -11,7 +12,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.util.ResourceLocation;
 import riskyken.armourersWorkshop.client.render.core.ModRenderHelper;
-import net.skin43d.utils.UtilRender;
 
 @SideOnly(Side.CLIENT)
 public class ModelArrow {
@@ -46,7 +46,7 @@ public class ModelArrow {
             GL11.glColor4f(1F, 1F, 1F, 0.25F);
         }
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        UtilRender.bindTexture(arrowTextures);
+        Minecraft.getMinecraft().getTextureManager().bindTexture(arrowTextures);
         GL11.glCallList(this.displayList);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         if (ghost) {

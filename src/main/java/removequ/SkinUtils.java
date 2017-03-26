@@ -1,4 +1,4 @@
-package net.skin43d.utils;
+package removequ;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,32 +46,4 @@ public final class SkinUtils {
 //    private static Skin getSkinOnClient(SkinPointer skinPointer, boolean requestSkin) {
 //        return ClientSkinCache.INSTANCE.getSkin(skinPointer, requestSkin);
 //    }
-    
-    public static double getFlapAngleForWings(Entity entity, Skin skin) {
-        
-        double maxAngle = skin.getProperties().getPropertyDouble(Skin.KEY_WINGS_MAX_ANGLE, 75D);
-        double minAngle = skin.getProperties().getPropertyDouble(Skin.KEY_WINGS_MIN_ANGLE, 0D);
-        double idleSpeed = skin.getProperties().getPropertyDouble(Skin.KEY_WINGS_IDLE_SPEED, 6000D);
-        double flyingSpeed = skin.getProperties().getPropertyDouble(Skin.KEY_WINGS_FLYING_SPEED, 350D);
-        
-        double angle = 0;
-        double flapTime = idleSpeed;
-        
-        if (entity != null) {
-            if (entity.isAirBorne) {
-                if (entity instanceof EntityPlayer) {
-                    if (((EntityPlayer)entity).capabilities.isFlying) {
-                        flapTime = flyingSpeed;
-                    }
-                } else {
-                    flapTime = flyingSpeed;
-                }
-            }
-            angle = (((double)System.currentTimeMillis() + entity.getEntityId()) % flapTime);
-            angle = Math.sin(angle / flapTime * Math.PI * 2);
-        }
-        
-        double fullAngle = maxAngle - minAngle;
-        return -minAngle - fullAngle * ((angle + 1D) / 2);
-    }
 }

@@ -13,7 +13,6 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import net.skin43d.utils.SkinNBTHelper;
 
 import java.util.HashMap;
 

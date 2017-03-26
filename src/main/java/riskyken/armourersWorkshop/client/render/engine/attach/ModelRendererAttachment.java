@@ -18,11 +18,11 @@ import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.client.render.core.SkinPartRenderer;
+import riskyken.armourersWorkshop.client.render.engine.special.ModelSkinWings;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
-import net.skin43d.utils.SkinUtils;
 
 /**
  * A ModelRenderer that is attached to each ModelRenderer on the
@@ -90,7 +90,7 @@ public class ModelRendererAttachment extends ModelRenderer {
             }
             if (skinType == SkinTypeRegistry.skinWings) {
                 GL11.glTranslated(0, 0, scale * 2);
-                double angle = SkinUtils.getFlapAngleForWings(player, data);
+                double angle = ModelSkinWings.getFlapAngleForWings(player, data);
                 Point3D point = new Point3D(0, 0, 0);
                 ForgeDirection axis = ForgeDirection.DOWN;
 

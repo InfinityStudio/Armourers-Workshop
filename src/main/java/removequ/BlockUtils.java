@@ -1,4 +1,4 @@
-package net.skin43d.utils;
+package removequ;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package net.skin43d.utils;
+package removequ;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
