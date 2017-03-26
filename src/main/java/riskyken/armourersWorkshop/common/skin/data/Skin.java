@@ -2,13 +2,13 @@ package riskyken.armourersWorkshop.common.skin.data;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.IRectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkin;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPart;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 import riskyken.armourersWorkshop.common.skin.cubes.ICube;
@@ -42,7 +42,7 @@ public class Skin implements ISkin {
     public static final String KEY_FILE_NAME = "fileName";
 
     private SkinProperties properties;
-    private ISkinType equipmentSkinType;
+    private SkinType equipmentSkinType;
     private int[] paintData;
     private List<SkinPart> parts;
     public int requestId;
@@ -106,7 +106,7 @@ public class Skin implements ISkin {
 
         if (getPartCount() == 0) {
             for (int i = 0; i < getSkinType().getSkinParts().size(); i++) {
-                ISkinPartType part = getSkinType().getSkinParts().get(i);
+                SkinPartType part = getSkinType().getSkinParts().get(i);
 
                 IRectangle3D skinRec = part.getGuideSpace();
 
@@ -131,7 +131,7 @@ public class Skin implements ISkin {
         return properties;
     }
 
-    public Skin(SkinProperties properties, ISkinType equipmentSkinType, int[] paintData, List<SkinPart> equipmentSkinParts) {
+    public Skin(SkinProperties properties, SkinType equipmentSkinType, int[] paintData, List<SkinPart> equipmentSkinParts) {
         this.properties = properties;
         this.equipmentSkinType = equipmentSkinType;
         this.paintData = null;
@@ -190,7 +190,7 @@ public class Skin implements ISkin {
     }
 
     @Override
-    public ISkinType getSkinType() {
+    public SkinType getSkinType() {
         return equipmentSkinType;
     }
 
@@ -206,12 +206,10 @@ public class Skin implements ISkin {
         return parts;
     }
 
-    public SkinPart getSkinPartFromType(ISkinPartType skinPartType) {
-        for (int i = 0; i < parts.size(); i++) {
-            if (parts.get(i).getPartType() == skinPartType) {
+    public SkinPart getSkinPartFromType(SkinPartType skinPartType) {
+        for (int i = 0; i < parts.size(); i++)
+            if (parts.get(i).getPartType() == skinPartType)
                 return parts.get(i);
-            }
-        }
         return null;
     }
 
@@ -290,13 +288,5 @@ public class Skin implements ISkin {
         }
         returnString += "]";
         return returnString;
-    }
-
-    public int getMarkerCount() {
-        int count = 0;
-        for (int i = 0; i < parts.size(); i++) {
-            count += parts.get(i).getMarkerBlocks().size();
-        }
-        return count;
     }
 }

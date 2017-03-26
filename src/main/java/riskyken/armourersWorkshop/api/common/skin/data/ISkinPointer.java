@@ -1,11 +1,11 @@
 package riskyken.armourersWorkshop.api.common.skin.data;
 
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinType;
 
 public interface ISkinPointer {
     int getSkinId();
 
-    ISkinType getSkinType();
+    SkinType getSkinType();
 
     ISkinDye getSkinDye();
 }

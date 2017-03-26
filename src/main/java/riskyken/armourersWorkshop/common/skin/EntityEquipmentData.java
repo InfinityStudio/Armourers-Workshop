@@ -7,10 +7,10 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.api.common.skin.IEntityEquipment;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.common.skin.data.SkinDye;
 import riskyken.armourersWorkshop.common.skin.data.SkinPointer;
 
@@ -40,7 +40,7 @@ public class EntityEquipmentData implements IEntityEquipment {
     }
 
     @Override
-    public void addEquipment(ISkinType skinType, int slotIndex, ISkinPointer skinPointer) {
+    public void addEquipment(SkinType skinType, int slotIndex, ISkinPointer skinPointer) {
         String key = skinType.getRegistryName() + ":" + slotIndex;
         skinId.remove(key);
         skinDye.remove(key);
@@ -52,20 +52,20 @@ public class EntityEquipmentData implements IEntityEquipment {
     }
 
     @Override
-    public void removeEquipment(ISkinType skinType, int slotIndex) {
+    public void removeEquipment(SkinType skinType, int slotIndex) {
         String key = skinType.getRegistryName() + ":" + slotIndex;
         skinId.remove(key);
         skinDye.remove(key);
     }
 
     @Override
-    public boolean haveEquipment(ISkinType skinType, int slotIndex) {
+    public boolean haveEquipment(SkinType skinType, int slotIndex) {
         String key = skinType.getRegistryName() + ":" + slotIndex;
         return this.skinId.containsKey(key);
     }
 
     @Override
-    public int getEquipmentId(ISkinType skinType, int slotIndex) {
+    public int getEquipmentId(SkinType skinType, int slotIndex) {
         String key = skinType.getRegistryName() + ":" + slotIndex;
         if (this.skinId.containsKey(key)) {
             return this.skinId.get(key);
@@ -74,7 +74,7 @@ public class EntityEquipmentData implements IEntityEquipment {
     }
 
     @Override
-    public ISkinPointer getSkinPointer(ISkinType skinType, int slotIndex) {
+    public ISkinPointer getSkinPointer(SkinType skinType, int slotIndex) {
         String key = skinType.getRegistryName() + ":" + slotIndex;
         if (this.skinId.containsKey(key)) {
             int skinId = this.skinId.get(key);
@@ -89,7 +89,7 @@ public class EntityEquipmentData implements IEntityEquipment {
     }
 
     @Override
-    public ISkinDye getSkinDye(ISkinType skinType, int slotIndex) {
+    public ISkinDye getSkinDye(SkinType skinType, int slotIndex) {
         String key = skinType.getRegistryName() + ":" + slotIndex;
         return skinDye.get(key);
     }

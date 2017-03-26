@@ -1,5 +1,6 @@
 package riskyken.armourersWorkshop.client.render;
 
+import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -12,8 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 import riskyken.armourersWorkshop.api.common.IPoint3D;
 import riskyken.armourersWorkshop.api.common.IRectangle3D;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 
@@ -22,9 +22,9 @@ public final class SkinRenderHelper {
     
     private static final ResourceLocation guideImage = new ResourceLocation(LibModInfo.ID.toLowerCase(), "textures/blocks/guide.png");
     
-    public static void renderBuildingGuide(ISkinType skinType, float scale, boolean showSkinOverlay, boolean showHelper) {
+    public static void renderBuildingGuide(SkinType skinType, float scale, boolean showSkinOverlay, boolean showHelper) {
         for (int i = 0; i < skinType.getSkinParts().size(); i++) {
-            ISkinPartType skinPart = skinType.getSkinParts().get(i);
+            SkinPartType skinPart = skinType.getSkinParts().get(i);
             IPoint3D partOffset = skinPart.getOffset();
             GL11.glTranslated(partOffset.getX() * scale, partOffset.getY() * scale, partOffset.getZ() * scale);
             skinPart.renderBuildingGuide(scale, showSkinOverlay, showHelper);
@@ -32,9 +32,9 @@ public final class SkinRenderHelper {
         }
     }
     
-    public static void renderBuildingGrid(ISkinType skinType, float scale, boolean showGuides, boolean hidden) {
+    public static void renderBuildingGrid(SkinType skinType, float scale, boolean showGuides, boolean hidden) {
         for (int i = 0; i < skinType.getSkinParts().size(); i++) {
-            ISkinPartType skinPartType = skinType.getSkinParts().get(i);
+            SkinPartType skinPartType = skinType.getSkinParts().get(i);
             IPoint3D partOffset = skinPartType.getOffset();
             GL11.glTranslated(partOffset.getX() * scale, partOffset.getY() * scale, partOffset.getZ() * scale);
             renderBuildingGrid(skinPartType, scale, showGuides, hidden);
@@ -42,7 +42,7 @@ public final class SkinRenderHelper {
         }
     }
     
-    public static void renderBuildingGrid(ISkinPartType skinPartType, float scale, boolean showGuides, boolean hidden) {
+    public static void renderBuildingGrid(SkinPartType skinPartType, float scale, boolean showGuides, boolean hidden) {
         GL11.glTranslated(0, skinPartType.getBuildingSpace().getY() * scale, 0);
         GL11.glScalef(-1, -1, 1);
         SkinRenderHelper.renderGuidePart(skinPartType, scale, showGuides, hidden);
@@ -50,7 +50,7 @@ public final class SkinRenderHelper {
         GL11.glTranslated(0, -skinPartType.getBuildingSpace().getY() * scale, 0);
     }
     
-    private static void renderGuidePart(ISkinPartType part, float scale, boolean showGuides, boolean hidden) {
+    private static void renderGuidePart(SkinPartType part, float scale, boolean showGuides, boolean hidden) {
         Minecraft.getMinecraft().getTextureManager().bindTexture(guideImage);
         GL11.glColor3f(1F, 1F, 1F);
         GL11.glPushMatrix();

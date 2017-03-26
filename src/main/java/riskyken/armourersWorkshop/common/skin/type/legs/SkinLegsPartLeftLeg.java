@@ -2,6 +2,7 @@ package riskyken.armourersWorkshop.common.skin.type.legs;
 
 import java.awt.Point;
 
+import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -10,13 +11,12 @@ import riskyken.armourersWorkshop.api.common.IPoint3D;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.client.render.model.armourer.ModelLegs;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;
 
 public class SkinLegsPartLeftLeg extends AbstractSkinPartTypeBase implements ISkinPartTypeTextured {
     
-    public SkinLegsPartLeftLeg(ISkinType baseType) {
+    public SkinLegsPartLeftLeg(SkinType baseType) {
         super(baseType);
         this.buildingSpace = new Rectangle3D(-8, -8, -8, 11, 9, 16);
         this.guideSpace = new Rectangle3D(-2, -12, -2, 4, 12, 4);

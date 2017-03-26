@@ -6,16 +6,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 
 public interface ISkinDataHandler {
     
     public boolean setSkinOnPlayer(EntityPlayer player, ItemStack stack);
     
-    public ItemStack getSkinFormPlayer(EntityPlayer player, ISkinType skinType);
+    public ItemStack getSkinFormPlayer(EntityPlayer player, SkinType skinType);
     
-    public void removeSkinFromPlayer(EntityPlayer player, ISkinType skinType);
+    public void removeSkinFromPlayer(EntityPlayer player, SkinType skinType);
     
     public boolean isValidEquipmentSkin(ItemStack stack);
     

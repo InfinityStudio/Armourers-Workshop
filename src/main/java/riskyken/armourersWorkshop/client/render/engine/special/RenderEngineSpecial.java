@@ -134,7 +134,7 @@ public class RenderEngineSpecial implements RenderEngine {
         MinecraftForge.EVENT_BUS.unregister(this);
     }
 
-//    public AbstractModelSkin getModelForEquipmentType(ISkinType skinType) {
+//    public AbstractModelSkin getModelForEquipmentType(SkinType skinType) {
 //        if (skinType == SkinTypeRegistry.skinHead) {
 //            return customHead;
 //        } else if (skinType == SkinTypeRegistry.skinChest) {

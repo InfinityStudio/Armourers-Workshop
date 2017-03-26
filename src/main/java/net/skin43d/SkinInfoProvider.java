@@ -1,8 +1,8 @@
 package net.skin43d;
 
 import net.minecraft.entity.Entity;
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 
 
@@ -14,9 +14,9 @@ public interface SkinInfoProvider {
 
     SkinInfo getSkin(Entity entity);
 
-    Skin getSkin(Entity entity, ISkinType skinType, int slotIndex);
+    Skin getSkin(Entity entity, SkinType skinType, int slotIndex);
 
-    ISkinDye getPlayerDyeData(Entity entity, ISkinType skinType, int slotIndex);
+    ISkinDye getPlayerDyeData(Entity entity, SkinType skinType, int slotIndex);
 
 //    byte[] getPlayerExtraColours(Entity entity);
 }

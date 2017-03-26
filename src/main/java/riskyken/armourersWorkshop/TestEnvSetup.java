@@ -3,8 +3,8 @@ package riskyken.armourersWorkshop;
 import net.skin43d.SkinInfo;
 import net.skin43d.SkinInfoProvider;
 import net.minecraft.entity.Entity;
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.utils.SkinIOUtils;
@@ -41,12 +41,12 @@ public class TestEnvSetup implements SkinInfoProvider {
     }
 
     @Override
-    public Skin getSkin(Entity entity, ISkinType skinType, int slotIndex) {
+    public Skin getSkin(Entity entity, SkinType skinType, int slotIndex) {
         return skin;
     }
 
     @Override
-    public ISkinDye getPlayerDyeData(Entity entity, ISkinType skinType, int slotIndex) {
+    public ISkinDye getPlayerDyeData(Entity entity, SkinType skinType, int slotIndex) {
         return null;
     }
 }

@@ -8,7 +8,7 @@ import riskyken.armourersWorkshop.api.common.IPoint3D;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.client.render.model.armourer.ModelHead;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;
 import cpw.mods.fml.relauncher.Side;
@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class SkinHeadPartBase extends AbstractSkinPartTypeBase implements ISkinPartTypeTextured {
     
-    public SkinHeadPartBase(ISkinType baseType) {
+    public SkinHeadPartBase(SkinType baseType) {
         super(baseType);
         this.buildingSpace = new Rectangle3D(-16, -12, -16, 32, 32, 32);
         this.guideSpace = new Rectangle3D(-4, 0, -4, 8, 8, 8);

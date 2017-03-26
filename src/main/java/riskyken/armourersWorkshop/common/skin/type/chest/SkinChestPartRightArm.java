@@ -10,13 +10,13 @@ import riskyken.armourersWorkshop.api.common.IPoint3D;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.client.render.model.armourer.ModelChest;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;
 
 public class SkinChestPartRightArm extends AbstractSkinPartTypeBase implements ISkinPartTypeTextured {
     
-    public SkinChestPartRightArm(ISkinType baseType) {
+    public SkinChestPartRightArm(SkinType baseType) {
         super(baseType);
         this.buildingSpace = new Rectangle3D(-3, -16, -14, 14, 32, 28);
         this.guideSpace = new Rectangle3D(-1, -10, -2, 4, 12, 4);

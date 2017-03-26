@@ -6,7 +6,7 @@ import java.util.BitSet;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
+import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 import riskyken.armourersWorkshop.common.skin.cubes.ICube;
@@ -157,7 +157,7 @@ public class SkinCubeData {
         }
     }
     
-    public void readFromStream(DataInput stream, int version, ISkinPartType skinPart) throws IOException, InvalidCubeTypeException {
+    public void readFromStream(DataInput stream, int version, SkinPartType skinPart) throws IOException, InvalidCubeTypeException {
         int size = stream.readInt();
         setCubeCount(size);
         for (int i = 0; i < getCubeCount(); i++) {

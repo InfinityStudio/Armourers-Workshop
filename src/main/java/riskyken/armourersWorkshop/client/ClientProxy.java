@@ -112,7 +112,7 @@ public class ClientProxy extends CommonProxy {
     private void enableCrossModSupport() {
         try {
             Class.forName("shadersmodcore.client.Shaders");
-            ModLogger.log("Shaders mod support active");
+            ModLogger.log("Shaders impl support active");
             shadersModLoaded = true;
         } catch (Exception e) {
         }

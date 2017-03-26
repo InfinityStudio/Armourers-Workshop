@@ -6,13 +6,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.client.render.model.armourer.ModelChest;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;
 
 public class SkinWingsPartLeftWing extends AbstractSkinPartTypeBase {
 
-    public SkinWingsPartLeftWing(ISkinType baseType) {
+    public SkinWingsPartLeftWing(SkinType baseType) {
         super(baseType);
         this.buildingSpace = new Rectangle3D(-32, -24, 0, 32, 48, 12);
         this.guideSpace = new Rectangle3D(-4, -12, -4, 8, 12, 4);

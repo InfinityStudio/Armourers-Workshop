@@ -10,12 +10,12 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.ArmourersWorkshopMod;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.client.render.SkinPartRenderer;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
@@ -33,12 +33,12 @@ import riskyken.armourersWorkshop.utils.SkinUtils;
 @SideOnly(Side.CLIENT)
 public class ModelRendererAttachment extends ModelRenderer {
 
-    private final ISkinType skinType;
-    private final ISkinPartType skinPart;
+    private final SkinType skinType;
+    private final SkinPartType skinPart;
     private final Minecraft mc;
     private RenderEngineAttach engineAttach;
 
-    public ModelRendererAttachment(ModelBiped modelBase, ISkinType skinType, ISkinPartType skinPart, RenderEngineAttach engineAttach) {
+    public ModelRendererAttachment(ModelBiped modelBase, SkinType skinType, SkinPartType skinPart, RenderEngineAttach engineAttach) {
         super(modelBase);
         this.engineAttach = engineAttach;
         this.mc = Minecraft.getMinecraft();

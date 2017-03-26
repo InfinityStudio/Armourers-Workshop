@@ -14,7 +14,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPart;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
+import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
 import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeMarkerData;
@@ -22,15 +22,14 @@ import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
 public class SkinPart implements ISkinPart {
-    
     private Rectangle3D partBounds;
     private SkinCubeData cubeData;
     private List<CubeMarkerData> markerBlocks;
-    private ISkinPartType skinPart;
+    private SkinPartType skinPart;
     @SideOnly(Side.CLIENT)
     private ClientSkinPartData clientSkinPartData;
     
-    public SkinPart(SkinCubeData cubeData, ISkinPartType skinPart, List<CubeMarkerData> markerBlocks) {
+    public SkinPart(SkinCubeData cubeData, SkinPartType skinPart, List<CubeMarkerData> markerBlocks) {
         this.cubeData = cubeData;
         this.skinPart = skinPart;
         this.markerBlocks = markerBlocks;
@@ -119,7 +118,7 @@ public class SkinPart implements ISkinPart {
     }
 
     @Override
-    public ISkinPartType getPartType() {
+    public SkinPartType getPartType() {
         return this.skinPart;
     }
     

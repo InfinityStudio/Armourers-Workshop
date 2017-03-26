@@ -15,7 +15,6 @@ import riskyken.armourersWorkshop.ArmourersWorkshopMod;
 import riskyken.armourersWorkshop.client.render.DisplayList;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
-import riskyken.armourersWorkshop.common.skin.cache.CommonSkinCache;
 import riskyken.armourersWorkshop.client.ClientProxy;
 
 @SideOnly(Side.CLIENT)
@@ -37,7 +36,6 @@ public class DebugTextHandler {
             if (GuiScreen.isCtrlKeyDown()) {
 //                event.left.add("Client Skin Count: " + ArmourersWorkshopMod.proxy.getPlayerModelCacheSize());
                 if (Minecraft.getMinecraft().isIntegratedServerRunning()) {
-                    event.left.add("Common Skin Count: " + CommonSkinCache.INSTANCE.size());
                 }
 //                event.left.add("Part Count: " + ClientSkinCache.INSTANCE.getPartCount());
 //                event.left.add("Player Data: " + SkinModelRenderer.INSTANCE.getSkinDataMapSize());

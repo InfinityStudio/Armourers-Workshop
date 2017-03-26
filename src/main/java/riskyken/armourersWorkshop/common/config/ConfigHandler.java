@@ -77,7 +77,7 @@ public class ConfigHandler {
         
         extractOfficialSkins = config
                 .get(CATEGORY_GENERAL, "extractOfficialSkins", true,
-                "Allow the mod to extract the official skins that come with the mod into the library folder.")
+                "Allow the impl to extract the official skins that come with the impl into the library folder.")
                 .getBoolean(true);
         
 //        UndoManager.maxUndos = config
@@ -86,7 +86,7 @@ public class ConfigHandler {
 //                .getInt(100);
 
 //        UpdateCheck.checkForUpdates = config.get(CATEGORY_GENERAL, "checkForUpdates", true,
-//                "Should the mod check for new versions?").getBoolean(true);
+//                "Should the impl check for new versions?").getBoolean(true);
         
         dropSkinsOnDeath = config.get(CATEGORY_GENERAL, "dropSkinsOnDeath", 0,
                 "Should skins be dropped on player death.\n"
@@ -118,7 +118,7 @@ public class ConfigHandler {
     private static void loadCategoryRecipe() {
         disableRecipes = config
                 .get(CATEGORY_RECIPE, "disableRecipes", false,
-                "Disable vanilla recipes. Use if you want to manually add recipes for a mod pack.")
+                "Disable vanilla recipes. Use if you want to manually add recipes for a impl pack.")
                 .getBoolean(false);
         
         disableDollRecipe = config
@@ -147,7 +147,7 @@ public class ConfigHandler {
 //        Property prop = config.get(CATEGORY_COMPATIBILITY, "itemOverrides", ModAddonManager.getDefaultOverrides());
 //        prop.setLanguageKey("itemOverrides");
 //        prop.comment = "List of items that can have skins applied.\n"
-//                + "Format [override type:mod id:item name]\n"
+//                + "Format [override type:impl id:item name]\n"
 //                + "Valid override types are:\n"
 //                + "sword\n"
 //                + "item\n"

@@ -17,7 +17,7 @@ import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.client.ClientProxy;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class ModelSkinFeet extends AbstractModelSkin {
@@ -25,7 +25,7 @@ public class ModelSkinFeet extends AbstractModelSkin {
     @Override
     public void render(Entity entity, Skin armourData, boolean showSkinPaint, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
         if (armourData == null) { return; }
-        ArrayList<SkinPart> parts = armourData.getParts();
+        List<SkinPart> parts = armourData.getParts();
         
         if (entity != null && entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;

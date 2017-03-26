@@ -6,13 +6,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.client.render.model.armourer.ModelLegs;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;
 
 public class SkinLegsPartSkirt extends AbstractSkinPartTypeBase {
 
-    public SkinLegsPartSkirt(ISkinType baseType) {
+    public SkinLegsPartSkirt(SkinType baseType) {
         super(baseType);
         this.buildingSpace = new Rectangle3D(-10, -12, -10, 20, 15, 20);
         this.guideSpace = new Rectangle3D(-4, -12, -2, 8, 12, 4);

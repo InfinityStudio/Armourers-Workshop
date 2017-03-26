@@ -110,7 +110,7 @@ public class ConfigHandlerClient {
         skinTextureRenderOverride = config
                 .get(CATEGORY_DEBUG, "skinTextureRenderOverride", false,
                 "Only enable this if you are having rendering issues with skins. (normally fixes lighting issues)\n"
-                + "This option is force on if Shaders Mod or Colored Lights mod is installed.")
+                + "This option is force on if Shaders Mod or Colored Lights impl is installed.")
                 .getBoolean(false);
         
         showF3DebugInfo = config

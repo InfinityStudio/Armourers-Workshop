@@ -2,10 +2,10 @@ package riskyken.armourersWorkshop.api.common.skin.data;
 
 import java.util.List;
 
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinType;
 
 public interface ISkin {
-    ISkinType getSkinType();
+    SkinType getSkinType();
 
     List<ISkinPart> getSubParts();
 }

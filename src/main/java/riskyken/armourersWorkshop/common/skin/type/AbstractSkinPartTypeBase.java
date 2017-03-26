@@ -1,18 +1,18 @@
 package riskyken.armourersWorkshop.common.skin.type;
 
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.api.common.IPoint3D;
 import riskyken.armourersWorkshop.api.common.IRectangle3D;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinPartType;
 
-public abstract class AbstractSkinPartTypeBase implements ISkinPartType {
+public abstract class AbstractSkinPartTypeBase implements SkinPartType {
 
-    private ISkinType baseType;
+    private SkinType baseType;
     protected IRectangle3D buildingSpace;
     protected IRectangle3D guideSpace;
     protected IPoint3D offset;
     
-    public AbstractSkinPartTypeBase(ISkinType baseType) {
+    public AbstractSkinPartTypeBase(SkinType baseType) {
         this.baseType = baseType;
     }
     

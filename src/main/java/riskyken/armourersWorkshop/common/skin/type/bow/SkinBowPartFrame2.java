@@ -1,18 +1,18 @@
 package riskyken.armourersWorkshop.common.skin.type.bow;
 
+import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.client.render.model.armourer.ModelHand;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;
 
 public class SkinBowPartFrame2 extends AbstractSkinPartTypeBase {
     
-    public SkinBowPartFrame2(ISkinType baseType) {
+    public SkinBowPartFrame2(SkinType baseType) {
         super(baseType);
         this.buildingSpace = new Rectangle3D(-10, -20, -46, 20, 62, 64);
         this.guideSpace = new Rectangle3D(-2, -2, 2, 4, 4, 8);

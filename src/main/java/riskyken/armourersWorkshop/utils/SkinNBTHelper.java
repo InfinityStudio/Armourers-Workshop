@@ -2,10 +2,8 @@ package riskyken.armourersWorkshop.utils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.data.SkinDye;
 import riskyken.armourersWorkshop.common.skin.data.SkinPointer;
 
 public class SkinNBTHelper {
@@ -69,7 +67,7 @@ public class SkinNBTHelper {
         return skinData;
     }
     
-    public static ISkinType getSkinTypeFromStack(ItemStack stack) {
+    public static SkinType getSkinTypeFromStack(ItemStack stack) {
         if (!stackHasSkinData(stack)) {
             return null;
         }
@@ -102,12 +100,12 @@ public class SkinNBTHelper {
         return skinData.lockSkin;
     }
     
-    public static void addSkinDataToStack(ItemStack stack, ISkinType skinType, int skinId, ISkinDye skinDye, boolean lockSkin) {
+    public static void addSkinDataToStack(ItemStack stack, SkinType skinType, int skinId, ISkinDye skinDye, boolean lockSkin) {
         SkinPointer skinData = new SkinPointer(skinType, skinId, skinDye, lockSkin);
         addSkinDataToStack(stack, skinData);
     }
     
-    public static void addSkinDataToStack(ItemStack stack, ISkinType skinType, int skinId, boolean lockSkin, ISkinDye skinDye) {
+    public static void addSkinDataToStack(ItemStack stack, SkinType skinType, int skinId, boolean lockSkin, ISkinDye skinDye) {
         SkinPointer skinData;
         if (skinDye != null) {
             skinData = new SkinPointer(skinType, skinId, skinDye, lockSkin);
@@ -195,7 +193,7 @@ public class SkinNBTHelper {
 //        return stack;
 //    }
     
-    public static void addRenderIdToStack(ItemStack stack, ISkinType skinType, int skinId, ISkinDye skinDye) {
+    public static void addRenderIdToStack(ItemStack stack, SkinType skinType, int skinId, ISkinDye skinDye) {
         if (stackHasSkinData(stack)) {
             SkinPointer skinData = getSkinPointerFromStack(stack);
             if (!skinData.lockSkin) {

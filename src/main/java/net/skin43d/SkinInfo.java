@@ -1,7 +1,7 @@
 package net.skin43d;
 
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinPartType;
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 
@@ -31,11 +31,11 @@ public class SkinInfo {
         return stringSkinMap;
     }
 
-    public Skin getSkin(ISkinType skinType) {
+    public Skin getSkin(SkinType skinType) {
         return stringSkinMap.get(skinType.getRegistryName());
     }
 
-    public SkinPart getSkinPart(ISkinType type, ISkinPartType partType) {
+    public SkinPart getSkinPart(SkinType type, SkinPartType partType) {
         Skin skin = stringSkinMap.get(type.getRegistryName());
         if (skin == null) return null;
         for (SkinPart part : skin.getParts())

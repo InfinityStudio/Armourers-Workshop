@@ -1,10 +1,10 @@
 package riskyken.armourersWorkshop.common.skin.type.legs;
 
+import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.client.render.model.armourer.ModelLegs;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;
 import cpw.mods.fml.relauncher.Side;
@@ -12,7 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class SkinSkirtPartBase extends AbstractSkinPartTypeBase {
     
-    public SkinSkirtPartBase(ISkinType baseType) {
+    public SkinSkirtPartBase(SkinType baseType) {
         super(baseType);
         this.buildingSpace = new Rectangle3D(-10, -12, -10, 20, 15, 20);
         this.guideSpace = new Rectangle3D(-4, -12, -2, 8, 12, 4);

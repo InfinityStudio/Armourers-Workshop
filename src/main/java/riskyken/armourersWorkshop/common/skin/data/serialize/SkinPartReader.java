@@ -2,7 +2,7 @@ package riskyken.armourersWorkshop.common.skin.data.serialize;
 
 import org.apache.logging.log4j.Level;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
+import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeMarkerData;
 import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
@@ -29,7 +29,7 @@ public class SkinPartReader {
     }
 
     public SkinPart readSkinPart(DataInput input, ArmourersWorkshop context) throws IOException, InvalidCubeTypeException {
-        ISkinPartType skinPart;
+        SkinPartType skinPart;
         if (context.getFileVersion() < 6) {
             skinPart = context.getSkinRegistry().getSkinPartTypeFromId(input.readByte());
             if (skinPart == null) {

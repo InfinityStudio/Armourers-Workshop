@@ -1,8 +1,8 @@
 package riskyken.armourersWorkshop.api.common;
 
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinType;
 
 public interface IArmourersSkinnableItem {
 
-    public boolean isSkinValidForItem(ISkinType skinType);
+    public boolean isSkinValidForItem(SkinType skinType);
 }

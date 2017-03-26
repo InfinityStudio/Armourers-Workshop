@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkin;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
+import net.skin43d.skin3d.SkinPartType;
 
 public interface ISkinRenderHandler {
 
@@ -26,7 +26,7 @@ public interface ISkinRenderHandler {
     
     public boolean renderSkin(ISkinPointer skinPointer);
     
-    public boolean renderSkinPart(ISkinPointer skinPointer, ISkinPartType skinPartType);
+    public boolean renderSkinPart(ISkinPointer skinPointer, SkinPartType skinPartType);
     
     public boolean isSkinInModelCache(ItemStack stack);
     

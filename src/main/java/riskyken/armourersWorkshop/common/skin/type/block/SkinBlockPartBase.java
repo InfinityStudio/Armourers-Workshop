@@ -1,13 +1,13 @@
 package riskyken.armourersWorkshop.common.skin.type.block;
 
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;
 
 public class SkinBlockPartBase extends AbstractSkinPartTypeBase {
 
-    public SkinBlockPartBase(ISkinType baseType) {
+    public SkinBlockPartBase(SkinType baseType) {
         super(baseType);
         this.buildingSpace = new Rectangle3D(-8, -8, -8, 16, 16, 16);
         this.guideSpace = new Rectangle3D(0, 0, 0, 0, 0, 0);

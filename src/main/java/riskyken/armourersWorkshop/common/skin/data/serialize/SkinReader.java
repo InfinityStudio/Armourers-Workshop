@@ -1,8 +1,7 @@
 package riskyken.armourersWorkshop.common.skin.data.serialize;
 
 import riskyken.armourersWorkshop.ArmourersWorkshop;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.exception.NewerFileVersionException;
@@ -12,10 +11,8 @@ import riskyken.armourersWorkshop.common.skin.data.SkinProperties;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 
 import java.io.DataInput;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class SkinReader {
             throw new NewerFileVersionException();
         ISkinTypeRegistry skinRegistry = context.getSkinRegistry();
         SkinProperties properties = new SkinProperties();
-        ISkinType skinType;
+        SkinType skinType;
         List<SkinPart> parts;
         int[] paintData = new int[0];
         if (fileVersion < 12) {

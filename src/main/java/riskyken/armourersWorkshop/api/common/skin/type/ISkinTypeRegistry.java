@@ -1,11 +1,13 @@
 package riskyken.armourersWorkshop.api.common.skin.type;
 
-import java.util.ArrayList;
+import net.skin43d.skin3d.SkinPartType;
+import net.skin43d.skin3d.SkinType;
+
 import java.util.List;
 
 /**
- * Skin type registry is used to register new ISkinType's
- * and get register ISkinType's and ISkinPart's.
+ * Skin type registry is used to register new SkinType's
+ * and get register SkinType's and ISkinPart's.
  *
  * @author RiskyKen
  */
@@ -16,26 +18,26 @@ public interface ISkinTypeRegistry {
      *
      * @param skinType
      */
-    boolean registerSkin(ISkinType skinType);
+    boolean registerSkin(SkinType skinType);
 
-    ISkinType getSkinTypeFromLegacyId(int id);
+    SkinType getSkinTypeFromLegacyId(int id);
 
-    ISkinType getSkinTypeFromRegistryName(String registryName);
+    SkinType getSkinTypeFromRegistryName(String registryName);
 
-    ISkinPartType getSkinPartTypeFromId(int id);
+    SkinPartType getSkinPartTypeFromId(int id);
 
-    ISkinPartType getSkinPartTypeFromName(String regName);
+    SkinPartType getSkinPartTypeFromName(String regName);
 
-    List<ISkinType> getRegisteredSkinTypes();
+    List<SkinType> getRegisteredSkinTypes();
 
-    ISkinType getSkinTypeHead();
+    SkinType getSkinTypeHead();
 
-    ISkinType getSkinTypeChest();
+    SkinType getSkinTypeChest();
 
-    ISkinType getSkinTypeLegs();
+    SkinType getSkinTypeLegs();
 
     @Deprecated
-    ISkinType getSkinTypeSkirt();
+    SkinType getSkinTypeSkirt();
 
-    ISkinType getSkinTypeFeet();
+    SkinType getSkinTypeFeet();
 }

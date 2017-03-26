@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.api.common.skin.type;
+package net.skin43d.skin3d;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -6,7 +6,7 @@ import riskyken.armourersWorkshop.api.common.IPoint3D;
 import riskyken.armourersWorkshop.api.common.IRectangle3D;
 
 
-public interface ISkinPartType {
+public interface SkinPartType {
     
     /**
      * Gets the name this skin will be registered with.

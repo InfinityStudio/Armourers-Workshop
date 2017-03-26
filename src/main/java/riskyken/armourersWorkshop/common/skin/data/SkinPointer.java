@@ -1,9 +1,9 @@
 package riskyken.armourersWorkshop.common.skin.data;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 
 public class SkinPointer implements ISkinPointer {
@@ -13,7 +13,7 @@ public class SkinPointer implements ISkinPointer {
     private static final String TAG_SKIN_ID = "skinId";
     private static final String TAG_SKIN_LOCK = "lock";
     
-    public ISkinType skinType;
+    public SkinType skinType;
     public int skinId;
     public boolean lockSkin;
     public SkinDye skinDye;
@@ -33,28 +33,28 @@ public class SkinPointer implements ISkinPointer {
         this.skinDye = new SkinDye(skinPointer.getSkinDye());
     }
     
-    public SkinPointer(ISkinType skinType, int skinId) {
+    public SkinPointer(SkinType skinType, int skinId) {
         this.skinType = skinType;
         this.skinId = skinId;
         this.lockSkin = false;
         this.skinDye = new SkinDye();
     }
     
-    public SkinPointer(ISkinType skinType, int skinId, SkinDye skinDye) {
+    public SkinPointer(SkinType skinType, int skinId, SkinDye skinDye) {
         this.skinType = skinType;
         this.skinId = skinId;
         this.lockSkin = false;
         this.skinDye = skinDye;
     }
     
-    public SkinPointer(ISkinType skinType, int skinId, boolean lockSkin) {
+    public SkinPointer(SkinType skinType, int skinId, boolean lockSkin) {
         this.skinType = skinType;
         this.skinId = skinId;
         this.lockSkin = lockSkin;
         this.skinDye = new SkinDye();
     }
     
-    public SkinPointer(ISkinType skinType, int skinId, ISkinDye skinDye, boolean lockSkin) {
+    public SkinPointer(SkinType skinType, int skinId, ISkinDye skinDye, boolean lockSkin) {
         this.skinType = skinType;
         this.skinId = skinId;
         this.lockSkin = lockSkin;
@@ -67,7 +67,7 @@ public class SkinPointer implements ISkinPointer {
     }
     
     @Override
-    public ISkinType getSkinType() {
+    public SkinType getSkinType() {
         return skinType;
     }
     

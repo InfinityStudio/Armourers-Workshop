@@ -3,9 +3,9 @@ package riskyken.armourersWorkshop.common.skin.type;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.IIcon;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinType;
 
-public abstract class AbstractSkinTypeBase implements ISkinType {
+public abstract class AbstractSkinTypeBase implements SkinType {
     
     @SideOnly(Side.CLIENT)
     protected IIcon icon;

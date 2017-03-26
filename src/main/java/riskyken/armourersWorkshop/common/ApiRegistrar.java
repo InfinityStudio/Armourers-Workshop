@@ -5,10 +5,10 @@ import java.util.LinkedHashMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 
+import net.skin43d.skin3d.SkinType;
 import riskyken.armourersWorkshop.api.client.IArmourersClientManager;
 import riskyken.armourersWorkshop.api.common.IArmourersCommonManager;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.common.config.ConfigHandler;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
@@ -52,10 +52,10 @@ public final class ApiRegistrar {
         }
     }
     
-    public void onRenderEquipment(Entity entity, ISkinType skinType) {
+    public void onRenderEquipment(Entity entity, SkinType skinType) {
     }
     
-    public void onRenderEquipmentPart(Entity entity, ISkinPartType skinPart) {
+    public void onRenderEquipmentPart(Entity entity, SkinPartType skinPart) {
     }
     
     public void onRenderMannequin(TileEntity TileEntity, GameProfile gameProfile) {

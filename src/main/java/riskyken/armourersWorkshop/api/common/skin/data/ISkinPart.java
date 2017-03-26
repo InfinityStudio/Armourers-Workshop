@@ -2,11 +2,11 @@ package riskyken.armourersWorkshop.api.common.skin.data;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
+import net.skin43d.skin3d.SkinPartType;
 
 public interface ISkinPart {
 
-    ISkinPartType getPartType();
+    SkinPartType getPartType();
     
     int getMarkerCount();
     
