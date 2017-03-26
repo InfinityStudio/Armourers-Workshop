@@ -15,7 +15,7 @@ import net.skin43d.impl.client.PlayerTextureHandler;
 import net.skin43d.utils.ModLogger;
 import org.apache.logging.log4j.Level;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
-import riskyken.armourersWorkshop.client.render.RenderEngine;
+import net.skin43d.impl.client.render.engine.RenderEngine;
 import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 

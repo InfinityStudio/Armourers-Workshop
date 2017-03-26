@@ -17,7 +17,7 @@ public class LegacyBakeSkinTask implements Callable<Skin> {
 
     private final Skin skin;
 
-    LegacyBakeSkinTask(Skin skin) {
+    public LegacyBakeSkinTask(Skin skin) {
         this.skin = skin;
     }
 

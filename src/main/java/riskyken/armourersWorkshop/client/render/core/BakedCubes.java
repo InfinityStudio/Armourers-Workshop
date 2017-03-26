@@ -10,12 +10,12 @@ import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class BakedCube {
-    public DisplayList[] displayList;
-    public boolean[] haveList;
-    public long loadedTime;
+public class BakedCubes {
+    public final DisplayList[] displayList;
+    public final boolean[] haveList;
+    private long loadedTime;
 
-    public BakedCube(List<BakedFace>[] vertexLists) {
+    public BakedCubes(List<BakedFace>[] vertexLists) {
         displayList = new DisplayList[vertexLists.length];
         haveList = new boolean[vertexLists.length];
         for (int i = 0; i < displayList.length; i++) {
@@ -26,6 +26,18 @@ public class BakedCube {
                 haveList[i] = false;
             }
         }
+    }
+
+    public int length() {
+        return displayList.length;
+    }
+
+    public boolean hasList(int idx) {
+        return haveList[idx];
+    }
+
+    public DisplayList getDisplayList(int idx) {
+        return displayList[idx];
     }
 
     public void setLoaded() {

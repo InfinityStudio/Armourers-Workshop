@@ -11,11 +11,16 @@ public abstract class AbstractSkinPartTypeBase implements SkinPartType {
     protected Rectangle3D buildingSpace;
     protected Rectangle3D guideSpace;
     protected Point3D offset;
-    
+
     public AbstractSkinPartTypeBase(SkinType baseType) {
         this.baseType = baseType;
     }
-    
+
+    @Override
+    public SkinType getBaseType() {
+        return baseType;
+    }
+
     @Override
     public Rectangle3D getBuildingSpace() {
         return this.buildingSpace;
@@ -30,22 +35,22 @@ public abstract class AbstractSkinPartTypeBase implements SkinPartType {
     public Point3D getOffset() {
         return this.offset;
     }
-    
+
     @Override
     public String getRegistryName() {
         return baseType.getRegistryName() + "." + getPartName();
     }
-    
+
     @Override
     public int getMinimumMarkersNeeded() {
         return 0;
     }
-    
+
     @Override
     public int getMaximumMarkersNeeded() {
         return 0;
     }
-    
+
     @Override
     public boolean isPartRequired() {
         return false;

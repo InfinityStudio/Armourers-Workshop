@@ -25,6 +25,8 @@ public interface SkinPartType {
      */
     String getPartName();
 
+    SkinType getBaseType();
+
     /**
      * The last 3 values are used to define the size of this part, the first 3 values will change the origin.
      * Example -5, -5, -5, 10, 10, 10, Will create a 10x10x10 cube with it's origin in the centre.

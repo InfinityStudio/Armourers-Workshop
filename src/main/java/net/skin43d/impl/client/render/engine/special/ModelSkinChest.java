@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.render.engine.special;
+package net.skin43d.impl.client.render.engine.special;
 
 import java.util.List;
 

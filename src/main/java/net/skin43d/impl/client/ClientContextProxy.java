@@ -11,13 +11,13 @@ import net.skin43d.SkinProvider;
 import net.skin43d.impl.ContextProxy;
 import net.skin43d.impl.SkinProviderLocal;
 import net.skin43d.impl.Test;
+import net.skin43d.impl.client.render.engine.RenderEngine;
 import net.skin43d.utils.ModLogger;
 import net.skin43d.utils.SkinIOUtils;
 import org.apache.logging.log4j.Level;
-import riskyken.armourersWorkshop.client.render.RenderEngine;
-import riskyken.armourersWorkshop.client.render.bake.AsyncModelBakery;
-import riskyken.armourersWorkshop.client.render.engine.attach.RenderEngineAttach;
-import riskyken.armourersWorkshop.client.render.engine.special.RenderEngineSpecial;
+import net.skin43d.impl.client.render.bakery.AsyncModelBakery;
+import net.skin43d.impl.client.render.engine.attach.RenderEngineAttach;
+import net.skin43d.impl.client.render.engine.special.RenderEngineSpecial;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 
 import java.io.File;
@@ -54,11 +54,11 @@ public class ClientContextProxy extends ContextProxy {
         this.renderEngine.deploy();
         service = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool());
         MinecraftForge.EVENT_BUS.register(new PlayerTextureHandler());
+        AsyncModelBakery bakery = new AsyncModelBakery(service);
 
         /////TEST CODE//////
         File file = new File(loc);
         skin = SkinIOUtils.loadSkinFromFile(file);
-        AsyncModelBakery bakery = new AsyncModelBakery(service);
         bakery.bake(skin);
         this.provider = new SkinProviderLocal(skin);
         /////TEST CODE//////

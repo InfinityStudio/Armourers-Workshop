@@ -2,6 +2,7 @@ package net.skin43d.impl;
 
 import net.skin43d.EquipmentWardrobeProvider;
 import net.skin43d.SkinProvider;
+import net.skin43d.impl.client.render.bakery.SkinBakery;
 import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 
@@ -26,6 +27,8 @@ public abstract class Context {
     public abstract EquipmentWardrobeProvider getEquipmentWardrobeProvider();
 
     public abstract SkinProvider getSkinProvider();
+
+    public abstract SkinBakery getSkinBakery();
 
     public abstract CubeRegistry getCubeRegistry();
 }

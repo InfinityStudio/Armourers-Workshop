@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.render.engine.special;
+package net.skin43d.impl.client.render.engine.special;
 
 import java.util.List;
 
@@ -16,12 +16,10 @@ import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.client.ClientProxy;
 
 public class ModelSkinWings extends AbstractModelSkin {
-
     @Override
     public void render(Entity entity, Skin skin, boolean showSkinPaint, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
-        if (skin == null) {
+        if (skin == null)
             return;
-        }
 
         List<SkinPart> parts = skin.getParts();
 
@@ -35,14 +33,10 @@ public class ModelSkinWings extends AbstractModelSkin {
             }
         }
 
-        if (ClientProxy.isJrbaClientLoaded()) {
+        if (ClientProxy.isJrbaClientLoaded())
             this.isChild = false;
-        }
 
-//        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinSword);
-        for (int i = 0; i < parts.size(); i++) {
-            SkinPart part = parts.get(i);
-
+        for (SkinPart part : parts) {
             GL11.glPushMatrix();
             GL11.glTranslated(0, 0, SCALE * 2);
             if (isChild) {
@@ -50,25 +44,14 @@ public class ModelSkinWings extends AbstractModelSkin {
                 GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
                 GL11.glTranslatef(0.0F, 24.0F * SCALE, 0.0F);
             }
-            ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, part.getPartType());
-
-            double angle = 45D;
-
-            angle = getFlapAngleForWings(entity, skin);
-
-            if (isSneak) {
-                GL11.glRotated(28F, 1F, 0, 0);
-            }
-
-            if (part.getPartType().getPartName().equals("leftWing")) {
+            double angle = getFlapAngleForWings(entity, skin);
+            if (isSneak) GL11.glRotated(28F, 1F, 0, 0);
+            if (part.getPartType().getPartName().equals("leftWing"))
                 renderLeftWing(part, SCALE, skinDye, extraColour, distance, angle, doLodLoading);
-            }
-            if (part.getPartType().getPartName().equals("rightWing")) {
+            if (part.getPartType().getPartName().equals("rightWing"))
                 renderRightWing(part, SCALE, skinDye, extraColour, distance, -angle, doLodLoading);
-            }
             GL11.glPopMatrix();
         }
-
         GL11.glColor3f(1F, 1F, 1F);
     }
 

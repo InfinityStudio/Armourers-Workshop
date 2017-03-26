@@ -1,44 +1,46 @@
-package net.skin43d.impl.client;
+package net.skin43d.impl.client.render;
 
 import com.google.common.collect.Lists;
 import net.skin43d.impl.Context;
-import net.skin43d.impl.client.render.BakedFace;
-import net.skin43d.impl.client.render.FaceBaker;
-import net.skin43d.impl.client.render.FaceCuller;
+import net.skin43d.skin3d.SkinPartType;
+import net.skin43d.skin3d.SkinType;
 import net.skin43d.utils.BitwiseUtils;
-import riskyken.armourersWorkshop.client.render.bake.SkinBaker;
-import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 /**
  * @author ci010
  */
-public class BakeTask implements Callable<BakedSkinModel> {
+public class BakeTask implements Callable<BakedSkin> {
 
     private final Skin skin;
 
-    BakeTask(Skin skin) {
+    public BakeTask(Skin skin) {
         this.skin = skin;
     }
 
     @Override
-    public BakedSkinModel call() throws Exception {
+    public BakedSkin call() throws Exception {
         Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 
         SkinModelTexture modelTexture = null;
-        List<BakedSkinModel.BakeSkinPart> parts = Lists.newArrayList();
+        List<BakeSkinPart> parts = Lists.newArrayList();
         int[][] dyeColour;
         int[] dyeUseCount;
 
         dyeColour = new int[3][10];
         dyeUseCount = new int[10];
 
+        int[] averageR = new int[10];
+        int[] averageG = new int[10];
+        int[] averageB = new int[10];
+
+        List<SkinPartType> part = skin.getSkinType().getSkinParts();
+        BakeSkinPart[] bakeSkinParts = new BakeSkinPart[part.size()];
         for (int i = 0; i < skin.getParts().size(); i++) {
             SkinPart partData = skin.getParts().get(i);
 //            partData.setClientSkinPartData(new ClientSkinPartData());
@@ -46,7 +48,7 @@ public class BakeTask implements Callable<BakedSkinModel> {
             int[][][] dim = FaceCuller.cullFacesPre(partData, totalCubesInPart);
             FaceCuller.cullFace(partData, dim);
             List<BakedFace>[] lists = FaceBaker.buildPartDisplayListArray(partData, dyeColour, dyeUseCount, dim);
-            parts.add(new BakedSkinModel.BakeSkinPart(lists, totalCubesInPart));
+            parts.add(new BakeSkinPart(averageR, averageG, averageB, lists, totalCubesInPart));
             partData.clearCubeData();
         }
         Context context = Context.instance();
@@ -83,9 +85,6 @@ public class BakeTask implements Callable<BakedSkinModel> {
             }
         }
 
-        int[] averageR = new int[10];
-        int[] averageG = new int[10];
-        int[] averageB = new int[10];
 
         for (int i = 0; i < 10; i++) {
             averageR[i] = (int) ((double) dyeColour[0][i] / (double) dyeUseCount[i]);
@@ -93,12 +92,9 @@ public class BakeTask implements Callable<BakedSkinModel> {
             averageB[i] = (int) ((double) dyeColour[2][i] / (double) dyeUseCount[i]);
         }
 
-        for (int i = 0; i < skin.getParts().size(); i++)
-            skin.getParts().get(i).getClientSkinPartData().setAverageDyeValues(averageR, averageG, averageB);
-
         if (skin.hasPaintData() && modelTexture != null)
             modelTexture.createTextureForColours(skin, null);
-        return new BakedSkinModel(modelTexture, averageR, averageG, averageB,
-                parts);
+        return new BakedSkin(modelTexture, averageR, averageG, averageB,
+                parts.toArray(new BakeSkinPart[parts.size()]));
     }
 }

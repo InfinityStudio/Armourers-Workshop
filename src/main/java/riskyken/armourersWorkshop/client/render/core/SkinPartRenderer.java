@@ -2,8 +2,6 @@ package riskyken.armourersWorkshop.client.render.core;
 
 import java.util.List;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -26,19 +24,19 @@ import riskyken.plushieWrapper.client.RenderBridge;
 public class SkinPartRenderer extends ModelBase {
     private static final ResourceLocation texture = new ResourceLocation(LibModInfo.ID.toLowerCase(), "textures/armour/cube.png");
     public static final SkinPartRenderer INSTANCE = new SkinPartRenderer();
-    private int skinRendersThisTick = 0;
-    private float renderTickTime;
-    private int skinRenderLastTick = 0;
+    //    private int skinRendersThisTick = 0;
+//    private float renderTickTime;
+//    private int skinRenderLastTick = 0;
     private final Minecraft mc;
 
-    @SubscribeEvent
-    public void onRenderTickEvent(TickEvent.RenderTickEvent event) {
-        if (event.phase == TickEvent.Phase.START) {
-            renderTickTime = event.renderTickTime;
-            skinRenderLastTick = skinRendersThisTick;
-            skinRendersThisTick = 0;
-        }
-    }
+//    @SubscribeEvent
+//    public void onRenderTickEvent(TickEvent.RenderTickEvent event) {
+//        if (event.phase == TickEvent.Phase.START) {
+//            renderTickTime = event.renderTickTime;
+//            skinRenderLastTick = skinRendersThisTick;
+//            skinRendersThisTick = 0;
+//        }
+//    }
 
     public SkinPartRenderer() {
         mc = Minecraft.getMinecraft();
@@ -47,17 +45,12 @@ public class SkinPartRenderer extends ModelBase {
     public void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, double distance, boolean doLodLoading) {
         int lod = MathHelper.floor_double(distance / ConfigHandlerClient.lodDistance);
         lod = MathHelper.clamp_int(lod, 0, ConfigHandlerClient.maxLodLevels);
-        renderPart(skinPart, scale, skinDye, extraColour, lod, doLodLoading);
+        renderPart(skinPart.getClientSkinPartData(), scale, skinDye, extraColour, lod, doLodLoading);
     }
 
-    private void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, int lod, boolean doLodLoading) {
-        //mc.mcProfiler.startSection(skinPart.getPartType().getPartName());
-        skinRendersThisTick++;
-        //GL11.glColor3f(1F, 1F, 1F);
-
-        ClientSkinPartData cspd = skinPart.getClientSkinPartData();
+    private void renderPart(ClientSkinPartData cspd, float scale, ISkinDye skinDye, byte[] extraColour, int lod, boolean doLodLoading) {
         if (cspd == null) return;
-        BakedCube skinModel = cspd.getModelForDye(skinDye, extraColour);
+        BakedCubes skinModel = cspd.getModelForDye(skinDye, extraColour);
         boolean multipassSkinRendering = ClientProxy.useMultipassSkinRendering();
 
         for (int i = 0; i < skinModel.displayList.length; i++) {
@@ -73,7 +66,7 @@ public class SkinPartRenderer extends ModelBase {
 
         if (ClientProxy.useSafeTextureRender())
             mc.renderEngine.bindTexture(texture);
-         else
+        else
             GL11.glDisable(GL11.GL_TEXTURE_2D);
 
         int startIndex = 0;
@@ -88,12 +81,12 @@ public class SkinPartRenderer extends ModelBase {
         if (lod != 0)
             if (multipassSkinRendering)
                 startIndex = lod * 4;
-             else
+            else
                 startIndex = lod * 2;
 
         if (multipassSkinRendering)
             endIndex = startIndex + 4;
-         else
+        else
             endIndex = startIndex + 2;
 
         int listCount = skinModel.displayList.length;
@@ -139,7 +132,7 @@ public class SkinPartRenderer extends ModelBase {
         IRenderBuffer renderBuffer = RenderBridge.INSTANCE;
         renderBuffer.startDrawingQuads();
         for (int i = 0; i < vertexList.size(); i++)
-            vertexList.get(i).renderVertex(skinDye, extraColour, cspd, ClientProxy.useSafeTextureRender());
+            vertexList.get(i).render(skinDye, extraColour, cspd, ClientProxy.useSafeTextureRender());
         renderBuffer.draw();
     }
 }

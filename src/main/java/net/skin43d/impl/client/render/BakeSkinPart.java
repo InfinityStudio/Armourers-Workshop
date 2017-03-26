@@ -1,71 +1,70 @@
-package net.skin43d.impl.client;
+package net.skin43d.impl.client.render;
 
+import com.google.common.collect.Maps;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import net.skin43d.impl.client.render.BakedFace;
-import riskyken.armourersWorkshop.client.render.core.BakedCube;
-import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
+import riskyken.armourersWorkshop.client.render.core.BakedCubes;
 import riskyken.armourersWorkshop.common.skin.data.SkinDye;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author ci010
  */
-public class BakedSkinModel {
-
-    private SkinModelTexture texture;
-
+public class BakeSkinPart {
+    public static final SkinDye blankDye = new SkinDye();
     private int[] averageR = new int[10];
     private int[] averageG = new int[10];
     private int[] averageB = new int[10];
 
-    private List<BakeSkinPart> skinParts;
-
-    public BakedSkinModel(SkinModelTexture texture, int[] averageR, int[] averageG, int[] averageB, List<BakeSkinPart> skinParts) {
-        this.texture = texture;
+    public BakeSkinPart(int[] averageR, int[] averageG, int[] averageB, List<BakedFace>[] colouredFaces, int[] totalCubesInPart) {
         this.averageR = averageR;
         this.averageG = averageG;
         this.averageB = averageB;
-        this.skinParts = skinParts;
+        this.colouredFaces = colouredFaces;
+        this.totalCubesInPart = totalCubesInPart;
+        this.dyeModels = Maps.newHashMap();
     }
 
-    public static class BakeSkinPart {
-        public static final SkinDye blankDye = new SkinDye();
+    public BakeSkinPart(List<BakedFace>[] colouredFaces, int[] totalCubesInPart) {
+        this.colouredFaces = colouredFaces;
+        this.totalCubesInPart = totalCubesInPart;
+    }
 
-        public BakeSkinPart(List<BakedFace>[] colouredFaces, int[] totalCubesInPart) {
-            this.colouredFaces = colouredFaces;
-            this.totalCubesInPart = totalCubesInPart;
+    private List<BakedFace>[] colouredFaces;
+    private Map<ModelKey, BakedCubes> dyeModels;
+    private int[] totalCubesInPart;
+
+    public List<BakedFace>[] getColouredFaces() {
+        return colouredFaces;
+    }
+
+    public Map<ModelKey, BakedCubes> getDyeModels() {
+        return dyeModels;
+    }
+
+    public int[] getTotalCubesInPart() {
+        return totalCubesInPart;
+    }
+
+    public BakedCubes getModelForDye(ISkinDye skinDye, byte[] extraColour) {
+        if (skinDye == null)
+            skinDye = blankDye;
+        ModelKey modelKey = new ModelKey(skinDye, extraColour);
+        BakedCubes skinModel = dyeModels.get(modelKey);
+        if (skinModel == null) {
+            skinModel = new BakedCubes(colouredFaces);
+            dyeModels.put(modelKey, skinModel);
         }
-
-        private List<BakedFace>[] colouredFaces;
-        private HashMap<ModelKey, BakedCube> dyeModels;
-        private int[] totalCubesInPart;
+        return skinModel;
     }
 
-    public SkinModelTexture getTexture() {
-        return texture;
-    }
-
-    public int[] getAverageR() {
-        return averageR;
-    }
-
-    public int[] getAverageG() {
-        return averageG;
-    }
-
-    public int[] getAverageB() {
-        return averageB;
-    }
-
-    public List<BakeSkinPart> getSkinParts() {
-        return skinParts;
+    public int[] getAverageDyeColour(int dyeNumber) {
+        return new int[]{averageR[dyeNumber], averageG[dyeNumber], averageB[dyeNumber]};
     }
 
     private class ModelKey {
-
         private ISkinDye skinDye;
         byte[] extraColours;
 
@@ -103,4 +102,5 @@ public class BakedSkinModel {
             return true;
         }
     }
+
 }

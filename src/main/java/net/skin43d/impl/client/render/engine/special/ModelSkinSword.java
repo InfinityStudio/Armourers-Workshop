@@ -1,34 +1,35 @@
-package riskyken.armourersWorkshop.client.render.engine.special;
+package net.skin43d.impl.client.render.engine.special;
+
+import java.util.List;
+
+import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
+import removequ.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
-import net.skin43d.utils.ModLogger;
-
-import java.util.List;
+import riskyken.armourersWorkshop.client.ClientProxy;
 
 @SideOnly(Side.CLIENT)
-public class ModelSkinBow extends AbstractModelSkin {
-    public int frame = 0;
+public class ModelSkinSword extends AbstractModelSkin {
 
     @Override
     public void render(Entity entity, Skin armourData, boolean showSkinPaint, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
-        if (armourData == null)
+        if (armourData == null) {
             return;
+        }
 
         List<SkinPart> parts = armourData.getParts();
+
         if (entity != null && entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
             this.isSneak = player.isSneaking();
             this.isRiding = player.isRiding();
-            this.isChild = player.isChild();
             this.heldItemRight = 0;
             if (player.getHeldItem() != null) {
                 this.heldItemRight = 1;
@@ -39,34 +40,30 @@ public class ModelSkinBow extends AbstractModelSkin {
             this.isChild = false;
         }
 
-//        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinBow);
+//        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinSword);
 
-        if (frame > parts.size() - 1) {
-            frame = parts.size() - 1;
+        for (int i = 0; i < parts.size(); i++) {
+            SkinPart part = parts.get(i);
+
+            GL11.glPushMatrix();
+            if (isChild) {
+                float f6 = 2.0F;
+                GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
+                GL11.glTranslatef(0.0F, 24.0F * SCALE, 0.0F);
+            }
+
+            ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, part.getPartType());
+
+            if (part.getPartType().getPartName().equals("base")) {
+                renderRightArm(part, SCALE, skinDye, extraColour, distance, doLodLoading);
+            }
+
+            GL11.glPopMatrix();
+
         }
-
-        if (frame < 0 | frame > parts.size() - 1) {
-            ModLogger.log("wow");
-            return;
-        }
-
-        SkinPart part = parts.get(frame);
-
-        GL11.glPushMatrix();
-        if (isChild) {
-            float f6 = 2.0F;
-            GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
-            GL11.glTranslatef(0.0F, 24.0F * SCALE, 0.0F);
-        }
-
-//        ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, part.getPartType());
-        renderRightArm(part, SCALE, skinDye, extraColour, distance, doLodLoading);
-
-        GL11.glPopMatrix();
 
 
         GL11.glColor3f(1F, 1F, 1F);
-        frame = 0;
     }
 
     private void renderRightArm(SkinPart part, float scale, ISkinDye skinDye, byte[] extraColour, double distance, boolean doLodLoading) {

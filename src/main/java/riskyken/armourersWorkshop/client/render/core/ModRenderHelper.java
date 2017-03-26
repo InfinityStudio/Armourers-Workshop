@@ -10,7 +10,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public final class ModRenderHelper {
-    
     private static float lightX;
     private static float lightY;
     

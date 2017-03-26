@@ -33,7 +33,57 @@ public class BakedFace {
         this.lodLevel = lodLevel;
     }
 
-    public void renderVertex(ISkinDye skinDye, byte[] extraColour, ClientSkinPartData cspd, boolean useTexture) {
+    public void render(ISkinDye skinDye, byte[] extraColour, BakeSkinPart data, boolean useTexture) {
+        byte r = this.r;
+        byte g = this.g;
+        byte b = this.b;
+        int type = t & 0xFF;
+        if (type != 0) {
+            //Dye
+            if (type >= 1 && type <= 8) {
+                //Is a dye paint
+                if (skinDye != null && skinDye.haveDyeInSlot(type - 1)) {
+                    byte[] dye = skinDye.getDyeColour(type - 1);
+                    if (dye.length == 4) {
+                        if ((dye[3] & 0xFF) == 0)
+                            return;
+                        int dyeType = dye[3] & 0xFF;
+                        int[] averageRGB = data.getAverageDyeColour(type - 1);
+                        byte[] dyedColour;
+                        if (dyeType == 253 & extraColour != null) {
+                            dyedColour = dyeColour(r, g, b, new byte[]{extraColour[0], extraColour[1], extraColour[2]}, averageRGB);
+                        } else if (dyeType == 254 & extraColour != null) {
+                            dyedColour = dyeColour(r, g, b, new byte[]{extraColour[3], extraColour[4], extraColour[5]}, averageRGB);
+                        } else {
+                            dyedColour = dyeColour(r, g, b, dye, averageRGB);
+                        }
+                        r = dyedColour[0];
+                        g = dyedColour[1];
+                        b = dyedColour[2];
+                    }
+                }
+            }
+            //Skin
+            if (type == 253 & extraColour != null) {
+                int[] averageRGB = data.getAverageDyeColour(8);
+                byte[] dyedColour = dyeColour(r, g, b, new byte[]{extraColour[0], extraColour[1], extraColour[2]}, averageRGB);
+                r = dyedColour[0];
+                g = dyedColour[1];
+                b = dyedColour[2];
+            }
+            //Hair
+            if (type == 254 & extraColour != null) {
+                int[] averageRGB = data.getAverageDyeColour(9);
+                byte[] dyedColour = dyeColour(r, g, b, new byte[]{extraColour[3], extraColour[4], extraColour[5]}, averageRGB);
+                r = dyedColour[0];
+                g = dyedColour[1];
+                b = dyedColour[2];
+            }
+            BakedFaceRenderer.renderFace(x, y, z, r, g, b, a, face, useTexture, lodLevel);
+        }
+    }
+
+    public void render(ISkinDye skinDye, byte[] extraColour, ClientSkinPartData data, boolean useTexture) {
         byte r = this.r;
         byte g = this.g;
         byte b = this.b;
@@ -49,7 +99,7 @@ public class BakedFace {
                             return;
                         }
                         int dyeType = dye[3] & 0xFF;
-                        int[] averageRGB = cspd.getAverageDyeColour(type - 1);
+                        int[] averageRGB = data.getAverageDyeColour(type - 1);
                         byte[] dyedColour = null;
                         if (dyeType == 253 & extraColour != null) {
                             dyedColour = dyeColour(r, g, b, new byte[]{extraColour[0], extraColour[1], extraColour[2]}, averageRGB);
@@ -66,7 +116,7 @@ public class BakedFace {
             }
             //Skin
             if (type == 253 & extraColour != null) {
-                int[] averageRGB = cspd.getAverageDyeColour(8);
+                int[] averageRGB = data.getAverageDyeColour(8);
                 byte[] dyedColour = dyeColour(r, g, b, new byte[]{extraColour[0], extraColour[1], extraColour[2]}, averageRGB);
                 r = dyedColour[0];
                 g = dyedColour[1];
@@ -74,7 +124,7 @@ public class BakedFace {
             }
             //Hair
             if (type == 254 & extraColour != null) {
-                int[] averageRGB = cspd.getAverageDyeColour(9);
+                int[] averageRGB = data.getAverageDyeColour(9);
                 byte[] dyedColour = dyeColour(r, g, b, new byte[]{extraColour[3], extraColour[4], extraColour[5]}, averageRGB);
                 r = dyedColour[0];
                 g = dyedColour[1];

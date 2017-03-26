@@ -73,7 +73,6 @@ public final class SkinTypeRegistryImpl implements SkinTypeRegistry {
         registerSkin(skinWings);
     }
 
-    @Override
     public boolean registerSkin(SkinType skinType) {
         if (skinType == null) {
             ModLogger.log(Level.WARN, "A impl tried to register a null skin type.");

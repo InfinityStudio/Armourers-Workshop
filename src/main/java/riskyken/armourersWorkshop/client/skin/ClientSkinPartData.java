@@ -5,7 +5,7 @@ import java.util.*;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.render.core.BakedCube;
+import riskyken.armourersWorkshop.client.render.core.BakedCubes;
 import net.skin43d.impl.client.render.BakedFace;
 import riskyken.armourersWorkshop.common.skin.data.SkinDye;
 
@@ -16,7 +16,7 @@ public class ClientSkinPartData {
      * Blank dye that is used if no dye is applied.
      */
     public static final SkinDye blankDye = new SkinDye();
-    public HashMap<ModelKey, BakedCube> dyeModels;
+    public HashMap<ModelKey, BakedCubes> dyeModels;
 
     public List<BakedFace>[] vertexLists;
     public int[] totalCubesInPart;
@@ -26,16 +26,16 @@ public class ClientSkinPartData {
     private int[] averageB = new int[10];
 
     public ClientSkinPartData() {
-        dyeModels = new HashMap<ModelKey, BakedCube>();
+        dyeModels = new HashMap<ModelKey, BakedCubes>();
     }
 
-    public BakedCube getModelForDye(ISkinDye skinDye, byte[] extraColours) {
+    public BakedCubes getModelForDye(ISkinDye skinDye, byte[] extraColours) {
         if (skinDye == null)
             skinDye = blankDye;
         ModelKey modelKey = new ModelKey(skinDye, extraColours);
-        BakedCube skinModel = dyeModels.get(modelKey);
+        BakedCubes skinModel = dyeModels.get(modelKey);
         if (skinModel == null) {
-            skinModel = new BakedCube(vertexLists);
+            skinModel = new BakedCubes(vertexLists);
             dyeModels.put(modelKey, skinModel);
         }
         return skinModel;

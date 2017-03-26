@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.render.engine.special;
+package net.skin43d.impl.client.render.engine.special;
 
 import com.google.common.collect.ImmutableMap;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -14,7 +14,7 @@ import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
-import riskyken.armourersWorkshop.client.render.RenderEngine;
+import net.skin43d.impl.client.render.engine.RenderEngine;
 import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;

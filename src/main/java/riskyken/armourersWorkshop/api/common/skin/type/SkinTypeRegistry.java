@@ -13,25 +13,24 @@ import java.util.List;
  */
 public interface SkinTypeRegistry {
 
-    /**
-     * Register a new skin type.
-     *
-     * @param skinType
-     */
-    boolean registerSkin(SkinType skinType);
+//    /**
+//     * Register a new skin type.
+//     *
+//     * @param skinType
+//     */
+//    boolean registerSkin(SkinType skinType);
 
     SkinType getSkinTypeFromLegacyId(int id);
 
     SkinType getSkinTypeFromRegistryName(String registryName);
-
-
-    SkinType getSkinWings();
 
     SkinPartType getSkinPartTypeFromId(int id);
 
     SkinPartType getSkinPartTypeFromName(String regName);
 
     List<SkinType> getAllSkinTypes();
+
+    SkinType getSkinWings();
 
     @Deprecated
     SkinType getSkinTypeSkirt();

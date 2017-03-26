@@ -13,10 +13,10 @@ import riskyken.armourersWorkshop.common.skin.cubes.CubeMarkerData;
 import java.util.List;
 
 public class SkinPart implements Skin3D.Part {
-    private Rectangle3D partBounds;
     private SkinCubeData cubeData;
     private List<CubeMarkerData> markerBlocks;
     private SkinPartType skinPart;
+    private Rectangle3D partBounds;
 
     @SideOnly(Side.CLIENT)
     private ClientSkinPartData clientSkinPartData;
@@ -59,37 +59,14 @@ public class SkinPart implements Skin3D.Part {
             int y = loc[1];
             int z = loc[2];
 
-            if (x < minX) {
-                minX = x;
-            }
-            if (x > maxX) {
-                maxX = x;
-            }
-
-            if (y < minY) {
-                minY = y;
-            }
-            if (y > maxY) {
-                maxY = y;
-            }
-
-            if (z < minZ) {
-                minZ = z;
-            }
-            if (z > maxZ) {
-                maxZ = z;
-            }
+            minX = Math.min(x, minX);
+            maxX = Math.max(x, maxX);
+            minY = Math.min(y, minY);
+            maxY = Math.max(y, maxY);
+            minZ = Math.min(z, minZ);
+            maxZ = Math.max(z, maxZ);
         }
-
-        int xSize = maxX - minX;
-        int ySize = maxY - minY;
-        int zSize = maxZ - minZ;
-
-        int xOffset = minX;
-        int yOffset = minY;
-        int zOffset = minZ;
-
-        partBounds = new Rectangle3D(xOffset, yOffset, zOffset, xSize + 1, ySize + 1, zSize + 1);
+        partBounds = new Rectangle3D(minX, minY, minZ, maxX - minX + 1, maxY - minY + 1, maxZ - minZ + 1);
     }
 
     public SkinCubeData getCubeData() {
