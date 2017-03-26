@@ -2,22 +2,19 @@ package riskyken.armourersWorkshop;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.*;
-import net.skin43d.EquipmentWardrobeProvider;
-import net.skin43d.SkinInfoProvider;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
-import riskyken.armourersWorkshop.common.lib.LibModInfo;
-import riskyken.armourersWorkshop.common.CommonProxy;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.data.SkinTexture;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.skin43d.utils.ModLogger;
+import riskyken.armourersWorkshop.common.CommonProxy;
+import riskyken.armourersWorkshop.common.lib.LibModInfo;
+import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 
 import java.io.File;
 import java.net.URISyntaxException;
 
 @Mod(modid = LibModInfo.ID, name = LibModInfo.NAME, version = LibModInfo.VERSION, guiFactory = LibModInfo.GUI_FACTORY_CLASS)
-public class ArmourersWorkshopMod extends ArmourersWorkshop {
+public class ArmourersWorkshopMod {
     
     /* 
      * Hello and welcome to the Armourer's Workshop source code.
@@ -80,33 +77,8 @@ public class ArmourersWorkshopMod extends ArmourersWorkshop {
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit();
         TestEnvSetup.setup();
-        Skin skin1 = proxy.getSkinProvider().getSkinInfoForEntity(null).getSkin(ArmourersWorkshop.instance().getSkinRegistry().getSkinWings());
-        System.out.println(proxy.getSkinProvider().getSkinInfoForEntity(null));
-        System.out.println(skin1);
-    }
-
-    @Override
-    public ISkinTypeRegistry getSkinRegistry() {
-        return registry;
-    }
-
-    @Override
-    public int getTextureSize() {
-        return 0;
-    }
-
-    @Override
-    public int getFileVersion() {
-        return Skin.FILE_VERSION;
-    }
-
-    @Override
-    public EquipmentWardrobeProvider getEquipmentWardrobeProvider() {
-        return proxy.getEquipmentWardrobeProvider();
-    }
-
-    @Override
-    public SkinInfoProvider getSkinProvider() {
-        return proxy.getSkinProvider();
+//        Skin skin1 = proxy.getSkinProvider().getSkinInfoForEntity(null).getSkin(Context.instance().getSkinRegistry().getSkinWings());
+//        System.out.println(proxy.getSkinProvider().getSkinInfoForEntity(null));
+//        System.out.println(skin1);
     }
 }

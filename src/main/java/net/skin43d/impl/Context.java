@@ -1,10 +1,8 @@
 package net.skin43d.impl;
 
 import net.skin43d.EquipmentWardrobeProvider;
-import net.skin43d.SkinInfoProvider;
+import net.skin43d.SkinProvider;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
-
-import java.util.Map;
 
 /**
  * @author ci010
@@ -26,5 +24,5 @@ public abstract class Context {
 
     public abstract EquipmentWardrobeProvider getEquipmentWardrobeProvider();
 
-    public abstract SkinInfoProvider getSkinProvider();
+    public abstract SkinProvider getSkinProvider();
 }

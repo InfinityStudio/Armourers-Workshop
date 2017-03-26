@@ -1,8 +1,7 @@
 package riskyken.armourersWorkshop.common;
 
 import net.skin43d.EquipmentWardrobeProvider;
-import net.skin43d.SkinInfoProvider;
-import net.skin43d.SkinRepository;
+import net.skin43d.SkinProvider;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 
 import java.io.File;
@@ -14,11 +13,7 @@ public class CommonProxy {
 //        ConfigHandlerClient.init(new File(configDir, "client.cfg"));
     }
 
-    public SkinInfoProvider getSkinProvider() {
-        throw new UnsupportedOperationException();
-    }
-
-    public SkinRepository getSkinRepository() {
+    public SkinProvider getSkinProvider() {
         throw new UnsupportedOperationException();
     }
 

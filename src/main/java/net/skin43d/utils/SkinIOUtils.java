@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import net.skin43d.impl.Context;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
@@ -20,7 +21,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StringUtils;
 import net.minecraftforge.common.DimensionManager;
-import riskyken.armourersWorkshop.ArmourersWorkshop;
 import net.skin43d.exception.InvalidCubeTypeException;
 import net.skin43d.exception.NewerFileVersionException;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
@@ -95,7 +95,7 @@ public final class SkinIOUtils {
 
         try {
             stream = new DataInputStream(new BufferedInputStream(inputStream));
-            skin = new SkinReader().readSkin(stream, ArmourersWorkshop.instance());
+            skin = new SkinReader().readSkin(stream, Context.instance());
         } catch (FileNotFoundException e) {
             ModLogger.log(Level.WARN, "Skin file not found.");
             e.printStackTrace();

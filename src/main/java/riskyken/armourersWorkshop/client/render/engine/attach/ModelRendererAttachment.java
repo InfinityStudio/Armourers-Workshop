@@ -2,8 +2,7 @@ package riskyken.armourersWorkshop.client.render.engine.attach;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.skin43d.SkinInfo;
-import net.skin43d.SkinInfoProvider;
+import net.skin43d.SkinProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
@@ -13,7 +12,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.skin43d.impl.Context;
 import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.ArmourersWorkshopMod;
 import net.skin43d.utils.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import net.skin43d.skin3d.SkinPartType;
@@ -24,7 +22,6 @@ import riskyken.armourersWorkshop.client.render.engine.special.ModelSkinWings;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 
 /**
  * A ModelRenderer that is attached to each ModelRenderer on the
@@ -72,13 +69,12 @@ public class ModelRendererAttachment extends ModelRenderer {
 //                    (byte) skinColour.getRed(), (byte) skinColour.getGreen(), (byte) skinColour.getBlue(),
 //                    (byte) hairColour.getRed(), (byte) hairColour.getGreen(), (byte) hairColour.getBlue()};
 //        }
-        SkinInfoProvider provider = Context.instance().getSkinProvider();
+        SkinProvider provider = Context.instance().getSkinProvider();
         ISkinTypeRegistry reg = Context.instance().getSkinRegistry();
 //        SkinInfo info = provider.getSkinInfoForEntity(player);
 //        Skin data = info.getSkinInfoForEntity(skinType);
 //        SkinPart partData = info.getSkinPart(skinType, skinPart);
-        SkinInfo skin = provider.getSkinInfoForEntity(player);
-        Skin data = skin.getSkin(skinType);
+        Skin data = provider.getSkinInfoForEntity(player, skinType);
         SkinPart partData = data.getSkinPartFromType(skinPart);
         if (partData != null) {
             GL11.glPushMatrix();
@@ -157,7 +153,7 @@ public class ModelRendererAttachment extends ModelRenderer {
             GL11.glEnable(GL11.GL_CULL_FACE);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glEnable(GL11.GL_BLEND);
-            ISkinDye skinDye = provider.getPlayerDyeData(player, skinType, 0);
+            ISkinDye skinDye = provider.getPlayerDyeData(player, skinType);
             SkinPartRenderer.INSTANCE.renderPart(partData, scale, skinDye, extraColours, distance, true);
             GL11.glDisable(GL11.GL_CULL_FACE);
             GL11.glPopMatrix();

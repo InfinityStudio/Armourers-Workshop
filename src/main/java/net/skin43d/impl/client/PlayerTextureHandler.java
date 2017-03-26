@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.render;
+package net.skin43d.impl.client;
 
 import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 import cpw.mods.fml.common.eventhandler.EventPriority;
@@ -10,16 +10,15 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.profiler.Profiler;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.skin43d.SkinInfoProvider;
+import net.skin43d.SkinProvider;
 import net.skin43d.impl.Context;
-import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
+import riskyken.armourersWorkshop.client.render.EntityTextureInfo;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import removequ.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 
 import java.util.HashMap;
 
@@ -64,7 +63,7 @@ public class PlayerTextureHandler {
             textureInfo.updateSkinColour(ewd.skinColour);
             Skin[] skins = new Skin[4 * 5];
 
-            SkinInfoProvider skinProvider = Context.instance().getSkinProvider();
+            SkinProvider skinProvider = Context.instance().getSkinProvider();
             ISkinTypeRegistry reg = Context.instance().getSkinRegistry();
             for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
                 skins[skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinHead());

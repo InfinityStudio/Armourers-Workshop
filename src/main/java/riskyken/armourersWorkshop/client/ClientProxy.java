@@ -4,43 +4,31 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.skin43d.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.skin43d.impl.SkinStorageImpl;
+import net.skin43d.EquipmentWardrobeProvider;
+import net.skin43d.SkinProvider;
+import net.skin43d.impl.client.PlayerTextureHandler;
+import net.skin43d.utils.ModLogger;
 import org.apache.logging.log4j.Level;
-import removequ.EquipmentWardrobeData;
-import riskyken.armourersWorkshop.TestEnvSetup;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
-import riskyken.armourersWorkshop.client.render.PlayerTextureHandler;
 import riskyken.armourersWorkshop.client.render.RenderEngine;
-import riskyken.armourersWorkshop.client.render.bake.AsyncModelBakery;
-import riskyken.armourersWorkshop.client.render.engine.attach.RenderEngineAttach;
-import riskyken.armourersWorkshop.client.render.engine.special.RenderEngineSpecial;
 import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
-import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import net.skin43d.utils.ModLogger;
 
 import java.io.File;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
-    private SkinInfoProvider provider;
+    private SkinProvider provider;
     private EquipmentWardrobeProvider equipmentWardrobeHandler;
     private RenderEngine renderEngine;
-    private SkinRepository skinRepository;
-    private SkinRequester requester;
 
-    public SkinInfoProvider getSkinProvider() {
+    public SkinProvider getSkinProvider() {
         return provider;
-    }
-
-    public SkinRepository getSkinRepository() {
-        return skinRepository;
     }
 
     public EquipmentWardrobeProvider getEquipmentWardrobeProvider() {
@@ -67,26 +55,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(File configDir) {
         super.preInit(configDir);
-        provider = new TestEnvSetup();
-        SkinInfo skin = provider.getSkinInfoForEntity(null);
-        System.out.println(skin);
-
-
-        skinRepository = new SkinStorageImpl(new AsyncModelBakery(2));
-        equipmentWardrobeHandler = new EquipmentWardrobeProvider() {
-            @Override
-            public void setEquipmentWardrobeData(PlayerPointer playerPointer, EquipmentWardrobeData ewd) {
-            }
-
-            @Override
-            public EquipmentWardrobeData getEquipmentWardrobeData(PlayerPointer playerPointer) {
-                return null;
-            }
-
-            @Override
-            public void removeEquipmentWardrobeData(PlayerPointer playerPointer) {
-            }
-        };
 //        Minecraft.getMinecraft().theWorld.addWorldAccess(new WorldListener());
 //        provider = new AbstractSkinProvider(skinRepository);
         //TODO init skinProvider
@@ -96,13 +64,13 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
-        SkinRenderType type = getSkinRenderType();
-        if (type == SkinRenderType.MODEL_ATTACHMENT)
-            this.renderEngine = new RenderEngineAttach();
-        else if (type == SkinRenderType.RENDER_EVENT)
-            this.renderEngine = new RenderEngineSpecial();
-        else this.renderEngine = new RenderEngineAttach();//TODO handle this exception
-        this.renderEngine.deploy();
+//        SkinRenderType type = getSkinRenderType();
+//        if (type == SkinRenderType.MODEL_ATTACHMENT)
+//            this.renderEngine = new RenderEngineAttach();
+//        else if (type == SkinRenderType.RENDER_EVENT)
+//            this.renderEngine = new RenderEngineSpecial();
+//        else this.renderEngine = new RenderEngineAttach();//TODO handle this exception
+//        this.renderEngine.deploy();
 //        this.equipmentWardrobeHandler = new EquipmentWardrobeHandler();
 //        ClientSkinCache.init();
         MinecraftForge.EVENT_BUS.register(new PlayerTextureHandler());
@@ -124,7 +92,6 @@ public class ClientProxy extends CommonProxy {
     public void join(EntityJoinWorldEvent joinWorldEvent) {
         if (joinWorldEvent.entity.worldObj.isRemote && joinWorldEvent.entity instanceof EntityPlayer) {
             EntityPlayer entity = (EntityPlayer) joinWorldEvent.entity;
-
             entity.getEntityData();
         }
     }
@@ -161,33 +128,10 @@ public class ClientProxy extends CommonProxy {
             ModLogger.log(Level.WARN, "Colored Lights and Smart Moving are both installed. Armourer's Workshop cannot support this.");
         }
 
-        ModLogger.log("Skin render type set to: " + getSkinRenderType().toString().toLowerCase());
+//        ModLogger.log("Skin render type set to: " + getSkinRenderType().toString().toLowerCase());
     }
 
-    public static SkinRenderType getSkinRenderType() {
-        switch (ConfigHandlerClient.skinRenderType) {
-            case 1: //Force render event
-                return SkinRenderType.RENDER_EVENT;
-            case 2: //Force model attachment
-                return SkinRenderType.MODEL_ATTACHMENT;
-            case 3: //Force render layer
-                return SkinRenderType.RENDER_LAYER;
-            default: //Auto
-                if (moreplayermodelsLoaded) {
-                    return SkinRenderType.RENDER_EVENT;
-                }
-                if (shadersModLoaded & !smartMovingLoaded) {
-                    return SkinRenderType.RENDER_EVENT;
-                }
-                if (coloredLightsLoaded & !smartMovingLoaded) {
-                    return SkinRenderType.RENDER_EVENT;
-                }
-                if (jrbaClientLoaded) {
-                    return SkinRenderType.RENDER_EVENT;
-                }
-                return SkinRenderType.MODEL_ATTACHMENT;
-        }
-    }
+
 
     public static boolean useSafeTextureRender() {
         if (shadersModLoaded) {

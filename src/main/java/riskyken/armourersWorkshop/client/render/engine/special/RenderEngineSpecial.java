@@ -3,15 +3,15 @@ package riskyken.armourersWorkshop.client.render.engine.special;
 import com.google.common.collect.ImmutableMap;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.model.ModelBiped;
-import net.skin43d.SkinInfoProvider;
+import net.skin43d.SkinProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.skin43d.impl.Context;
 import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 import riskyken.armourersWorkshop.client.render.RenderEngine;
@@ -20,7 +20,6 @@ import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import removequ.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 
 import java.awt.*;
 
@@ -42,9 +41,9 @@ public class RenderEngineSpecial implements RenderEngine {
         double distance = Minecraft.getMinecraft().thePlayer.getDistance(player.posX, player.posY, player.posZ);
         if (distance > ConfigHandlerClient.maxSkinRenderDistance) return;
 
-        SkinInfoProvider skinProvider = ArmourersWorkshop.instance().getSkinProvider();
-        ISkinTypeRegistry skinRegistry = ArmourersWorkshop.instance().getSkinRegistry();
-        EquipmentWardrobeData ewd = ArmourersWorkshop.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(new PlayerPointer(player));
+        SkinProvider skinProvider = Context.instance().getSkinProvider();
+        ISkinTypeRegistry skinRegistry = Context.instance().getSkinRegistry();
+        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(new PlayerPointer(player));
         byte[] extraColours = null;
         if (ewd != null) {
             Color skinColour = new Color(ewd.skinColour);
@@ -66,10 +65,10 @@ public class RenderEngineSpecial implements RenderEngine {
         GL11.glPopMatrix();
     }
 
-    private void render(SkinInfoProvider skinProvider, SkinType type, AbstractModelSkin modelBipedMain,
+    private void render(SkinProvider skinProvider, SkinType type, AbstractModelSkin modelBipedMain,
                         EntityPlayer player, double distance, byte[] extraColours, ModelBiped parent) {
         Skin data = skinProvider.getSkinInfoForEntity(player, type);
-        ISkinDye dye = skinProvider.getPlayerDyeData(player, type, 0);
+        ISkinDye dye = skinProvider.getPlayerDyeData(player, type);
         if (data != null)
             modelBipedMain.render(player, parent, data, false, dye, extraColours, false, distance, true);
     }
@@ -85,7 +84,7 @@ public class RenderEngineSpecial implements RenderEngine {
     }
 
     private void buildMap() {
-        ISkinTypeRegistry registry = ArmourersWorkshop.instance().getSkinRegistry();
+        ISkinTypeRegistry registry = Context.instance().getSkinRegistry();
         skinImmutableMap = ImmutableMap.<String, AbstractModelSkin>builder()
                 .put(registry.getSkinChest().getRegistryName(), new ModelSkinChest())
                 .put(registry.getSkinHead().getRegistryName(), new ModelSkinHead())

@@ -1,14 +1,13 @@
 package riskyken.armourersWorkshop.common.skin.data.serialize;
 
-import riskyken.armourersWorkshop.ArmourersWorkshop;
-import net.skin43d.skin3d.SkinType;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 import net.skin43d.exception.InvalidCubeTypeException;
 import net.skin43d.exception.NewerFileVersionException;
+import net.skin43d.impl.Context;
+import net.skin43d.skin3d.SkinType;
+import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.data.SkinProperties;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 
 import java.io.DataInput;
 import java.io.DataOutputStream;
@@ -24,7 +23,7 @@ import static riskyken.armourersWorkshop.common.skin.data.Skin.*;
 public class SkinReader {
     private SkinPartReader partSerializer = new SkinPartReader();
 
-    public Skin readSkin(DataInput stream, ArmourersWorkshop context) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
+    public Skin readSkin(DataInput stream, Context context) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
         int fileVersion = stream.readInt();
         if (fileVersion > context.getFileVersion())
             throw new NewerFileVersionException();
@@ -73,7 +72,7 @@ public class SkinReader {
         return new Skin(properties, skinType, paintData, parts);
     }
 
-    public void writeSkin(Skin skin, DataOutputStream stream, ArmourersWorkshop context) throws IOException {
+    public void writeSkin(Skin skin, DataOutputStream stream, Context context) throws IOException {
         stream.writeInt(context.getFileVersion());
         skin.getProperties().writeToStream(stream);
         stream.writeUTF(skin.getSkinType().getRegistryName());
