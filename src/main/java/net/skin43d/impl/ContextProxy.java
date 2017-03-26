@@ -5,6 +5,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.skin43d.EquipmentWardrobeProvider;
 import net.skin43d.SkinProvider;
+import net.skin43d.impl.client.render.bakery.SkinBakery;
 import removequ.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
@@ -79,6 +80,11 @@ public class ContextProxy extends Context {
     @Override
     public SkinProvider getSkinProvider() {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public SkinBakery getSkinBakery() {
+        return null;
     }
 
     @Override

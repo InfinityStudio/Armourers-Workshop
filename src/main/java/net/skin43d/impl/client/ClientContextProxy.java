@@ -31,6 +31,9 @@ public class ClientContextProxy extends ContextProxy {
     private RenderEngine renderEngine;
     private ListeningExecutorService service;
 
+    private static String loc = "D:\\Storage\\Desktop\\Angel Wings.armour";
+    private static Skin skin;
+
     @Override
     public SkinProvider getSkinProvider() {
         return provider;
@@ -62,11 +65,7 @@ public class ClientContextProxy extends ContextProxy {
         bakery.bake(skin);
         this.provider = new SkinProviderLocal(skin);
         /////TEST CODE//////
-
     }
-
-    private static String loc = "D:\\Storage\\Desktop\\Angel Wings.armour";
-    private static Skin skin;
 
     @Override
     protected void postInit(FMLPostInitializationEvent event) {

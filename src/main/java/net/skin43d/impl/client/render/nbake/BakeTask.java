@@ -1,9 +1,9 @@
-package net.skin43d.impl.client.render;
+package net.skin43d.impl.client.render.nbake;
 
 import com.google.common.collect.Lists;
 import net.skin43d.impl.Context;
+import net.skin43d.impl.client.render.BakedFace;
 import net.skin43d.skin3d.SkinPartType;
-import net.skin43d.skin3d.SkinType;
 import net.skin43d.utils.BitwiseUtils;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
@@ -40,7 +40,7 @@ public class BakeTask implements Callable<BakedSkin> {
         int[] averageB = new int[10];
 
         List<SkinPartType> part = skin.getSkinType().getSkinParts();
-        BakeSkinPart[] bakeSkinParts = new BakeSkinPart[part.size()];
+//        BakeSkinPart[] bakeSkinParts = new BakeSkinPart[part.size()];
         for (int i = 0; i < skin.getParts().size(); i++) {
             SkinPart partData = skin.getParts().get(i);
 //            partData.setClientSkinPartData(new ClientSkinPartData());

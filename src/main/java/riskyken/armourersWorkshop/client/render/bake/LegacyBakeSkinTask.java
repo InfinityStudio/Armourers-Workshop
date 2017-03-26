@@ -26,11 +26,8 @@ public class LegacyBakeSkinTask implements Callable<Skin> {
         Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
         skin.lightHash();
 
-        int[][] dyeColour;
-        int[] dyeUseCount;
-
-        dyeColour = new int[3][10];
-        dyeUseCount = new int[10];
+        int[][] dyeColour = new int[3][10];
+        int[] dyeUseCount = new int[10];
 
         for (int i = 0; i < skin.getParts().size(); i++) {
             SkinPart partData = skin.getParts().get(i);

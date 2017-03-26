@@ -1,6 +1,7 @@
-package net.skin43d.impl.client.render;
+package net.skin43d.impl.client.render.nbake;
 
 import com.google.common.collect.Maps;
+import net.skin43d.impl.client.render.BakedFace;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.render.core.BakedCubes;
 import riskyken.armourersWorkshop.common.skin.data.SkinDye;

@@ -1,6 +1,6 @@
 package riskyken.armourersWorkshop.client.render;
 
-import net.skin43d.impl.client.render.BakeSkinPart;
+import net.skin43d.impl.client.render.nbake.BakeSkinPart;
 import net.skin43d.impl.client.render.BakedFace;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;

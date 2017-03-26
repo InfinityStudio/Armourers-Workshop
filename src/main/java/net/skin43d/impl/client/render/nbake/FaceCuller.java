@@ -1,4 +1,4 @@
-package net.skin43d.impl.client.render;
+package net.skin43d.impl.client.render.nbake;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import net.skin43d.impl.Context;

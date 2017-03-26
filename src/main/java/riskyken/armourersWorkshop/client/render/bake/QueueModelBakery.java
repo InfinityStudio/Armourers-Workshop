@@ -8,8 +8,6 @@ import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.Type;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.skin43d.impl.client.render.BakeSkinPart;
-import net.skin43d.impl.client.render.BakedSkin;
 import net.skin43d.impl.client.render.bakery.SkinBakery;
 import riskyken.armourersWorkshop.api.common.skin.data.Skin3D;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
@@ -34,17 +32,7 @@ public final class QueueModelBakery implements SkinBakery {
     }
 
     @Override
-    public BakeSkinPart getSkinPart(Skin3D.Part part) {
-        return null;
-    }
-
-    @Override
-    public BakedSkin getBakedModel(Skin3D skin3D) {
-        return null;
-    }
-
-    @Override
-    public ListenableFuture<BakedSkin> bake(Skin3D skin) {
+    public ListenableFuture<Skin> bake(Skin3D skin) {
         bakingQueue.incrementAndGet();
         skinCompletion.submit(new LegacyBakeSkinTask((Skin) skin));
         return null;

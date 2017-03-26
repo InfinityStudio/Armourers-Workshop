@@ -1,4 +1,4 @@
-package net.skin43d.impl.client.render;
+package net.skin43d.impl.client.render.nbake;
 
 import net.minecraft.entity.player.EntityPlayer;
 

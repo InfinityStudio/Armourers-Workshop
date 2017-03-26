@@ -24,19 +24,8 @@ import riskyken.plushieWrapper.client.RenderBridge;
 public class SkinPartRenderer extends ModelBase {
     private static final ResourceLocation texture = new ResourceLocation(LibModInfo.ID.toLowerCase(), "textures/armour/cube.png");
     public static final SkinPartRenderer INSTANCE = new SkinPartRenderer();
-    //    private int skinRendersThisTick = 0;
-//    private float renderTickTime;
-//    private int skinRenderLastTick = 0;
     private final Minecraft mc;
 
-//    @SubscribeEvent
-//    public void onRenderTickEvent(TickEvent.RenderTickEvent event) {
-//        if (event.phase == TickEvent.Phase.START) {
-//            renderTickTime = event.renderTickTime;
-//            skinRenderLastTick = skinRendersThisTick;
-//            skinRendersThisTick = 0;
-//        }
-//    }
 
     public SkinPartRenderer() {
         mc = Minecraft.getMinecraft();
