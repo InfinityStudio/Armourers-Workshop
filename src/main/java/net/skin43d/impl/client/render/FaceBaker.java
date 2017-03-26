@@ -1,6 +1,6 @@
 package net.skin43d.impl.client.render;
 
-import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
+import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;

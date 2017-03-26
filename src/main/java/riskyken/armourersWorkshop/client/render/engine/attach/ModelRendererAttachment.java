@@ -10,12 +10,14 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.skin43d.impl.Context;
 import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.ArmourersWorkshopMod;
 import net.skin43d.utils.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import net.skin43d.skin3d.SkinPartType;
+import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.client.render.core.SkinPartRenderer;
 import riskyken.armourersWorkshop.client.render.engine.special.ModelSkinWings;
@@ -70,7 +72,8 @@ public class ModelRendererAttachment extends ModelRenderer {
 //                    (byte) skinColour.getRed(), (byte) skinColour.getGreen(), (byte) skinColour.getBlue(),
 //                    (byte) hairColour.getRed(), (byte) hairColour.getGreen(), (byte) hairColour.getBlue()};
 //        }
-        SkinInfoProvider provider = ArmourersWorkshopMod.proxy.getSkinProvider();
+        SkinInfoProvider provider = Context.instance().getSkinProvider();
+        ISkinTypeRegistry reg = Context.instance().getSkinRegistry();
 //        SkinInfo info = provider.getSkinInfoForEntity(player);
 //        Skin data = info.getSkinInfoForEntity(skinType);
 //        SkinPart partData = info.getSkinPart(skinType, skinPart);
@@ -79,7 +82,7 @@ public class ModelRendererAttachment extends ModelRenderer {
         SkinPart partData = data.getSkinPartFromType(skinPart);
         if (partData != null) {
             GL11.glPushMatrix();
-            if (skinType == SkinTypeRegistry.skinLegs && skinPart.getRegistryName().equals("armourers:legs.skirt")) {
+            if (skinType == reg.getSkinLegs() && skinPart.getRegistryName().equals("armourers:legs.skirt")) {
                 GL11.glTranslatef(0, 12 * scale, 0);
                 if (player.isSneaking()) {
                     GL11.glRotatef(-30, 1, 0, 0);
@@ -88,7 +91,7 @@ public class ModelRendererAttachment extends ModelRenderer {
                 if (player.isRiding())
                     GL11.glRotated(-70, 1F, 0F, 0F);
             }
-            if (skinType == SkinTypeRegistry.skinWings) {
+            if (skinType == reg.getSkinWings()) {
                 GL11.glTranslated(0, 0, scale * 2);
                 double angle = ModelSkinWings.getFlapAngleForWings(player, data);
                 Point3D point = new Point3D(0, 0, 0);

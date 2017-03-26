@@ -11,10 +11,12 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
+import net.skin43d.impl.Context;
 import net.skin43d.utils.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
 import net.skin43d.impl.client.render.BakedFace;
+import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 import riskyken.armourersWorkshop.common.SkinHelper;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import net.skin43d.utils.PaintType;
@@ -250,10 +252,10 @@ public class EntityTextureInfo {
                         Point texLoc = typeTextured.getTextureLocation();
                         Point3D texSize = typeTextured.getTextureModelSize();
 
-
+                        ISkinTypeRegistry reg = Context.instance().getSkinRegistry();
                         for (int ix = 0; ix < texSize.getZ() * 2 + texSize.getX() * 2; ix++) {
                             for (int iy = 0; iy < texSize.getZ() + texSize.getY(); iy++) {
-                                if (skin.getSkinType() == SkinTypeRegistry.skinLegs) {
+                                if (skin.getSkinType() == reg.getSkinLegs()) {
                                     if (iy >= 12) {
                                         continue;
                                     }
@@ -261,7 +263,7 @@ public class EntityTextureInfo {
                                         continue;
                                     }
                                 }
-                                if (skin.getSkinType() == SkinTypeRegistry.skinFeet) {
+                                if (skin.getSkinType() == reg.getSkinFeet()) {
                                     if (iy < 12) {
                                         if (!(iy < 4 & ix > 7 & ix < 12)) {
                                             continue;

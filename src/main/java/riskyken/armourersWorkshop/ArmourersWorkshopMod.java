@@ -92,7 +92,7 @@ public class ArmourersWorkshopMod extends ArmourersWorkshop {
 
     @Override
     public int getTextureSize() {
-        return SkinTexture.TEXTURE_SIZE;
+        return 0;
     }
 
     @Override

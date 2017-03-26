@@ -11,8 +11,10 @@ import net.minecraft.profiler.Profiler;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.skin43d.SkinInfoProvider;
+import net.skin43d.impl.Context;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
+import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import removequ.EquipmentWardrobeData;
@@ -50,10 +52,10 @@ public class PlayerTextureHandler {
             return;
         }
         PlayerPointer playerPointer = new PlayerPointer(player);
-        EquipmentWardrobeData ewd = ArmourersWorkshop.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
-        if (ewd == null) {
+        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
+        if (ewd == null)
             return;
-        }
+
         profiler.startSection("textureBuild");
         if (playerTextureMap.containsKey(playerPointer)) {
             EntityTextureInfo textureInfo = playerTextureMap.get(playerPointer);
@@ -62,19 +64,20 @@ public class PlayerTextureHandler {
             textureInfo.updateSkinColour(ewd.skinColour);
             Skin[] skins = new Skin[4 * 5];
 
-            SkinInfoProvider skinProvider = ArmourersWorkshop.instance().getSkinProvider();
+            SkinInfoProvider skinProvider = Context.instance().getSkinProvider();
+            ISkinTypeRegistry reg = Context.instance().getSkinRegistry();
             for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
-                skins[skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, SkinTypeRegistry.skinHead);
-                skins[1 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, SkinTypeRegistry.skinChest);
-                skins[2 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, SkinTypeRegistry.skinLegs);
-                skins[3 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, SkinTypeRegistry.skinFeet);
+                skins[skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinHead());
+                skins[1 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinChest());
+                skins[2 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinLegs());
+                skins[3 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinFeet());
             }
             ISkinDye[] dyes = new ISkinDye[4 * 5];
             for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
-                dyes[skinIndex * 4] = skinProvider.getPlayerDyeData(player, SkinTypeRegistry.skinHead, skinIndex);
-                dyes[1 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, SkinTypeRegistry.skinChest, skinIndex);
-                dyes[2 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, SkinTypeRegistry.skinLegs, skinIndex);
-                dyes[3 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, SkinTypeRegistry.skinFeet, skinIndex);
+                dyes[skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinHead());
+                dyes[1 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinChest());
+                dyes[2 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinLegs());
+                dyes[3 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinFeet());
             }
 
             textureInfo.updateSkins(skins);
@@ -102,7 +105,7 @@ public class PlayerTextureHandler {
             return;
         }
         PlayerPointer playerPointer = new PlayerPointer(player);
-        EquipmentWardrobeData ewd = ArmourersWorkshop.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
         if (ewd == null) {
             return;
         }

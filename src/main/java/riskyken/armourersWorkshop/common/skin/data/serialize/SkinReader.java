@@ -51,8 +51,8 @@ public class SkinReader {
             skinType = skinRegistry.getSkinTypeFromLegacyId(stream.readByte() - 1);
         } else {
             String regName = stream.readUTF();
-            if (regName.equals(SkinTypeRegistry.skinSkirt.getRegistryName()))
-                regName = SkinTypeRegistry.skinLegs.getRegistryName();
+            if (regName.equals(skinRegistry.getSkinSkirt().getRegistryName()))
+                regName = skinRegistry.getSkinLegs().getRegistryName();
             skinType = skinRegistry.getSkinTypeFromRegistryName(regName);
         }
 
@@ -88,5 +88,4 @@ public class SkinReader {
         for (int i = 0; i < parts.size(); i++)
             partSerializer.writeToStream(parts.get(i), stream);
     }
-
 }

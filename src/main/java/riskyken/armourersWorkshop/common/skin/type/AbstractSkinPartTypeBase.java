@@ -1,15 +1,15 @@
 package riskyken.armourersWorkshop.common.skin.type;
 
 import net.skin43d.skin3d.SkinType;
-import riskyken.armourersWorkshop.api.common.IRectangle3D;
 import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.utils.Point3D;
+import net.skin43d.utils.Rectangle3D;
 
 public abstract class AbstractSkinPartTypeBase implements SkinPartType {
 
     private SkinType baseType;
-    protected IRectangle3D buildingSpace;
-    protected IRectangle3D guideSpace;
+    protected Rectangle3D buildingSpace;
+    protected Rectangle3D guideSpace;
     protected Point3D offset;
     
     public AbstractSkinPartTypeBase(SkinType baseType) {
@@ -17,12 +17,12 @@ public abstract class AbstractSkinPartTypeBase implements SkinPartType {
     }
     
     @Override
-    public IRectangle3D getBuildingSpace() {
+    public Rectangle3D getBuildingSpace() {
         return this.buildingSpace;
     }
 
     @Override
-    public IRectangle3D getGuideSpace() {
+    public Rectangle3D getGuideSpace() {
         return this.guideSpace;
     }
 

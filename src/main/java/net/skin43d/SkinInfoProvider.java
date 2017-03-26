@@ -16,6 +16,8 @@ public interface SkinInfoProvider {
 
     Skin getSkinInfoForEntity(Entity entity, SkinType skinType, int slotIndex);
 
+    ISkinDye getPlayerDyeData(Entity entity, SkinType skinType);
+
     ISkinDye getPlayerDyeData(Entity entity, SkinType skinType, int slotIndex);
 
 //    byte[] getPlayerExtraColours(Entity entity);

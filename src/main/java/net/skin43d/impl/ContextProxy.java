@@ -7,6 +7,8 @@ import net.skin43d.EquipmentWardrobeProvider;
 import net.skin43d.SkinInfoProvider;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 
+import java.util.Map;
+
 /**
  * @author ci010
  */
@@ -24,10 +26,19 @@ public class ContextProxy extends Context {
 
     }
 
+    @Override
+    public int getTextureWidth() {
+        return ModSkin43D.TEXTURE_WIDTH;
+    }
+
+    @Override
+    public int getTextureHeight() {
+        return ModSkin43D.TEXTURE_HEIGHT;
+    }
 
     @Override
     public int getTextureSize() {
-        return 0;
+        return ModSkin43D.TEXTURE_SIZE;
     }
 
     @Override

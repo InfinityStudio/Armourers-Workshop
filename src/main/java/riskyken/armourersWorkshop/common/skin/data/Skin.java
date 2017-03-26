@@ -2,16 +2,15 @@ package riskyken.armourersWorkshop.common.skin.data;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.skin43d.impl.Context;
 import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.api.common.IRectangle3D;
-import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
+import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.data.Skin3D;
 import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 import riskyken.armourersWorkshop.common.skin.cubes.ICube;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,7 +72,7 @@ public class Skin implements Skin3D {
         int depth = 1;
 
         for (int i = 0; i < getPartCount(); i++) {
-            if (!(getSkinType() == SkinTypeRegistry.skinBow && i > 0)) {
+            if (!(getSkinType() == Context.instance().getSkinRegistry().getSkinBow() && i > 0)) {
 
                 SkinPart skinPart = getParts().get(i);
                 Rectangle3D bounds = skinPart.getPartBounds();
@@ -87,7 +86,7 @@ public class Skin implements Skin3D {
                 z = bounds.getZ();
 
                 if (hasPaintData()) {
-                    IRectangle3D skinRec = skinPart.getPartType().getGuideSpace();
+                    Rectangle3D skinRec = skinPart.getPartType().getGuideSpace();
 
                     width = Math.max(width, skinRec.getWidth());
                     height = Math.max(height, skinRec.getHeight());
@@ -105,7 +104,7 @@ public class Skin implements Skin3D {
             for (int i = 0; i < getSkinType().getSkinParts().size(); i++) {
                 SkinPartType part = getSkinType().getSkinParts().get(i);
 
-                IRectangle3D skinRec = part.getGuideSpace();
+                Rectangle3D skinRec = part.getGuideSpace();
 
                 width = Math.max(width, skinRec.getWidth());
                 height = Math.max(height, skinRec.getHeight());
@@ -135,7 +134,7 @@ public class Skin implements Skin3D {
         //Check if the paint data has any paint on it.
         if (paintData != null) {
             boolean validPaintData = false;
-            for (int i = 0; i < SkinTexture.TEXTURE_SIZE; i++) {
+            for (int i = 0; i < Context.instance().getTextureSize(); i++) {
                 if (paintData[i] >>> 16 != 255) {
                     validPaintData = true;
                     break;

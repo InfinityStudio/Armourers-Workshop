@@ -29,16 +29,16 @@ import riskyken.armourersWorkshop.common.skin.type.wings.SkinWings;
 import net.skin43d.utils.ModLogger;
 
 public final class SkinTypeRegistry implements ISkinTypeRegistry {
-    public static SkinType skinHead;
-    public static SkinType skinChest;
-    public static SkinType skinLegs;
-    public static SkinType skinSkirt;
-    public static SkinType skinFeet;
-    public static SkinType skinSword;
-    public static SkinType skinBow;
-    public static SkinType skinArrow;
-    public static SkinType skinBlock;
-    public static SkinType skinWings;
+    public SkinType skinHead;
+    public SkinType skinChest;
+    public SkinType skinLegs;
+    public SkinType skinSkirt;
+    public SkinType skinFeet;
+    public SkinType skinSword;
+    public SkinType skinBow;
+    public SkinType skinArrow;
+    public SkinType skinBlock;
+    public SkinType skinWings;
 
     private LinkedHashMap<String, SkinType> skinTypeMap;
     private HashMap<String, SkinPartType> skinPartMap;

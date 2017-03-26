@@ -48,6 +48,11 @@ public class TestEnvSetup implements SkinInfoProvider {
     }
 
     @Override
+    public ISkinDye getPlayerDyeData(Entity entity, SkinType skinType) {
+        return null;
+    }
+
+    @Override
     public ISkinDye getPlayerDyeData(Entity entity, SkinType skinType, int slotIndex) {
         return null;
     }

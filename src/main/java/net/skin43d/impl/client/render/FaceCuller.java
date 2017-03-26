@@ -1,9 +1,8 @@
 package net.skin43d.impl.client.render;
 
 import net.minecraftforge.common.util.ForgeDirection;
-import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
+import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
-import riskyken.armourersWorkshop.common.skin.cubes.ICube;
 import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 

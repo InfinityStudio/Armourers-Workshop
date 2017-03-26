@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.skin43d.utils.Point3D;
-import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
+import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
 import riskyken.armourersWorkshop.client.render.core.armourer.ModelChest;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;

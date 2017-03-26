@@ -11,9 +11,9 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
-import riskyken.armourersWorkshop.api.common.IRectangle3D;
 import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.utils.Point3D;
+import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 
@@ -55,8 +55,8 @@ public final class SkinRenderHelper {
         GL11.glColor3f(1F, 1F, 1F);
         GL11.glPushMatrix();
         
-        IRectangle3D buildRec = part.getBuildingSpace();
-        IRectangle3D guideRec = part.getGuideSpace();
+        Rectangle3D buildRec = part.getBuildingSpace();
+        Rectangle3D guideRec = part.getGuideSpace();
         
         GL11.glDisable(GL11.GL_LIGHTING);
         

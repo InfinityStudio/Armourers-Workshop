@@ -9,7 +9,7 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.skin43d.impl.client.render.BakedFace;
-import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
+import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 import riskyken.armourersWorkshop.common.skin.cubes.ICube;

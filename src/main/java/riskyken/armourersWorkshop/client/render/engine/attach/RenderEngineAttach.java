@@ -38,7 +38,7 @@ public class RenderEngineAttach implements RenderEngine {
         if (player.getGameProfile() == null)
             return;
         attachModelsToBiped(event.renderer.modelBipedMain, event.renderer);
-//        PlayerPointer playerPointer = new PlayerPointer(player);
+
         //Limit the players limbs if they have a skirt equipped.
         //A proper lady should not swing her legs around!
 //        if (isPlayerWearingSkirt(playerPointer)) {
@@ -57,17 +57,17 @@ public class RenderEngineAttach implements RenderEngine {
             return;
         ISkinTypeRegistry reg = ArmourersWorkshop.instance().getSkinRegistry();
         attachedBipedSet.add(modelBiped);
-        modelBiped.bipedHead.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinHead, reg.getSkinPartTypeFromName("armourers:head.base"), this));
-        modelBiped.bipedBody.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinChest, reg.getSkinPartTypeFromName("armourers:chest.base"), this));
-        modelBiped.bipedLeftArm.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinChest, reg.getSkinPartTypeFromName("armourers:chest.leftArm"), this));
-        modelBiped.bipedRightArm.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinChest, reg.getSkinPartTypeFromName("armourers:chest.rightArm"), this));
-        modelBiped.bipedLeftLeg.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinLegs, reg.getSkinPartTypeFromName("armourers:legs.leftLeg"), this));
-        modelBiped.bipedRightLeg.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinLegs, reg.getSkinPartTypeFromName("armourers:legs.rightLeg"), this));
-        modelBiped.bipedBody.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinLegs, reg.getSkinPartTypeFromName("armourers:legs.skirt"), this));
-        modelBiped.bipedLeftLeg.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinFeet, reg.getSkinPartTypeFromName("armourers:feet.leftFoot"), this));
-        modelBiped.bipedRightLeg.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinFeet, reg.getSkinPartTypeFromName("armourers:feet.rightFoot"), this));
-        modelBiped.bipedBody.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinWings, reg.getSkinPartTypeFromName("armourers:wings.leftWing"), this));
-        modelBiped.bipedBody.addChild(new ModelRendererAttachment(modelBiped, SkinTypeRegistry.skinWings, reg.getSkinPartTypeFromName("armourers:wings.rightWing"), this));
+        modelBiped.bipedHead.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinHead(), reg.getSkinPartTypeFromName("armourers:head.base"), this));
+        modelBiped.bipedBody.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinChest(), reg.getSkinPartTypeFromName("armourers:chest.base"), this));
+        modelBiped.bipedLeftArm.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinChest(), reg.getSkinPartTypeFromName("armourers:chest.leftArm"), this));
+        modelBiped.bipedRightArm.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinChest(), reg.getSkinPartTypeFromName("armourers:chest.rightArm"), this));
+        modelBiped.bipedLeftLeg.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinLegs(), reg.getSkinPartTypeFromName("armourers:legs.leftLeg"), this));
+        modelBiped.bipedRightLeg.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinLegs(), reg.getSkinPartTypeFromName("armourers:legs.rightLeg"), this));
+        modelBiped.bipedBody.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinLegs(), reg.getSkinPartTypeFromName("armourers:legs.skirt"), this));
+        modelBiped.bipedLeftLeg.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinFeet(), reg.getSkinPartTypeFromName("armourers:feet.leftFoot"), this));
+        modelBiped.bipedRightLeg.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinFeet(), reg.getSkinPartTypeFromName("armourers:feet.rightFoot"), this));
+        modelBiped.bipedBody.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinWings(), reg.getSkinPartTypeFromName("armourers:wings.leftWing"), this));
+        modelBiped.bipedBody.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinWings(), reg.getSkinPartTypeFromName("armourers:wings.rightWing"), this));
         ModLogger.log(String.format("Added model render attachment to %s", modelBiped.toString()));
         ModLogger.log(String.format("Using player renderer %s", renderPlayer.toString()));
     }

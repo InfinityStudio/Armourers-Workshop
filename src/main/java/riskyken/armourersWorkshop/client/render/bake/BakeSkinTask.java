@@ -1,11 +1,12 @@
 package riskyken.armourersWorkshop.client.render.bake;
 
+import net.skin43d.impl.Context;
+import net.skin43d.utils.BitwiseUtils;
 import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.data.SkinTexture;
-import net.skin43d.utils.BitwiseUtils;
 
 import java.util.concurrent.Callable;
 
@@ -38,12 +39,12 @@ public class BakeSkinTask implements Callable<Skin> {
             SkinBaker.buildPartDisplayListArray(partData, dyeColour, dyeUseCount, cubeSpace);
             partData.clearCubeData();
         }
-
+        Context context = Context.instance();
         if (skin.hasPaintData()) {
             skin.skinModelTexture = new SkinModelTexture();
-            for (int ix = 0; ix < SkinTexture.TEXTURE_WIDTH; ix++) {
-                for (int iy = 0; iy < SkinTexture.TEXTURE_HEIGHT; iy++) {
-                    int paintColour = skin.getPaintData()[ix + (iy * SkinTexture.TEXTURE_WIDTH)];
+            for (int ix = 0; ix < context.getTextureWidth(); ix++) {
+                for (int iy = 0; iy < context.getTextureHeight(); iy++) {
+                    int paintColour = skin.getPaintData()[ix + (iy * context.getTextureWidth())];
                     int paintType = BitwiseUtils.getUByteFromInt(paintColour, 0);
 
                     byte r = (byte) (paintColour >>> 16 & 0xFF);
@@ -88,7 +89,6 @@ public class BakeSkinTask implements Callable<Skin> {
         skin.setAverageDyeValues(averageR, averageG, averageB);
         if (skin.hasPaintData())
             skin.skinModelTexture.createTextureForColours(skin, null);
-
         return skin;
     }
 }
