@@ -1,14 +1,9 @@
 package riskyken.armourersWorkshop.common;
 
-import net.cijhn.EquipmentWardrobeProvider;
-import net.cijhn.SkinInfoProvider;
-import net.cijhn.SkinRepository;
-import net.minecraft.block.Block;
-import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import riskyken.armourersWorkshop.common.skin.EntityEquipmentData;
+import net.skin43d.EquipmentWardrobeProvider;
+import net.skin43d.SkinInfoProvider;
+import net.skin43d.SkinRepository;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 
 import java.io.File;
 

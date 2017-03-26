@@ -3,14 +3,13 @@ package riskyken.armourersWorkshop;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
-import net.cijhn.EquipmentWardrobeProvider;
-import net.cijhn.SkinInfoProvider;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
+import net.skin43d.EquipmentWardrobeProvider;
+import net.skin43d.SkinInfoProvider;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
+import riskyken.armourersWorkshop.common.skin.data.SkinTexture;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.utils.ModLogger;
 
@@ -67,8 +66,7 @@ public class ArmourersWorkshopMod extends ArmourersWorkshop {
 
         File configDir = event.getSuggestedConfigurationFile().getParentFile();
         configDir = new File(configDir, LibModInfo.ID);
-        if (!configDir.exists())
-            configDir.mkdirs();
+        if (!configDir.exists()) configDir.mkdirs();
         registry = new SkinTypeRegistry();
         proxy.preInit(configDir);
     }
@@ -90,7 +88,7 @@ public class ArmourersWorkshopMod extends ArmourersWorkshop {
 
     @Override
     public int getTextureSize() {
-        return 0;
+        return SkinTexture.TEXTURE_SIZE;
     }
 
     @Override

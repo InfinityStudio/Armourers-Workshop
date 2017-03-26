@@ -1,4 +1,4 @@
-package net.cijhn;
+package net.skin43d;
 
 import java.util.UUID;
 

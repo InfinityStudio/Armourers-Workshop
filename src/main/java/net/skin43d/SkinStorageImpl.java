@@ -1,6 +1,5 @@
-package net.cijhn;
+package net.skin43d;
 
-import com.google.common.cache.Cache;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkin;
 import riskyken.armourersWorkshop.client.render.bake.SkinBakery;
 

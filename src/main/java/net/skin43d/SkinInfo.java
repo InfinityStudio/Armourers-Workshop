@@ -1,4 +1,4 @@
-package net.cijhn;
+package net.skin43d;
 
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartType;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;

@@ -1,7 +1,7 @@
 package riskyken.armourersWorkshop.client.render.engine.special;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.cijhn.SkinInfoProvider;
+import net.skin43d.SkinInfoProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;

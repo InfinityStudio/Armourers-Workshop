@@ -1,7 +1,7 @@
 package riskyken.armourersWorkshop;
 
-import net.cijhn.SkinInfo;
-import net.cijhn.SkinInfoProvider;
+import net.skin43d.SkinInfo;
+import net.skin43d.SkinInfoProvider;
 import net.minecraft.entity.Entity;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
@@ -27,9 +27,6 @@ public class TestEnvSetup implements SkinInfoProvider {
         System.out.println(skin.getSkinType().getRegistryName());
         System.out.println(skin);
         ConfigHandlerClient.skinRenderType = 2;
-        System.out.println("==============================");
-        System.out.println(skin.serverId);
-        System.out.println("==============================");
         ArmourersWorkshopMod.proxy.getSkinRepository().registerSkin(KEY, skin);
     }
 

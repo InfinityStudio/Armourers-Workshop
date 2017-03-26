@@ -46,7 +46,6 @@ public class Skin implements ISkin {
     private int[] paintData;
     private List<SkinPart> parts;
     public int requestId;
-    public int serverId = -1;
     private int lightHash = 0;
 
     @SideOnly(Side.CLIENT)

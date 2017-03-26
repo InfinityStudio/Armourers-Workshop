@@ -1,7 +1,7 @@
 package riskyken.armourersWorkshop;
 
-import net.cijhn.EquipmentWardrobeProvider;
-import net.cijhn.SkinInfoProvider;
+import net.skin43d.EquipmentWardrobeProvider;
+import net.skin43d.SkinInfoProvider;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
 
 /**

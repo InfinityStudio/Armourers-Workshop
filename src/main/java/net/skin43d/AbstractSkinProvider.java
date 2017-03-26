@@ -1,9 +1,8 @@
-package net.cijhn;
+package net.skin43d;
 
 import net.minecraft.entity.Entity;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinType;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
 
 
 /**

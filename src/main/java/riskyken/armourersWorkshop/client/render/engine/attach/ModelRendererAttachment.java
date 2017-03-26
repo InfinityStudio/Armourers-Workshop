@@ -2,8 +2,8 @@ package riskyken.armourersWorkshop.client.render.engine.attach;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.cijhn.SkinInfo;
-import net.cijhn.SkinInfoProvider;
+import net.skin43d.SkinInfo;
+import net.skin43d.SkinInfoProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
