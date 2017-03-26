@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
-import riskyken.armourersWorkshop.common.ApiRegistrar;
+import removequ.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
@@ -38,7 +38,7 @@ public class ModelSkinSkirt extends AbstractModelSkin {
             this.isChild = false;
         }
         
-        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistry.skinSkirt);
+//        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistry.skinSkirt);
         
         for (int i = 0; i < parts.size(); i++) {
             SkinPart part = parts.get(i);

@@ -11,7 +11,7 @@ import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinTexture;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
-import riskyken.armourersWorkshop.utils.ModLogger;
+import net.skin43d.utils.ModLogger;
 
 import java.io.File;
 import java.net.URISyntaxException;

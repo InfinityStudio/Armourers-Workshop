@@ -14,7 +14,7 @@ import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.render.bake.ColouredFace;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinTexture;
-import riskyken.armourersWorkshop.utils.BitwiseUtils;
+import net.skin43d.utils.BitwiseUtils;
 
 @SideOnly(Side.CLIENT)
 public class SkinModelTexture extends AbstractTexture {

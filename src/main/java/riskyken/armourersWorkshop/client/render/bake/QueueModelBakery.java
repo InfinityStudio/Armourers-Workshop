@@ -7,7 +7,7 @@ import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.common.gameevent.TickEvent.Type;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkin;
+import riskyken.armourersWorkshop.api.common.skin.data.Skin3D;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 
@@ -30,7 +30,7 @@ public final class QueueModelBakery implements SkinBakery {
     }
 
     @Override
-    public void bake(ISkin skin) {
+    public void bake(Skin3D skin) {
         bakingQueue.incrementAndGet();
         skinCompletion.submit(new BakeSkinTask((Skin) skin));
     }

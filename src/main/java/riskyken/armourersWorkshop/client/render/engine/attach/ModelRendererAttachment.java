@@ -13,7 +13,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.ArmourersWorkshopMod;
-import riskyken.armourersWorkshop.api.common.skin.Point3D;
+import net.skin43d.utils.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.client.ClientProxy;
@@ -22,7 +22,7 @@ import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
-import riskyken.armourersWorkshop.utils.SkinUtils;
+import net.skin43d.utils.SkinUtils;
 
 /**
  * A ModelRenderer that is attached to each ModelRenderer on the

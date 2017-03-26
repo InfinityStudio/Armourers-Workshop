@@ -4,15 +4,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.skin43d.skin3d.SkinPartType;
-import riskyken.armourersWorkshop.api.common.skin.Point3D;
+import net.skin43d.utils.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinPart;
+import riskyken.armourersWorkshop.api.common.skin.data.Skin3D;
 import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeMarkerData;
 
 import java.util.List;
 
-public class SkinPart implements ISkinPart {
+public class SkinPart implements Skin3D.Part {
     private Rectangle3D partBounds;
     private SkinCubeData cubeData;
     private List<CubeMarkerData> markerBlocks;

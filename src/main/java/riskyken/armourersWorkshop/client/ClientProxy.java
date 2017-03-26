@@ -11,8 +11,8 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import org.apache.logging.log4j.Level;
+import removequ.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.TestEnvSetup;
-import riskyken.armourersWorkshop.client.handler.EquipmentWardrobeHandler;
 import riskyken.armourersWorkshop.client.lib.LibItemResources;
 import riskyken.armourersWorkshop.client.render.PlayerTextureHandler;
 import riskyken.armourersWorkshop.client.render.RenderEngine;
@@ -21,7 +21,8 @@ import riskyken.armourersWorkshop.client.render.engine.attach.RenderEngineAttach
 import riskyken.armourersWorkshop.client.render.engine.special.RenderEngineSpecial;
 import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
-import riskyken.armourersWorkshop.utils.ModLogger;
+import riskyken.armourersWorkshop.common.data.PlayerPointer;
+import net.skin43d.utils.ModLogger;
 
 import java.io.File;
 
@@ -67,6 +68,20 @@ public class ClientProxy extends CommonProxy {
         super.preInit(configDir);
         provider = new TestEnvSetup();
         skinRepository = new SkinStorageImpl(new AsyncModelBakery(2));
+        equipmentWardrobeHandler = new EquipmentWardrobeProvider() {
+            @Override
+            public void setEquipmentWardrobeData(PlayerPointer playerPointer, EquipmentWardrobeData ewd) {
+            }
+
+            @Override
+            public EquipmentWardrobeData getEquipmentWardrobeData(PlayerPointer playerPointer) {
+                return null;
+            }
+
+            @Override
+            public void removeEquipmentWardrobeData(PlayerPointer playerPointer) {
+            }
+        };
 //        Minecraft.getMinecraft().theWorld.addWorldAccess(new WorldListener());
 //        provider = new AbstractSkinProvider(skinRepository);
         //TODO init skinProvider
@@ -83,7 +98,7 @@ public class ClientProxy extends CommonProxy {
             this.renderEngine = new RenderEngineSpecial();
         else this.renderEngine = new RenderEngineAttach();//TODO handle this exception
         this.renderEngine.deploy();
-        this.equipmentWardrobeHandler = new EquipmentWardrobeHandler();
+//        this.equipmentWardrobeHandler = new EquipmentWardrobeHandler();
 //        ClientSkinCache.init();
         MinecraftForge.EVENT_BUS.register(new PlayerTextureHandler());
     }

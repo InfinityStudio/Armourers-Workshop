@@ -1,6 +1,6 @@
 package net.skin43d;
 
-import riskyken.armourersWorkshop.api.common.skin.data.ISkin;
+import riskyken.armourersWorkshop.api.common.skin.data.Skin3D;
 
 import java.util.Collection;
 
@@ -8,9 +8,9 @@ import java.util.Collection;
  * @author ci010
  */
 public interface SkinRepository {
-    boolean registerSkin(Object key, ISkin skin);
+    boolean registerSkin(Object key, Skin3D skin);
 
-    Collection<ISkin> getAllStorage();
+    Collection<Skin3D> getAllStorage();
 
-    ISkin getSkin(Object key);
+    Skin3D getSkin(Object key);
 }

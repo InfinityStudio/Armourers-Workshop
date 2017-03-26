@@ -5,7 +5,7 @@ import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.data.SkinTexture;
-import riskyken.armourersWorkshop.utils.BitwiseUtils;
+import net.skin43d.utils.BitwiseUtils;
 
 import java.util.concurrent.Callable;
 

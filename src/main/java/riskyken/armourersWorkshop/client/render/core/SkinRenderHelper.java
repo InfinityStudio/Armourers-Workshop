@@ -11,9 +11,9 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
-import riskyken.armourersWorkshop.api.common.IPoint3D;
 import riskyken.armourersWorkshop.api.common.IRectangle3D;
 import net.skin43d.skin3d.SkinPartType;
+import net.skin43d.utils.Point3D;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 
@@ -25,7 +25,7 @@ public final class SkinRenderHelper {
     public static void renderBuildingGuide(SkinType skinType, float scale, boolean showSkinOverlay, boolean showHelper) {
         for (int i = 0; i < skinType.getSkinParts().size(); i++) {
             SkinPartType skinPart = skinType.getSkinParts().get(i);
-            IPoint3D partOffset = skinPart.getOffset();
+            Point3D partOffset = skinPart.getOffset();
             GL11.glTranslated(partOffset.getX() * scale, partOffset.getY() * scale, partOffset.getZ() * scale);
             skinPart.renderBuildingGuide(scale, showSkinOverlay, showHelper);
             GL11.glTranslated(-partOffset.getX() * scale, -partOffset.getY() * scale, -partOffset.getZ() * scale);
@@ -35,7 +35,7 @@ public final class SkinRenderHelper {
     public static void renderBuildingGrid(SkinType skinType, float scale, boolean showGuides, boolean hidden) {
         for (int i = 0; i < skinType.getSkinParts().size(); i++) {
             SkinPartType skinPartType = skinType.getSkinParts().get(i);
-            IPoint3D partOffset = skinPartType.getOffset();
+            Point3D partOffset = skinPartType.getOffset();
             GL11.glTranslated(partOffset.getX() * scale, partOffset.getY() * scale, partOffset.getZ() * scale);
             renderBuildingGrid(skinPartType, scale, showGuides, hidden);
             GL11.glTranslated(-partOffset.getX() * scale, -partOffset.getY() * scale, -partOffset.getZ() * scale);

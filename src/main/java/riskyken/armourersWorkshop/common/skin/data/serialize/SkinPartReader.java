@@ -7,7 +7,7 @@ import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeMarkerData;
 import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
-import riskyken.armourersWorkshop.utils.ModLogger;
+import net.skin43d.utils.ModLogger;
 
 import java.io.DataInput;
 import java.io.DataOutput;

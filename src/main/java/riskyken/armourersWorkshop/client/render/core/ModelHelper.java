@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.ArmourersWorkshopMod;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import riskyken.armourersWorkshop.common.skin.EquipmentWardrobeData;
+import removequ.EquipmentWardrobeData;
 
 import java.awt.*;
 

@@ -1,6 +1,6 @@
 package riskyken.armourersWorkshop.client.render.bake;
 
-import riskyken.armourersWorkshop.api.common.skin.data.ISkin;
+import riskyken.armourersWorkshop.api.common.skin.data.Skin3D;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 
 import java.util.concurrent.ExecutorService;
@@ -20,7 +20,7 @@ public class AsyncModelBakery implements SkinBakery {
     }
 
     @Override
-    public void bake(ISkin skin) {
+    public void bake(Skin3D skin) {
         service.submit(new BakeSkinTask((Skin) skin));
     }
 }

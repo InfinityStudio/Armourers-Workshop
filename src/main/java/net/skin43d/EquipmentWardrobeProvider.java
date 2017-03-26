@@ -1,7 +1,7 @@
 package net.skin43d;
 
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import riskyken.armourersWorkshop.common.skin.EquipmentWardrobeData;
+import removequ.EquipmentWardrobeData;
 
 /**
  * @author ci010

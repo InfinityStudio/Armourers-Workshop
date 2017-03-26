@@ -4,8 +4,7 @@ import java.awt.Point;
 
 import org.lwjgl.opengl.GL11;
 
-import riskyken.armourersWorkshop.api.common.IPoint3D;
-import riskyken.armourersWorkshop.api.common.skin.Point3D;
+import net.skin43d.utils.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
 import net.skin43d.skin3d.SkinType;
@@ -49,7 +48,7 @@ public class SkinHeadPartBase extends AbstractSkinPartTypeBase implements ISkinP
     }
     
     @Override
-    public IPoint3D getTextureModelSize() {
+    public Point3D getTextureModelSize() {
         return new Point3D(8, 8, 8);
     }
 }

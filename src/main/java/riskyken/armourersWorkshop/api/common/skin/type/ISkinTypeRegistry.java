@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Skin type registry is used to register new SkinType's
- * and get register SkinType's and ISkinPart's.
+ * and get register SkinType's and Part's.
  *
  * @author RiskyKen
  */
@@ -24,20 +24,31 @@ public interface ISkinTypeRegistry {
 
     SkinType getSkinTypeFromRegistryName(String registryName);
 
+
     SkinPartType getSkinPartTypeFromId(int id);
 
     SkinPartType getSkinPartTypeFromName(String regName);
 
     List<SkinType> getRegisteredSkinTypes();
 
-    SkinType getSkinTypeHead();
-
-    SkinType getSkinTypeChest();
-
-    SkinType getSkinTypeLegs();
-
     @Deprecated
     SkinType getSkinTypeSkirt();
 
-    SkinType getSkinTypeFeet();
+    SkinType getSkinHead();
+
+    SkinType getSkinChest();
+
+    SkinType getSkinLegs();
+
+    SkinType getSkinSkirt();
+
+    SkinType getSkinFeet();
+
+    SkinType getSkinSword();
+
+    SkinType getSkinBow();
+
+    SkinType getSkinArrow();
+
+    SkinType getSkinBlock();
 }

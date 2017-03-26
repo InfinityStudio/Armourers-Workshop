@@ -26,7 +26,7 @@ import riskyken.armourersWorkshop.common.skin.type.legs.SkinLegs;
 import riskyken.armourersWorkshop.common.skin.type.legs.SkinSkirt;
 import riskyken.armourersWorkshop.common.skin.type.sword.SkinSword;
 import riskyken.armourersWorkshop.common.skin.type.wings.SkinWings;
-import riskyken.armourersWorkshop.utils.ModLogger;
+import net.skin43d.utils.ModLogger;
 
 public final class SkinTypeRegistry implements ISkinTypeRegistry {
     public static SkinType skinHead;
@@ -139,6 +139,56 @@ public final class SkinTypeRegistry implements ISkinTypeRegistry {
         }
     }
 
+
+    @Override
+    public SkinType getSkinHead() {
+        return skinHead;
+    }
+
+    @Override
+    public SkinType getSkinChest() {
+        return skinChest;
+    }
+
+    @Override
+    public SkinType getSkinLegs() {
+        return skinLegs;
+    }
+
+    @Override
+    public SkinType getSkinSkirt() {
+        return skinSkirt;
+    }
+
+    @Override
+    public SkinType getSkinFeet() {
+        return skinFeet;
+    }
+
+    @Override
+    public SkinType getSkinSword() {
+        return skinSword;
+    }
+
+    @Override
+    public SkinType getSkinBow() {
+        return skinBow;
+    }
+
+    @Override
+    public SkinType getSkinArrow() {
+        return skinArrow;
+    }
+
+    @Override
+    public SkinType getSkinBlock() {
+        return skinBlock;
+    }
+
+    public static SkinType getSkinWings() {
+        return skinWings;
+    }
+
     @Override
     public SkinPartType getSkinPartTypeFromId(int id) {
         return getSkinPartFromLegacyId(id);
@@ -226,27 +276,8 @@ public final class SkinTypeRegistry implements ISkinTypeRegistry {
     }
 
     @Override
-    public SkinType getSkinTypeHead() {
-        return skinHead;
-    }
-
-    @Override
-    public SkinType getSkinTypeChest() {
-        return skinChest;
-    }
-
-    @Override
-    public SkinType getSkinTypeLegs() {
-        return skinLegs;
-    }
-
-    @Override
     public SkinType getSkinTypeSkirt() {
         return skinSkirt;
     }
 
-    @Override
-    public SkinType getSkinTypeFeet() {
-        return skinFeet;
-    }
 }

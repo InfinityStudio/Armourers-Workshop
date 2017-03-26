@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
-import riskyken.armourersWorkshop.api.common.IPoint3D;
+import net.skin43d.utils.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
 import riskyken.armourersWorkshop.client.render.bake.ColouredFace;
@@ -21,8 +21,8 @@ import riskyken.armourersWorkshop.common.painting.PaintType;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
-import riskyken.armourersWorkshop.utils.BitwiseUtils;
-import riskyken.armourersWorkshop.utils.ModLogger;
+import net.skin43d.utils.BitwiseUtils;
+import net.skin43d.utils.ModLogger;
 
 public class EntityTextureInfo {
 
@@ -248,7 +248,7 @@ public class EntityTextureInfo {
                     if (skinPart.getPartType() instanceof ISkinPartTypeTextured) {
                         ISkinPartTypeTextured typeTextured = (ISkinPartTypeTextured) skinPart.getPartType();
                         Point texLoc = typeTextured.getTextureLocation();
-                        IPoint3D texSize = typeTextured.getTextureModelSize();
+                        Point3D texSize = typeTextured.getTextureModelSize();
 
 
                         for (int ix = 0; ix < texSize.getZ() * 2 + texSize.getX() * 2; ix++) {

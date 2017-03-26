@@ -6,8 +6,7 @@ import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.IRectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkin;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinPart;
+import riskyken.armourersWorkshop.api.common.skin.data.Skin3D;
 import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Skin implements ISkin {
+public class Skin implements Skin3D {
 
     public static final int FILE_VERSION = 12;
 
@@ -213,8 +212,8 @@ public class Skin implements ISkin {
     }
 
     @Override
-    public List<ISkinPart> getSubParts() {
-        ArrayList<ISkinPart> partList = new ArrayList<ISkinPart>();
+    public List<Part> getSubParts() {
+        ArrayList<Part> partList = new ArrayList<Part>();
         for (int i = 0; i < parts.size(); i++)
             partList.add(parts.get(i));
         return partList;

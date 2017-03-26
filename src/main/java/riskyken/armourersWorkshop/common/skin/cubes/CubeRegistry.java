@@ -1,6 +1,6 @@
 package riskyken.armourersWorkshop.common.skin.cubes;
 
-import riskyken.armourersWorkshop.utils.ModLogger;
+import net.skin43d.utils.ModLogger;
 
 import java.util.ArrayList;
 

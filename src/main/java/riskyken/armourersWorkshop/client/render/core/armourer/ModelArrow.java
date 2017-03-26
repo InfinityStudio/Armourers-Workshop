@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.util.ResourceLocation;
 import riskyken.armourersWorkshop.client.render.core.ModRenderHelper;
-import riskyken.armourersWorkshop.utils.UtilRender;
+import net.skin43d.utils.UtilRender;
 
 @SideOnly(Side.CLIENT)
 public class ModelArrow {

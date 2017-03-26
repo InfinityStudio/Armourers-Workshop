@@ -1,8 +1,8 @@
 package riskyken.armourersWorkshop.common.painting;
 
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
-import riskyken.armourersWorkshop.utils.BitwiseUtils;
-import riskyken.armourersWorkshop.utils.TranslateUtils;
+import net.skin43d.utils.BitwiseUtils;
+import net.skin43d.utils.TranslateUtils;
 
 public enum PaintType {
     NORMAL(255),
@@ -25,7 +25,7 @@ public enum PaintType {
     
     private final int key;
     
-    private PaintType(int key) {
+    PaintType(int key) {
         this.key = key;
     }
     

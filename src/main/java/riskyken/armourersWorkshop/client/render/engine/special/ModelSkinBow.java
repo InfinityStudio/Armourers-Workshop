@@ -8,11 +8,9 @@ import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
-import riskyken.armourersWorkshop.common.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
-import riskyken.armourersWorkshop.utils.ModLogger;
+import net.skin43d.utils.ModLogger;
 
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class ModelSkinBow extends AbstractModelSkin {
             this.isChild = false;
         }
         
-        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistry.skinBow);
+//        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistry.skinBow);
         
         if (frame > parts.size() - 1) {
             frame = parts.size() - 1;
@@ -62,7 +60,7 @@ public class ModelSkinBow extends AbstractModelSkin {
             GL11.glTranslatef(0.0F, 24.0F * SCALE, 0.0F);
         }
 
-        ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, part.getPartType());
+//        ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, part.getPartType());
         renderRightArm(part, SCALE, skinDye, extraColour, distance, doLodLoading);
         
         GL11.glPopMatrix();
