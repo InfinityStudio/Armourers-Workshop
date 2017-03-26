@@ -1,6 +1,7 @@
 package riskyken.armourersWorkshop.client.render.engine.special;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
@@ -9,7 +10,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.render.model.skin.AbstractModelSkin;
+import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
 import riskyken.armourersWorkshop.common.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
@@ -25,7 +26,7 @@ public class ModelSkinSword extends AbstractModelSkin {
             return;
         }
 
-        ArrayList<SkinPart> parts = armourData.getParts();
+        List<SkinPart> parts = armourData.getParts();
 
         if (entity != null && entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;

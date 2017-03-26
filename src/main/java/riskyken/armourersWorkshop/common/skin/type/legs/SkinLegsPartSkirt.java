@@ -7,7 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 import net.skin43d.skin3d.SkinType;
-import riskyken.armourersWorkshop.client.render.model.armourer.ModelLegs;
+import riskyken.armourersWorkshop.client.render.core.armourer.ModelLegs;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;
 
 public class SkinLegsPartSkirt extends AbstractSkinPartTypeBase {

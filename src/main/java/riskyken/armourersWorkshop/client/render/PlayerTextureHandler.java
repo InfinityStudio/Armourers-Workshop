@@ -1,26 +1,25 @@
 package riskyken.armourersWorkshop.client.render;
 
-import java.util.HashMap;
-
 import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
-
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.skin43d.SkinInfoProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.profiler.Profiler;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
-import riskyken.armourersWorkshop.ArmourersWorkshopMod;
+import net.skin43d.SkinInfoProvider;
+import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.skin.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
+
+import java.util.HashMap;
 
 /**
  * Handles replacing the players texture with the painted version.
@@ -51,7 +50,7 @@ public class PlayerTextureHandler {
             return;
         }
         PlayerPointer playerPointer = new PlayerPointer(player);
-        EquipmentWardrobeData ewd = ArmourersWorkshopMod.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = ArmourersWorkshop.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
         if (ewd == null) {
             return;
         }
@@ -63,7 +62,7 @@ public class PlayerTextureHandler {
             textureInfo.updateSkinColour(ewd.skinColour);
             Skin[] skins = new Skin[4 * 5];
 
-            SkinInfoProvider skinProvider = ArmourersWorkshopMod.proxy.getSkinProvider();
+            SkinInfoProvider skinProvider = ArmourersWorkshop.instance().getSkinProvider();
             for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
                 skins[skinIndex * 4] = skinProvider.getSkin(player, SkinTypeRegistry.skinHead, skinIndex);
                 skins[1 + skinIndex * 4] = skinProvider.getSkin(player, SkinTypeRegistry.skinChest, skinIndex);
@@ -103,7 +102,7 @@ public class PlayerTextureHandler {
             return;
         }
         PlayerPointer playerPointer = new PlayerPointer(player);
-        EquipmentWardrobeData ewd = ArmourersWorkshopMod.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = ArmourersWorkshop.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
         if (ewd == null) {
             return;
         }

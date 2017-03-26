@@ -2,6 +2,7 @@ package riskyken.armourersWorkshop.common.skin.data;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.skin43d.skin3d.SkinType;
+import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinPointer;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
@@ -78,7 +79,7 @@ public class SkinPointer implements ISkinPointer {
     
     public void readFromCompound(NBTTagCompound compound) {
         NBTTagCompound skinDataCompound = compound.getCompoundTag(TAG_SKIN_DATA);
-        this.skinType = SkinTypeRegistry.INSTANCE.getSkinTypeFromRegistryName(skinDataCompound.getString(TAG_SKIN_TYPE));
+        this.skinType = ArmourersWorkshop.instance().getSkinRegistry().getSkinTypeFromRegistryName(skinDataCompound.getString(TAG_SKIN_TYPE));
         this.skinId = skinDataCompound.getInteger(TAG_SKIN_ID);
         this.lockSkin = skinDataCompound.getBoolean(TAG_SKIN_LOCK);
         this.skinDye.readFromCompound(skinDataCompound);

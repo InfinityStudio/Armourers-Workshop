@@ -51,7 +51,6 @@ public class Skin implements ISkin {
     @SideOnly(Side.CLIENT)
     public SkinModelTexture skinModelTexture;
 
-
     @SideOnly(Side.CLIENT)
     public int paintTextureId;
 

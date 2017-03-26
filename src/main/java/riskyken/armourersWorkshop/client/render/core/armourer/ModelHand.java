@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.render.model.armourer;
+package riskyken.armourersWorkshop.client.render.core.armourer;
 
 import org.lwjgl.opengl.GL11;
 
@@ -7,7 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import riskyken.armourersWorkshop.client.render.ModRenderHelper;
+import riskyken.armourersWorkshop.client.render.core.ModRenderHelper;
 
 @SideOnly(Side.CLIENT)
 public class ModelHand extends ModelBase {

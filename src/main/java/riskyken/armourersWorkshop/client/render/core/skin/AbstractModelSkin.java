@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.render.model.skin;
+package riskyken.armourersWorkshop.client.render.core.skin;
 
 import org.lwjgl.opengl.GL11;
 
@@ -9,8 +9,8 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.render.ModRenderHelper;
-import riskyken.armourersWorkshop.client.render.SkinPartRenderer;
+import riskyken.armourersWorkshop.client.render.core.ModRenderHelper;
+import riskyken.armourersWorkshop.client.render.core.SkinPartRenderer;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 

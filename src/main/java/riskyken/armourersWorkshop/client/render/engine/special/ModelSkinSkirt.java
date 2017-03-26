@@ -1,20 +1,19 @@
 package riskyken.armourersWorkshop.client.render.engine.special;
 
-import java.util.ArrayList;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.render.model.skin.AbstractModelSkin;
+import riskyken.armourersWorkshop.client.ClientProxy;
+import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
 import riskyken.armourersWorkshop.common.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
-import riskyken.armourersWorkshop.client.ClientProxy;
+
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class ModelSkinSkirt extends AbstractModelSkin {
@@ -23,7 +22,7 @@ public class ModelSkinSkirt extends AbstractModelSkin {
     public void render(Entity entity, Skin armourData, boolean showSkinPaint, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
         if (armourData == null) { return; }
         
-        ArrayList<SkinPart> parts = armourData.getParts();
+        List<SkinPart> parts = armourData.getParts();
         
         if (entity != null && entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;

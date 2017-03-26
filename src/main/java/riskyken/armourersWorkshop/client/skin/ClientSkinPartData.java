@@ -9,7 +9,7 @@ import java.util.Set;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.render.model.SkinModel;
+import riskyken.armourersWorkshop.client.render.core.SkinModel;
 import riskyken.armourersWorkshop.client.render.bake.ColouredFace;
 import riskyken.armourersWorkshop.common.skin.data.SkinDye;
 

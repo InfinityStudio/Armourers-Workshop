@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.render.model.armourer;
+package riskyken.armourersWorkshop.client.render.core.armourer;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderArrow;
 import net.minecraft.util.ResourceLocation;
-import riskyken.armourersWorkshop.client.render.ModRenderHelper;
+import riskyken.armourersWorkshop.client.render.core.ModRenderHelper;
 import riskyken.armourersWorkshop.utils.UtilRender;
 
 @SideOnly(Side.CLIENT)

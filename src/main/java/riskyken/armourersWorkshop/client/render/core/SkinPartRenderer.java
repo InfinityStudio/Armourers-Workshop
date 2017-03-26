@@ -1,7 +1,9 @@
-package riskyken.armourersWorkshop.client.render;
+package riskyken.armourersWorkshop.client.render.core;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -11,8 +13,6 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.handler.ModClientFMLEventHandler;
-import riskyken.armourersWorkshop.client.render.model.SkinModel;
 import riskyken.armourersWorkshop.client.render.bake.ColouredFace;
 import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
@@ -24,10 +24,21 @@ import riskyken.plushieWrapper.client.RenderBridge;
 
 @SideOnly(Side.CLIENT)
 public class SkinPartRenderer extends ModelBase {
-
     private static final ResourceLocation texture = new ResourceLocation(LibModInfo.ID.toLowerCase(), "textures/armour/cube.png");
     public static final SkinPartRenderer INSTANCE = new SkinPartRenderer();
+    private int skinRendersThisTick = 0;
+    private float renderTickTime;
+    private int skinRenderLastTick = 0;
     private final Minecraft mc;
+
+    @SubscribeEvent
+    public void onRenderTickEvent(TickEvent.RenderTickEvent event) {
+        if (event.phase == TickEvent.Phase.START) {
+            renderTickTime = event.renderTickTime;
+            skinRenderLastTick = skinRendersThisTick;
+            skinRendersThisTick = 0;
+        }
+    }
 
     public SkinPartRenderer() {
         mc = Minecraft.getMinecraft();
@@ -45,7 +56,7 @@ public class SkinPartRenderer extends ModelBase {
 
     private void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, int lod, boolean doLodLoading) {
         //mc.mcProfiler.startSection(skinPart.getPartType().getPartName());
-        ModClientFMLEventHandler.skinRendersThisTick++;
+        skinRendersThisTick++;
         //GL11.glColor3f(1F, 1F, 1F);
 
         ClientSkinPartData cspd = skinPart.getClientSkinPartData();
@@ -71,9 +82,7 @@ public class SkinPartRenderer extends ModelBase {
         }
 
         int startIndex = 0;
-        ;
         int endIndex = 0;
-        ;
 
         int loadingLod = skinModel.getLoadingLod();
         if (!doLodLoading) {

@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.render;
+package riskyken.armourersWorkshop.client.render.core;
 
 import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;

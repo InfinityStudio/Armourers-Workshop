@@ -11,7 +11,7 @@ import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
 import net.skin43d.skin3d.SkinType;
-import riskyken.armourersWorkshop.client.render.model.armourer.ModelLegs;
+import riskyken.armourersWorkshop.client.render.core.armourer.ModelLegs;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;
 
 public class SkinFeetPartRightFoot extends AbstractSkinPartTypeBase implements ISkinPartTypeTextured {

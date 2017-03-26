@@ -7,7 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import riskyken.armourersWorkshop.ArmourersWorkshopMod;
+import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.skin.EquipmentWardrobeData;
 
@@ -145,7 +145,7 @@ public final class PaintingHelper {
     @SideOnly(Side.CLIENT)
     public static int getLocalPlayersSkinColour() {
         PlayerPointer playerPointer = new PlayerPointer(Minecraft.getMinecraft().thePlayer);
-        EquipmentWardrobeData ewd = ArmourersWorkshopMod.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = ArmourersWorkshop.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
         if (ewd != null) {
             return ewd.skinColour;
         }
@@ -155,7 +155,7 @@ public final class PaintingHelper {
     @SideOnly(Side.CLIENT)
     public static int getLocalPlayersHairColour() {
         PlayerPointer playerPointer = new PlayerPointer(Minecraft.getMinecraft().thePlayer);
-        EquipmentWardrobeData ewd = ArmourersWorkshopMod.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = ArmourersWorkshop.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
         if (ewd != null) {
             return ewd.hairColour;
         }

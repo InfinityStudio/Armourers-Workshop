@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.opengl.GL11;
+import riskyken.armourersWorkshop.ArmourersWorkshop;
 import riskyken.armourersWorkshop.ArmourersWorkshopMod;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.render.RenderEngine;
@@ -61,8 +62,8 @@ public class RenderEngineSpecial implements RenderEngine {
             return;
         }
 
-        SkinInfoProvider skinProvider = ArmourersWorkshopMod.proxy.getSkinProvider();
-        EquipmentWardrobeData ewd = ArmourersWorkshopMod.proxy.getEquipmentWardrobeProvider().getEquipmentWardrobeData(new PlayerPointer(player));
+        SkinInfoProvider skinProvider = ArmourersWorkshop.instance().getSkinProvider();
+        EquipmentWardrobeData ewd = ArmourersWorkshop.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(new PlayerPointer(player));
         byte[] extraColours = null;
         if (ewd != null) {
             Color skinColour = new Color(ewd.skinColour);

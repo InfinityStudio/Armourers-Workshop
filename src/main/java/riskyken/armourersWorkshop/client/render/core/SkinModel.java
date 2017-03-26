@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.render.model;
+package riskyken.armourersWorkshop.client.render.core;
 
 import java.util.ArrayList;
 

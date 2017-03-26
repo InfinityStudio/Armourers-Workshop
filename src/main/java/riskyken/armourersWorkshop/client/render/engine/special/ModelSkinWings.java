@@ -1,6 +1,7 @@
 package riskyken.armourersWorkshop.client.render.engine.special;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
@@ -9,7 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.util.ForgeDirection;
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.render.model.skin.AbstractModelSkin;
+import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
 import riskyken.armourersWorkshop.common.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
@@ -25,7 +26,7 @@ public class ModelSkinWings extends AbstractModelSkin {
             return;
         }
         
-        ArrayList<SkinPart> parts = skin.getParts();
+        List<SkinPart> parts = skin.getParts();
         
         if (entity != null && entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;

@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 
 import riskyken.armourersWorkshop.api.common.skin.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
-import riskyken.armourersWorkshop.client.render.model.armourer.ModelLegs;
+import riskyken.armourersWorkshop.client.render.core.armourer.ModelLegs;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
