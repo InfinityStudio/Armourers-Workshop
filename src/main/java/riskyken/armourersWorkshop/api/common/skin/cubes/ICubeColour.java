@@ -4,36 +4,36 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public interface ICubeColour {
     
-    public byte getRed(int side);
+    byte getRed(int side);
     
-    public byte getGreen(int side);
+    byte getGreen(int side);
         
-    public byte getBlue(int side);
+    byte getBlue(int side);
     
-    public byte getPaintType(int side);
+    byte getPaintType(int side);
     
-    public byte[] getRed();
+    byte[] getRed();
     
-    public byte[] getGreen();
+    byte[] getGreen();
     
-    public byte[] getBlue();
+    byte[] getBlue();
     
-    public byte[] getPaintType();
+    byte[] getPaintType();
     
-    public void setColour(int colour, int side);
+    void setColour(int colour, int side);
     
     @Deprecated
-    public void setColour(int colour);
+    void setColour(int colour);
     
-    public void setRed(byte red, int side);
+    void setRed(byte red, int side);
     
-    public void setGreen(byte green, int side);
+    void setGreen(byte green, int side);
     
-    public void setBlue(byte blue, int side);
+    void setBlue(byte blue, int side);
     
-    public void setPaintType(byte type, int side);
+    void setPaintType(byte type, int side);
     
-    public void readFromNBT(NBTTagCompound compound);
-    
-    public void writeToNBT(NBTTagCompound compound);
+//    void readFromNBT(NBTTagCompound compound);
+//
+//    void writeToNBT(NBTTagCompound compound);
 }

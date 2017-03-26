@@ -1,22 +1,21 @@
 package riskyken.armourersWorkshop.client.render.core;
 
-import java.util.ArrayList;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.MathHelper;
-import riskyken.armourersWorkshop.client.render.bake.ColouredFace;
-import riskyken.armourersWorkshop.client.render.DisplayList;
+import net.skin43d.impl.client.render.DisplayList;
+import net.skin43d.impl.client.render.BakedFace;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
+
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class SkinModel {
-
     public DisplayList[] displayList;
     public boolean[] haveList;
     public long loadedTime;
 
-    public SkinModel(ArrayList<ColouredFace>[] vertexLists) {
+    public SkinModel(List<BakedFace>[] vertexLists) {
         displayList = new DisplayList[vertexLists.length];
         haveList = new boolean[vertexLists.length];
         for (int i = 0; i < displayList.length; i++) {

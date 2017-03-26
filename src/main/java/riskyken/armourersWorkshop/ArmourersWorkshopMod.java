@@ -79,6 +79,10 @@ public class ArmourersWorkshopMod extends ArmourersWorkshop {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit();
+        TestEnvSetup.setup();
+        Skin skin1 = proxy.getSkinProvider().getSkinInfoForEntity(null).getSkin(ArmourersWorkshop.instance().getSkinRegistry().getSkinWings());
+        System.out.println(proxy.getSkinProvider().getSkinInfoForEntity(null));
+        System.out.println(skin1);
     }
 
     @Override

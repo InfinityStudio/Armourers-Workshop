@@ -22,7 +22,7 @@ import static riskyken.armourersWorkshop.common.skin.data.Skin.*;
  * @author ci010
  */
 public class SkinReader {
-    private SkinPartReader partSerializer;
+    private SkinPartReader partSerializer = new SkinPartReader();
 
     public Skin readSkin(DataInput stream, ArmourersWorkshop context) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
         int fileVersion = stream.readInt();
@@ -32,7 +32,7 @@ public class SkinReader {
         SkinProperties properties = new SkinProperties();
         SkinType skinType;
         List<SkinPart> parts;
-        int[] paintData = new int[0];
+        int[] paintData = null;
         if (fileVersion < 12) {
             String authorName = stream.readUTF();
             String customName = stream.readUTF();

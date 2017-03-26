@@ -10,11 +10,11 @@ import riskyken.armourersWorkshop.common.skin.data.Skin;
  * @author ci010
  */
 public interface SkinInfoProvider {
-    void deploy();
+    SkinInfo getSkinInfoForEntity(Entity entity);
 
-    SkinInfo getSkin(Entity entity);
+    Skin getSkinInfoForEntity(Entity entity, SkinType skinType);
 
-    Skin getSkin(Entity entity, SkinType skinType, int slotIndex);
+    Skin getSkinInfoForEntity(Entity entity, SkinType skinType, int slotIndex);
 
     ISkinDye getPlayerDyeData(Entity entity, SkinType skinType, int slotIndex);
 

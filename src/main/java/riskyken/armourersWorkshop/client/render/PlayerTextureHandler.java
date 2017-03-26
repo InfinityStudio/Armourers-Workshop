@@ -64,10 +64,10 @@ public class PlayerTextureHandler {
 
             SkinInfoProvider skinProvider = ArmourersWorkshop.instance().getSkinProvider();
             for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
-                skins[skinIndex * 4] = skinProvider.getSkin(player, SkinTypeRegistry.skinHead, skinIndex);
-                skins[1 + skinIndex * 4] = skinProvider.getSkin(player, SkinTypeRegistry.skinChest, skinIndex);
-                skins[2 + skinIndex * 4] = skinProvider.getSkin(player, SkinTypeRegistry.skinLegs, skinIndex);
-                skins[3 + skinIndex * 4] = skinProvider.getSkin(player, SkinTypeRegistry.skinFeet, skinIndex);
+                skins[skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, SkinTypeRegistry.skinHead);
+                skins[1 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, SkinTypeRegistry.skinChest);
+                skins[2 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, SkinTypeRegistry.skinLegs);
+                skins[3 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, SkinTypeRegistry.skinFeet);
             }
             ISkinDye[] dyes = new ISkinDye[4 * 5];
             for (int skinIndex = 0; skinIndex < 5; skinIndex++) {

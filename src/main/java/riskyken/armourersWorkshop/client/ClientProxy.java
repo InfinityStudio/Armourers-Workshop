@@ -10,6 +10,7 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.skin43d.impl.SkinStorageImpl;
 import org.apache.logging.log4j.Level;
 import removequ.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.TestEnvSetup;
@@ -67,6 +68,10 @@ public class ClientProxy extends CommonProxy {
     public void preInit(File configDir) {
         super.preInit(configDir);
         provider = new TestEnvSetup();
+        SkinInfo skin = provider.getSkinInfoForEntity(null);
+        System.out.println(skin);
+
+
         skinRepository = new SkinStorageImpl(new AsyncModelBakery(2));
         equipmentWardrobeHandler = new EquipmentWardrobeProvider() {
             @Override

@@ -10,6 +10,8 @@ import riskyken.armourersWorkshop.common.skin.data.Skin;
 import net.skin43d.utils.SkinIOUtils;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.UUID;
 
 /**
  * @author ci010
@@ -31,17 +33,17 @@ public class TestEnvSetup implements SkinInfoProvider {
     }
 
     @Override
-    public void deploy() {
-
+    public SkinInfo getSkinInfoForEntity(Entity entity) {
+        return new SkinInfo(UUID.randomUUID(), Collections.singletonMap("armourers:wings", skin));
     }
 
     @Override
-    public SkinInfo getSkin(Entity entity) {
-        return SkinInfo.EMPTY;
+    public Skin getSkinInfoForEntity(Entity entity, SkinType skinType) {
+        return null;
     }
 
     @Override
-    public Skin getSkin(Entity entity, SkinType skinType, int slotIndex) {
+    public Skin getSkinInfoForEntity(Entity entity, SkinType skinType, int slotIndex) {
         return skin;
     }
 

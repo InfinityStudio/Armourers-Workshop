@@ -1,6 +1,6 @@
 package riskyken.armourersWorkshop.client.render.core;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -13,7 +13,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.render.bake.ColouredFace;
+import net.skin43d.impl.client.render.BakedFace;
 import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
@@ -44,10 +44,6 @@ public class SkinPartRenderer extends ModelBase {
         mc = Minecraft.getMinecraft();
     }
 
-    public void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, boolean doLodLoading) {
-        renderPart(skinPart, scale, skinDye, extraColour, 0, doLodLoading);
-    }
-
     public void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, double distance, boolean doLodLoading) {
         int lod = MathHelper.floor_double(distance / ConfigHandlerClient.lodDistance);
         lod = MathHelper.clamp_int(lod, 0, ConfigHandlerClient.maxLodLevels);
@@ -75,37 +71,30 @@ public class SkinPartRenderer extends ModelBase {
             }
         }
 
-        if (ClientProxy.useSafeTextureRender()) {
+        if (ClientProxy.useSafeTextureRender())
             mc.renderEngine.bindTexture(texture);
-        } else {
+         else
             GL11.glDisable(GL11.GL_TEXTURE_2D);
-        }
 
         int startIndex = 0;
-        int endIndex = 0;
+        int endIndex;
 
         int loadingLod = skinModel.getLoadingLod();
-        if (!doLodLoading) {
+        if (!doLodLoading)
             loadingLod = 0;
-        }
-        if (loadingLod > lod) {
+        if (loadingLod > lod)
             lod = loadingLod;
-        }
 
-        if (lod != 0) {
-            if (multipassSkinRendering) {
+        if (lod != 0)
+            if (multipassSkinRendering)
                 startIndex = lod * 4;
-            } else {
+             else
                 startIndex = lod * 2;
-            }
-        }
 
-        if (multipassSkinRendering) {
+        if (multipassSkinRendering)
             endIndex = startIndex + 4;
-        } else {
+         else
             endIndex = startIndex + 2;
-        }
-
 
         int listCount = skinModel.displayList.length;
         for (int i = startIndex; i < endIndex; i++) {
@@ -146,13 +135,11 @@ public class SkinPartRenderer extends ModelBase {
         //mc.mcProfiler.endSection();
     }
 
-    private void renderVertexList(ArrayList<ColouredFace> vertexList, float scale, ISkinDye skinDye, byte[] extraColour, ClientSkinPartData cspd) {
+    private void renderVertexList(List<BakedFace> vertexList, float scale, ISkinDye skinDye, byte[] extraColour, ClientSkinPartData cspd) {
         IRenderBuffer renderBuffer = RenderBridge.INSTANCE;
         renderBuffer.startDrawingQuads();
-        for (int i = 0; i < vertexList.size(); i++) {
-            ColouredFace cVert = vertexList.get(i);
-            cVert.renderVertex(renderBuffer, skinDye, extraColour, cspd, ClientProxy.useSafeTextureRender());
-        }
+        for (int i = 0; i < vertexList.size(); i++)
+            vertexList.get(i).renderVertex(skinDye, extraColour, cspd, ClientProxy.useSafeTextureRender());
         renderBuffer.draw();
     }
 }

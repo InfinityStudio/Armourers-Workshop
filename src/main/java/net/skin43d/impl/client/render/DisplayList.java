@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.client.render;
+package net.skin43d.impl.client.render;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -7,7 +7,6 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.renderer.GLAllocation;
 
 public class DisplayList {
-    
     private static AtomicInteger LIST_COUNT = new AtomicInteger(0);
     private int list; 
     private boolean compiled = false;

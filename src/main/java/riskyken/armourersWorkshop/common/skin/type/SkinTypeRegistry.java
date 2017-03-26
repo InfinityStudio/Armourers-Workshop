@@ -43,10 +43,13 @@ public final class SkinTypeRegistry implements ISkinTypeRegistry {
     private LinkedHashMap<String, SkinType> skinTypeMap;
     private HashMap<String, SkinPartType> skinPartMap;
 
+    private List<SkinType> skinTypeList;
+
     public SkinTypeRegistry() {
         MinecraftForge.EVENT_BUS.register(this);
         skinTypeMap = new LinkedHashMap<String, SkinType>();
         skinPartMap = new HashMap<String, SkinPartType>();
+        skinTypeList = new ArrayList<SkinType>();
         registerSkins();
     }
 
@@ -100,6 +103,7 @@ public final class SkinTypeRegistry implements ISkinTypeRegistry {
             SkinPartType skinPart = skinParts.get(i);
             skinPartMap.put(skinPart.getRegistryName(), skinPart);
         }
+        skinTypeList.add(skinType);
         return true;
     }
 
@@ -185,7 +189,8 @@ public final class SkinTypeRegistry implements ISkinTypeRegistry {
         return skinBlock;
     }
 
-    public static SkinType getSkinWings() {
+    @Override
+    public SkinType getSkinWings() {
         return skinWings;
     }
 
@@ -233,16 +238,8 @@ public final class SkinTypeRegistry implements ISkinTypeRegistry {
     }
 
     @Override
-    public ArrayList<SkinType> getRegisteredSkinTypes() {
-        ArrayList<SkinType> skinTypes = new ArrayList<SkinType>();
-        for (int i = 0; i < skinTypeMap.size(); i++) {
-            String registryName = (String) skinTypeMap.keySet().toArray()[i];
-            SkinType skinType = getSkinTypeFromRegistryName(registryName);
-            if (skinType != null) {
-                skinTypes.add(skinType);
-            }
-        }
-        return skinTypes;
+    public List<SkinType> getAllSkinTypes() {
+        return skinTypeList;
     }
 
     public int getNumberOfSkinRegistered() {

@@ -43,4 +43,12 @@ public class SkinInfo {
                 return part;
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "SkinInfo{" +
+                "playerID=" + playerID +
+                ", stringSkinMap=" + stringSkinMap +
+                '}';
+    }
 }

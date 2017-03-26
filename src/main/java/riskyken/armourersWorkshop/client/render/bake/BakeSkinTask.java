@@ -34,8 +34,8 @@ public class BakeSkinTask implements Callable<Skin> {
         for (int i = 0; i < skin.getParts().size(); i++) {
             SkinPart partData = skin.getParts().get(i);
             partData.setClientSkinPartData(new ClientSkinPartData());
-            int[][][] cubeArray = SkinBaker.cullFacesOnEquipmentPart(partData);
-            SkinBaker.buildPartDisplayListArray(partData, dyeColour, dyeUseCount, cubeArray);
+            int[][][] cubeSpace = SkinBaker.cullFacesOnEquipmentPart(partData);
+            SkinBaker.buildPartDisplayListArray(partData, dyeColour, dyeUseCount, cubeSpace);
             partData.clearCubeData();
         }
 

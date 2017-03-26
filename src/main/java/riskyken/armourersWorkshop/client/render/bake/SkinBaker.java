@@ -2,11 +2,13 @@ package riskyken.armourersWorkshop.client.render.bake;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.skin43d.impl.client.render.BakedFace;
 import riskyken.armourersWorkshop.api.common.skin.Rectangle3D;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
@@ -33,8 +35,8 @@ final class SkinBaker {
         cubeData.setupFaceFlags();
         skinPart.getClientSkinPartData().totalCubesInPart = new int[CubeRegistry.INSTANCE.getTotalCubes()];
 
-        Rectangle3D pb = skinPart.getPartBounds();
-        int[][][] cubeArray = new int[pb.getWidth()][pb.getHeight()][pb.getDepth()];
+        Rectangle3D bounds = skinPart.getPartBounds();
+        int[][][] cubeSpace3D = new int[bounds.getWidth()][bounds.getHeight()][bounds.getDepth()];
 
         int updates = 0;
 
@@ -42,24 +44,24 @@ final class SkinBaker {
             int cubeId = cubeData.getCubeId(i);
             byte[] cubeLoc = cubeData.getCubeLocation(i);
             skinPart.getClientSkinPartData().totalCubesInPart[cubeId] += 1;
-            int x = (int) cubeLoc[0] - pb.getX();
-            int y = (int) cubeLoc[1] - pb.getY();
-            int z = (int) cubeLoc[2] - pb.getZ();
-            cubeArray[x][y][z] = i + 1;
-            if (ConfigHandlerClient.slowModelBaking) {
-                updates++;
-                if (updates > 40) {
-                    try {
-                        Thread.sleep(1);
-                        updates = 0;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+            int x = (int) cubeLoc[0] - bounds.getX();
+            int y = (int) cubeLoc[1] - bounds.getY();
+            int z = (int) cubeLoc[2] - bounds.getZ();
+            cubeSpace3D[x][y][z] = i + 1;
+//            if (ConfigHandlerClient.slowModelBaking) {
+//                updates++;
+//                if (updates > 40) {
+//                    try {
+//                        Thread.sleep(1);
+//                        updates = 0;
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
         }
 
-        ArrayList<CubeLocation> openList = new ArrayList<CubeLocation>();
+        List<CubeLocation> openList = new ArrayList<CubeLocation>();
         HashSet<Integer> closedSet = new HashSet<Integer>();
         CubeLocation startCube = new CubeLocation(-1, -1, -1);
         openList.add(startCube);
@@ -68,32 +70,33 @@ final class SkinBaker {
         while (openList.size() > 0) {
             CubeLocation cl = openList.get(openList.size() - 1);
             openList.remove(openList.size() - 1);
-            ArrayList<CubeLocation> foundLocations = checkCubesAroundLocation(cubeData, cl, pb, cubeArray);
+            ArrayList<CubeLocation> foundLocations = checkCubesAroundLocation(cubeData, cl, bounds, cubeSpace3D);
             for (int i = 0; i < foundLocations.size(); i++) {
                 CubeLocation foundLocation = foundLocations.get(i);
                 if (!closedSet.contains(foundLocation.hashCode())) {
                     closedSet.add(foundLocation.hashCode());
-                    if (isCubeInSearchArea(foundLocation, pb)) {
+                    if (isCubeInSearchArea(foundLocation, bounds)) {
                         openList.add(foundLocation);
                     }
                 }
             }
-            if (ConfigHandlerClient.slowModelBaking) {
-                updates++;
-                if (updates > 40) {
-                    try {
-                        Thread.sleep(1);
-                        updates = 0;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+//            if (ConfigHandlerClient.slowModelBaking) {
+//                updates++;
+//                if (updates > 40) {
+//                    try {
+//                        Thread.sleep(1);
+//                        updates = 0;
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
         }
-        return cubeArray;
+        return cubeSpace3D;
     }
 
-    private static ArrayList<CubeLocation> checkCubesAroundLocation(SkinCubeData cubeData, CubeLocation cubeLocation, Rectangle3D partBounds, int[][][] cubeArray) {
+    private static ArrayList<CubeLocation> checkCubesAroundLocation(SkinCubeData cubeData, CubeLocation cubeLocation,
+                                                                    Rectangle3D partBounds, int[][][] cubeArray) {
         ArrayList<CubeLocation> openList = new ArrayList<SkinBaker.CubeLocation>();
         ForgeDirection[] dirs = {ForgeDirection.DOWN, ForgeDirection.UP,
                 ForgeDirection.SOUTH, ForgeDirection.NORTH,
@@ -101,11 +104,9 @@ final class SkinBaker {
 
         int index = getIndexForLocation(cubeLocation, partBounds, cubeArray);
 
-        boolean isGlass = false;
-        if (index > 0) {
-            ICube cube = cubeData.getCube(index - 1);
-            isGlass = cube.needsPostRender();
-        }
+        boolean needPostRender = false;
+        if (index > 0)
+            needPostRender = cubeData.getCube(index - 1).needsPostRender();
 
         for (int i = 0; i < dirs.length; i++) {
             ForgeDirection dir = dirs[i];
@@ -113,7 +114,6 @@ final class SkinBaker {
             int y = cubeLocation.y + dir.offsetY;
             int z = cubeLocation.z + dir.offsetZ;
             int tarIndex = getIndexForLocation(x, y, z, partBounds, cubeArray);
-
 
             //Add new cubes to the open list.
             if (tarIndex < 1) {
@@ -125,9 +125,8 @@ final class SkinBaker {
             }
 
             //Update the face flags if there is a block at this location.
-            if (tarIndex > 0) {
-                flagCubeFace(x, y, z, i, partBounds, cubeArray, cubeData, isGlass);
-            }
+            if (tarIndex > 0)
+                flagCubeFace(x, y, z, i, partBounds, cubeArray, cubeData, needPostRender);
         }
         return openList;
     }
@@ -171,7 +170,7 @@ final class SkinBaker {
     static void buildPartDisplayListArray(SkinPart partData, int[][] dyeColour, int[] dyeUseCount, int[][][] cubeArray) {
         boolean multipassSkinRendering = ClientProxy.useMultipassSkinRendering();
 
-        ArrayList<ColouredFace>[] renderLists;
+        ArrayList<BakedFace>[] renderLists;
 
         int lodLevels = ConfigHandlerClient.maxLodLevels;
         
@@ -188,10 +187,10 @@ final class SkinBaker {
          * 1 = glowing
          */
 
-        renderLists = (ArrayList<ColouredFace>[]) new ArrayList[ClientProxy.getNumberOfRenderLayers() * (lodLevels + 1)];
+        renderLists = (ArrayList<BakedFace>[]) new ArrayList[ClientProxy.getNumberOfRenderLayers() * (lodLevels + 1)];
 
         for (int i = 0; i < renderLists.length; i++) {
-            renderLists[i] = new ArrayList<ColouredFace>();
+            renderLists[i] = new ArrayList<BakedFace>();
         }
 
         float scale = 0.0625F;
@@ -259,7 +258,7 @@ final class SkinBaker {
 
                         for (int j = 0; j < 6; j++) {
                             if (cubeData.getFaceFlags(i).get(j)) {
-                                ColouredFace ver = new ColouredFace(
+                                BakedFace ver = new BakedFace(
                                         loc[0], loc[1], loc[2],
                                         r[j], g[j], b[j],
                                         a, paintType[j], (byte) j, (byte) (1));
@@ -300,7 +299,7 @@ final class SkinBaker {
                                     }
                                     int lodIndex = ((lod) * ClientProxy.getNumberOfRenderLayers()) + listIndex;
 
-                                    ColouredFace ver = new ColouredFace(
+                                    BakedFace ver = new BakedFace(
                                             (byte) (ix + pb.getX()), (byte) (iy + pb.getY()), (byte) (iz + pb.getZ()),
                                             avegC[0], avegC[1], avegC[2],
                                             avegC[3], avegC[4], (byte) j, lodLevel);

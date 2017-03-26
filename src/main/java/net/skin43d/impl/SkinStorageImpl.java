@@ -1,5 +1,6 @@
-package net.skin43d;
+package net.skin43d.impl;
 
+import net.skin43d.SkinRepository;
 import riskyken.armourersWorkshop.api.common.skin.data.Skin3D;
 import riskyken.armourersWorkshop.client.render.bake.SkinBakery;
 

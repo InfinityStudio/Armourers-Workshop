@@ -1,39 +1,36 @@
 package riskyken.armourersWorkshop.client.skin;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.render.core.SkinModel;
-import riskyken.armourersWorkshop.client.render.bake.ColouredFace;
+import net.skin43d.impl.client.render.BakedFace;
 import riskyken.armourersWorkshop.common.skin.data.SkinDye;
 
 @SideOnly(Side.CLIENT)
 public class ClientSkinPartData {
 
-    /** Blank dye that is used if no dye is applied. */
+    /**
+     * Blank dye that is used if no dye is applied.
+     */
     public static final SkinDye blankDye = new SkinDye();
-    public ArrayList<ColouredFace>[] vertexLists;
+    public List<BakedFace>[] vertexLists;
     public HashMap<ModelKey, SkinModel> dyeModels;
     public int[] totalCubesInPart;
-    
+
     private int[] averageR = new int[10];
     private int[] averageG = new int[10];
     private int[] averageB = new int[10];
-    
+
     public ClientSkinPartData() {
         dyeModels = new HashMap<ModelKey, SkinModel>();
     }
-    
+
     public SkinModel getModelForDye(ISkinDye skinDye, byte[] extraColours) {
-        if (skinDye == null) {
+        if (skinDye == null)
             skinDye = blankDye;
-        }
         ModelKey modelKey = new ModelKey(skinDye, extraColours);
         SkinModel skinModel = dyeModels.get(modelKey);
         if (skinModel == null) {
@@ -42,7 +39,7 @@ public class ClientSkinPartData {
         }
         return skinModel;
     }
-    
+
     public void cleanUpDisplayLists() {
         Set keys = dyeModels.keySet();
         Iterator<ModelKey> i = dyeModels.keySet().iterator();
@@ -51,30 +48,30 @@ public class ClientSkinPartData {
             dyeModels.get(modelKey).cleanUpDisplayLists();
         }
     }
-    
+
     public int getModelCount() {
         return dyeModels.size();
     }
 
-    public void setVertexLists(ArrayList<ColouredFace>[] vertexLists) {
+    public void setVertexLists(List<BakedFace>[] vertexLists) {
         this.vertexLists = vertexLists;
     }
-    
+
     public void setAverageDyeValues(int[] r, int[] g, int[] b) {
         this.averageR = r;
         this.averageG = g;
         this.averageB = b;
     }
-    
+
     public int[] getAverageDyeColour(int dyeNumber) {
-        return new int[] { averageR[dyeNumber], averageG[dyeNumber], averageB[dyeNumber] };
+        return new int[]{averageR[dyeNumber], averageG[dyeNumber], averageB[dyeNumber]};
     }
-    
+
     private class ModelKey {
-        
+
         private ISkinDye skinDye;
         byte[] extraColours;
-        
+
         public ModelKey(ISkinDye skinDye, byte[] extraColours) {
             this.skinDye = skinDye;
             this.extraColours = extraColours;

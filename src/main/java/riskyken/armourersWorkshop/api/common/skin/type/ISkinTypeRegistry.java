@@ -25,11 +25,13 @@ public interface ISkinTypeRegistry {
     SkinType getSkinTypeFromRegistryName(String registryName);
 
 
+    SkinType getSkinWings();
+
     SkinPartType getSkinPartTypeFromId(int id);
 
     SkinPartType getSkinPartTypeFromName(String regName);
 
-    List<SkinType> getRegisteredSkinTypes();
+    List<SkinType> getAllSkinTypes();
 
     @Deprecated
     SkinType getSkinTypeSkirt();

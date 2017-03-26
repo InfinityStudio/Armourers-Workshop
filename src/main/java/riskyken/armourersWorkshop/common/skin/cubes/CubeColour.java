@@ -139,7 +139,6 @@ public class CubeColour implements ICubeColour {
         t[side] = type;
     }
 
-    @Override
     public void readFromNBT(NBTTagCompound compound) {
         for (int i = 0; i < 6; i++) {
             r[i] = compound.getByte(TAG_RED + i);
@@ -153,7 +152,6 @@ public class CubeColour implements ICubeColour {
         }
     }
 
-    @Override
     public void writeToNBT(NBTTagCompound compound) {
         for (int i = 0; i < 6; i++) {
             compound.setByte(TAG_RED + i, r[i]);

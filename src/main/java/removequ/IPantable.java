@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.api.common.painting;
+package removequ;
 
 import riskyken.armourersWorkshop.api.common.skin.cubes.ICubeColour;
 import net.skin43d.utils.PaintType;

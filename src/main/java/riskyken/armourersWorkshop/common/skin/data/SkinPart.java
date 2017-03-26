@@ -17,6 +17,7 @@ public class SkinPart implements Skin3D.Part {
     private SkinCubeData cubeData;
     private List<CubeMarkerData> markerBlocks;
     private SkinPartType skinPart;
+
     @SideOnly(Side.CLIENT)
     private ClientSkinPartData clientSkinPartData;
 
@@ -134,6 +135,7 @@ public class SkinPart implements Skin3D.Part {
         }
         return null;
     }
+
     @Override
     public String toString() {
         return "SkinPart [cubeData=" + cubeData + ", markerBlocks=" + markerBlocks + ", skinPart=" + skinPart.getRegistryName() + "]";

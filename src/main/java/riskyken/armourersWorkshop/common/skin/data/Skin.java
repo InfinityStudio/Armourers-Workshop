@@ -44,7 +44,6 @@ public class Skin implements Skin3D {
     private SkinType equipmentSkinType;
     private int[] paintData;
     private List<SkinPart> parts;
-    public int requestId;
     private int lightHash = 0;
 
     @SideOnly(Side.CLIENT)

@@ -71,12 +71,12 @@ public class ModelRendererAttachment extends ModelRenderer {
 //                    (byte) hairColour.getRed(), (byte) hairColour.getGreen(), (byte) hairColour.getBlue()};
 //        }
         SkinInfoProvider provider = ArmourersWorkshopMod.proxy.getSkinProvider();
-//        SkinInfo info = provider.getSkin(player);
-//        Skin data = info.getSkin(skinType);
+//        SkinInfo info = provider.getSkinInfoForEntity(player);
+//        Skin data = info.getSkinInfoForEntity(skinType);
 //        SkinPart partData = info.getSkinPart(skinType, skinPart);
-        SkinInfo skin = provider.getSkin(player);
+        SkinInfo skin = provider.getSkinInfoForEntity(player);
         Skin data = skin.getSkin(skinType);
-        SkinPart partData = skin.getSkinPart(skinType, skinPart);
+        SkinPart partData = data.getSkinPartFromType(skinPart);
         if (partData != null) {
             GL11.glPushMatrix();
             if (skinType == SkinTypeRegistry.skinLegs && skinPart.getRegistryName().equals("armourers:legs.skirt")) {

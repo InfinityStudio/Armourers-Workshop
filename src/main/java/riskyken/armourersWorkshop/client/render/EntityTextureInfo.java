@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.skin43d.utils.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
-import riskyken.armourersWorkshop.client.render.bake.ColouredFace;
+import net.skin43d.impl.client.render.BakedFace;
 import riskyken.armourersWorkshop.common.SkinHelper;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import net.skin43d.utils.PaintType;
@@ -296,7 +296,7 @@ public class EntityTextureInfo {
         if (skin != null) {
             average = skin.getAverageDyeColour(dyeIndex);
         }
-        dye = ColouredFace.dyeColour(r, g, b, dye, average);
+        dye = BakedFace.dyeColour(r, g, b, dye, average);
 
         return (255 << 24) + ((dye[0] & 0xFF) << 16) + ((dye[1] & 0xFF) << 8) + (dye[2] & 0xFF);
     }

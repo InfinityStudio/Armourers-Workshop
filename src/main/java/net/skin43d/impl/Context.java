@@ -15,7 +15,6 @@ public abstract class Context {
     public abstract int getTextureSize();
 
     public abstract int getFileVersion();
-
     public abstract ISkinTypeRegistry getSkinRegistry();
 
     public abstract EquipmentWardrobeProvider getEquipmentWardrobeProvider();
