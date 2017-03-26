@@ -10,12 +10,12 @@ import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class SkinModel {
+public class BakedCube {
     public DisplayList[] displayList;
     public boolean[] haveList;
     public long loadedTime;
 
-    public SkinModel(List<BakedFace>[] vertexLists) {
+    public BakedCube(List<BakedFace>[] vertexLists) {
         displayList = new DisplayList[vertexLists.length];
         haveList = new boolean[vertexLists.length];
         for (int i = 0; i < displayList.length; i++) {

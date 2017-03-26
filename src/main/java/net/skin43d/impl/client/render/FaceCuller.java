@@ -17,18 +17,16 @@ public class FaceCuller {
     /**
      * @return indexSpace
      */
-    static int[][][] cullFacesPre(SkinPart skinPart) {
+    public static int[][][] cullFacesPre(SkinPart skinPart, int[] totalCubesInPart) {
         SkinCubeData cubeData = skinPart.getCubeData();
         Rectangle3D bounds = skinPart.getPartBounds();
-
-        skinPart.getClientSkinPartData().totalCubesInPart = new int[Context.instance().getCubeRegistry().getTotalCubes()];
 
         int[][][] cubeSpace3D = new int[bounds.getWidth()][bounds.getHeight()][bounds.getDepth()];
 
         for (int i = 0; i < cubeData.getCubeCount(); i++) {
             int cubeId = cubeData.getCubeId(i);
             byte[] cubeLoc = cubeData.getCubeLocation(i);
-            skinPart.getClientSkinPartData().totalCubesInPart[cubeId] += 1;
+            totalCubesInPart[cubeId] += 1;
             int x = (int) cubeLoc[0] - bounds.getX();
             int y = (int) cubeLoc[1] - bounds.getY();
             int z = (int) cubeLoc[2] - bounds.getZ();
@@ -37,7 +35,7 @@ public class FaceCuller {
         return cubeSpace3D;
     }
 
-    static void cullFace(SkinPart part, int[][][] cubeSpace3D) {
+    public static void cullFace(SkinPart part, int[][][] cubeSpace3D) {
         SkinCubeData cubeData = part.getCubeData();
         Rectangle3D bounds = part.getPartBounds();
         cubeData.setupFaceFlags();
@@ -113,13 +111,10 @@ public class FaceCuller {
     }
 
     private static boolean isCubeInSearchArea(CubeLocation cubeLocation, Rectangle3D partBounds) {
-        if (cubeLocation.x > -2 & cubeLocation.x < partBounds.getWidth() + 1) {
-            if (cubeLocation.y > -2 & cubeLocation.y < partBounds.getHeight() + 1) {
-                if (cubeLocation.z > -2 & cubeLocation.z < partBounds.getDepth() + 1) {
+        if (cubeLocation.x > -2 & cubeLocation.x < partBounds.getWidth() + 1)
+            if (cubeLocation.y > -2 & cubeLocation.y < partBounds.getHeight() + 1)
+                if (cubeLocation.z > -2 & cubeLocation.z < partBounds.getDepth() + 1)
                     return true;
-                }
-            }
-        }
         return false;
     }
 

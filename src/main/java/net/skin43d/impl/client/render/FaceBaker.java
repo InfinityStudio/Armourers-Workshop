@@ -3,9 +3,7 @@ package net.skin43d.impl.client.render;
 import net.skin43d.impl.Context;
 import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.client.ClientProxy;
-import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
-import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 import riskyken.armourersWorkshop.common.skin.cubes.ICube;
 import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
@@ -17,9 +15,8 @@ import java.util.List;
  * @author ci010
  */
 public class FaceBaker {
-    static void buildPartDisplayListArray(SkinPart partData, int[][] dyeColour, int[] dyeUseCount, int[][][] cubeArray) {
+    public static List<BakedFace>[] buildPartDisplayListArray(SkinPart partData, int[][] dyeColour, int[] dyeUseCount, int[][][] cubeArray) {
         boolean multipassSkinRendering = ClientProxy.useMultipassSkinRendering();
-
 
         int lodLevels = ConfigHandlerClient.maxLodLevels;
 
@@ -37,14 +34,12 @@ public class FaceBaker {
          */
 
         List<BakedFace>[] renderLists = new ArrayList[ClientProxy.getNumberOfRenderLayers() * (lodLevels + 1)];
+
         for (int i = 0; i < renderLists.length; i++)
             renderLists[i] = new ArrayList<BakedFace>();
 
-        float scale = 0.0625F;
-
         SkinCubeData cubeData = partData.getCubeData();
         Rectangle3D bound = partData.getPartBounds();
-        ClientSkinPartData baked = partData.getClientSkinPartData();
 
         for (int ix = 0; ix < bound.getWidth(); ix++) {
             for (int iy = 0; iy < bound.getHeight(); iy++) {
@@ -86,20 +81,14 @@ public class FaceBaker {
 
                         int listIndex = 0;
                         if (multipassSkinRendering) {
-                            if (cube.isGlowing() && !cube.needsPostRender()) {
+                            if (cube.isGlowing() && !cube.needsPostRender())
                                 listIndex = 1;
-                            }
-                            if (cube.needsPostRender() && !cube.isGlowing()) {
+                            if (cube.needsPostRender() && !cube.isGlowing())
                                 listIndex = 2;
-                            }
-                            if (cube.isGlowing() && cube.needsPostRender()) {
+                            if (cube.isGlowing() && cube.needsPostRender())
                                 listIndex = 3;
-                            }
-                        } else {
-                            if (cube.isGlowing()) {
-                                listIndex = 1;
-                            }
-                        }
+                        } else if (cube.isGlowing())
+                            listIndex = 1;
 
                         for (int j = 0; j < 6; j++)
                             if (cubeData.getFaceFlags(locIdx).get(j))
@@ -152,7 +141,8 @@ public class FaceBaker {
                 }
             }
         }
-        baked.setVertexLists(renderLists);
+//        baked.setVertexLists(renderLists);
+        return renderLists;
     }
 
     private static boolean getAverageFaceFlags(int x, int y, int z, byte lodLevel, int[][][] cubeArray, SkinCubeData cubeData, Rectangle3D partBounds, int face) {

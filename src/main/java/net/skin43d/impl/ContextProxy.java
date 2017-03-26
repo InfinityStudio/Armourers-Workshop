@@ -62,4 +62,9 @@ public class ContextProxy extends Context {
     public SkinProvider getSkinProvider() {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public CubeRegistry getCubeRegistry() {
+        return cubeRegistry;
+    }
 }

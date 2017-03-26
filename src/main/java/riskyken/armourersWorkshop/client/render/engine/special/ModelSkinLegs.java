@@ -10,7 +10,6 @@ import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.render.core.ModelHelper;
 import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
-import removequ.ClientSkinPaintCache;
 import removequ.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
@@ -20,12 +19,14 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class ModelSkinLegs extends AbstractModelSkin {
-    
+
     @Override
     public void render(Entity entity, Skin armourData, boolean showSkinPaint, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
-        if (armourData == null) { return; }
+        if (armourData == null) {
+            return;
+        }
         List<SkinPart> parts = armourData.getParts();
-        
+
         if (entity != null && entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
             this.isSneak = player.isSneaking();
@@ -35,19 +36,20 @@ public class ModelSkinLegs extends AbstractModelSkin {
                 this.heldItemRight = 1;
             }
         }
-        
+
         if (ClientProxy.isJrbaClientLoaded()) {
             this.isChild = false;
         }
-        
+
 //        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinLegs);
         RenderHelper.enableGUIStandardItemLighting();
-        
+
         if (armourData.hasPaintData() & showSkinPaint) {
             if (extraColour == null) {
                 extraColour = ModelHelper.getLocalPlayerExtraColours();
             }
-            SkinModelTexture st = ClientSkinPaintCache.INSTANCE.getTextureForSkin(armourData, skinDye, extraColour);
+//            armourData.skinModelTexture
+            SkinModelTexture st = armourData.skinModelTexture;// ClientSkinPaintCache.INSTANCE.getTextureForSkin(armourData, skinDye, extraColour);
             st.bindTexture();
             GL11.glPushMatrix();
             GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
@@ -61,19 +63,19 @@ public class ModelSkinLegs extends AbstractModelSkin {
             GL11.glPopAttrib();
             GL11.glPopMatrix();
         }
-        
+
         for (int i = 0; i < parts.size(); i++) {
             SkinPart part = parts.get(i);
-            
+
             GL11.glPushMatrix();
             if (isChild) {
                 float f6 = 2.0F;
                 GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
                 GL11.glTranslatef(0.0F, 24.0F * SCALE, 0.0F);
             }
-            
+
             ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, part.getPartType());
-            
+
             if (part.getPartType().getPartName().equals("leftLeg")) {
                 renderLeftLeg(part, SCALE, skinDye, extraColour, itemRender, distance, doLodLoading);
             } else if (part.getPartType().getPartName().equals("rightLeg")) {
@@ -81,13 +83,13 @@ public class ModelSkinLegs extends AbstractModelSkin {
             } else if (part.getPartType().getPartName().equals("skirt")) {
                 renderSkirt(part, SCALE, skinDye, extraColour, itemRender, distance, doLodLoading);
             }
-            
+
             GL11.glPopMatrix();
         }
-        
+
         GL11.glColor3f(1F, 1F, 1F);
     }
-    
+
     private void renderLeftLeg(SkinPart part, float scale, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
         GL11.glPushMatrix();
         if (isSneak) {
@@ -104,7 +106,7 @@ public class ModelSkinLegs extends AbstractModelSkin {
         renderPart(part, scale, skinDye, extraColour, distance, doLodLoading);
         GL11.glPopMatrix();
     }
-    
+
     private void renderRightLeg(SkinPart part, float scale, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
         GL11.glPushMatrix();
         if (isSneak) {
@@ -121,21 +123,21 @@ public class ModelSkinLegs extends AbstractModelSkin {
         renderPart(part, scale, skinDye, extraColour, distance, doLodLoading);
         GL11.glPopMatrix();
     }
-    
+
     private void renderSkirt(SkinPart part, float scale, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
         GL11.glPushMatrix();
         GL11.glColor3f(1F, 1F, 1F);
         if (!itemRender) {
             GL11.glTranslated(0, 12 * scale, 0);
         }
-        
+
         if (isSneak) {
             GL11.glTranslated(0, -3 * scale, 4 * scale);
         }
         if (isRiding) {
             GL11.glRotated(-70, 1F, 0F, 0F);
         }
-        
+
         renderPart(part, scale, skinDye, extraColour, distance, doLodLoading);
         GL11.glPopMatrix();
     }

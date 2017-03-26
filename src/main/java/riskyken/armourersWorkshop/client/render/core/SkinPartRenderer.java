@@ -57,7 +57,7 @@ public class SkinPartRenderer extends ModelBase {
 
         ClientSkinPartData cspd = skinPart.getClientSkinPartData();
         if (cspd == null) return;
-        SkinModel skinModel = cspd.getModelForDye(skinDye, extraColour);
+        BakedCube skinModel = cspd.getModelForDye(skinDye, extraColour);
         boolean multipassSkinRendering = ClientProxy.useMultipassSkinRendering();
 
         for (int i = 0; i < skinModel.displayList.length; i++) {

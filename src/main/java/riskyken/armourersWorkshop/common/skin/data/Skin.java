@@ -43,14 +43,12 @@ public class Skin implements Skin3D {
     private SkinType equipmentSkinType;
     private int[] paintData;
     private List<SkinPart> parts;
-    private int lightHash = 0;
 
+    private int lightHash = 0;
     @SideOnly(Side.CLIENT)
     public SkinModelTexture skinModelTexture;
-
     @SideOnly(Side.CLIENT)
     public int paintTextureId;
-
     private int[] averageR = new int[10];
     private int[] averageG = new int[10];
     private int[] averageB = new int[10];

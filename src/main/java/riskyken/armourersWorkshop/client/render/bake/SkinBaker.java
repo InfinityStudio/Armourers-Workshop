@@ -18,7 +18,7 @@ import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.client.ClientProxy;
 
-final class SkinBaker {
+public final class SkinBaker {
     public static boolean withinMaxRenderDistance(Entity entity) {
         return withinMaxRenderDistance(entity.posX, entity.posY, entity.posZ);
     }
@@ -31,7 +31,7 @@ final class SkinBaker {
         return true;
     }
 
-    static int[][][] cullFacesOnEquipmentPart(SkinPart skinPart) {
+    public static int[][][] cullFacesOnEquipmentPart(SkinPart skinPart) {
         SkinCubeData cubeData = skinPart.getCubeData();
         cubeData.setupFaceFlags();
         skinPart.getClientSkinPartData().totalCubesInPart = new int[Context.instance().getCubeRegistry().getTotalCubes()];
@@ -168,7 +168,7 @@ final class SkinBaker {
         return false;
     }
 
-    static void buildPartDisplayListArray(SkinPart partData, int[][] dyeColour, int[] dyeUseCount, int[][][] cubeArray) {
+    public static void buildPartDisplayListArray(SkinPart partData, int[][] dyeColour, int[] dyeUseCount, int[][][] cubeArray) {
         boolean multipassSkinRendering = ClientProxy.useMultipassSkinRendering();
 
         ArrayList<BakedFace>[] renderLists;
