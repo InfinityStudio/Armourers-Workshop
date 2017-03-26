@@ -1,8 +1,4 @@
-package riskyken.armourersWorkshop.common.painting;
-
-import riskyken.armourersWorkshop.common.lib.LibModInfo;
-import net.skin43d.utils.BitwiseUtils;
-import net.skin43d.utils.TranslateUtils;
+package net.skin43d.utils;
 
 public enum PaintType {
     NORMAL(255),
@@ -51,14 +47,14 @@ public enum PaintType {
         }
         return PaintType.NORMAL;
     }
-    
-    public static int setPaintTypeOnColour(PaintType paintType, int colour) {
-        return BitwiseUtils.setUByteToInt(colour, 0, paintType.key);
-    }
-    
-    public String getLocalizedName() {
-        String unlocalizedText = "paintType." + LibModInfo.ID.toLowerCase() + ":";
-        unlocalizedText += this.name().toLowerCase() + ".name";
-        return TranslateUtils.translate(unlocalizedText);
-    }
+//
+//    public static int setPaintTypeOnColour(PaintType paintType, int colour) {
+//        return BitwiseUtils.setUByteToInt(colour, 0, paintType.key);
+//    }
+//
+//    public String getLocalizedName() {
+//        String unlocalizedText = "paintType." + LibModInfo.ID.toLowerCase() + ":";
+//        unlocalizedText += this.name().toLowerCase() + ".name";
+//        return TranslateUtils.translate(unlocalizedText);
+//    }
  }

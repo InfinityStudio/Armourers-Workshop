@@ -3,7 +3,7 @@ package riskyken.armourersWorkshop.common.skin.data.serialize;
 import org.apache.logging.log4j.Level;
 import riskyken.armourersWorkshop.ArmourersWorkshop;
 import net.skin43d.skin3d.SkinPartType;
-import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
+import net.skin43d.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeMarkerData;
 import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;

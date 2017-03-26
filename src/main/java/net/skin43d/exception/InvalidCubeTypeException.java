@@ -1,4 +1,4 @@
-package riskyken.armourersWorkshop.common.exception;
+package net.skin43d.exception;
 
 public class InvalidCubeTypeException extends Exception {
     

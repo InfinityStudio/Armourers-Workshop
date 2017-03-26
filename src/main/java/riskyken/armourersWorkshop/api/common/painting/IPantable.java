@@ -1,7 +1,7 @@
 package riskyken.armourersWorkshop.api.common.painting;
 
 import riskyken.armourersWorkshop.api.common.skin.cubes.ICubeColour;
-import riskyken.armourersWorkshop.common.painting.PaintType;
+import net.skin43d.utils.PaintType;
 
 public interface IPantable {
     

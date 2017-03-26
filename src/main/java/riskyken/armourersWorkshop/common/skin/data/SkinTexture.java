@@ -20,7 +20,7 @@ import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.util.ResourceLocation;
 import riskyken.armourersWorkshop.common.SkinHelper;
-import riskyken.armourersWorkshop.common.painting.PaintType;
+import net.skin43d.utils.PaintType;
 import net.skin43d.utils.BitwiseUtils;
 
 /**

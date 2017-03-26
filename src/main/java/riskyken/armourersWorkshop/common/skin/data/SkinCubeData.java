@@ -7,7 +7,7 @@ import java.util.BitSet;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.skin43d.skin3d.SkinPartType;
-import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
+import net.skin43d.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 import riskyken.armourersWorkshop.common.skin.cubes.ICube;
 import riskyken.armourersWorkshop.common.skin.cubes.LegacyCubeHelper;

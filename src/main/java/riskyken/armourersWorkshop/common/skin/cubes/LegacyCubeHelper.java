@@ -1,7 +1,7 @@
 package riskyken.armourersWorkshop.common.skin.cubes;
 
 import net.skin43d.skin3d.SkinPartType;
-import riskyken.armourersWorkshop.common.exception.InvalidCubeTypeException;
+import net.skin43d.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
 
 import java.io.DataInput;
