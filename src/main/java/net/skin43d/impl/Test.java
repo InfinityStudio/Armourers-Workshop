@@ -14,31 +14,10 @@ import java.util.concurrent.Callable;
 /**
  * @author ci010
  */
-public class Test extends SkinProviderBase {
-    public Test(SkinBakery bakery, ListeningExecutorService service) {
-        super(bakery, service);
-    }
+public class Test {
 
-    private static String loc = "D:\\Storage\\Desktop\\Angel Wings.armour";
-    private static Skin skin;
 
     public static void setup() {
-        File file = new File(loc);
-        skin = SkinIOUtils.loadSkinFromFile(file);
-    }
 
-    @Override
-    public BakedSkinModel getBakedModel(Entity entity, SkinType type) {
-        return null;
-    }
-
-    @Override
-    protected Callable<Skin> requestSkinTask(Entity entity, SkinType skinType) {
-        return new Callable<Skin>() {
-            @Override
-            public Skin call() throws Exception {
-                return skin;
-            }
-        };
     }
 }

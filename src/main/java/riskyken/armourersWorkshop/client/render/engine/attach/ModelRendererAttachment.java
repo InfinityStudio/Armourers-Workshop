@@ -46,6 +46,10 @@ public class ModelRendererAttachment extends ModelRenderer {
         addBox(0, 0, 0, 0, 0, 0);
     }
 
+    private void _render(Skin skin) {
+
+    }
+
     @Override
     public void render(float scale) {
         mc.mcProfiler.startSection("armourers player render");
@@ -75,7 +79,8 @@ public class ModelRendererAttachment extends ModelRenderer {
 //        Skin data = info.getSkinInfoForEntity(skinType);
 //        SkinPart partData = info.getSkinPart(skinType, skinPart);
         Skin data = provider.getSkinInfoForEntity(player, skinType);
-        SkinPart partData = data.getSkinPartFromType(skinPart);
+        SkinPart partData = null;
+        if (data != null) partData = data.getSkinPartFromType(skinPart);
         if (partData != null) {
             GL11.glPushMatrix();
             if (skinType == reg.getSkinLegs() && skinPart.getRegistryName().equals("armourers:legs.skirt")) {

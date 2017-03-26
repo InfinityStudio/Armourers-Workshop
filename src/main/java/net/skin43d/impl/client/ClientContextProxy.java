@@ -9,23 +9,25 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.skin43d.SkinProvider;
 import net.skin43d.impl.ContextProxy;
-import net.skin43d.impl.SkinProviderBase;
+import net.skin43d.impl.SkinProviderLocal;
 import net.skin43d.impl.Test;
 import net.skin43d.utils.ModLogger;
+import net.skin43d.utils.SkinIOUtils;
 import org.apache.logging.log4j.Level;
 import riskyken.armourersWorkshop.client.render.RenderEngine;
 import riskyken.armourersWorkshop.client.render.bake.AsyncModelBakery;
 import riskyken.armourersWorkshop.client.render.engine.attach.RenderEngineAttach;
 import riskyken.armourersWorkshop.client.render.engine.special.RenderEngineSpecial;
+import riskyken.armourersWorkshop.common.skin.data.Skin;
 
-import java.util.concurrent.ExecutorService;
+import java.io.File;
 import java.util.concurrent.Executors;
 
 /**
  * @author ci010
  */
 public class ClientContextProxy extends ContextProxy {
-    private SkinProviderBase provider;
+    private SkinProvider provider;
     private RenderEngine renderEngine;
     private ListeningExecutorService service;
 
@@ -52,8 +54,19 @@ public class ClientContextProxy extends ContextProxy {
         this.renderEngine.deploy();
         service = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool());
         MinecraftForge.EVENT_BUS.register(new PlayerTextureHandler());
-        this.provider = new Test(new AsyncModelBakery(service), service);
+
+        /////TEST CODE//////
+        File file = new File(loc);
+        skin = SkinIOUtils.loadSkinFromFile(file);
+        AsyncModelBakery bakery = new AsyncModelBakery(service);
+        bakery.bake(skin);
+        this.provider = new SkinProviderLocal(skin);
+        /////TEST CODE//////
+
     }
+
+    private static String loc = "D:\\Storage\\Desktop\\Angel Wings.armour";
+    private static Skin skin;
 
     @Override
     protected void postInit(FMLPostInitializationEvent event) {

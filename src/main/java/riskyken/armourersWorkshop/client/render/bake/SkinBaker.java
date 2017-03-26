@@ -314,7 +314,6 @@ public final class SkinBaker {
             }
         }
 
-
         partData.getClientSkinPartData().setVertexLists(renderLists);
     }
 
