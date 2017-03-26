@@ -65,21 +65,21 @@ public final class EntityEquipmentDataManager {
 //        ItemStack stack = inventory.getCurrentItem();
 //        if (stack != null) {
 //            if (isSwordRenderItem(stack.getItem())) {
-//                if (equipmentData.haveEquipment(SkinTypeRegistry.skinSword, 0)) {
+//                if (equipmentData.haveEquipment(SkinTypeRegistryImpl.skinSword, 0)) {
 //                    SkinNBTHelper.addRenderIdToStack(
-//                            stack, SkinTypeRegistry.skinSword,
-//                            equipmentData.getEquipmentId(SkinTypeRegistry.skinSword, 0),
-//                            equipmentData.getSkinDye(SkinTypeRegistry.skinSword, 0));
+//                            stack, SkinTypeRegistryImpl.skinSword,
+//                            equipmentData.getEquipmentId(SkinTypeRegistryImpl.skinSword, 0),
+//                            equipmentData.getSkinDye(SkinTypeRegistryImpl.skinSword, 0));
 //                } else {
 //                    SkinNBTHelper.removeRenderIdFromStack(stack);
 //                }
 //            }
 //            if (isBowRenderItem(stack.getItem())) {
-//                if (equipmentData.haveEquipment(SkinTypeRegistry.skinBow, 0)) {
+//                if (equipmentData.haveEquipment(SkinTypeRegistryImpl.skinBow, 0)) {
 //                    SkinNBTHelper.addRenderIdToStack(
-//                            stack, SkinTypeRegistry.skinBow,
-//                            equipmentData.getEquipmentId(SkinTypeRegistry.skinBow, 0),
-//                            equipmentData.getSkinDye(SkinTypeRegistry.skinBow, 0));
+//                            stack, SkinTypeRegistryImpl.skinBow,
+//                            equipmentData.getEquipmentId(SkinTypeRegistryImpl.skinBow, 0),
+//                            equipmentData.getSkinDye(SkinTypeRegistryImpl.skinBow, 0));
 //                } else {
 //                    SkinNBTHelper.removeRenderIdFromStack(stack);
 //                }

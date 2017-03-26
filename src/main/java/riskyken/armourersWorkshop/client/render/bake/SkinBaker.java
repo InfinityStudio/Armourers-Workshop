@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.skin43d.impl.Context;
 import net.skin43d.impl.client.render.BakedFace;
 import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
@@ -33,7 +34,7 @@ final class SkinBaker {
     static int[][][] cullFacesOnEquipmentPart(SkinPart skinPart) {
         SkinCubeData cubeData = skinPart.getCubeData();
         cubeData.setupFaceFlags();
-        skinPart.getClientSkinPartData().totalCubesInPart = new int[CubeRegistry.INSTANCE.getTotalCubes()];
+        skinPart.getClientSkinPartData().totalCubesInPart = new int[Context.instance().getCubeRegistry().getTotalCubes()];
 
         Rectangle3D bounds = skinPart.getPartBounds();
         int[][][] cubeSpace3D = new int[bounds.getWidth()][bounds.getHeight()][bounds.getDepth()];
@@ -279,7 +280,7 @@ final class SkinBaker {
                                 if (showFace) {
                                     byte[] avegC = getAverageRGBAT(ix, iy, iz, lodLevel, cubeArray, cubeData, pb, j);
 
-                                    ICube cube = CubeRegistry.INSTANCE.getCubeFormId(avegC[5]);
+                                    ICube cube =Context.instance().getCubeRegistry().getCubeFormId(avegC[5]);
 
                                     int listIndex = 0;
                                     if (multipassSkinRendering) {

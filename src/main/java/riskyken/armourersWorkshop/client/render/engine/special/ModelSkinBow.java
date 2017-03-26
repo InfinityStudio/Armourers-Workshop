@@ -40,7 +40,7 @@ public class ModelSkinBow extends AbstractModelSkin {
             this.isChild = false;
         }
         
-//        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistry.skinBow);
+//        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinBow);
         
         if (frame > parts.size() - 1) {
             frame = parts.size() - 1;

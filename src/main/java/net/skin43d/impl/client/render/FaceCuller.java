@@ -1,6 +1,7 @@
 package net.skin43d.impl.client.render;
 
 import net.minecraftforge.common.util.ForgeDirection;
+import net.skin43d.impl.Context;
 import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
@@ -20,7 +21,7 @@ public class FaceCuller {
         SkinCubeData cubeData = skinPart.getCubeData();
         Rectangle3D bounds = skinPart.getPartBounds();
 
-        skinPart.getClientSkinPartData().totalCubesInPart = new int[CubeRegistry.INSTANCE.getTotalCubes()];
+        skinPart.getClientSkinPartData().totalCubesInPart = new int[Context.instance().getCubeRegistry().getTotalCubes()];
 
         int[][][] cubeSpace3D = new int[bounds.getWidth()][bounds.getHeight()][bounds.getDepth()];
 

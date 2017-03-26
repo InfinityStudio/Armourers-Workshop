@@ -13,7 +13,7 @@ import net.skin43d.impl.Context;
 import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
+import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.client.render.RenderEngine;
 import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
@@ -42,7 +42,7 @@ public class RenderEngineSpecial implements RenderEngine {
         if (distance > ConfigHandlerClient.maxSkinRenderDistance) return;
 
         SkinProvider skinProvider = Context.instance().getSkinProvider();
-        ISkinTypeRegistry skinRegistry = Context.instance().getSkinRegistry();
+        SkinTypeRegistry skinRegistry = Context.instance().getSkinRegistry();
         EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(new PlayerPointer(player));
         byte[] extraColours = null;
         if (ewd != null) {
@@ -84,7 +84,7 @@ public class RenderEngineSpecial implements RenderEngine {
     }
 
     private void buildMap() {
-        ISkinTypeRegistry registry = Context.instance().getSkinRegistry();
+        SkinTypeRegistry registry = Context.instance().getSkinRegistry();
         skinImmutableMap = ImmutableMap.<String, AbstractModelSkin>builder()
                 .put(registry.getSkinChest().getRegistryName(), new ModelSkinChest())
                 .put(registry.getSkinHead().getRegistryName(), new ModelSkinHead())

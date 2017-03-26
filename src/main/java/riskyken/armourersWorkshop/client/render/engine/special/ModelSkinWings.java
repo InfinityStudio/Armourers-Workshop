@@ -39,7 +39,7 @@ public class ModelSkinWings extends AbstractModelSkin {
             this.isChild = false;
         }
 
-//        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistry.skinSword);
+//        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinSword);
         for (int i = 0; i < parts.size(); i++) {
             SkinPart part = parts.get(i);
 

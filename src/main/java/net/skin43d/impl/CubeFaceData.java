@@ -29,7 +29,7 @@ public class CubeFaceData {
     }
 
     public ICube getCube(int index) {
-        return CubeRegistry.INSTANCE.getCubeFormId(cubeId[index]);
+        return Context.instance().getCubeRegistry().getCubeFormId(cubeId[index]);
     }
 
     public void setCubeColour(int index, int side, byte r, byte g, byte b) {

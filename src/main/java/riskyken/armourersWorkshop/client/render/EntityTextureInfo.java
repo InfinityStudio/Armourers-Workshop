@@ -16,13 +16,12 @@ import net.skin43d.utils.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.ISkinPartTypeTextured;
 import net.skin43d.impl.client.render.BakedFace;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
+import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.common.SkinHelper;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import net.skin43d.utils.PaintType;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import net.skin43d.utils.BitwiseUtils;
 import net.skin43d.utils.ModLogger;
 
@@ -252,7 +251,7 @@ public class EntityTextureInfo {
                         Point texLoc = typeTextured.getTextureLocation();
                         Point3D texSize = typeTextured.getTextureModelSize();
 
-                        ISkinTypeRegistry reg = Context.instance().getSkinRegistry();
+                        SkinTypeRegistry reg = Context.instance().getSkinRegistry();
                         for (int ix = 0; ix < texSize.getZ() * 2 + texSize.getX() * 2; ix++) {
                             for (int iy = 0; iy < texSize.getZ() + texSize.getY(); iy++) {
                                 if (skin.getSkinType() == reg.getSkinLegs()) {

@@ -227,8 +227,8 @@ public class Skin implements Skin3D {
 
     public int getTotalCubes() {
         int totalCubes = 0;
-        for (int i = 0; i < CubeRegistry.INSTANCE.getTotalCubes(); i++) {
-            ICube cube = CubeRegistry.INSTANCE.getCubeFormId((byte) i);
+        for (int i = 0; i < Context.instance().getCubeRegistry().getTotalCubes(); i++) {
+            ICube cube = Context.instance().getCubeRegistry().getCubeFormId((byte) i);
             totalCubes += getTotalOfCubeType(cube);
         }
         return totalCubes;

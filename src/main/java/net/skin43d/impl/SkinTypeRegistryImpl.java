@@ -1,12 +1,4 @@
-package riskyken.armourersWorkshop.common.skin.type;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-
-import net.skin43d.skin3d.SkinType;
-import org.apache.logging.log4j.Level;
+package net.skin43d.impl;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -15,7 +7,10 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.skin43d.skin3d.SkinPartType;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
+import net.skin43d.skin3d.SkinType;
+import net.skin43d.utils.ModLogger;
+import org.apache.logging.log4j.Level;
+import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.common.skin.type.arrow.SkinArrow;
 import riskyken.armourersWorkshop.common.skin.type.block.SkinBlock;
 import riskyken.armourersWorkshop.common.skin.type.bow.SkinBow;
@@ -26,26 +21,27 @@ import riskyken.armourersWorkshop.common.skin.type.legs.SkinLegs;
 import riskyken.armourersWorkshop.common.skin.type.legs.SkinSkirt;
 import riskyken.armourersWorkshop.common.skin.type.sword.SkinSword;
 import riskyken.armourersWorkshop.common.skin.type.wings.SkinWings;
-import net.skin43d.utils.ModLogger;
 
-public final class SkinTypeRegistry implements ISkinTypeRegistry {
-    public SkinType skinHead;
-    public SkinType skinChest;
-    public SkinType skinLegs;
-    public SkinType skinSkirt;
-    public SkinType skinFeet;
-    public SkinType skinSword;
-    public SkinType skinBow;
-    public SkinType skinArrow;
-    public SkinType skinBlock;
-    public SkinType skinWings;
+import java.util.*;
 
-    private LinkedHashMap<String, SkinType> skinTypeMap;
-    private HashMap<String, SkinPartType> skinPartMap;
+public final class SkinTypeRegistryImpl implements SkinTypeRegistry {
+    private SkinType skinHead;
+    private SkinType skinChest;
+    private SkinType skinLegs;
+    private SkinType skinSkirt;
+    private SkinType skinFeet;
+    private SkinType skinSword;
+    private SkinType skinBow;
+    private SkinType skinArrow;
+    private SkinType skinBlock;
+    private SkinType skinWings;
+
+    private Map<String, SkinType> skinTypeMap;
+    private Map<String, SkinPartType> skinPartMap;
 
     private List<SkinType> skinTypeList;
 
-    public SkinTypeRegistry() {
+    public SkinTypeRegistryImpl() {
         MinecraftForge.EVENT_BUS.register(this);
         skinTypeMap = new LinkedHashMap<String, SkinType>();
         skinPartMap = new HashMap<String, SkinPartType>();

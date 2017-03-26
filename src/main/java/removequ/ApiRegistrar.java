@@ -28,7 +28,7 @@ public final class ApiRegistrar {
 //                ModLogger.log(String.format("Loading %s API addon for %s", "data manager", modName));
 //                equipmentDataManagers.put(modName, ((IArmourersCommonManager)classObject));
 ////                ((IArmourersCommonManager)classObject).onLoad(SkinDataHandler.INSTANCE,
-////                        SkinTypeRegistry.INSTANCE, EntitySkinHandler.INSTANCE);
+////                        SkinTypeRegistryImpl.INSTANCE, EntitySkinHandler.INSTANCE);
 //            }
 //            if (classObject instanceof IArmourersClientManager) {
 //                if (ArmourersWorkshopMod.isDedicated()) {

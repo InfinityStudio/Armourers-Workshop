@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.skin43d.impl.Context;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
+import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.client.render.RenderEngine;
 import net.skin43d.utils.ModLogger;
 
@@ -54,7 +54,7 @@ public class RenderEngineAttach implements RenderEngine {
     private void attachModelsToBiped(ModelBiped modelBiped, RenderPlayer renderPlayer) {
         if (attachedBipedSet.contains(modelBiped))
             return;
-        ISkinTypeRegistry reg = Context.instance().getSkinRegistry();
+        SkinTypeRegistry reg = Context.instance().getSkinRegistry();
         attachedBipedSet.add(modelBiped);
         modelBiped.bipedHead.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinHead(), reg.getSkinPartTypeFromName("armourers:head.base"), this));
         modelBiped.bipedBody.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinChest(), reg.getSkinPartTypeFromName("armourers:chest.base"), this));

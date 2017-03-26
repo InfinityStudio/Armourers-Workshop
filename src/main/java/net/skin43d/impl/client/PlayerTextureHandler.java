@@ -13,7 +13,7 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.skin43d.SkinProvider;
 import net.skin43d.impl.Context;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
+import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.client.render.EntityTextureInfo;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
@@ -64,7 +64,7 @@ public class PlayerTextureHandler {
             Skin[] skins = new Skin[4 * 5];
 
             SkinProvider skinProvider = Context.instance().getSkinProvider();
-            ISkinTypeRegistry reg = Context.instance().getSkinRegistry();
+            SkinTypeRegistry reg = Context.instance().getSkinRegistry();
             for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
                 skins[skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinHead());
                 skins[1 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinChest());

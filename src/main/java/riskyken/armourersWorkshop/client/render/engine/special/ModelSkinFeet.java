@@ -14,7 +14,6 @@ import removequ.ClientSkinPaintCache;
 import removequ.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.client.ClientProxy;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class ModelSkinFeet extends AbstractModelSkin {
             this.isChild = false;
         }
         
-//        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistry.skinFeet);
+//        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinFeet);
         RenderHelper.enableGUIStandardItemLighting();
         
         if (armourData.hasPaintData() & showSkinPaint) {

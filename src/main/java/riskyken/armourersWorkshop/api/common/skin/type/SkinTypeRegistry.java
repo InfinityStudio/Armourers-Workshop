@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author RiskyKen
  */
-public interface ISkinTypeRegistry {
+public interface SkinTypeRegistry {
 
     /**
      * Register a new skin type.

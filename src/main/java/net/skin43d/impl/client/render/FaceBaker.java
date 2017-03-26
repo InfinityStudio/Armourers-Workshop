@@ -1,5 +1,6 @@
 package net.skin43d.impl.client.render;
 
+import net.skin43d.impl.Context;
 import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
@@ -118,7 +119,7 @@ public class FaceBaker {
                                 if (showFace) {
                                     byte[] avegC = getAverageRGBAT(ix, iy, iz, lodLevel, cubeArray, cubeData, bound, j);
 
-                                    ICube cube = CubeRegistry.INSTANCE.getCubeFormId(avegC[5]);
+                                    ICube cube = Context.instance().getCubeRegistry().getCubeFormId(avegC[5]);
 
                                     int listIndex = 0;
                                     if (multipassSkinRendering) {

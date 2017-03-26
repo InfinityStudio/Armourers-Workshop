@@ -6,6 +6,7 @@ import java.util.BitSet;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.skin43d.impl.Context;
 import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.exception.InvalidCubeTypeException;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
@@ -65,7 +66,7 @@ public class SkinCubeData {
     }
     
     public ICube getCube(int index) {
-        return CubeRegistry.INSTANCE.getCubeFormId(cubeId[index]);
+        return Context.instance().getCubeRegistry().getCubeFormId(cubeId[index]);
     }
     
     public void setCubeColour(int index, int side, byte r, byte g, byte b) {

@@ -8,7 +8,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.skin43d.utils.ModLogger;
 import riskyken.armourersWorkshop.common.CommonProxy;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
-import riskyken.armourersWorkshop.common.skin.type.SkinTypeRegistry;
+import net.skin43d.impl.SkinTypeRegistryImpl;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -29,7 +29,7 @@ public class ArmourersWorkshopMod {
      * server side and ClientSkinCache on the client side.
      * 
      * SkinType - Each skin has a skin type, examples; head, chest, bow and block. All
-     * skin types can be found in the SkinTypeRegistry.
+     * skin types can be found in the SkinTypeRegistryImpl.
      * 
      * SkinPart - Each skin type will have at least 1 skin part. For example the chest skin type has
      * base, left arm and right arm skin parts.
@@ -55,7 +55,7 @@ public class ArmourersWorkshopMod {
     @SidedProxy(clientSide = LibModInfo.PROXY_CLIENT_CLASS, serverSide = LibModInfo.PROXY_COMMNON_CLASS)
     public static CommonProxy proxy;
 
-    private SkinTypeRegistry registry;
+    private SkinTypeRegistryImpl registry;
 
     @Mod.EventHandler
     public void perInit(FMLPreInitializationEvent event) throws URISyntaxException {
@@ -64,7 +64,7 @@ public class ArmourersWorkshopMod {
         File configDir = event.getSuggestedConfigurationFile().getParentFile();
         configDir = new File(configDir, LibModInfo.ID);
         if (!configDir.exists()) configDir.mkdirs();
-        registry = new SkinTypeRegistry();
+        registry = new SkinTypeRegistryImpl();
         proxy.preInit(configDir);
     }
 

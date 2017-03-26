@@ -4,7 +4,7 @@ import net.skin43d.exception.InvalidCubeTypeException;
 import net.skin43d.exception.NewerFileVersionException;
 import net.skin43d.impl.Context;
 import net.skin43d.skin3d.SkinType;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
+import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.common.skin.data.SkinProperties;
@@ -27,7 +27,7 @@ public class SkinReader {
         int fileVersion = stream.readInt();
         if (fileVersion > context.getFileVersion())
             throw new NewerFileVersionException();
-        ISkinTypeRegistry skinRegistry = context.getSkinRegistry();
+        SkinTypeRegistry skinRegistry = context.getSkinRegistry();
         SkinProperties properties = new SkinProperties();
         SkinType skinType;
         List<SkinPart> parts;

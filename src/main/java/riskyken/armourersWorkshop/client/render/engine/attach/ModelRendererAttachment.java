@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 import net.skin43d.utils.Point3D;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import net.skin43d.skin3d.SkinPartType;
-import riskyken.armourersWorkshop.api.common.skin.type.ISkinTypeRegistry;
+import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.client.render.core.SkinPartRenderer;
 import riskyken.armourersWorkshop.client.render.engine.special.ModelSkinWings;
@@ -70,7 +70,7 @@ public class ModelRendererAttachment extends ModelRenderer {
 //                    (byte) hairColour.getRed(), (byte) hairColour.getGreen(), (byte) hairColour.getBlue()};
 //        }
         SkinProvider provider = Context.instance().getSkinProvider();
-        ISkinTypeRegistry reg = Context.instance().getSkinRegistry();
+        SkinTypeRegistry reg = Context.instance().getSkinRegistry();
 //        SkinInfo info = provider.getSkinInfoForEntity(player);
 //        Skin data = info.getSkinInfoForEntity(skinType);
 //        SkinPart partData = info.getSkinPart(skinType, skinPart);
