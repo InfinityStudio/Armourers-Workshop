@@ -3,15 +3,20 @@ package riskyken.armourersWorkshop.common.skin.cubes;
 import net.minecraft.block.Block;
 
 public interface ICube {
-    
-    /** Will this cube glow in the dark? */
-    public boolean isGlowing();
-    
-    /** Should this cube be rendered after the world? */
-    public boolean needsPostRender();
-    
-    /** Get the cubes ID */
-    public byte getId();
-    
-    public Block getMinecraftBlock();
+    /**
+     * Will this cube glow in the dark?
+     */
+    boolean isGlowing();
+
+    /**
+     * Should this cube be rendered after the world?
+     */
+    boolean needsPostRender();
+
+    /**
+     * Get the cubes ID
+     */
+    byte getId();
+
+    Block getMinecraftBlock();
 }

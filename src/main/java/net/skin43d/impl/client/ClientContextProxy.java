@@ -1,5 +1,7 @@
 package net.skin43d.impl.client;
 
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -12,8 +14,12 @@ import net.skin43d.impl.Test;
 import net.skin43d.utils.ModLogger;
 import org.apache.logging.log4j.Level;
 import riskyken.armourersWorkshop.client.render.RenderEngine;
+import riskyken.armourersWorkshop.client.render.bake.AsyncModelBakery;
 import riskyken.armourersWorkshop.client.render.engine.attach.RenderEngineAttach;
 import riskyken.armourersWorkshop.client.render.engine.special.RenderEngineSpecial;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author ci010
@@ -21,6 +27,7 @@ import riskyken.armourersWorkshop.client.render.engine.special.RenderEngineSpeci
 public class ClientContextProxy extends ContextProxy {
     private SkinProviderBase provider;
     private RenderEngine renderEngine;
+    private ListeningExecutorService service;
 
     @Override
     public SkinProvider getSkinProvider() {
@@ -43,7 +50,9 @@ public class ClientContextProxy extends ContextProxy {
             this.renderEngine = new RenderEngineSpecial();
         else this.renderEngine = new RenderEngineAttach();//TODO handle this exception
         this.renderEngine.deploy();
+        service = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool());
         MinecraftForge.EVENT_BUS.register(new PlayerTextureHandler());
+        this.provider = new Test(new AsyncModelBakery(service), service);
     }
 
     @Override

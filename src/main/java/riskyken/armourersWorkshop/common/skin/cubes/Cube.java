@@ -7,6 +7,10 @@ public class Cube implements ICube {
 
     protected final byte id;
 
+    public Cube(byte id) {
+        this.id = id;
+    }
+
     public Cube() {
         id = Context.instance().getCubeRegistry().getTotalCubes();
     }

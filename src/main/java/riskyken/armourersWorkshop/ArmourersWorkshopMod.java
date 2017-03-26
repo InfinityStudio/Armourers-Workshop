@@ -13,7 +13,7 @@ import net.skin43d.impl.SkinTypeRegistryImpl;
 import java.io.File;
 import java.net.URISyntaxException;
 
-@Mod(modid = LibModInfo.ID, name = LibModInfo.NAME, version = LibModInfo.VERSION, guiFactory = LibModInfo.GUI_FACTORY_CLASS)
+//@Mod(modid = LibModInfo.ID, name = LibModInfo.NAME, version = LibModInfo.VERSION, guiFactory = LibModInfo.GUI_FACTORY_CLASS)
 public class ArmourersWorkshopMod {
     
     /* 

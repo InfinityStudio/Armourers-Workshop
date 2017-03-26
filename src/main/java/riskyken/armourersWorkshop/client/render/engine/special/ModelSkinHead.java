@@ -17,13 +17,11 @@ import riskyken.armourersWorkshop.client.ClientProxy;
 
 @SideOnly(Side.CLIENT)
 public class ModelSkinHead extends AbstractModelSkin {
-    
+
     @Override
     public void render(Entity entity, Skin skin, boolean showSkinPaint, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
-        if (skin == null) {
+        if (skin == null)
             return;
-        }
-        
         if (entity != null && entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
             this.isSneak = player.isSneaking();
@@ -33,19 +31,18 @@ public class ModelSkinHead extends AbstractModelSkin {
                 this.heldItemRight = 1;
             }
         }
-        
-        if (ClientProxy.isJrbaClientLoaded()) {
+
+        if (ClientProxy.isJrbaClientLoaded())
             this.isChild = false;
-        }
-        
+
 //        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinHead);
         RenderHelper.enableGUIStandardItemLighting();
-        
+
         if (skin.hasPaintData() & showSkinPaint) {
             if (extraColour == null) {
                 extraColour = ModelHelper.getLocalPlayerExtraColours();
             }
-            SkinModelTexture st = ClientSkinPaintCache.INSTANCE.getTextureForSkin(skin, skinDye, extraColour);
+            SkinModelTexture st = skin.skinModelTexture;//.INSTANCE.getTextureForSkin(skin, skinDye, extraColour);
             st.bindTexture();
             GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
             GL11.glDisable(GL11.GL_CULL_FACE);
@@ -53,7 +50,7 @@ public class ModelSkinHead extends AbstractModelSkin {
             bipedHead.render(SCALE);
             GL11.glPopAttrib();
         }
-        
+
         if (skin.getParts().size() > 0) {
             ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, skin.getParts().get(0).getPartType());
             GL11.glPushMatrix();
@@ -62,24 +59,24 @@ public class ModelSkinHead extends AbstractModelSkin {
                 GL11.glScalef(1.5F / f6, 1.5F / f6, 1.5F / f6);
                 GL11.glTranslatef(0.0F, 16.0F * SCALE, 0.0F);
             }
-            
+
             GL11.glColor3f(1F, 1F, 1F);
             GL11.glRotated(Math.toDegrees(bipedHead.rotateAngleZ), 0, 0, 1);
             GL11.glRotated(Math.toDegrees(bipedHead.rotateAngleY), 0, 1, 0);
             GL11.glRotated(Math.toDegrees(bipedHead.rotateAngleX), 1, 0, 0);
-            
+
             if (isSneak) {
                 GL11.glTranslated(0, 1 * SCALE, 0);
             }
 
             renderHead(skin.getParts().get(0), SCALE, skinDye, extraColour, distance, doLodLoading);
-            
+
             GL11.glPopMatrix();
         }
 
         GL11.glColor3f(1F, 1F, 1F);
     }
-    
+
     private void renderHead(SkinPart part, float scale, ISkinDye skinDye, byte[] extraColours, double distance, boolean doLodLoading) {
         GL11.glPushMatrix();
         GL11.glColor3f(1F, 1F, 1F);

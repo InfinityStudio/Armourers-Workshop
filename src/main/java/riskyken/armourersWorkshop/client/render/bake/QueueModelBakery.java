@@ -32,7 +32,7 @@ public final class QueueModelBakery implements SkinBakery {
     @Override
     public void bake(Skin3D skin) {
         bakingQueue.incrementAndGet();
-        skinCompletion.submit(new BakeSkinTask((Skin) skin));
+        skinCompletion.submit(new LegacyBakeSkinTask((Skin) skin));
     }
 
     @SubscribeEvent

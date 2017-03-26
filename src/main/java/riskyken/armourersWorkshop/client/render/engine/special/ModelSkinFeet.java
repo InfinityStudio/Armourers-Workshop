@@ -19,12 +19,14 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class ModelSkinFeet extends AbstractModelSkin {
-    
+
     @Override
     public void render(Entity entity, Skin armourData, boolean showSkinPaint, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
-        if (armourData == null) { return; }
+        if (armourData == null) {
+            return;
+        }
         List<SkinPart> parts = armourData.getParts();
-        
+
         if (entity != null && entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
             this.isSneak = player.isSneaking();
@@ -34,19 +36,19 @@ public class ModelSkinFeet extends AbstractModelSkin {
                 this.heldItemRight = 1;
             }
         }
-        
+
         if (ClientProxy.isJrbaClientLoaded()) {
             this.isChild = false;
         }
-        
+
 //        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinFeet);
         RenderHelper.enableGUIStandardItemLighting();
-        
+
         if (armourData.hasPaintData() & showSkinPaint) {
             if (extraColour == null) {
                 extraColour = ModelHelper.getLocalPlayerExtraColours();
             }
-            SkinModelTexture st = ClientSkinPaintCache.INSTANCE.getTextureForSkin(armourData, skinDye, extraColour);
+            SkinModelTexture st = armourData.skinModelTexture;//ClientSkinPaintCache.INSTANCE.getTextureForSkin(armourData, skinDye, extraColour);
             st.bindTexture();
             GL11.glPushMatrix();
             GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
@@ -60,31 +62,31 @@ public class ModelSkinFeet extends AbstractModelSkin {
             GL11.glPopAttrib();
             GL11.glPopMatrix();
         }
-        
+
         for (int i = 0; i < parts.size(); i++) {
             SkinPart part = parts.get(i);
-            
+
             GL11.glPushMatrix();
             if (isChild) {
                 float f6 = 2.0F;
                 GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
-                GL11.glTranslatef(0.0F, 24.0F * SCALE, 0.0F); 
+                GL11.glTranslatef(0.0F, 24.0F * SCALE, 0.0F);
             }
 
             ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, part.getPartType());
-            
+
             if (part.getPartType().getPartName().equals("leftFoot")) {
                 renderLeftFoot(part, SCALE, skinDye, extraColour, itemRender, distance, doLodLoading);
             } else if (part.getPartType().getPartName().equals("rightFoot")) {
                 renderRightFoot(part, SCALE, skinDye, extraColour, itemRender, distance, doLodLoading);
             }
-            
+
             GL11.glPopMatrix();
         }
-        
+
         GL11.glColor3f(1F, 1F, 1F);
     }
-    
+
     private void renderLeftFoot(SkinPart part, float scale, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
         GL11.glPushMatrix();
         if (isSneak) {
@@ -98,12 +100,12 @@ public class ModelSkinFeet extends AbstractModelSkin {
         GL11.glRotatef((float) Math.toDegrees(this.bipedLeftLeg.rotateAngleZ), 0, 0, 1);
         GL11.glRotatef((float) Math.toDegrees(this.bipedLeftLeg.rotateAngleY), 0, 1, 0);
         GL11.glRotatef((float) Math.toDegrees(this.bipedLeftLeg.rotateAngleX), 1, 0, 0);
-        
-        
+
+
         renderPart(part, scale, skinDye, extraColour, distance, doLodLoading);
         GL11.glPopMatrix();
     }
-    
+
     private void renderRightFoot(SkinPart part, float scale, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
         GL11.glPushMatrix();
         if (isSneak) {
@@ -117,7 +119,7 @@ public class ModelSkinFeet extends AbstractModelSkin {
         GL11.glRotatef((float) Math.toDegrees(this.bipedRightLeg.rotateAngleZ), 0, 0, 1);
         GL11.glRotatef((float) Math.toDegrees(this.bipedRightLeg.rotateAngleY), 0, 1, 0);
         GL11.glRotatef((float) Math.toDegrees(this.bipedRightLeg.rotateAngleX), 1, 0, 0);
-        
+
         renderPart(part, scale, skinDye, extraColour, distance, doLodLoading);
         GL11.glPopMatrix();
     }

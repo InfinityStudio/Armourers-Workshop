@@ -9,7 +9,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 /**
  * @author ci010
  */
-//@Mod(modid = ModSkin43D.MOD_ID, name = ModSkin43D.NAME, version = ModSkin43D.VERSION)
+@Mod(modid = ModSkin43D.MOD_ID, name = ModSkin43D.NAME, version = ModSkin43D.VERSION)
 public class ModSkin43D {
     public static final String MOD_ID = "skin43D", NAME = "Skin For 3D", VERSION = "0.1";
     public static final String COMMON_PROXY = "net.skin43d.impl.ContextProxy",

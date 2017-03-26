@@ -11,10 +11,10 @@ public class CubeRegistry {
 
     public CubeRegistry() {
         cubeList = new ArrayList<ICube>();
-        registerCube(new Cube());
-        registerCube(new CubeGlowing());
-        registerCube(new CubeGlass());
-        registerCube(new CubeGlassGlowing());
+        registerCube(new Cube((byte) 0));
+        registerCube(new CubeGlowing((byte) 1));
+        registerCube(new CubeGlass((byte) 2));
+        registerCube(new CubeGlassGlowing((byte) 3));
     }
 
     public ICube getCubeFormId(byte id) {

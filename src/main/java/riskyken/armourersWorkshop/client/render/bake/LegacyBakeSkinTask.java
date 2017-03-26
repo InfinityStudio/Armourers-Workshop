@@ -13,11 +13,11 @@ import java.util.concurrent.Callable;
 /**
  * @author ci010
  */
-public class BakeSkinTask implements Callable<Skin> {
+public class LegacyBakeSkinTask implements Callable<Skin> {
 
     private final Skin skin;
 
-    BakeSkinTask(Skin skin) {
+    LegacyBakeSkinTask(Skin skin) {
         this.skin = skin;
     }
 
