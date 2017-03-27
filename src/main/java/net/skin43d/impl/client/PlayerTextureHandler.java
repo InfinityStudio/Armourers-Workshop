@@ -68,11 +68,12 @@ public class PlayerTextureHandler {
         profiler.startSection("textureBuild");
         if (playerTextureMap.containsKey(uuid)) {
             EntityTextureInfo textureInfo = playerTextureMap.get(uuid);
-            textureInfo.updateTexture(player.getLocationSkin());
+
             textureInfo.updateHairColour(ewd.hairColour);
             textureInfo.updateSkinColour(ewd.skinColour);
-            Skin[] skins = new Skin[4 * 5];
 
+            textureInfo.updateTexture(player.getLocationSkin());
+            Skin[] skins = new Skin[4 * 5];
             SkinProvider skinProvider = Context.instance().getSkinProvider();
             SkinTypeRegistry reg = Context.instance().getSkinRegistry();
             for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
