@@ -22,121 +22,121 @@ public final class SkinRenderHelper {
     
     private static final ResourceLocation guideImage = new ResourceLocation(LibModInfo.ID.toLowerCase(), "textures/blocks/guide.png");
     
-    public static void renderBuildingGuide(SkinType skinType, float scale, boolean showSkinOverlay, boolean showHelper) {
-        for (int i = 0; i < skinType.getSkinParts().size(); i++) {
-            SkinPartType skinPart = skinType.getSkinParts().get(i);
-            Point3D partOffset = skinPart.getOffset();
-            GL11.glTranslated(partOffset.getX() * scale, partOffset.getY() * scale, partOffset.getZ() * scale);
-            skinPart.renderBuildingGuide(scale, showSkinOverlay, showHelper);
-            GL11.glTranslated(-partOffset.getX() * scale, -partOffset.getY() * scale, -partOffset.getZ() * scale);
-        }
-    }
+//    public static void renderBuildingGuide(SkinType skinType, float scale, boolean showSkinOverlay, boolean showHelper) {
+//        for (int i = 0; i < skinType.getSkinParts().size(); i++) {
+//            SkinPartType skinPart = skinType.getSkinParts().get(i);
+//            Point3D partOffset = skinPart.getOffset();
+//            GL11.glTranslated(partOffset.getX() * scale, partOffset.getY() * scale, partOffset.getZ() * scale);
+//            skinPart.renderBuildingGuide(scale, showSkinOverlay, showHelper);
+//            GL11.glTranslated(-partOffset.getX() * scale, -partOffset.getY() * scale, -partOffset.getZ() * scale);
+//        }
+//    }
+//
+//    public static void renderBuildingGrid(SkinType skinType, float scale, boolean showGuides, boolean hidden) {
+//        for (int i = 0; i < skinType.getSkinParts().size(); i++) {
+//            SkinPartType skinPartType = skinType.getSkinParts().get(i);
+//            Point3D partOffset = skinPartType.getOffset();
+//            GL11.glTranslated(partOffset.getX() * scale, partOffset.getY() * scale, partOffset.getZ() * scale);
+//            renderBuildingGrid(skinPartType, scale, showGuides, hidden);
+//            GL11.glTranslated(-partOffset.getX() * scale, -partOffset.getY() * scale, -partOffset.getZ() * scale);
+//        }
+//    }
+//
+//    public static void renderBuildingGrid(SkinPartType skinPartType, float scale, boolean showGuides, boolean hidden) {
+//        GL11.glTranslated(0, skinPartType.getBuildingSpace().getY() * scale, 0);
+//        GL11.glScalef(-1, -1, 1);
+//        SkinRenderHelper.renderGuidePart(skinPartType, scale, showGuides, hidden);
+//        GL11.glScalef(-1, -1, 1);
+//        GL11.glTranslated(0, -skinPartType.getBuildingSpace().getY() * scale, 0);
+//    }
+//
+//    private static void renderGuidePart(SkinPartType part, float scale, boolean showGuides, boolean hidden) {
+//        Minecraft.getMinecraft().getTextureManager().bindTexture(guideImage);
+//        GL11.glColor3f(1F, 1F, 1F);
+//        GL11.glPushMatrix();
+//
+//        Rectangle3D buildRec = part.getBuildingSpace();
+//        Rectangle3D guideRec = part.getGuideSpace();
+//
+//        GL11.glDisable(GL11.GL_LIGHTING);
+//
+//        if (showGuides) {
+//            GL11.glColor4f(0.5F, 0.5F, 0.5F, 0.25F);
+//            renderGuideBox(buildRec.getX(), buildRec.getY(), buildRec.getZ(), buildRec.getWidth(), buildRec.getHeight(), buildRec.getDepth(), scale);
+//
+//            GL11.glColor4f(0F, 1F, 0F, 0.5F);
+//            //renderGuideBox(0.0F, 0.0F, 0.0F, 1, 1, 1, scale);
+//            renderGuideBox(-0.5F, -0.5F, -0.5F, 1, 1, 1, scale);
+//        }
+//
+//
+//        if (ConfigHandlerClient.showArmourerDebugRender) {
+//            GL11.glColor4f(1F, 0F, 0F, 0.25F);
+//            renderGuideBox(guideRec.getX(), guideRec.getY(), guideRec.getZ(), guideRec.getWidth(), guideRec.getHeight(), guideRec.getDepth(), scale);
+//        }
+//
+//        if (hidden) {
+//            GL11.glColor4f(0F, 0F, 1F, 0.25F);
+//            renderGuideBox(guideRec.getX(), guideRec.getY(), guideRec.getZ(), guideRec.getWidth(), guideRec.getHeight(), guideRec.getDepth(), scale);
+//        }
+//
+//        GL11.glColor4f(1F, 1F, 1F, 1F);
+//
+//        GL11.glEnable(GL11.GL_LIGHTING);
+//        GL11.glPopMatrix();
+//    }
     
-    public static void renderBuildingGrid(SkinType skinType, float scale, boolean showGuides, boolean hidden) {
-        for (int i = 0; i < skinType.getSkinParts().size(); i++) {
-            SkinPartType skinPartType = skinType.getSkinParts().get(i);
-            Point3D partOffset = skinPartType.getOffset();
-            GL11.glTranslated(partOffset.getX() * scale, partOffset.getY() * scale, partOffset.getZ() * scale);
-            renderBuildingGrid(skinPartType, scale, showGuides, hidden);
-            GL11.glTranslated(-partOffset.getX() * scale, -partOffset.getY() * scale, -partOffset.getZ() * scale);
-        }
-    }
+//    private static void renderGuideBox(double x, double y, double z, int width, int height, int depth, float scale) {
+//        renderGuideFace(ForgeDirection.DOWN, x, y, z, width, depth, scale);
+//        renderGuideFace(ForgeDirection.UP, x, y + height, z, width, depth, scale);
+//        renderGuideFace(ForgeDirection.EAST, x + width, y, z, depth, height, scale);
+//        renderGuideFace(ForgeDirection.WEST, x, y, z, depth, height, scale);
+//        renderGuideFace(ForgeDirection.NORTH, x, y, z, width, height, scale);
+//        renderGuideFace(ForgeDirection.SOUTH, x, y, z + depth, width, height, scale);
+//    }
     
-    public static void renderBuildingGrid(SkinPartType skinPartType, float scale, boolean showGuides, boolean hidden) {
-        GL11.glTranslated(0, skinPartType.getBuildingSpace().getY() * scale, 0);
-        GL11.glScalef(-1, -1, 1);
-        SkinRenderHelper.renderGuidePart(skinPartType, scale, showGuides, hidden);
-        GL11.glScalef(-1, -1, 1);
-        GL11.glTranslated(0, -skinPartType.getBuildingSpace().getY() * scale, 0);
-    }
-    
-    private static void renderGuidePart(SkinPartType part, float scale, boolean showGuides, boolean hidden) {
-        Minecraft.getMinecraft().getTextureManager().bindTexture(guideImage);
-        GL11.glColor3f(1F, 1F, 1F);
-        GL11.glPushMatrix();
-        
-        Rectangle3D buildRec = part.getBuildingSpace();
-        Rectangle3D guideRec = part.getGuideSpace();
-        
-        GL11.glDisable(GL11.GL_LIGHTING);
-        
-        if (showGuides) {
-            GL11.glColor4f(0.5F, 0.5F, 0.5F, 0.25F);
-            renderGuideBox(buildRec.getX(), buildRec.getY(), buildRec.getZ(), buildRec.getWidth(), buildRec.getHeight(), buildRec.getDepth(), scale);
-            
-            GL11.glColor4f(0F, 1F, 0F, 0.5F);
-            //renderGuideBox(0.0F, 0.0F, 0.0F, 1, 1, 1, scale);
-            renderGuideBox(-0.5F, -0.5F, -0.5F, 1, 1, 1, scale);
-        }
-
-        
-        if (ConfigHandlerClient.showArmourerDebugRender) {
-            GL11.glColor4f(1F, 0F, 0F, 0.25F);
-            renderGuideBox(guideRec.getX(), guideRec.getY(), guideRec.getZ(), guideRec.getWidth(), guideRec.getHeight(), guideRec.getDepth(), scale);
-        }
-
-        if (hidden) {
-            GL11.glColor4f(0F, 0F, 1F, 0.25F);
-            renderGuideBox(guideRec.getX(), guideRec.getY(), guideRec.getZ(), guideRec.getWidth(), guideRec.getHeight(), guideRec.getDepth(), scale);
-        }
-        
-        GL11.glColor4f(1F, 1F, 1F, 1F);
-        
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glPopMatrix();
-    }
-    
-    private static void renderGuideBox(double x, double y, double z, int width, int height, int depth, float scale) {
-        renderGuideFace(ForgeDirection.DOWN, x, y, z, width, depth, scale);
-        renderGuideFace(ForgeDirection.UP, x, y + height, z, width, depth, scale);
-        renderGuideFace(ForgeDirection.EAST, x + width, y, z, depth, height, scale);
-        renderGuideFace(ForgeDirection.WEST, x, y, z, depth, height, scale);
-        renderGuideFace(ForgeDirection.NORTH, x, y, z, width, height, scale);
-        renderGuideFace(ForgeDirection.SOUTH, x, y, z + depth, width, height, scale);
-    }
-    
-    private static void renderGuideFace(ForgeDirection dir, double x, double y, double z, double sizeX, double sizeY, float scale) {
-        RenderManager renderManager = RenderManager.instance;
-        Tessellator tessellator = Tessellator.instance;
-        
-        GL11.glPushMatrix();
-        GL11.glDisable(GL11.GL_CULL_FACE);
-        ModRenderHelper.enableAlphaBlend();
-        
-        
-        float scale1 = 0.999F;
-        //GL11.glScalef(scale1, scale1, scale1);
-        GL11.glTranslated(x * scale, y * scale, z * scale);
-        
-        switch (dir) {
-        case EAST:
-            GL11.glRotated(-90, 0, 1, 0);
-            break;
-        case WEST:
-            GL11.glRotated(-90, 0, 1, 0);
-            break;
-        case UP:
-            GL11.glRotated(90, 1, 0, 0);
-            break;
-        case DOWN:
-            GL11.glRotated(90, 1, 0, 0);
-            break;
-        default:
-            break;
-        }
-        
-        tessellator.setBrightness(15728880);
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f, 240f);
-        
-        tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(0, 0, 0, 0, 0);
-        tessellator.addVertexWithUV(0, sizeY * scale, 0, sizeY, 0);
-        tessellator.addVertexWithUV(sizeX * scale, sizeY * scale, 0, sizeY, sizeX);
-        tessellator.addVertexWithUV(sizeX * scale, 0, 0, 0, sizeX);
-        tessellator.draw();
-        
-        ModRenderHelper.disableAlphaBlend();
-        GL11.glEnable(GL11.GL_CULL_FACE);
-        GL11.glPopMatrix();
-    }
+//    private static void renderGuideFace(ForgeDirection dir, double x, double y, double z, double sizeX, double sizeY, float scale) {
+////        RenderManager renderManager = RenderManager.instance;
+////        Tessellator tessellator = Tessellator.instance;
+//
+//        GL11.glPushMatrix();
+//        GL11.glDisable(GL11.GL_CULL_FACE);
+//        ModRenderHelper.enableAlphaBlend();
+//
+//
+//        float scale1 = 0.999F;
+//        //GL11.glScalef(scale1, scale1, scale1);
+//        GL11.glTranslated(x * scale, y * scale, z * scale);
+//
+//        switch (dir) {
+//        case EAST:
+//            GL11.glRotated(-90, 0, 1, 0);
+//            break;
+//        case WEST:
+//            GL11.glRotated(-90, 0, 1, 0);
+//            break;
+//        case UP:
+//            GL11.glRotated(90, 1, 0, 0);
+//            break;
+//        case DOWN:
+//            GL11.glRotated(90, 1, 0, 0);
+//            break;
+//        default:
+//            break;
+//        }
+//
+//        tessellator.setBrightness(15728880);
+//        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f, 240f);
+//
+//        tessellator.startDrawingQuads();
+//        tessellator.addVertexWithUV(0, 0, 0, 0, 0);
+//        tessellator.addVertexWithUV(0, sizeY * scale, 0, sizeY, 0);
+//        tessellator.addVertexWithUV(sizeX * scale, sizeY * scale, 0, sizeY, sizeX);
+//        tessellator.addVertexWithUV(sizeX * scale, 0, 0, 0, sizeX);
+//        tessellator.draw();
+//
+//        ModRenderHelper.disableAlphaBlend();
+//        GL11.glEnable(GL11.GL_CULL_FACE);
+//        GL11.glPopMatrix();
+//    }
 }

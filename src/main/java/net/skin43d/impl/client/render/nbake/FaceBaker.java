@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class FaceBaker {
     public static List<BakedFace>[] buildPartDisplayListArray(SkinPart partData, int[][] dyeColour, int[] dyeUseCount, int[][][] cubeArray) {
-        boolean multipassSkinRendering = ClientProxy.useMultipassSkinRendering();
+        boolean multipassSkinRendering = Context.instance().useMultipassSkinRendering();
 
         int lodLevels = ConfigHandlerClient.maxLodLevels;
 
@@ -33,7 +33,7 @@ public class FaceBaker {
          * 1 = glowing
          */
 
-        List<BakedFace>[] renderLists = new ArrayList[ClientProxy.getNumberOfRenderLayers() * (lodLevels + 1)];
+        List<BakedFace>[] renderLists = new ArrayList[Context.instance().getNumberOfRenderLayers() * (lodLevels + 1)];
 
         for (int i = 0; i < renderLists.length; i++)
             renderLists[i] = new ArrayList<BakedFace>();
@@ -126,7 +126,7 @@ public class FaceBaker {
                                             listIndex = 1;
                                         }
                                     }
-                                    int lodIndex = ((lod) * ClientProxy.getNumberOfRenderLayers()) + listIndex;
+                                    int lodIndex = ((lod) * Context.instance().getNumberOfRenderLayers()) + listIndex;
 
                                     BakedFace ver = new BakedFace(
                                             (byte) (ix + bound.getX()), (byte) (iy + bound.getY()), (byte) (iz + bound.getZ()),

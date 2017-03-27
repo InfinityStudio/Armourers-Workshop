@@ -168,7 +168,7 @@ public final class SkinBaker {
     }
 
     public static void buildPartDisplayListArray(SkinPart partData, int[][] dyeColour, int[] dyeUseCount, int[][][] cubeArray) {
-        boolean multipassSkinRendering = Context.instance().ClientProxy.useMultipassSkinRendering();
+        boolean multipassSkinRendering = Context.instance().useMultipassSkinRendering();
 
         ArrayList<BakedFace>[] renderLists;
 
@@ -187,7 +187,7 @@ public final class SkinBaker {
          * 1 = glowing
          */
 
-        renderLists = (ArrayList<BakedFace>[]) new ArrayList[ClientProxy.getNumberOfRenderLayers() * (lodLevels + 1)];
+        renderLists = (ArrayList<BakedFace>[]) new ArrayList[Context.instance().getNumberOfRenderLayers() * (lodLevels + 1)];
 
         for (int i = 0; i < renderLists.length; i++) {
             renderLists[i] = new ArrayList<BakedFace>();
@@ -297,7 +297,7 @@ public final class SkinBaker {
                                             listIndex = 1;
                                         }
                                     }
-                                    int lodIndex = ((lod) * ClientProxy.getNumberOfRenderLayers()) + listIndex;
+                                    int lodIndex = ((lod) * Context.instance().getNumberOfRenderLayers()) + listIndex;
 
                                     BakedFace ver = new BakedFace(
                                             (byte) (ix + pb.getX()), (byte) (iy + pb.getY()), (byte) (iz + pb.getZ()),

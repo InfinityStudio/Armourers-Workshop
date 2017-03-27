@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import org.apache.commons.io.IOUtils;
 
 import com.mojang.authlib.GameProfile;
@@ -27,52 +28,53 @@ public final class SkinHelper {
      * Based on @KitsuneKihira texture helper class.
      * https://github.com/kihira/FoxLib/blob/2946cd6033d3039151064ceccfb8d38612d0af02/src/main/scala/kihira/foxlib/client/TextureHelper.scala#L28
      */
-    
-//    public static BufferedImage getBufferedImageSkin(AbstractClientPlayer player) {
-//        BufferedImage bufferedImage = null;
-//        ResourceLocation skinloc = AbstractClientPlayer.locationStevePng;
-//        InputStream inputStream = null;
-//        Minecraft mc = Minecraft.getMinecraft();
-//        skinloc = player.getLocationSkin();
-//        try {
-//            ITextureObject skintex = mc.getTextureManager().getTexture(skinloc);
-//            if (skintex instanceof ThreadDownloadImageData) {
-//                ThreadDownloadImageData imageData = (ThreadDownloadImageData)skintex;
-//                bufferedImage  = ObfuscationReflectionHelper.getPrivateValue(ThreadDownloadImageData.class, imageData, "bufferedImage", "field_110560_d", "bpr.h");
-//            } else {
-//                inputStream = Minecraft.getMinecraft().getResourceManager().getResource(skinloc).getInputStream();
-//                bufferedImage = ImageIO.read(inputStream);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            IOUtils.closeQuietly(inputStream);
-//        }
-//        return bufferedImage;
-//    }
-//
-//    public static BufferedImage getBufferedImageSkin(ResourceLocation resourceLocation) {
-//        Minecraft mc = Minecraft.getMinecraft();
-//        BufferedImage bufferedImage = null;
-//        InputStream inputStream = null;
-//
-//        try {
-//            ITextureObject skintex = mc.getTextureManager().getTexture(resourceLocation);
-//            if (skintex instanceof ThreadDownloadImageData) {
-//                ThreadDownloadImageData imageData = (ThreadDownloadImageData)skintex;
-//                bufferedImage  = ObfuscationReflectionHelper.getPrivateValue(ThreadDownloadImageData.class, imageData, "bufferedImage", "field_110560_d", "bpr.h");
-//            } else {
-//                inputStream = Minecraft.getMinecraft().getResourceManager().getResource(resourceLocation).getInputStream();
-//                bufferedImage = ImageIO.read(inputStream);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            IOUtils.closeQuietly(inputStream);
-//        }
-//
-//        return bufferedImage;
-//    }
+
+    public static BufferedImage getBufferedImageSkin(AbstractClientPlayer player) {
+        BufferedImage bufferedImage = null;
+        ResourceLocation skinloc = DefaultPlayerSkin.getDefaultSkin(player.getUniqueID());
+        InputStream inputStream = null;
+        Minecraft mc = Minecraft.getMinecraft();
+        skinloc = player.getLocationSkin();
+        try {
+            ITextureObject skintex = mc.getTextureManager().getTexture(skinloc);
+            if (skintex instanceof ThreadDownloadImageData) {
+                ThreadDownloadImageData imageData = (ThreadDownloadImageData) skintex;
+                bufferedImage = ObfuscationReflectionHelper.getPrivateValue(ThreadDownloadImageData.class, imageData, "bufferedImage", "field_110560_d", "bpr.h");
+            } else {
+                inputStream = Minecraft.getMinecraft().getResourceManager().getResource(skinloc).getInputStream();
+                bufferedImage = ImageIO.read(inputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(inputStream);
+        }
+        return bufferedImage;
+    }
+
+    //
+    public static BufferedImage getBufferedImageSkin(ResourceLocation resourceLocation) {
+        Minecraft mc = Minecraft.getMinecraft();
+        BufferedImage bufferedImage = null;
+        InputStream inputStream = null;
+
+        try {
+            ITextureObject skintex = mc.getTextureManager().getTexture(resourceLocation);
+            if (skintex instanceof ThreadDownloadImageData) {
+                ThreadDownloadImageData imageData = (ThreadDownloadImageData)skintex;
+                bufferedImage  = ObfuscationReflectionHelper.getPrivateValue(ThreadDownloadImageData.class, imageData, "bufferedImage", "field_110560_d", "bpr.h");
+            } else {
+                inputStream = Minecraft.getMinecraft().getResourceManager().getResource(resourceLocation).getInputStream();
+                bufferedImage = ImageIO.read(inputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(inputStream);
+        }
+
+        return bufferedImage;
+    }
 //
 //    public static BufferedImage getBufferedImageSkin(GameProfile gameProfile) {
 //        BufferedImage bufferedImage = null;
@@ -162,10 +164,10 @@ public final class SkinHelper {
 //        return skin;
 //    }
 //
-//    public static BufferedImage deepCopyBufferedImage(BufferedImage bufferedImage) {
-//        ColorModel cm = bufferedImage.getColorModel();
-//        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-//        WritableRaster raster = bufferedImage.copyData(null);
-//        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
-//    }
+    public static BufferedImage deepCopyBufferedImage(BufferedImage bufferedImage) {
+        ColorModel cm = bufferedImage.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = bufferedImage.copyData(null);
+        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+    }
 }

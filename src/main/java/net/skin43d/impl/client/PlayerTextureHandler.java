@@ -1,6 +1,7 @@
 package net.skin43d.impl.client;
 
 import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -58,7 +59,8 @@ public class PlayerTextureHandler {
         profiler.startSection("textureBuild");
         if (playerTextureMap.containsKey(playerPointer)) {
             EntityTextureInfo textureInfo = playerTextureMap.get(playerPointer);
-            textureInfo.updateTexture(player.getLocationSkin());
+            ResourceLocation def = DefaultPlayerSkin.getDefaultSkin(player.getUniqueID());
+            textureInfo.updateTexture(def, player.getLocationSkin());
             textureInfo.updateHairColour(ewd.hairColour);
             textureInfo.updateSkinColour(ewd.skinColour);
             Skin[] skins = new Skin[4 * 5];

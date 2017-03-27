@@ -79,7 +79,10 @@ public class ContextProxy extends Context {
 
     @Override
     public int getNumberOfRenderLayers() {
-        return 3;
+        if (useMultipassSkinRendering())
+            return 4;
+        else
+            return 2;
     }
 
     @Override

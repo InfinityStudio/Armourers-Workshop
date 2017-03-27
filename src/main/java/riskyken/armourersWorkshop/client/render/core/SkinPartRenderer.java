@@ -1,31 +1,32 @@
 package riskyken.armourersWorkshop.client.render.core;
 
-import java.util.List;
-
-import net.skin43d.impl.Context;
-import org.lwjgl.opengl.GL11;
-
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.ResourceLocation;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.skin43d.impl.Context;
 import net.skin43d.impl.client.render.BakedFace;
+import org.lwjgl.opengl.GL11;
+import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
-import riskyken.plushieWrapper.client.IRenderBuffer;
-import riskyken.plushieWrapper.client.RenderBridge;
+
+import java.util.List;
+
+import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.*;
 
 @SideOnly(Side.CLIENT)
 public class SkinPartRenderer extends ModelBase {
     private static final ResourceLocation texture = new ResourceLocation(LibModInfo.ID.toLowerCase(), "textures/armour/cube.png");
     public static final SkinPartRenderer INSTANCE = new SkinPartRenderer();
     private final Minecraft mc;
-
 
     public SkinPartRenderer() {
         mc = Minecraft.getMinecraft();
@@ -117,11 +118,22 @@ public class SkinPartRenderer extends ModelBase {
         //mc.mcProfiler.endSection();
     }
 
+    static final VertexFormat POS_COLOR_NORMAL = new VertexFormat();
+
+    static {
+        POS_COLOR_NORMAL.addElement(POSITION_3F);
+        POS_COLOR_NORMAL.addElement(COLOR_4UB);
+        POS_COLOR_NORMAL.addElement(NORMAL_3B);
+        POS_COLOR_NORMAL.addElement(PADDING_1B);
+    }
+
     private void renderVertexList(List<BakedFace> vertexList, float scale, ISkinDye skinDye, byte[] extraColour, ClientSkinPartData cspd) {
-        IRenderBuffer renderBuffer = RenderBridge.INSTANCE;
-        renderBuffer.startDrawingQuads();
+        if (Context.instance().useSafeTexture())
+            Tessellator.getInstance().getBuffer().begin(7, DefaultVertexFormats.POSITION_TEX_COLOR_NORMAL);
+        else
+            Tessellator.getInstance().getBuffer().begin(7, POS_COLOR_NORMAL);
         for (int i = 0; i < vertexList.size(); i++)
             vertexList.get(i).render(skinDye, extraColour, cspd, Context.instance().useSafeTexture());
-        renderBuffer.draw();
+        Tessellator.getInstance().draw();
     }
 }

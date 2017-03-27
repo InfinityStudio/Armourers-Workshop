@@ -107,7 +107,7 @@ public class EntityTextureInfo {
         return needsUpdate;
     }
 
-    public void updateTexture(ResourceLocation resourceLocation) {
+    public void updateTexture(ResourceLocation def, ResourceLocation resourceLocation) {
         if (lastEntityTextureHash != resourceLocation.hashCode()) {
             BufferedImage buff = SkinHelper.getBufferedImageSkin(resourceLocation);
             bufferedEntityImage = null;
@@ -122,8 +122,8 @@ public class EntityTextureInfo {
 
         if (bufferedEntityImage == null) {
             //Texture is most likely not downloaded yet.
-            lastEntityTextureHash = AbstractClientPlayer.locationStevePng.hashCode();
-            bufferedEntityImage = SkinHelper.getBufferedImageSkin(AbstractClientPlayer.locationStevePng);
+            lastEntityTextureHash = def.hashCode();
+            bufferedEntityImage = SkinHelper.getBufferedImageSkin(def);
             if (bufferedEntityImage != null & !loading) {
                 loading = true;
                 needsUpdate = true;

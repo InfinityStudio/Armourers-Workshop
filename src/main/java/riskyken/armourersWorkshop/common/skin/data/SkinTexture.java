@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.skin43d.impl.Context;
 import org.apache.commons.io.IOUtils;
 import org.lwjgl.opengl.GL11;
@@ -53,7 +54,7 @@ public class SkinTexture {
 
     public void updateGameProfile(GameProfile gameProfile) {
         //TODO Look at RealmsScreen code.
-        ResourceLocation rl = AbstractClientPlayer.locationStevePng;
+        ResourceLocation rl = DefaultPlayerSkin.getDefaultSkin(gameProfile.getId());
         if (gameProfile != null) {
             rl = AbstractClientPlayer.getLocationSkin(gameProfile.getName());
             AbstractClientPlayer.getDownloadImageSkin(rl, gameProfile.getName());
@@ -61,7 +62,7 @@ public class SkinTexture {
         updateForResourceLocation(rl);
 
         if (bufferedPlayerImage == null) {
-            updateForResourceLocation(AbstractClientPlayer.locationStevePng);
+            updateForResourceLocation(DefaultPlayerSkin.getDefaultSkin(gameProfile.getId()));
         }
     }
 

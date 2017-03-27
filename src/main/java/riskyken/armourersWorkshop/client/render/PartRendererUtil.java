@@ -95,12 +95,13 @@ public class PartRendererUtil {
         //mc.mcProfiler.endSection();
     }
 
-    private static void renderVertexList(List<BakedFace> vertexList, ISkinDye skinDye, byte[] extraColour,
+    private static void renderVertexList(List<BakedFace> bakedFaces, ISkinDye skinDye, byte[] extraColour,
                                          BakeSkinPart data) {
         IRenderBuffer renderBuffer = RenderBridge.INSTANCE;
         renderBuffer.startDrawingQuads();
-        for (int i = 0; i < vertexList.size(); i++)
-            vertexList.get(i).render(skinDye, extraColour, data, Context.instance().useSafeTexture());
+        for (int i = 0; i < bakedFaces.size(); i++) {
+            bakedFaces.get(i).render(skinDye, extraColour, data, false);
+        }
         renderBuffer.draw();
     }
 }

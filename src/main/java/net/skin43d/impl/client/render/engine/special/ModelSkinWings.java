@@ -2,6 +2,7 @@ package net.skin43d.impl.client.render.engine.special;
 
 import java.util.List;
 
+import net.minecraft.util.EnumHand;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.entity.Entity;
@@ -25,14 +26,14 @@ public class ModelSkinWings extends AbstractModelSkin {
             EntityPlayer player = (EntityPlayer) entity;
             this.isSneak = player.isSneaking();
             this.isRiding = player.isRiding();
-            this.heldItemRight = 0;
-            if (player.getHeldItem() != null) {
-                this.heldItemRight = 1;
+            this.rightArmPose = ArmPose.EMPTY;
+            if (player.getHeldItem(EnumHand.MAIN_HAND) != null) {
+                this.rightArmPose = ArmPose.ITEM;
             }
         }
 
-        if (ClientProxy.isJrbaClientLoaded())
-            this.isChild = false;
+//        if (ClientProxy.isJrbaClientLoaded())
+//            this.isChild = false;
 
         for (SkinPart part : parts) {
             GL11.glPushMatrix();

@@ -1,5 +1,6 @@
 package net.skin43d.impl.client.render.engine.special;
 
+import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
@@ -29,7 +30,7 @@ public class ModelSkinBow extends AbstractModelSkin {
             this.isRiding = player.isRiding();
             this.isChild = player.isChild();
 //            this.heldItemRight = 0;
-            if (player.getHeldItem() != null) {
+            if (player.getHeldItem(EnumHand.MAIN_HAND) != null) {
 //                this.heldItemRight = 1;
             }
         }
