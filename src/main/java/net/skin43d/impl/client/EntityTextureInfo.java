@@ -16,7 +16,6 @@ import net.skin43d.skin3d.ISkinDye;
 import net.skin43d.skin3d.ISkinPartTypeTextured;
 import net.skin43d.impl.client.render.bakery.BakedFace;
 import net.skin43d.skin3d.SkinTypeRegistry;
-import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import net.skin43d.utils.PaintType;
 import net.skin43d.impl.skin.Skin;
 import net.skin43d.impl.skin.SkinPart;
@@ -315,7 +314,8 @@ public class EntityTextureInfo {
             renderEngine.deleteTexture(replacementTexture);
         }
         SkinTextureObject sto = new SkinTextureObject(bufferedEntitySkinnedImage);
-        replacementTexture = new ResourceLocation(LibModInfo.ID.toLowerCase(), String.valueOf(bufferedEntitySkinnedImage.hashCode()));
+        //TODO
+        replacementTexture = new ResourceLocation("skin43d", String.valueOf(bufferedEntitySkinnedImage.hashCode()));
         renderEngine.loadTexture(replacementTexture, sto);
     }
 

@@ -128,8 +128,7 @@ public class Skin implements Skin3D {
         this.properties = properties;
         this.equipmentSkinType = equipmentSkinType;
         this.paintData = null;
-        //Check if the paint data has any paint on it.
-        if (paintData != null) {
+        if (paintData != null) {//Check if the paint data has any paint on it.
             boolean validPaintData = false;
             for (int i = 0; i < Context.instance().getTextureSize(); i++) {
                 if (paintData[i] >>> 16 != 255) {
@@ -176,9 +175,8 @@ public class Skin implements Skin3D {
     }
 
     public int lightHash() {
-        if (lightHash == 0) {
+        if (lightHash == 0)
             lightHash = this.hashCode();
-        }
         return lightHash;
     }
 

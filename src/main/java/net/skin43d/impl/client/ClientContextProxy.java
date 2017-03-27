@@ -31,7 +31,7 @@ public class ClientContextProxy extends ContextProxy {
     private RenderEngine renderEngine;
     private ListeningExecutorService service;
 
-    private static String loc = "D:\\Storage\\Desktop\\Angel Wings.armour";
+    private static String testLocation = "D:\\Storage\\Desktop\\Angel Wings.armour";
     private static Skin skin;
 
     @Override
@@ -60,7 +60,7 @@ public class ClientContextProxy extends ContextProxy {
         AsyncModelBakery bakery = new AsyncModelBakery(service);
 
         /////TEST CODE//////
-        File file = new File(loc);
+        File file = new File(testLocation);
         skin = SkinIOUtils.loadSkinFromFile(file);
         bakery.bake(skin);
         this.provider = new SkinProviderLocal(skin);

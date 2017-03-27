@@ -25,13 +25,13 @@ repositories {
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 
-group= "riskyken.armourersWorkshop"
-archivesBaseName = "Armourers-Workshop"
+group = "net.skin43d"
+archivesBaseName = "SkinFor3D"
 
 minecraft {
-    version  = "1.10.2-12.18.3.2185"
+    version = "1.10.2-12.18.3.2185"
 //    version = "$minecraftVersion-$forgeVersion"
-    runDir = "eclipse"
+    runDir = "run"
     mappings = "snapshot_20161111"
 }
 
@@ -45,7 +45,7 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
 
     from(sourceSets.main.resources.srcDirs) {

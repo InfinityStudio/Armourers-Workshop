@@ -14,7 +14,6 @@ import net.skin43d.impl.client.render.bakery.BakedFace;
 import org.lwjgl.opengl.GL11;
 import net.skin43d.skin3d.ISkinDye;
 import net.skin43d.impl.client.render.bakery.BakedPart;
-import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import net.skin43d.impl.skin.SkinPart;
 
 import java.util.List;
@@ -23,7 +22,7 @@ import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.*;
 
 @SideOnly(Side.CLIENT)
 public class SkinPartRenderer extends ModelBase {
-    private static final ResourceLocation texture = new ResourceLocation(LibModInfo.ID.toLowerCase(), "textures/armour/cube.png");
+    //    private static final ResourceLocation texture = new ResourceLocation(LibModInfo.ID.toLowerCase(), "textures/armour/cube.png");
     public static final SkinPartRenderer INSTANCE = new SkinPartRenderer();
     private final Minecraft mc;
 
@@ -40,6 +39,7 @@ public class SkinPartRenderer extends ModelBase {
     private void renderPart(BakedPart cspd, float scale, ISkinDye skinDye, byte[] extraColour, int lod, boolean doLodLoading) {
         if (cspd == null) return;
         BakedCubes skinModel = cspd.getModelForDye(skinDye, extraColour);
+        cspd.getVertexes();
         boolean multipassSkinRendering = true;//ClientProxy.useMultipassSkinRendering();
 
         for (int i = 0; i < skinModel.displayList.length; i++) {
@@ -53,10 +53,10 @@ public class SkinPartRenderer extends ModelBase {
             }
         }
 
-        if (Context.instance().useSafeTexture())
-            mc.renderEngine.bindTexture(texture);
-        else
-            GL11.glDisable(GL11.GL_TEXTURE_2D);
+//        if (Context.instance().useSafeTexture())
+//            mc.renderEngine.bindTexture(texture);
+//        else
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
 
         int startIndex = 0;
         int endIndex;

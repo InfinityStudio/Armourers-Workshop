@@ -10,12 +10,11 @@ import net.skin43d.impl.skin.SkinDye;
 
 @SideOnly(Side.CLIENT)
 public class BakedPart {
-
     /**
      * Blank dye that is used if no dye is applied.
      */
-    public static final SkinDye blankDye = new SkinDye();
-    public HashMap<ModelKey, BakedCubes> dyeModels;
+    private static final SkinDye blankDye = new SkinDye();
+    private HashMap<ModelKey, BakedCubes> dyeModels;
 
     public List<BakedFace>[] vertexLists;
     public int[] totalCubesInPart;
@@ -67,12 +66,16 @@ public class BakedPart {
         return new int[]{averageR[dyeNumber], averageG[dyeNumber], averageB[dyeNumber]};
     }
 
+    public List<BakedFace>[] getVertexes() {
+        return vertexLists;
+    }
+
     private class ModelKey {
 
         private ISkinDye skinDye;
         byte[] extraColours;
 
-        public ModelKey(ISkinDye skinDye, byte[] extraColours) {
+        ModelKey(ISkinDye skinDye, byte[] extraColours) {
             this.skinDye = skinDye;
             this.extraColours = extraColours;
         }
