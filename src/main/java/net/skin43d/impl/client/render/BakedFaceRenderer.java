@@ -1,14 +1,9 @@
 package net.skin43d.impl.client.render;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import riskyken.plushieWrapper.client.IRenderBuffer;
-import riskyken.plushieWrapper.client.RenderBridge;
 
 public class BakedFaceRenderer {
 
-    private static final IRenderBuffer BUF = RenderBridge.INSTANCE;
     private static final float SCALE = 0.0625F;
 
     //0 = west
@@ -87,13 +82,5 @@ public class BakedFaceRenderer {
         if (texture)
             Tessellator.getInstance().getBuffer().pos(x, y, z).tex(u, v).color(r, g, b, a).normal(nx, ny, nz).endVertex();
         else Tessellator.getInstance().getBuffer().pos(x, y, z).color(r, g, b, a).normal(nx, ny, nz).endVertex();
-    }
-
-    private static void addVertex(double x, double y, double z, double u, double v, boolean textured) {
-        if (textured) {
-            BUF.addVertexWithUV(x, y, z, u, v);
-        } else {
-            BUF.addVertex(x, y, z);
-        }
     }
 }

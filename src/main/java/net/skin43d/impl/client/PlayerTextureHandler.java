@@ -16,7 +16,6 @@ import net.skin43d.impl.Context;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.client.render.EntityTextureInfo;
-import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
@@ -40,7 +39,7 @@ public class PlayerTextureHandler {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onRender(RenderPlayerEvent.Pre event) {
-        disableTexturePainting = ConfigHandlerClient.disableTexturePainting;
+        disableTexturePainting = Context.instance().disableTexturePainting();
         if (disableTexturePainting) {
             return;
         }

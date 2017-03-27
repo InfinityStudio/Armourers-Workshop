@@ -1,14 +1,10 @@
 package riskyken;
 
 import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.util.BitSet;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import riskyken.armourersWorkshop.common.SkinHelper;
-import riskyken.armourersWorkshop.common.config.ConfigHandler;
 
 public class EquipmentWardrobeData {
     
@@ -38,7 +34,9 @@ public class EquipmentWardrobeData {
         armourOverride = new BitSet(4);
         headOverlay = false;
         limitLimbs = true;
-        slotsUnlocked = ConfigHandler.startingWardrobeSlots;
+
+        //TODO remember handle this...
+//        slotsUnlocked = ConfigHandler.startingWardrobeSlots;
     }
     
     public EquipmentWardrobeData(EquipmentWardrobeData ewd) {

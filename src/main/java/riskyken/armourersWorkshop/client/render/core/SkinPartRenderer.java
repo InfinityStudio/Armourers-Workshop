@@ -14,7 +14,6 @@ import net.skin43d.impl.client.render.BakedFace;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
-import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 
@@ -33,8 +32,8 @@ public class SkinPartRenderer extends ModelBase {
     }
 
     public void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, double distance, boolean doLodLoading) {
-        int lod = MathHelper.floor_double(distance / ConfigHandlerClient.lodDistance);
-        lod = MathHelper.clamp_int(lod, 0, ConfigHandlerClient.maxLodLevels);
+        int lod = MathHelper.floor_double(distance / Context.instance().getLodDistance());
+        lod = MathHelper.clamp_int(lod, 0, Context.instance().getMaxLodLevel());
         renderPart(skinPart.getClientSkinPartData(), scale, skinDye, extraColour, lod, doLodLoading);
     }
 
@@ -93,11 +92,11 @@ public class SkinPartRenderer extends ModelBase {
                                 GL11.glDisable(GL11.GL_LIGHTING);
                                 ModRenderHelper.disableLighting();
                             }
-                            if (ConfigHandlerClient.wireframeRender) {
+                            if (Context.instance().wireframeRender()) {
                                 GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
                             }
                             skinModel.displayList[i].render();
-                            if (ConfigHandlerClient.wireframeRender) {
+                            if (Context.instance().wireframeRender()) {
                                 GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
                             }
                             if (glowing) {

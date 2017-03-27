@@ -24,7 +24,6 @@ import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import net.skin43d.impl.client.render.engine.RenderEngine;
 import net.skin43d.utils.ModLogger;
 import riskyken.armourersWorkshop.client.render.core.SkinPartRenderer;
-import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 
@@ -187,7 +186,7 @@ public class RenderEngineAttach implements RenderEngine {
                 distance = 0;
             else
                 distance = Minecraft.getMinecraft().thePlayer.getDistance(player.posX, player.posY, player.posZ);
-            if (distance > ConfigHandlerClient.maxSkinRenderDistance) return;
+            if (distance > Context.instance().getLodDistance()) return;
 
             //TODO not really sure what EquipmentWardrobeData will handle(except color). Since it has the relationship with slot
             // which will be removed, I comment this out first.

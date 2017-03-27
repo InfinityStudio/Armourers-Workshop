@@ -16,7 +16,6 @@ import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import net.skin43d.impl.client.render.engine.RenderEngine;
 import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
-import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
@@ -39,7 +38,7 @@ public class RenderEngineSpecial implements RenderEngine {
             return;
 
         double distance = Minecraft.getMinecraft().thePlayer.getDistance(player.posX, player.posY, player.posZ);
-        if (distance > ConfigHandlerClient.maxSkinRenderDistance) return;
+        if (distance > Context.instance().getMaxLodLevel()) return;
 
         SkinProvider skinProvider = Context.instance().getSkinProvider();
         SkinTypeRegistry skinRegistry = Context.instance().getSkinRegistry();

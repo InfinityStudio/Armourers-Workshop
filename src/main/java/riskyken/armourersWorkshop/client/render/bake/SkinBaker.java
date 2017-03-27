@@ -1,19 +1,18 @@
 package riskyken.armourersWorkshop.client.render.bake;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
-import net.skin43d.utils.ForgeDirection;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.impl.Context;
 import net.skin43d.impl.client.render.BakedFace;
+import net.skin43d.utils.ForgeDirection;
 import net.skin43d.utils.Rectangle3D;
-import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.cubes.ICube;
 import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public final class SkinBaker {
@@ -172,7 +171,7 @@ public final class SkinBaker {
 
         ArrayList<BakedFace>[] renderLists;
 
-        int lodLevels = ConfigHandlerClient.maxLodLevels;
+        int lodLevels = Context.instance().getMaxLodLevel();
         
         /* LOD Indexs
          * 

@@ -3,9 +3,9 @@ package riskyken.armourersWorkshop.client.render.core;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.util.math.MathHelper;
+import net.skin43d.impl.Context;
 import net.skin43d.impl.client.render.DisplayList;
 import net.skin43d.impl.client.render.BakedFace;
-import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 
 import java.util.List;
 
@@ -48,7 +48,8 @@ public class BakedCubes {
         long time = System.currentTimeMillis();
         if (time < loadedTime + 500) {
             long timePassed = time - loadedTime;
-            return MathHelper.clamp_int((ConfigHandlerClient.maxLodLevels + 1) - ((int) (timePassed / 125F) + 1), 0, ConfigHandlerClient.maxLodLevels + 1);
+            return MathHelper.clamp_int((Context.instance().getMaxLodLevel() + 1) - ((int) (timePassed / 125F) + 1), 0,
+                    Context.instance().getMaxLodLevel() + 1);
         }
         return 0;
     }

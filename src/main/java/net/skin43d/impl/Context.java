@@ -14,6 +14,16 @@ public abstract class Context {
         return ModSkin43D.getProxy();
     }
 
+    public abstract SkinTypeRegistry getSkinRegistry();
+
+    public abstract EquipmentWardrobeProvider getEquipmentWardrobeProvider();
+
+    public abstract SkinProvider getSkinProvider();
+
+    public abstract SkinBakery getSkinBakery();
+
+    public abstract CubeRegistry getCubeRegistry();
+
     public abstract int getTextureWidth();
 
     public abstract int getTextureHeight();
@@ -28,13 +38,11 @@ public abstract class Context {
 
     public abstract int getNumberOfRenderLayers();
 
-    public abstract SkinTypeRegistry getSkinRegistry();
+    public abstract int getLodDistance();
 
-    public abstract EquipmentWardrobeProvider getEquipmentWardrobeProvider();
+    public abstract int getMaxLodLevel();
 
-    public abstract SkinProvider getSkinProvider();
+    public abstract boolean wireframeRender();
 
-    public abstract SkinBakery getSkinBakery();
-
-    public abstract CubeRegistry getCubeRegistry();
+    public abstract boolean disableTexturePainting();
 }

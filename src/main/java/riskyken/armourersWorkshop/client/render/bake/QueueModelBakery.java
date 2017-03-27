@@ -10,7 +10,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.impl.client.render.bakery.SkinBakery;
 import riskyken.armourersWorkshop.api.common.skin.data.Skin3D;
-import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 
 import java.util.concurrent.*;
@@ -22,7 +21,7 @@ public final class QueueModelBakery implements SkinBakery {
     private AtomicInteger bakingQueue = new AtomicInteger(0);
 
     public QueueModelBakery() {
-        Executor skinDownloadExecutor = Executors.newFixedThreadPool(ConfigHandlerClient.maxModelBakingThreads);
+        Executor skinDownloadExecutor = Executors.newFixedThreadPool(2);
         skinCompletion = new ExecutorCompletionService<Skin>(skinDownloadExecutor);
         FMLCommonHandler.instance().bus().register(this);
     }
