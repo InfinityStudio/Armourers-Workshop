@@ -62,12 +62,9 @@ public class FirstPersonRenderHelper {
         GL11.glTranslatef(0, offsetY * mcScale, 0);
         GL11.glTranslatef(0, 0, offsetZ * mcScale);
 
-        if (skin.getSkinType() == Context.instance().getSkinRegistry().getSkinWings()) {
-            GL11.glTranslated(-offsetX * mcScale, 0, 0);
-        }
-
         model.render(null, null, skin, showSkinPaint, null, null, true, 0, doLodLoading);
         GL11.glPopMatrix();
         GL11.glPopAttrib();
+        GL11.glPopMatrix();
     }
 }

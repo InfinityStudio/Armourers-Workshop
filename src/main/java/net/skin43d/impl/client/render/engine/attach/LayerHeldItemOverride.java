@@ -19,7 +19,6 @@ import net.skin43d.impl.skin.Skin;
 public class LayerHeldItemOverride implements LayerRenderer<EntityLivingBase> {
     protected final RenderLivingBase<?> livingEntityRenderer;
     private RenderEngineAttach attach;
-    private ModelSkinSword sword = new ModelSkinSword();
 
     public LayerHeldItemOverride(RenderLivingBase<?> livingEntityRendererIn, RenderEngineAttach engineAttach) {
         this.livingEntityRenderer = livingEntityRendererIn;
@@ -66,8 +65,8 @@ public class LayerHeldItemOverride implements LayerRenderer<EntityLivingBase> {
             Skin skin = Context.instance().getSkinProvider().getSkinInfoForEntity(entity,
                     Context.instance().getSkinRegistry().getSkinSword());
             if (skin != null) {
-                sword.npcEquipmentData = skin;
-                sword.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+                attach.sword.npcEquipmentData = skin;
+                attach.sword.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
             } else {
                 Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, p_188358_2_, p_188358_3_, flag);
             }

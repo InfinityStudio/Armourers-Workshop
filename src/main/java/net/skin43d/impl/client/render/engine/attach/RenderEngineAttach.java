@@ -3,6 +3,7 @@ package net.skin43d.impl.client.render.engine.attach;
 import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
@@ -11,12 +12,14 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.SkinProvider;
 import net.skin43d.impl.Context;
+import net.skin43d.impl.client.render.FirstPersonRenderHelper;
 import net.skin43d.impl.client.render.SkinPartRenderer;
 import net.skin43d.impl.client.render.engine.RenderEngine;
 import net.skin43d.impl.client.render.engine.core.ModelSkinSword;
@@ -40,6 +43,7 @@ import java.util.*;
  */
 public class RenderEngineAttach implements RenderEngine {
     private final Set<ModelBiped> attachedBipedSet = Collections.newSetFromMap(new WeakHashMap<ModelBiped, Boolean>());
+    ModelSkinSword sword = new ModelSkinSword();
 
     private EntityPlayer targetPlayer;
     private boolean[] renderedSkin = new boolean[7];
@@ -64,6 +68,16 @@ public class RenderEngineAttach implements RenderEngine {
         EntityPlayer player = targetPlayer = event.getEntityPlayer();
         if (player.getGameProfile() == null) return;
         attachModelsToBiped(event.getRenderer().getMainModel(), event.getRenderer());
+    }
+
+    @SubscribeEvent
+    public void renderFirstPersonRight(RenderSpecificHandEvent event) {
+        EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+        Skin sword = Context.instance().getSkinProvider().getSkinInfoForEntity(player, Context.instance().getSkinRegistry().getSkinSword());
+        if (sword != null) {
+//            this.sword.render(null, null, sword, false, null, null, true, 0, true);
+            FirstPersonRenderHelper.render(sword, this.sword, Context.instance().disableTexturePainting(), Context.instance().useMultipassSkinRendering());
+        }
     }
 
     boolean rendered(EntityEquipmentSlot slot) {
