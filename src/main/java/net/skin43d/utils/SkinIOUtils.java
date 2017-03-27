@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import net.minecraft.util.text.TextComponentString;
 import net.skin43d.impl.Context;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -18,7 +19,6 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StringUtils;
 import net.minecraftforge.common.DimensionManager;
 import net.skin43d.exception.InvalidCubeTypeException;
@@ -214,7 +214,7 @@ public final class SkinIOUtils {
     }
 
     public static void recoverSkins(EntityPlayer player) {
-        player.addChatComponentMessage(new ChatComponentText("Starting skin recovery."));
+        player.addChatComponentMessage(new TextComponentString("Starting skin recovery."));
         File skinDir = getSkinDatabaseDirectory();
         if (skinDir.exists() & skinDir.isDirectory()) {
             File recoverDir = new File(System.getProperty("user.dir"), "recovered-skins");
@@ -222,8 +222,8 @@ public final class SkinIOUtils {
                 recoverDir.mkdirs();
             }
             File[] skinFiles = skinDir.listFiles();
-            player.addChatComponentMessage(new ChatComponentText(String.format("Found %d skins to be recovered.", skinFiles.length)));
-            player.addChatComponentMessage(new ChatComponentText("Working..."));
+            player.addChatComponentMessage(new TextComponentString(String.format("Found %d skins to be recovered.", skinFiles.length)));
+            player.addChatComponentMessage(new TextComponentString("Working..."));
             int unnamedSkinCount = 0;
             int successCount = 0;
             int failCount = 0;
@@ -275,10 +275,10 @@ public final class SkinIOUtils {
                     failCount++;
                 }
             }
-            player.addChatComponentMessage(new ChatComponentText("Finished skin recovery."));
-            player.addChatComponentMessage(new ChatComponentText(String.format("%d skins were recovered and %d fail recovery.", successCount, failCount)));
+            player.addChatComponentMessage(new TextComponentString("Finished skin recovery."));
+            player.addChatComponentMessage(new TextComponentString(String.format("%d skins were recovered and %d fail recovery.", successCount, failCount)));
         } else {
-            player.addChatComponentMessage(new ChatComponentText("No skins found to recover."));
+            player.addChatComponentMessage(new TextComponentString("No skins found to recover."));
         }
     }
 }

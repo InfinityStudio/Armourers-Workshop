@@ -1,12 +1,12 @@
 package net.skin43d.impl;
 
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.skin43d.EquipmentWardrobeProvider;
 import net.skin43d.SkinProvider;
 import net.skin43d.impl.client.render.bakery.SkinBakery;
-import removequ.EquipmentWardrobeData;
+import riskyken.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
@@ -65,6 +65,21 @@ public class ContextProxy extends Context {
     @Override
     public int getFileVersion() {
         return ModSkin43D.FILE_VERSION;
+    }
+
+    @Override
+    public boolean useSafeTexture() {
+        return false;
+    }
+
+    @Override
+    public boolean useMultipassSkinRendering() {
+        return true;
+    }
+
+    @Override
+    public int getNumberOfRenderLayers() {
+        return 3;
     }
 
     @Override

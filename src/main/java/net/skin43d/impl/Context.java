@@ -22,6 +22,12 @@ public abstract class Context {
 
     public abstract int getFileVersion();
 
+    public abstract boolean useSafeTexture();
+
+    public abstract boolean useMultipassSkinRendering();
+
+    public abstract int getNumberOfRenderLayers();
+
     public abstract SkinTypeRegistry getSkinRegistry();
 
     public abstract EquipmentWardrobeProvider getEquipmentWardrobeProvider();

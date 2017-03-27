@@ -3,8 +3,8 @@ package riskyken.armourersWorkshop.common.skin.type.wings;
 import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.utils.Point3D;
 import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinPartTypeBase;

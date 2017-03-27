@@ -1,8 +1,8 @@
 package riskyken.armourersWorkshop.client.render.core;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.math.MathHelper;
 import net.skin43d.impl.client.render.DisplayList;
 import net.skin43d.impl.client.render.BakedFace;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;

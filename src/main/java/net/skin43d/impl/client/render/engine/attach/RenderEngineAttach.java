@@ -1,8 +1,8 @@
 package net.skin43d.impl.client.render.engine.attach;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.skin43d.utils.ForgeDirection;
 import net.skin43d.SkinProvider;
 import net.skin43d.impl.Context;
 import net.skin43d.impl.client.render.nbake.PartTranslator;
@@ -23,7 +23,6 @@ import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import net.skin43d.impl.client.render.engine.RenderEngine;
 import net.skin43d.utils.ModLogger;
-import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.client.render.core.SkinPartRenderer;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
@@ -51,10 +50,10 @@ public class RenderEngineAttach implements RenderEngine {
 
     @SubscribeEvent
     public void onRender(RenderPlayerEvent.Pre event) {
-        EntityPlayer player = targetPlayer = event.entityPlayer;
+        EntityPlayer player = targetPlayer = event.getEntityPlayer();
         if (player.getGameProfile() == null)
             return;
-        attachModelsToBiped(event.renderer.modelBipedMain, event.renderer);
+        attachModelsToBiped(event.getRenderer().getMainModel(), event.getRenderer());
         //Limit the players limbs if they have a skirt equipped.
         //A proper lady should not swing her legs around!
 //        if (isPlayerWearingSkirt(playerPointer)) {
@@ -233,7 +232,7 @@ public class RenderEngineAttach implements RenderEngine {
                 GL11.glDisable(GL11.GL_CULL_FACE);
                 GL11.glPopMatrix();
             }
-            if (ClientProxy.useSafeTextureRender()) {
+            if (true) {
                 if (player instanceof AbstractClientPlayer) {
                     AbstractClientPlayer clientPlayer = (AbstractClientPlayer) player;
                     Minecraft.getMinecraft().renderEngine.bindTexture(clientPlayer.getLocationSkin());

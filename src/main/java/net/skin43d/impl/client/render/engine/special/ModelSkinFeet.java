@@ -1,7 +1,7 @@
 package net.skin43d.impl.client.render.engine.special;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,10 +10,8 @@ import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.render.core.ModelHelper;
 import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
-import removequ.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
-import riskyken.armourersWorkshop.client.ClientProxy;
 
 import java.util.List;
 
@@ -31,15 +29,15 @@ public class ModelSkinFeet extends AbstractModelSkin {
             EntityPlayer player = (EntityPlayer) entity;
             this.isSneak = player.isSneaking();
             this.isRiding = player.isRiding();
-            this.heldItemRight = 0;
-            if (player.getHeldItem() != null) {
-                this.heldItemRight = 1;
-            }
+//            this.heldItemRight = 0;
+//            if (player.getHeldItem() != null) {
+//                this.heldItemRight = 1;
+//            }
         }
 
-        if (ClientProxy.isJrbaClientLoaded()) {
-            this.isChild = false;
-        }
+//        if (ClientProxy.isJrbaClientLoaded()) {
+//            this.isChild = false;
+//        }
 
 //        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinFeet);
         RenderHelper.enableGUIStandardItemLighting();
@@ -72,8 +70,6 @@ public class ModelSkinFeet extends AbstractModelSkin {
                 GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
                 GL11.glTranslatef(0.0F, 24.0F * SCALE, 0.0F);
             }
-
-            ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, part.getPartType());
 
             if (part.getPartType().getPartName().equals("leftFoot")) {
                 renderLeftFoot(part, SCALE, skinDye, extraColour, itemRender, distance, doLodLoading);

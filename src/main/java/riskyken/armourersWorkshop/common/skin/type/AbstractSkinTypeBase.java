@@ -1,29 +1,8 @@
 package riskyken.armourersWorkshop.common.skin.type;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.IIcon;
 import net.skin43d.skin3d.SkinType;
 
 public abstract class AbstractSkinTypeBase implements SkinType {
-    
-    @SideOnly(Side.CLIENT)
-    protected IIcon icon;
-    
-    @SideOnly(Side.CLIENT)
-    protected IIcon emptySlotIcon;
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIcon() {
-        return this.icon;
-    }
-    
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getEmptySlotIcon() {
-        return this.emptySlotIcon;
-    }
     
     @Override
     public boolean showSkinOverlayCheckbox() {

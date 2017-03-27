@@ -4,27 +4,22 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.entity.Entity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.skin43d.utils.ForgeDirection;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.impl.Context;
 import net.skin43d.impl.client.render.BakedFace;
 import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
-import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 import riskyken.armourersWorkshop.common.skin.cubes.ICube;
 import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
-import riskyken.armourersWorkshop.client.ClientProxy;
 
 @SideOnly(Side.CLIENT)
 public final class SkinBaker {
-    public static boolean withinMaxRenderDistance(Entity entity) {
-        return withinMaxRenderDistance(entity.posX, entity.posY, entity.posZ);
-    }
+//    public static boolean withinMaxRenderDistance(Entity entity) {
+//        return withinMaxRenderDistance(entity.posX, entity.posY, entity.posZ);
+//    }
 
 //    private static boolean withinMaxRenderDistance(double x, double y, double z) {
 //        EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
@@ -173,7 +168,7 @@ public final class SkinBaker {
     }
 
     public static void buildPartDisplayListArray(SkinPart partData, int[][] dyeColour, int[] dyeUseCount, int[][][] cubeArray) {
-        boolean multipassSkinRendering = ClientProxy.useMultipassSkinRendering();
+        boolean multipassSkinRendering = Context.instance().ClientProxy.useMultipassSkinRendering();
 
         ArrayList<BakedFace>[] renderLists;
 

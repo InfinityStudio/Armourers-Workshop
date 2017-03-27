@@ -1,7 +1,7 @@
 package net.skin43d.impl.client.render.nbake;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.skin43d.utils.ForgeDirection;
 import net.skin43d.utils.Point3D;
 import org.lwjgl.opengl.GL11;
 

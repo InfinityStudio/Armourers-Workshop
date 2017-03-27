@@ -1,9 +1,9 @@
 package riskyken.armourersWorkshop.common.skin.data;
 
-import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.skin3d.SkinPartType;
+import net.skin43d.utils.ForgeDirection;
 import net.skin43d.utils.Point3D;
 import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.data.Skin3D;
@@ -105,10 +105,10 @@ public class SkinPart implements Skin3D.Part {
     }
 
     @Override
-    public EnumFacing getMarkerSide(int index) {
+    public ForgeDirection getMarkerSide(int index) {
         if (index >= 0 & index < markerBlocks.size()) {
             CubeMarkerData cmd = markerBlocks.get(index);
-            return EnumFacing.getOrientation(cmd.meta - 1);
+            return ForgeDirection.getOrientation(cmd.meta - 1);
         }
         return null;
     }

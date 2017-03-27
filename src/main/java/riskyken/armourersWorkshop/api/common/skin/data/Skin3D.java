@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.util.EnumFacing;
 import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.skin3d.SkinType;
+import net.skin43d.utils.ForgeDirection;
 import net.skin43d.utils.Point3D;
 
 public interface Skin3D {
@@ -19,6 +20,6 @@ public interface Skin3D {
 
         Point3D getMarker(int index);
 
-        EnumFacing getMarkerSide(int index);
+        ForgeDirection getMarkerSide(int index);
     }
 }

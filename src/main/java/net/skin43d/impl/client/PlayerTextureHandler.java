@@ -1,10 +1,10 @@
 package net.skin43d.impl.client;
 
 import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.profiler.Profiler;
@@ -17,7 +17,7 @@ import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
 import riskyken.armourersWorkshop.client.render.EntityTextureInfo;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import removequ.EquipmentWardrobeData;
+import riskyken.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 
 import java.util.HashMap;
@@ -43,10 +43,10 @@ public class PlayerTextureHandler {
         if (disableTexturePainting) {
             return;
         }
-        if (!(event.entityPlayer instanceof AbstractClientPlayer)) {
+        if (!(event.getEntityLiving() instanceof AbstractClientPlayer)) {
             return;
         }
-        AbstractClientPlayer player = (AbstractClientPlayer) event.entityPlayer;
+        AbstractClientPlayer player = (AbstractClientPlayer) event.getEntityLiving();
         if (player.getGameProfile() == null) {
             return;
         }
@@ -82,8 +82,8 @@ public class PlayerTextureHandler {
             textureInfo.updateSkins(skins);
             textureInfo.updateDyes(dyes);
 
-            ResourceLocation replacmentTexture = textureInfo.preRender();
-            player.func_152121_a(Type.SKIN, replacmentTexture);
+//            ResourceLocation replacmentTexture = textureInfo.preRender();
+//            player.getPlayerInfo().func_152121_a(Type.SKIN, replacmentTexture);
         }
         profiler.endSection();
     }
@@ -93,10 +93,10 @@ public class PlayerTextureHandler {
         if (disableTexturePainting) {
             return;
         }
-        if (!(event.entityPlayer instanceof AbstractClientPlayer)) {
+        if (!(event.getEntityPlayer() instanceof AbstractClientPlayer)) {
             return;
         }
-        AbstractClientPlayer player = (AbstractClientPlayer) event.entityPlayer;
+        AbstractClientPlayer player = (AbstractClientPlayer) event.getEntityLiving();
 //        if (player instanceof MannequinFakePlayer) {
 //            return;
 //        }
@@ -112,8 +112,8 @@ public class PlayerTextureHandler {
         profiler.startSection("textureReset");
         if (playerTextureMap.containsKey(playerPointer)) {
             EntityTextureInfo textureInfo = playerTextureMap.get(playerPointer);
-            ResourceLocation replacmentTexture = textureInfo.postRender();
-            player.func_152121_a(Type.SKIN, replacmentTexture);
+//            ResourceLocation replacmentTexture = textureInfo.postRender();
+//            player.func_152121_a(Type.SKIN, replacmentTexture);
         } else {
             playerTextureMap.put(playerPointer, new EntityTextureInfo());
         }

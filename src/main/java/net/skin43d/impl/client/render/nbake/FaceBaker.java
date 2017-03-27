@@ -3,7 +3,6 @@ package net.skin43d.impl.client.render.nbake;
 import net.skin43d.impl.Context;
 import net.skin43d.impl.client.render.BakedFace;
 import net.skin43d.utils.Rectangle3D;
-import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.skin.cubes.ICube;
 import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;

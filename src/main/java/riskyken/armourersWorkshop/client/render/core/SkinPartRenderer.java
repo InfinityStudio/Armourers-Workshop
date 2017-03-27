@@ -2,13 +2,14 @@ package riskyken.armourersWorkshop.client.render.core;
 
 import java.util.List;
 
+import net.skin43d.impl.Context;
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import net.skin43d.impl.client.render.BakedFace;
@@ -16,7 +17,6 @@ import riskyken.armourersWorkshop.client.skin.ClientSkinPartData;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
-import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.plushieWrapper.client.IRenderBuffer;
 import riskyken.plushieWrapper.client.RenderBridge;
 
@@ -40,7 +40,7 @@ public class SkinPartRenderer extends ModelBase {
     private void renderPart(ClientSkinPartData cspd, float scale, ISkinDye skinDye, byte[] extraColour, int lod, boolean doLodLoading) {
         if (cspd == null) return;
         BakedCubes skinModel = cspd.getModelForDye(skinDye, extraColour);
-        boolean multipassSkinRendering = ClientProxy.useMultipassSkinRendering();
+        boolean multipassSkinRendering = true;//ClientProxy.useMultipassSkinRendering();
 
         for (int i = 0; i < skinModel.displayList.length; i++) {
             if (skinModel.haveList[i]) {
@@ -53,7 +53,7 @@ public class SkinPartRenderer extends ModelBase {
             }
         }
 
-        if (ClientProxy.useSafeTextureRender())
+        if (Context.instance().useSafeTexture())
             mc.renderEngine.bindTexture(texture);
         else
             GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -109,7 +109,7 @@ public class SkinPartRenderer extends ModelBase {
             }
         }
 
-        if (!ClientProxy.useSafeTextureRender()) {
+        if (!Context.instance().useSafeTexture()) {
             GL11.glEnable(GL11.GL_TEXTURE_2D);
         }
 
@@ -121,7 +121,7 @@ public class SkinPartRenderer extends ModelBase {
         IRenderBuffer renderBuffer = RenderBridge.INSTANCE;
         renderBuffer.startDrawingQuads();
         for (int i = 0; i < vertexList.size(); i++)
-            vertexList.get(i).render(skinDye, extraColour, cspd, ClientProxy.useSafeTextureRender());
+            vertexList.get(i).render(skinDye, extraColour, cspd, Context.instance().useSafeTexture());
         renderBuffer.draw();
     }
 }

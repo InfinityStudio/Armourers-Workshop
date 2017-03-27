@@ -1,7 +1,7 @@
 package net.skin43d.impl.client.render.engine.special;
 
 import com.google.common.collect.ImmutableMap;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.model.ModelBiped;
 import net.skin43d.SkinProvider;
 import net.minecraft.client.Minecraft;
@@ -18,7 +18,7 @@ import net.skin43d.impl.client.render.engine.RenderEngine;
 import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import removequ.EquipmentWardrobeData;
+import riskyken.EquipmentWardrobeData;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 
 import java.awt.*;
@@ -33,8 +33,8 @@ public class RenderEngineSpecial implements RenderEngine {
 
     @SubscribeEvent
     public void onRenderSpecialsPost(RenderPlayerEvent.Specials.Post event) {
-        EntityPlayer player = event.entityPlayer;
-        RenderPlayer render = event.renderer;
+        EntityPlayer player = event.getEntityPlayer();
+        RenderPlayer render = event.getRenderer();
         if (player.getGameProfile() == null)
             return;
 
@@ -58,7 +58,7 @@ public class RenderEngineSpecial implements RenderEngine {
         GL11.glEnable(GL11.GL_BLEND);
 
         for (SkinType type : skinRegistry.getAllSkinTypes())
-            render(skinProvider, type, getModelForEquipmentType(type), player, distance, extraColours, render.modelBipedMain);
+            render(skinProvider, type, getModelForEquipmentType(type), player, distance, extraColours, render.getMainModel());
 
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_CULL_FACE);

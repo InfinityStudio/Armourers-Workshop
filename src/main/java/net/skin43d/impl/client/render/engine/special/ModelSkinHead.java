@@ -1,7 +1,8 @@
 package net.skin43d.impl.client.render.engine.special;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.EnumHand;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,10 +11,8 @@ import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import riskyken.armourersWorkshop.client.render.core.ModelHelper;
 import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
-import removequ.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
-import riskyken.armourersWorkshop.client.ClientProxy;
 
 @SideOnly(Side.CLIENT)
 public class ModelSkinHead extends AbstractModelSkin {
@@ -26,14 +25,14 @@ public class ModelSkinHead extends AbstractModelSkin {
             EntityPlayer player = (EntityPlayer) entity;
             this.isSneak = player.isSneaking();
             this.isRiding = player.isRiding();
-            this.heldItemRight = 0;
-            if (player.getHeldItem() != null) {
-                this.heldItemRight = 1;
+//            this.heldItemRight = 0;
+            if (player.getHeldItem(EnumHand.MAIN_HAND) != null) {
+//                this.heldItemRight = 1;
             }
         }
 
-        if (ClientProxy.isJrbaClientLoaded())
-            this.isChild = false;
+//        if (ClientProxy.isJrbaClientLoaded())
+//            this.isChild = false;
 
 //        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinHead);
         RenderHelper.enableGUIStandardItemLighting();
@@ -52,7 +51,7 @@ public class ModelSkinHead extends AbstractModelSkin {
         }
 
         if (skin.getParts().size() > 0) {
-            ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, skin.getParts().get(0).getPartType());
+//            ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, skin.getParts().get(0).getPartType());
             GL11.glPushMatrix();
             if (isChild) {
                 float f6 = 2.0F;

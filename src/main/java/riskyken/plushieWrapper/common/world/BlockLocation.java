@@ -1,7 +1,7 @@
 package riskyken.plushieWrapper.common.world;
 
-import net.minecraft.util.MathHelper;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.math.MathHelper;
+import net.skin43d.utils.ForgeDirection;
 
 public class BlockLocation {
 

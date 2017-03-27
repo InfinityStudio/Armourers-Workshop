@@ -6,7 +6,6 @@ import java.io.IOException;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.impl.Context;
-import net.skin43d.impl.ModSkin43D;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.texture.AbstractTexture;
@@ -15,7 +14,6 @@ import net.minecraft.client.resources.IResourceManager;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
 import net.skin43d.impl.client.render.BakedFace;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.data.SkinTexture;
 import net.skin43d.utils.BitwiseUtils;
 
 @SideOnly(Side.CLIENT)

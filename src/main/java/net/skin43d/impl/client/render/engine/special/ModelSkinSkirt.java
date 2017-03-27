@@ -1,14 +1,12 @@
 package net.skin43d.impl.client.render.engine.special;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
-import removequ.ApiRegistrar;
 import riskyken.armourersWorkshop.common.skin.data.Skin;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 
@@ -27,15 +25,15 @@ public class ModelSkinSkirt extends AbstractModelSkin {
             EntityPlayer player = (EntityPlayer) entity;
             this.isSneak = player.isSneaking();
             this.isRiding = player.isRiding();
-            this.heldItemRight = 0;
-            if (player.getHeldItem() != null) {
-                this.heldItemRight = 1;
-            }
+//            this.heldItemRight = 0;
+//            if (player.getHeldItem() != null) {
+//                this.heldItemRight = 1;
+//            }
         }
         
-        if (ClientProxy.isJrbaClientLoaded()) {
-            this.isChild = false;
-        }
+//        if (ClientProxy.isJrbaClientLoaded()) {
+//            this.isChild = false;
+//        }
         
 //        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinSkirt);
         
@@ -48,8 +46,6 @@ public class ModelSkinSkirt extends AbstractModelSkin {
                 GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
                 GL11.glTranslatef(0.0F, 24.0F * SCALE, 0.0F);
             }
-            
-            ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, part.getPartType());
             
             if (part.getPartType().getPartName().equals("base")) {
                 renderSkirt(part, SCALE, skinDye, extraColour, distance, doLodLoading);

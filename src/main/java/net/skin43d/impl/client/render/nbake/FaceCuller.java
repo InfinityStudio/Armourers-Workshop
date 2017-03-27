@@ -1,6 +1,6 @@
 package net.skin43d.impl.client.render.nbake;
 
-import net.minecraftforge.common.util.ForgeDirection;
+import net.skin43d.utils.ForgeDirection;
 import net.skin43d.impl.Context;
 import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;

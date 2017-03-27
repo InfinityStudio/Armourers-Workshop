@@ -1,10 +1,10 @@
 package riskyken.armourersWorkshop.client.render;
 
+import net.skin43d.impl.Context;
 import net.skin43d.impl.client.render.nbake.BakeSkinPart;
 import net.skin43d.impl.client.render.BakedFace;
 import org.lwjgl.opengl.GL11;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.ClientProxy;
 import riskyken.armourersWorkshop.client.render.core.BakedCubes;
 import riskyken.armourersWorkshop.client.render.core.ModRenderHelper;
 import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
@@ -37,7 +37,7 @@ public class PartRendererUtil {
             }
         }
 
-//        if (ClientProxy.useSafeTextureRender())
+//        if (Context.instance().useSafeTexture()())
 //            Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 //        else
         GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -87,7 +87,7 @@ public class PartRendererUtil {
             }
         }
 
-        if (!ClientProxy.useSafeTextureRender()) {
+        if (!Context.instance().useSafeTexture()) {
             GL11.glEnable(GL11.GL_TEXTURE_2D);
         }
 
@@ -100,7 +100,7 @@ public class PartRendererUtil {
         IRenderBuffer renderBuffer = RenderBridge.INSTANCE;
         renderBuffer.startDrawingQuads();
         for (int i = 0; i < vertexList.size(); i++)
-            vertexList.get(i).render(skinDye, extraColour, data, ClientProxy.useSafeTextureRender());
+            vertexList.get(i).render(skinDye, extraColour, data, Context.instance().useSafeTexture());
         renderBuffer.draw();
     }
 }

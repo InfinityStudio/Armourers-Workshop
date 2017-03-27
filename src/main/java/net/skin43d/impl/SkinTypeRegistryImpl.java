@@ -1,10 +1,5 @@
 package net.skin43d.impl;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.skin3d.SkinType;
@@ -241,31 +236,31 @@ public final class SkinTypeRegistryImpl implements SkinTypeRegistry {
         return skinTypeMap.size();
     }
 
-    @SideOnly(Side.CLIENT)
-    public String getLocalizedSkinTypeName(SkinType skinType) {
-        String localizedName = "skinType." + skinType.getRegistryName() + ".name";
-        return StatCollector.translateToLocal(localizedName);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public String getLocalizedSkinPartTypeName(SkinPartType skinPartType) {
-        String localizedName = "skinPartType." + skinPartType.getRegistryName() + ".name";
-        return StatCollector.translateToLocal(localizedName);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    public void onTextureStitchEvent(TextureStitchEvent.Pre event) {
-        if (event.map.getTextureType() == 1) {
-            for (int i = 0; i < skinTypeMap.size(); i++) {
-                String registryName = (String) skinTypeMap.keySet().toArray()[i];
-                SkinType skinType = getSkinTypeFromRegistryName(registryName);
-                if (skinType != null) {
-                    skinType.registerIcon(event.map);
-                }
-            }
-        }
-    }
+//    @SideOnly(Side.CLIENT)
+//    public String getLocalizedSkinTypeName(SkinType skinType) {
+//        String localizedName = "skinType." + skinType.getRegistryName() + ".name";
+//        return StatCollector.translateToLocal(localizedName);
+//    }
+//
+//    @SideOnly(Side.CLIENT)
+//    public String getLocalizedSkinPartTypeName(SkinPartType skinPartType) {
+//        String localizedName = "skinPartType." + skinPartType.getRegistryName() + ".name";
+//        return StatCollector.translateToLocal(localizedName);
+//    }
+//
+//    @SideOnly(Side.CLIENT)
+//    @SubscribeEvent
+//    public void onTextureStitchEvent(TextureStitchEvent.Pre event) {
+//        if (event.map.getTextureType() == 1) {
+//            for (int i = 0; i < skinTypeMap.size(); i++) {
+//                String registryName = (String) skinTypeMap.keySet().toArray()[i];
+//                SkinType skinType = getSkinTypeFromRegistryName(registryName);
+//                if (skinType != null) {
+//                    skinType.registerIcon(event.map);
+//                }
+//            }
+//        }
+//    }
 
     @Override
     public SkinType getSkinTypeSkirt() {

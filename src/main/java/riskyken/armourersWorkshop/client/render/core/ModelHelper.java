@@ -1,13 +1,12 @@
 package riskyken.armourersWorkshop.client.render.core;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.skin43d.impl.Context;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.ArmourersWorkshopMod;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import removequ.EquipmentWardrobeData;
+import riskyken.EquipmentWardrobeData;
 
 import java.awt.*;
 

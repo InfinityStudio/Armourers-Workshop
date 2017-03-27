@@ -3,7 +3,6 @@ package riskyken.armourersWorkshop.common.skin.type.block;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.common.skin.type.AbstractSkinTypeBase;
 
@@ -33,7 +32,4 @@ public class SkinBlock extends AbstractSkinTypeBase {
         return "block";
     }
 
-    @Override
-    public void registerIcon(IIconRegister register) {
-    }
 }

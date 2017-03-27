@@ -1,7 +1,7 @@
 package riskyken.armourersWorkshop.client.render.core.skin;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
