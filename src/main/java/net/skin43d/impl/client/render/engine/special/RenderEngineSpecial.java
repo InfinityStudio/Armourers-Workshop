@@ -38,7 +38,7 @@ public class RenderEngineSpecial implements RenderEngine {
             return;
 
         double distance = Minecraft.getMinecraft().thePlayer.getDistance(player.posX, player.posY, player.posZ);
-        if (distance > Context.instance().getMaxLodLevel()) return;
+        if (distance > Context.instance().getRenderDistance()) return;
 
         SkinProvider skinProvider = Context.instance().getSkinProvider();
         SkinTypeRegistry skinRegistry = Context.instance().getSkinRegistry();
