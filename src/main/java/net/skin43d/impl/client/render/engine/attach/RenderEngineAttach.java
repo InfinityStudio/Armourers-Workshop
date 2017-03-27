@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemSword;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -73,10 +74,14 @@ public class RenderEngineAttach implements RenderEngine {
     @SubscribeEvent
     public void renderFirstPersonRight(RenderSpecificHandEvent event) {
         EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-        Skin sword = Context.instance().getSkinProvider().getSkinInfoForEntity(player, Context.instance().getSkinRegistry().getSkinSword());
-        if (sword != null) {
-//            this.sword.render(null, null, sword, false, null, null, true, 0, true);
-            FirstPersonRenderHelper.render(sword, this.sword, Context.instance().disableTexturePainting(), Context.instance().useMultipassSkinRendering());
+        if (event.getItemStack() == null) return;
+        if (event.getItemStack().getItem() instanceof ItemSword) {
+            Skin sword = Context.instance().getSkinProvider().getSkinInfoForEntity(player, Context.instance().getSkinRegistry().getSkinSword());
+            if (sword != null) {
+                event.setCanceled(true);
+                FirstPersonRenderHelper.render(sword, this.sword, Context.instance().disableTexturePainting(),
+                        Context.instance().useMultipassSkinRendering(), event);
+            }
         }
     }
 
