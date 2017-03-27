@@ -38,7 +38,9 @@ public abstract class SkinProviderNBT extends AbstractSkinProvider {
 
     @Override
     protected Callable<Skin> requestSkinTask(final Entity entity, final SkinType skinType) {
-        final String loc = entity.getEntityData().getString(skinType.getRegistryName());
+        NBTTagCompound skin43d = null;
+        if (entity.getEntityData().hasKey("skin43d")) skin43d = entity.getEntityData().getCompoundTag("skin43d");
+        final String loc = skin43d != null ? skin43d.getString(skinType.getRegistryName()) : "";
         if (loc == null)
             return new Callable<Skin>() {
                 @Override
@@ -78,6 +80,10 @@ public abstract class SkinProviderNBT extends AbstractSkinProvider {
     protected abstract URL getRemoteSkinLocation(Entity entity, SkinType type, String skinId);
 
     public static void putLocation(Entity entity, SkinPartType type, String location) {
-        entity.getEntityData().setString(type.getRegistryName(), location);
+        NBTTagCompound skin43d;
+        if (entity.getEntityData().hasKey("skin43d")) {
+            skin43d = entity.getEntityData().getCompoundTag("skin43d");
+        } else skin43d = new NBTTagCompound();
+        skin43d.setString(type.getRegistryName(), location);
     }
 }
