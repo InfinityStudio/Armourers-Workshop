@@ -24,10 +24,9 @@ import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.*;
 public class SkinPartRenderer extends ModelBase {
     //    private static final ResourceLocation texture = new ResourceLocation(LibModInfo.ID.toLowerCase(), "textures/armour/cube.png");
     public static final SkinPartRenderer INSTANCE = new SkinPartRenderer();
-    private final Minecraft mc;
 
     public SkinPartRenderer() {
-        mc = Minecraft.getMinecraft();
+
     }
 
     public void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, double distance, boolean doLodLoading) {

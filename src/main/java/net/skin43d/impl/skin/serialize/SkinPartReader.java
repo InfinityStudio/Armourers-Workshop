@@ -61,10 +61,7 @@ public class SkinPartReader {
     }
 
     public CubeMarkerData readCubeMaker(DataInput input) throws IOException {
-        return new CubeMarkerData(input.readByte(),
-                input.readByte(),
-                input.readByte(),
-                input.readByte());
+        return new CubeMarkerData(input.readByte(), input.readByte(), input.readByte(), input.readByte());
     }
 
     public void writeCubeMaker(DataOutput output, CubeMarkerData markerData) throws IOException {

@@ -1,5 +1,8 @@
 package net.skin43d.utils;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.Unpooled;
 import net.skin43d.exception.InvalidCubeTypeException;
 import net.skin43d.exception.NewerFileVersionException;
 import net.skin43d.impl.Context;
@@ -9,6 +12,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 
 import java.io.*;
+import java.nio.ByteBuffer;
 
 public final class SkinIOUtils {
 
@@ -58,6 +62,23 @@ public final class SkinIOUtils {
         return null;
     }
 
+    public static Skin loadSkinFromFileByBuffer(File file) {
+        try {
+            byte[] bytes = new byte[(int) file.length()];
+            IOUtils.readFully(new FileInputStream(file), bytes);
+            ByteBuf buffer = Unpooled.wrappedBuffer(bytes);
+            ByteBufInputStream stream = new ByteBufInputStream(buffer);
+            return loadSkinFromStream(stream);
+        } catch (FileNotFoundException e) {
+            ModLogger.log(Level.WARN, "Skin file not found.");
+            ModLogger.log(Level.WARN, file);
+        } catch (IOException e) {
+            ModLogger.log(Level.ERROR, "Skin file load failed.");
+            ModLogger.log(Level.WARN, file);
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static Skin loadSkinFromStream(InputStream inputStream) {
         DataInputStream stream = null;

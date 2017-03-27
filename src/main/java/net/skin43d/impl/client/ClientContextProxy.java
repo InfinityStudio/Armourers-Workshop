@@ -61,26 +61,16 @@ public class ClientContextProxy extends ContextProxy {
         AsyncModelBakery bakery = new AsyncModelBakery(service);
 
         /////TEST CODE//////
-        File file = new File(dir, "d");
+        File file = new File(dir, "c");
         List<Skin> ls = Lists.newArrayList();
         for (File skF : file.listFiles()) {
-            Skin skin = SkinIOUtils.loadSkinFromFile(skF);
+            Skin skin = SkinIOUtils.loadSkinFromFileByBuffer(skF);
             System.out.println("LOADING " + skin);
             bakery.bake(skin);
             ls.add(skin);
         }
-//        Skin[] skinss = new Skin[skins.length];
-//        for (int i = 0; i < skins.length; i++) {
-//            Skin sk = SkinIOUtils.loadSkinFromFile(new File(skins[i]));
-//            bakery.bake(sk);
-//            skinss[i] = sk;
-//        }
         this.provider = new SkinProviderLocal(ls.toArray(new Skin[ls.size()]));
         /////TEST CODE//////
-    }
-
-    class ServerHandler {
-
     }
 
     @Override
@@ -96,14 +86,14 @@ public class ClientContextProxy extends ContextProxy {
     }
 
     private SkinRenderType getSkinRenderType() {
-        if (moreplayermodelsLoaded)
-            return SkinRenderType.RENDER_EVENT;
-        if (shadersModLoaded & !smartMovingLoaded)
-            return SkinRenderType.RENDER_EVENT;
-        if (coloredLightsLoaded & !smartMovingLoaded)
-            return SkinRenderType.RENDER_EVENT;
-        if (jrbaClientLoaded)
-            return SkinRenderType.RENDER_EVENT;
+//        if (moreplayermodelsLoaded)
+//            return SkinRenderType.RENDER_EVENT;
+//        if (shadersModLoaded & !smartMovingLoaded)
+//            return SkinRenderType.RENDER_EVENT;
+//        if (coloredLightsLoaded & !smartMovingLoaded)
+//            return SkinRenderType.RENDER_EVENT;
+//        if (jrbaClientLoaded)
+//            return SkinRenderType.RENDER_EVENT;
         return SkinRenderType.MODEL_ATTACHMENT;
     }
 

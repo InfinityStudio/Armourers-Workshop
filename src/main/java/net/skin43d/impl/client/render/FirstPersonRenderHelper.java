@@ -110,7 +110,9 @@ public class FirstPersonRenderHelper {
 
 //        GL11.glPushMatrix();
 //        GL11.glTranslatef(0.8F, 0, -1.7F);
-        GlStateManager.rotate(-180, 1, 0, 0);
+        GlStateManager.rotate(180, 1, 0, 1F);
+        GlStateManager.rotate(90, 0, 1, 0);
+
 ////        GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
 //        ModRenderHelper.enableAlphaBlend();
 //        GL11.glEnable(GL11.GL_CULL_FACE);

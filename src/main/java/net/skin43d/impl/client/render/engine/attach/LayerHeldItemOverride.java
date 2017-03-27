@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.util.EnumHandSide;
 import net.skin43d.impl.Context;
 import net.skin43d.impl.client.render.engine.core.ModelSkinSword;
@@ -62,15 +63,20 @@ public class LayerHeldItemOverride implements LayerRenderer<EntityLivingBase> {
             GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
             boolean flag = handSide == EnumHandSide.LEFT;
             GlStateManager.translate((float) (flag ? -1 : 1) / 16.0F, 0.125F, -0.625F);
-            Skin skin = Context.instance().getSkinProvider().getSkinInfoForEntity(entity,
-                    Context.instance().getSkinRegistry().getSkinSword());
-            if (skin != null) {
-                attach.sword.npcEquipmentData = skin;
-                GlStateManager.rotate(180, 1, 0, 0);
-                attach.sword.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-            } else {
+            if (p_188358_2_.getItem() instanceof ItemSword) {
+                Skin skin = Context.instance().getSkinProvider().getSkinInfoForEntity(entity,
+                        Context.instance().getSkinRegistry().getSkinSword());
+                if (skin != null) {
+                    attach.sword.npcEquipmentData = skin;
+                    GlStateManager.rotate(180, 1, 0, 1F);
+                    GlStateManager.rotate(90, 0, 1, 0);
+                    attach.sword.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+                }
+                else
+                    Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, p_188358_2_, p_188358_3_, flag);
+            } else
                 Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, p_188358_2_, p_188358_3_, flag);
-            }
+
             GlStateManager.popMatrix();
         }
     }
