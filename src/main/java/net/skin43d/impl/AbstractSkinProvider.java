@@ -19,12 +19,14 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author ci010
  */
-public abstract class SkinProviderBase implements SkinProvider {
+public abstract class AbstractSkinProvider implements SkinProvider {
     private Cache<String, Skin> skinCache;
     private SkinBakery bakery;
     private ListeningExecutorService service;
 
-    public SkinProviderBase(SkinBakery bakery, ListeningExecutorService service) {
+    private static final Skin EMPTY = new Skin(null, null, null, null);
+
+    public AbstractSkinProvider(SkinBakery bakery, ListeningExecutorService service) {
         this.bakery = bakery;
         this.service = service;
         this.skinCache = CacheBuilder.newBuilder()
@@ -33,15 +35,23 @@ public abstract class SkinProviderBase implements SkinProvider {
                 .build();
     }
 
-    protected void requestSkin(final Entity entity, final SkinType skinType) {
+    /**
+     * Force request the skin and cache again.
+     *
+     * @param entity   The entity
+     * @param skinType The skin type
+     */
+    public void requestSkin(final Entity entity, final SkinType skinType) {
         final ListenableFuture<Skin> future = service.submit(requestSkinTask(entity, skinType));
         future.addListener(new Runnable() {
             @Override
             public void run() {
                 try {
                     Skin skin = future.get();
-                    bakery.bake(skin);
-                    skinCache.put(createKey(entity, skinType), skin);
+                    if (skin != null) {
+                        bakery.bake(skin);
+                        skinCache.put(createKey(entity, skinType), skin);
+                    } else skinCache.put(createKey(entity, skinType), EMPTY);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -57,8 +67,8 @@ public abstract class SkinProviderBase implements SkinProvider {
     public Skin getSkinInfoForEntity(Entity entity, SkinType skinType) {
         String key = createKey(entity, skinType);
         Skin skin = skinCache.getIfPresent(key);
-        if (skin == null)
-            requestSkin(entity, skinType);
+        if (skin == null) requestSkin(entity, skinType);
+        if (skin == EMPTY) return null;
         return skin;
     }
 

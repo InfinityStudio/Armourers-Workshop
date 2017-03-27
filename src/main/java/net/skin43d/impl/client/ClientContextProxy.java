@@ -67,6 +67,10 @@ public class ClientContextProxy extends ContextProxy {
         /////TEST CODE//////
     }
 
+    class ServerHandler {
+
+    }
+
     @Override
     protected void postInit(FMLPostInitializationEvent event) {
         super.postInit(event);
@@ -89,24 +93,6 @@ public class ClientContextProxy extends ContextProxy {
         if (jrbaClientLoaded)
             return SkinRenderType.RENDER_EVENT;
         return SkinRenderType.MODEL_ATTACHMENT;
-//        switch (ConfigHandlerClient.skinRenderType) {
-//            case 1: //Force render event
-//                return ClientProxy.SkinRenderType.RENDER_EVENT;
-//            case 2: //Force model attachment
-//                return ClientProxy.SkinRenderType.MODEL_ATTACHMENT;
-//            case 3: //Force render layer
-//                return ClientProxy.SkinRenderType.RENDER_LAYER;
-//            default: //Auto
-//                if (moreplayermodelsLoaded)
-//                    return ClientProxy.SkinRenderType.RENDER_EVENT;
-//                if (shadersModLoaded & !smartMovingLoaded)
-//                    return ClientProxy.SkinRenderType.RENDER_EVENT;
-//                if (coloredLightsLoaded & !smartMovingLoaded)
-//                    return ClientProxy.SkinRenderType.RENDER_EVENT;
-//                if (jrbaClientLoaded)
-//                    return ClientProxy.SkinRenderType.RENDER_EVENT;
-//                return ClientProxy.SkinRenderType.MODEL_ATTACHMENT;
-//        }
     }
 
     private boolean shadersModLoaded;
