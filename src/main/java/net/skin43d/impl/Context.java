@@ -40,9 +40,9 @@ public abstract class Context {
 
     public abstract int getLodDistance();
 
-    public abstract int getRenderDistance();
-
     public abstract int getMaxLodLevel();
+
+    public abstract int getRenderDistance();
 
     public abstract boolean wireframeRender();
 

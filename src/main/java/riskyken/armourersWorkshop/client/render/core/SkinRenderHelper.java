@@ -1,20 +1,9 @@
 package riskyken.armourersWorkshop.client.render.core;
 
-import net.skin43d.skin3d.SkinType;
-import org.lwjgl.opengl.GL11;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.util.ResourceLocation;
-import net.skin43d.utils.ForgeDirection;
-import net.skin43d.skin3d.SkinPartType;
-import net.skin43d.utils.Point3D;
-import net.skin43d.utils.Rectangle3D;
-import riskyken.armourersWorkshop.common.config.ConfigHandlerClient;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
 
 @SideOnly(Side.CLIENT)

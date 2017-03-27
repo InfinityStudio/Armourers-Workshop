@@ -86,6 +86,31 @@ public class ContextProxy extends Context {
     }
 
     @Override
+    public int getLodDistance() {
+        return 0;
+    }
+
+    @Override
+    public int getMaxLodLevel() {
+        return 0;
+    }
+
+    @Override
+    public int getRenderDistance() {
+        return 0;
+    }
+
+    @Override
+    public boolean wireframeRender() {
+        return false;
+    }
+
+    @Override
+    public boolean disableTexturePainting() {
+        return false;
+    }
+
+    @Override
     public SkinTypeRegistry getSkinRegistry() {
         return skinTypeRegistry;
     }
