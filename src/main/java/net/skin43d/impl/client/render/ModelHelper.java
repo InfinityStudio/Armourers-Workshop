@@ -31,8 +31,8 @@ public final class ModelHelper {
 
     @SideOnly(Side.CLIENT)
     public static int getLocalPlayersSkinColour() {
-        PlayerPointer playerPointer = new PlayerPointer(Minecraft.getMinecraft().thePlayer);
-        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider()
+                .getEquipmentWardrobeData(Minecraft.getMinecraft().thePlayer);
         if (ewd != null) {
             return ewd.skinColour;
         }
@@ -41,8 +41,8 @@ public final class ModelHelper {
 
     @SideOnly(Side.CLIENT)
     public static int getLocalPlayersHairColour() {
-        PlayerPointer playerPointer = new PlayerPointer(Minecraft.getMinecraft().thePlayer);
-        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
+        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider()
+                .getEquipmentWardrobeData(Minecraft.getMinecraft().thePlayer);
         if (ewd != null) {
             return ewd.hairColour;
         }

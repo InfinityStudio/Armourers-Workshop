@@ -25,10 +25,8 @@ import java.io.IOException;
 import java.util.Map;
 
 public class EntityTextureInfo {
-
     private static final int TEXTURE_WIDTH = Context.instance().getTextureWidth();
     private static final int TEXTURE_HEIGHT = Context.instance().getTextureHeight();
-    public static final int TEXTURE_SIZE = TEXTURE_WIDTH * TEXTURE_HEIGHT;
 
     /**
      * The last texture entity had when the replacement texture was made.
@@ -38,42 +36,27 @@ public class EntityTextureInfo {
      * The last skin hashs the entity had when the replacement texture was made.
      */
     private int[] lastSkinHashs;
-    /**
-     * The last dye hashs the entity had when the replacement texture was made.
-     */
     private int[] lastDyeHashs;
     /**
      * Skins that the entity has equipped.
      */
     private Skin[] skins;
-    /**
-     * Dyes that the entity has on it's skins.
-     */
     private ISkinDye[] dyes;
     /**
      * The entities normal texture.
      */
     private ResourceLocation normalTexture;
-    /**
-     * The entities replacement texture.
-     */
     private ResourceLocation replacementTexture;
     /**
      * The last skin colour the entity had when the replacement texture was made.
      */
     private int lastEntitySkinColour;
-    /**
-     * The last hair colour the entity had when the replacement texture was made.
-     */
     private int lastEntityHairColour;
     /**
      * A buffered image of the entity texture.
      */
-    private BufferedImage bufferedEntityImage;
-    /**
-     * A buffered image of the entity replacement texture.
-     */
-    private BufferedImage bufferedEntitySkinnedImage;
+    private BufferedImage originalImage;
+    private BufferedImage bakedTextureBuffer;
     /**
      * Does the texture need to be remade?
      */
@@ -84,6 +67,15 @@ public class EntityTextureInfo {
     private boolean loading;
 
     private Map<MinecraftProfileTexture.Type, ResourceLocation> textureMap;
+
+    public Map<MinecraftProfileTexture.Type, ResourceLocation> getTextureMap() {
+        return textureMap;
+    }
+
+    public EntityTextureInfo setTextureMap(Map<MinecraftProfileTexture.Type, ResourceLocation> textureMap) {
+        this.textureMap = textureMap;
+        return this;
+    }
 
     public EntityTextureInfo() {
         lastEntityTextureHash = -1;
@@ -97,7 +89,7 @@ public class EntityTextureInfo {
             lastDyeHashs[i] = -1;
         lastEntitySkinColour = -1;
         lastEntityHairColour = -1;
-        bufferedEntitySkinnedImage = new BufferedImage(TEXTURE_WIDTH, TEXTURE_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        bakedTextureBuffer = new BufferedImage(TEXTURE_WIDTH, TEXTURE_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         dirty = true;
         loading = false;
     }
@@ -106,172 +98,150 @@ public class EntityTextureInfo {
         return dirty;
     }
 
-    public void updateTexture(ResourceLocation newSkin, ResourceLocation defaultSkin) {
-        if (lastEntityTextureHash != defaultSkin.hashCode()) {
-            BufferedImage buff = SkinHelper.getBufferedImageSkin(defaultSkin);
-            bufferedEntityImage = null;
+    public void updateTexture(ResourceLocation resourceLocation) {
+        if (lastEntityTextureHash != resourceLocation.hashCode()) {
+            BufferedImage buff = SkinHelper.getBufferedImageSkin(resourceLocation);
+            originalImage = null;
             if (buff != null) {
                 loading = false;
-                lastEntityTextureHash = defaultSkin.hashCode();
-                normalTexture = defaultSkin;
-                bufferedEntityImage = buff;
+                lastEntityTextureHash = resourceLocation.hashCode();
+                normalTexture = resourceLocation;
+                originalImage = buff;
                 dirty = true;
             }
         }
 
-        if (bufferedEntityImage == null) {
-            //Texture is most likely not downloaded yet.
-            lastEntityTextureHash = newSkin.hashCode();
-            bufferedEntityImage = SkinHelper.getBufferedImageSkin(newSkin);
-            if (bufferedEntityImage != null & !loading) {
-                loading = true;
-                dirty = true;
-            }
-        }
+//        if (originalImage == null) {
+//            //Texture is most likely not downloaded yet.
+//            lastEntityTextureHash = AbstractClientPlayer.locationStevePng.hashCode();
+//            originalImage = SkinHelper.getBufferedImageSkin(AbstractClientPlayer.locationStevePng);
+//            if (originalImage != null & !loading) {
+//                loading = true;
+//                dirty = true;
+//            }
+//        }
     }
 
-    public void updateSkinColour(int colour) {
-        if (lastEntitySkinColour != colour) {
-            lastEntitySkinColour = colour;
-            dirty = true;
-        }
+    void updateSkinColour(int colour) {
+        if (lastEntitySkinColour == colour) return;
+        lastEntitySkinColour = colour;
+        dirty = true;
     }
 
-    public void updateHairColour(int colour) {
-        if (lastEntityHairColour != colour) {
-            lastEntityHairColour = colour;
-            dirty = true;
-        }
+    void updateHairColour(int colour) {
+        if (lastEntityHairColour == colour) return;
+        lastEntityHairColour = colour;
+        dirty = true;
     }
 
-    public void updateSkins(Skin[] skins) {
+    void updateSkins(Skin[] skins) {
         this.skins = skins;
-        for (int i = 0; i < skins.length; i++) {
+        for (int i = 0; i < skins.length; i++)
             if (skins[i] != null) {
                 if (skins[i].lightHash() != lastSkinHashs[i]) {
                     lastSkinHashs[i] = skins[i].lightHash();
                     dirty = true;
                 }
-            } else {
-                if (lastSkinHashs[i] != -1) {
-                    lastSkinHashs[i] = -1;
-                    dirty = true;
-                }
+            } else if (lastSkinHashs[i] != -1) {
+                lastSkinHashs[i] = -1;
+                dirty = true;
             }
-        }
     }
 
-    public void updateDyes(ISkinDye[] dyes) {
+    void updateDyes(ISkinDye[] dyes) {
         this.dyes = dyes;
-        for (int i = 0; i < skins.length; i++) {
+        for (int i = 0; i < skins.length; i++)
             if (dyes[i] != null) {
                 if (dyes[i].hashCode() != lastDyeHashs[i]) {
                     lastDyeHashs[i] = dyes[i].hashCode();
                     dirty = true;
                 }
-            } else {
-                if (lastDyeHashs[i] != -1) {
-                    lastDyeHashs[i] = -1;
-                    dirty = true;
-                }
+            } else if (lastDyeHashs[i] != -1) {
+                lastDyeHashs[i] = -1;
+                dirty = true;
             }
-        }
     }
 
-    public void checkTexture() {
+    private void ensureBaked() {
         if (dirty) {
             ModLogger.log("rebuilding texture");
-            buildTexture();
+            applyPlayerToTexture();
+            applySkinsToTexture();
+            createReplacementTexture();
             dirty = false;
         }
     }
 
     //TODO check if the skins have a texture.
-    private void buildTexture() {
-        applyPlayerToTexture();
-        applySkinsToTexture();
-        createReplacementTexture();
+    @Override
+    protected void finalize() throws Throwable {
+        TextureManager renderEngine = Minecraft.getMinecraft().renderEngine;
+        if (replacementTexture != null)
+            renderEngine.deleteTexture(replacementTexture);
+        super.finalize();
+    }
+
+    ResourceLocation preRender() {
+        ensureBaked();
+        if (replacementTexture != null) return replacementTexture;
+        else return normalTexture;
+    }
+
+    public ResourceLocation postRender() {
+        return normalTexture;
     }
 
     private void applyPlayerToTexture() {
+        if (this.originalImage == null) return;
         for (int ix = 0; ix < TEXTURE_WIDTH; ix++)
-            for (int iy = 0; iy < TEXTURE_HEIGHT; iy++) {
-                if (bufferedEntityImage == null) break;
-                bufferedEntitySkinnedImage.setRGB(ix, iy, bufferedEntityImage.getRGB(ix, iy));
-            }
+            for (int iy = 0; iy < TEXTURE_HEIGHT; iy++)
+                this.bakedTextureBuffer.setRGB(ix, iy, this.originalImage.getRGB(ix, iy));
     }
 
     private void applySkinsToTexture() {
-        for (int i = 0; i < skins.length; i++) {
-            Skin skin = skins[i];
-            if (skin != null && skin.hasPaintData()) {
-                for (int ix = 0; ix < TEXTURE_WIDTH; ix++) {
-                    for (int iy = 0; iy < TEXTURE_HEIGHT; iy++) {
-                        int paintColour = skin.getPaintData()[ix + (iy * TEXTURE_WIDTH)];
-                        PaintType paintType = PaintType.getPaintTypeFromColour(paintColour);
-
-                        if (paintType == PaintType.NORMAL)
-                            bufferedEntitySkinnedImage.setRGB(ix, iy, BitwiseUtils.setUByteToInt(paintColour, 0, 255));
-
-                        if (paintType == PaintType.HAIR) {
-                            int colour = dyeColour(lastEntityHairColour, paintColour, 9, skin);
-                            bufferedEntitySkinnedImage.setRGB(ix, iy, colour);
-                        }
-                        if (paintType == PaintType.SKIN) {
-                            int colour = dyeColour(lastEntitySkinColour, paintColour, 8, skin);
-                            bufferedEntitySkinnedImage.setRGB(ix, iy, colour);
-                        }
-                        if (paintType.getKey() >= 1 && paintType.getKey() <= 8) {
-                            int dyeNumber = paintType.getKey() - 1;
-                            if (dyes != null && dyes[i] != null && dyes[i].haveDyeInSlot(dyeNumber)) {
-                                byte[] dye = dyes[i].getDyeColour(dyeNumber);
-                                int colour = dyeColour(dye, paintColour, dyeNumber, skin);
-                                bufferedEntitySkinnedImage.setRGB(ix, iy, colour);
-                            } else {
-                                bufferedEntitySkinnedImage.setRGB(ix, iy, BitwiseUtils.setUByteToInt(paintColour, 0, 255));
-                            }
-                        }
+        for (int i = 0; i < this.skins.length; i++) {
+            Skin skin = this.skins[i];
+            if (skin == null || !skin.hasPaintData()) continue;
+            for (int ix = 0; ix < TEXTURE_WIDTH; ix++)
+                for (int iy = 0; iy < TEXTURE_HEIGHT; iy++) {
+                    int paintColour = skin.getPaintData()[ix + (iy * TEXTURE_WIDTH)];
+                    PaintType paintType = PaintType.getPaintTypeFromColour(paintColour);
+                    if (paintType == PaintType.NORMAL)
+                        this.bakedTextureBuffer.setRGB(ix, iy, BitwiseUtils.setUByteToInt(paintColour, 0, 255));
+                    else if (paintType == PaintType.HAIR)
+                        this.bakedTextureBuffer.setRGB(ix, iy, dyeColour(this.lastEntityHairColour, paintColour, 9, skin));
+                    else if (paintType == PaintType.SKIN)
+                        this.bakedTextureBuffer.setRGB(ix, iy, dyeColour(this.lastEntitySkinColour, paintColour, 8, skin));
+                    else if (paintType.getKey() >= 1 && paintType.getKey() <= 8) {
+                        int dyeNumber = paintType.getKey() - 1;
+                        if (this.dyes != null && this.dyes[i] != null && this.dyes[i].haveDyeInSlot(dyeNumber))
+                            this.bakedTextureBuffer.setRGB(ix, iy, dyeColour(dyes[i].getDyeColour(dyeNumber), paintColour, dyeNumber, skin));
+                        else
+                            this.bakedTextureBuffer.setRGB(ix, iy, BitwiseUtils.setUByteToInt(paintColour, 0, 255));
                     }
                 }
-            }
         }
 
-        for (int i = 0; i < skins.length; i++) {
-            Skin skin = skins[i];
-            if (skin != null && skin.getProperties().getPropertyBoolean(Skin.KEY_ARMOUR_OVERRIDE, false)) {
+        for (Skin skin : this.skins)
+            if (skin != null && skin.getProperties().getPropertyBoolean(Skin.KEY_ARMOUR_OVERRIDE, false))
                 for (int j = 0; j < skin.getPartCount(); j++) {
                     SkinPart skinPart = skin.getParts().get(j);
                     if (skinPart.getPartType() instanceof ISkinPartTypeTextured) {
                         ISkinPartTypeTextured typeTextured = (ISkinPartTypeTextured) skinPart.getPartType();
+                        SkinTypeRegistry reg = Context.instance().getSkinRegistry();
                         Point texLoc = typeTextured.getTextureLocation();
                         Point3D texSize = typeTextured.getTextureModelSize();
-
-                        SkinTypeRegistry reg = Context.instance().getSkinRegistry();
-                        for (int ix = 0; ix < texSize.getZ() * 2 + texSize.getX() * 2; ix++) {
+                        for (int ix = 0; ix < texSize.getZ() * 2 + texSize.getX() * 2; ix++)
                             for (int iy = 0; iy < texSize.getZ() + texSize.getY(); iy++) {
-                                if (skin.getSkinType() == reg.getSkinLegs()) {
-                                    if (iy >= 12) {
-                                        continue;
-                                    }
-                                    if (iy < 4 & ix > 7 & ix < 12) {
-                                        continue;
-                                    }
-                                }
-                                if (skin.getSkinType() == reg.getSkinFeet()) {
-                                    if (iy < 12) {
-                                        if (!(iy < 4 & ix > 7 & ix < 12)) {
-                                            continue;
-                                        }
-
-                                    }
-                                }
-                                bufferedEntitySkinnedImage.setRGB((int) texLoc.getX() + ix, (int) texLoc.getY() + iy, 0x00FFFFFF);
+                                if (skin.getSkinType() == reg.getSkinLegs())
+                                    if (iy >= 12) continue;
+                                    else if (iy < 4 & ix > 7 & ix < 12) continue;
+                                if (skin.getSkinType() == reg.getSkinFeet())
+                                    if (iy < 12) if (!(iy < 4 & ix > 7 & ix < 12)) continue;
+                                this.bakedTextureBuffer.setRGB((int) texLoc.getX() + ix, (int) texLoc.getY() + iy, 0x00FFFFFF);
                             }
-                        }
                     }
                 }
-            }
-        }
     }
 
     private int dyeColour(int dye, int colour, int dyeIndex, Skin skin) {
@@ -293,36 +263,18 @@ public class EntityTextureInfo {
         return (255 << 24) + ((dye[0] & 0xFF) << 16) + ((dye[1] & 0xFF) << 8) + (dye[2] & 0xFF);
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        TextureManager renderEngine = Minecraft.getMinecraft().renderEngine;
-        if (replacementTexture != null)
-            renderEngine.deleteTexture(replacementTexture);
-        super.finalize();
-    }
-
     private void createReplacementTexture() {
         TextureManager renderEngine = Minecraft.getMinecraft().renderEngine;
-        if (replacementTexture != null) {
-            renderEngine.deleteTexture(replacementTexture);
+        if (this.replacementTexture != null) {
+            renderEngine.deleteTexture(this.replacementTexture);
         }
-        SkinTextureObject sto = new SkinTextureObject(bufferedEntitySkinnedImage);
+        SkinTextureObject sto = new SkinTextureObject(this.bakedTextureBuffer);
         //TODO
-        replacementTexture = new ResourceLocation("skin43d", String.valueOf(bufferedEntitySkinnedImage.hashCode()));
-        renderEngine.loadTexture(replacementTexture, sto);
+        this.replacementTexture = new ResourceLocation("skin43d", String.valueOf(this.bakedTextureBuffer.hashCode()));
+        renderEngine.loadTexture(this.replacementTexture, sto);
     }
 
-    public ResourceLocation preRender() {
-        checkTexture();
-        if (replacementTexture != null) return replacementTexture;
-        else return normalTexture;
-    }
-
-    public ResourceLocation postRender() {
-        return normalTexture;
-    }
-
-    private class SkinTextureObject extends AbstractTexture {
+    private static class SkinTextureObject extends AbstractTexture {
 
         private final BufferedImage texture;
 

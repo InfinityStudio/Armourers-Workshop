@@ -43,7 +43,7 @@ public class RenderEngineSpecial implements RenderEngine {
 
         SkinProvider skinProvider = Context.instance().getSkinProvider();
         SkinTypeRegistry skinRegistry = Context.instance().getSkinRegistry();
-        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(new PlayerPointer(player));
+        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(player);
         byte[] extraColours = null;
         if (ewd != null) {
             Color skinColour = new Color(ewd.skinColour);
