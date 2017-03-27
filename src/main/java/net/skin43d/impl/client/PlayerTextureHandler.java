@@ -1,24 +1,30 @@
 package net.skin43d.impl.client;
 
+import com.google.common.collect.Maps;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.resources.DefaultPlayerSkin;
+import net.minecraft.profiler.Profiler;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.profiler.Profiler;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.skin43d.SkinProvider;
 import net.skin43d.impl.Context;
+import net.skin43d.impl.skin.Skin;
 import net.skin43d.skin3d.ISkinDye;
 import net.skin43d.skin3d.SkinTypeRegistry;
-import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.EquipmentWardrobeData;
-import net.skin43d.impl.skin.Skin;
+import riskyken.armourersWorkshop.common.data.PlayerPointer;
 
-import java.util.HashMap;
+import java.lang.reflect.Field;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Handles replacing the players texture with the painted version.
@@ -27,36 +33,42 @@ import java.util.HashMap;
  */
 @SideOnly(Side.CLIENT)
 public class PlayerTextureHandler {
-    private HashMap<PlayerPointer, EntityTextureInfo> playerTextureMap = new HashMap<PlayerPointer, EntityTextureInfo>();
+    private Map<UUID, EntityTextureInfo> playerTextureMap = Maps.newHashMap();
     private final Profiler profiler;
     private boolean disableTexturePainting;
+    private Field playerTextures;
 
     public PlayerTextureHandler() {
         profiler = Minecraft.getMinecraft().mcProfiler;
+        try {
+            playerTextures = NetworkPlayerInfo.class.getDeclaredField("playerTextures");
+            playerTextures.setAccessible(true);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @SubscribeEvent
+    public void onConfigChange(ConfigChangedEvent event) {
     }
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onRender(RenderPlayerEvent.Pre event) {
         disableTexturePainting = Context.instance().disableTexturePainting();
-        if (disableTexturePainting) {
+        if (disableTexturePainting)
             return;
-        }
-        if (!(event.getEntityLiving() instanceof AbstractClientPlayer)) {
+        if (!(event.getEntityLiving() instanceof AbstractClientPlayer))
             return;
-        }
         AbstractClientPlayer player = (AbstractClientPlayer) event.getEntityLiving();
-        if (player.getGameProfile() == null) {
-            return;
-        }
-        PlayerPointer playerPointer = new PlayerPointer(player);
+        if (player.getGameProfile() == null) return;
+        UUID playerPointer = player.getUniqueID();
         EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
-        if (ewd == null)
-            return;
+        if (ewd == null) return;
 
         profiler.startSection("textureBuild");
         if (playerTextureMap.containsKey(playerPointer)) {
             EntityTextureInfo textureInfo = playerTextureMap.get(playerPointer);
-            ResourceLocation def = DefaultPlayerSkin.getDefaultSkin(player.getUniqueID());
+            ResourceLocation def = player.getLocationSkin();
             textureInfo.updateTexture(def, player.getLocationSkin());
             textureInfo.updateHairColour(ewd.hairColour);
             textureInfo.updateSkinColour(ewd.skinColour);
@@ -81,28 +93,28 @@ public class PlayerTextureHandler {
             textureInfo.updateSkins(skins);
             textureInfo.updateDyes(dyes);
 
-//            ResourceLocation replacmentTexture = textureInfo.preRender();
-//            player.getPlayerInfo().func_152121_a(Type.SKIN, replacmentTexture);
+            ResourceLocation replacmentTexture = textureInfo.preRender();
+            NetworkPlayerInfo info = Minecraft.getMinecraft().getConnection()
+                    .getPlayerInfo(player.getUniqueID());
+            try {
+                Map<MinecraftProfileTexture.Type, ResourceLocation> map = (Map<MinecraftProfileTexture.Type, ResourceLocation>) playerTextures.get(info);
+                ResourceLocation location = map.get(MinecraftProfileTexture.Type.SKIN);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
         profiler.endSection();
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void onRender(RenderPlayerEvent.Post event) {
-        if (disableTexturePainting) {
+        if (disableTexturePainting)
             return;
-        }
-        if (!(event.getEntityPlayer() instanceof AbstractClientPlayer)) {
+        if (!(event.getEntityPlayer() instanceof AbstractClientPlayer))
             return;
-        }
         AbstractClientPlayer player = (AbstractClientPlayer) event.getEntityLiving();
-//        if (player instanceof MannequinFakePlayer) {
-//            return;
-//        }
-        if (player.getGameProfile() == null) {
-            return;
-        }
-        PlayerPointer playerPointer = new PlayerPointer(player);
+        if (player.getGameProfile() == null) return;
+        UUID playerPointer = player.getUniqueID();
         EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(playerPointer);
         if (ewd == null) {
             return;

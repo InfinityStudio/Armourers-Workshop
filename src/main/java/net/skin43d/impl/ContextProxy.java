@@ -1,5 +1,6 @@
 package net.skin43d.impl;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -22,7 +23,7 @@ public class ContextProxy extends Context {
     private int maxLodLevels = 4;
     private double lodDistance = 32F;
     private int maxSkinRenderDistance = 128;
-    private boolean useMultipassSkinRendering = false, useSafeTexture = false, wireframeRender = false, disableTexturePainting = false;
+    private boolean useMultipassSkinRendering = true, useSafeTexture = false, wireframeRender = false, disableTexturePainting = false;
 
     protected void preInit(FMLPreInitializationEvent event) {
 
@@ -33,17 +34,17 @@ public class ContextProxy extends Context {
         cubeRegistry = new CubeRegistry();
         equipmentWardrobeHandler = new EquipmentWardrobeProvider() {
             @Override
-            public void setEquipmentWardrobeData(PlayerPointer playerPointer, EquipmentWardrobeData ewd) {
+            public void setEquipmentWardrobeData(EntityPlayer playerPointer, EquipmentWardrobeData ewd) {
 
             }
 
             @Override
-            public EquipmentWardrobeData getEquipmentWardrobeData(PlayerPointer playerPointer) {
+            public EquipmentWardrobeData getEquipmentWardrobeData(EntityPlayer playerPointer) {
                 return null;
             }
 
             @Override
-            public void removeEquipmentWardrobeData(PlayerPointer playerPointer) {
+            public void removeEquipmentWardrobeData(EntityPlayer playerPointer) {
 
             }
         };

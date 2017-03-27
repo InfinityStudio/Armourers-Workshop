@@ -1,5 +1,6 @@
 package net.skin43d;
 
+import net.minecraft.entity.player.EntityPlayer;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.EquipmentWardrobeData;
 
@@ -7,9 +8,9 @@ import riskyken.EquipmentWardrobeData;
  * @author ci010
  */
 public interface EquipmentWardrobeProvider {
-    void setEquipmentWardrobeData(PlayerPointer playerPointer, EquipmentWardrobeData ewd);
+    void setEquipmentWardrobeData(EntityPlayer playerPointer, EquipmentWardrobeData ewd);
 
-    EquipmentWardrobeData getEquipmentWardrobeData(PlayerPointer playerPointer);
+    EquipmentWardrobeData getEquipmentWardrobeData(EntityPlayer playerPointer);
 
-    void removeEquipmentWardrobeData(PlayerPointer playerPointer);
+    void removeEquipmentWardrobeData(EntityPlayer playerPointer);
 }

@@ -1,20 +1,18 @@
 package net.skin43d.impl.client.render;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.impl.Context;
 import net.skin43d.impl.client.render.bakery.BakedFace;
-import org.lwjgl.opengl.GL11;
-import net.skin43d.skin3d.ISkinDye;
 import net.skin43d.impl.client.render.bakery.BakedPart;
 import net.skin43d.impl.skin.SkinPart;
+import net.skin43d.skin3d.ISkinDye;
+import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 
@@ -26,7 +24,6 @@ public class SkinPartRenderer extends ModelBase {
     public static final SkinPartRenderer INSTANCE = new SkinPartRenderer();
 
     public SkinPartRenderer() {
-
     }
 
     public void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, double distance, boolean doLodLoading) {
