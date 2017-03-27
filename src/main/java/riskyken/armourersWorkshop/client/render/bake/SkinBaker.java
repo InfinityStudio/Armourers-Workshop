@@ -8,6 +8,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.impl.Context;
 import net.skin43d.impl.client.render.BakedFace;
 import net.skin43d.utils.Rectangle3D;
@@ -18,19 +20,21 @@ import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
 import riskyken.armourersWorkshop.common.skin.data.SkinPart;
 import riskyken.armourersWorkshop.client.ClientProxy;
 
+@SideOnly(Side.CLIENT)
 public final class SkinBaker {
     public static boolean withinMaxRenderDistance(Entity entity) {
         return withinMaxRenderDistance(entity.posX, entity.posY, entity.posZ);
     }
 
-    private static boolean withinMaxRenderDistance(double x, double y, double z) {
-        EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-        if (player.getDistance(x, y, z) > ConfigHandlerClient.maxSkinRenderDistance) {
-            return false;
-        }
-        return true;
-    }
+//    private static boolean withinMaxRenderDistance(double x, double y, double z) {
+//        EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+//        if (player.getDistance(x, y, z) > ConfigHandlerClient.maxSkinRenderDistance) {
+//            return false;
+//        }
+//        return true;
+//    }
 
+    @SideOnly(Side.CLIENT)
     public static int[][][] cullFacesOnEquipmentPart(SkinPart skinPart) {
         SkinCubeData cubeData = skinPart.getCubeData();
         cubeData.setupFaceFlags();
@@ -280,7 +284,7 @@ public final class SkinBaker {
                                 if (showFace) {
                                     byte[] avegC = getAverageRGBAT(ix, iy, iz, lodLevel, cubeArray, cubeData, pb, j);
 
-                                    ICube cube =Context.instance().getCubeRegistry().getCubeFormId(avegC[5]);
+                                    ICube cube = Context.instance().getCubeRegistry().getCubeFormId(avegC[5]);
 
                                     int listIndex = 0;
                                     if (multipassSkinRendering) {

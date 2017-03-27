@@ -3,12 +3,12 @@ package riskyken.armourersWorkshop.client.skin;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.impl.Context;
 import net.skin43d.impl.ModSkin43D;
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResourceManager;

@@ -1,7 +1,7 @@
 package net.skin43d.skin3d;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.utils.Point3D;
 import net.skin43d.utils.Rectangle3D;
 

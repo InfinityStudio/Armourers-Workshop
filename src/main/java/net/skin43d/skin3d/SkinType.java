@@ -1,11 +1,9 @@
 package net.skin43d.skin3d;
 
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.util.IIcon;
 
 /**
  * @author RiskyKen
@@ -33,14 +31,14 @@ public interface SkinType {
     String getName();
 
 
-    @SideOnly(Side.CLIENT)
-    void registerIcon(IIconRegister register);
+//    @SideOnly(Side.CLIENT)
+//    void registerIcon(IIconRegister register);
 
-    @SideOnly(Side.CLIENT)
-    IIcon getIcon();
-
-    @SideOnly(Side.CLIENT)
-    IIcon getEmptySlotIcon();
+//    @SideOnly(Side.CLIENT)
+//    IIcon getIcon();
+//
+//    @SideOnly(Side.CLIENT)
+//    IIcon getEmptySlotIcon();
 
     /**
      * Should the show skin overlay check box be shown in the armourer and mini armourer.

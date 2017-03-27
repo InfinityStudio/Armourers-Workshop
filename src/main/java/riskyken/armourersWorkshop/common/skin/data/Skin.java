@@ -1,7 +1,7 @@
 package riskyken.armourersWorkshop.common.skin.data;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.impl.Context;
 import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
@@ -9,7 +9,6 @@ import net.skin43d.utils.Rectangle3D;
 import riskyken.armourersWorkshop.api.common.skin.data.Skin3D;
 import net.skin43d.skin3d.SkinPartType;
 import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
-import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
 import riskyken.armourersWorkshop.common.skin.cubes.ICube;
 
 import java.util.ArrayList;

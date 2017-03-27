@@ -11,7 +11,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
     }
 }
 
@@ -22,33 +22,21 @@ repositories {
     }
 }
 
-apply plugin: 'forge'
+apply plugin: 'net.minecraftforge.gradle.forge'
 
-if (System.env.BUILD_NUMBER != null) {
-    version = "$minecraftVersion-$modVersion.$System.env.BUILD_NUMBER"
-} else {
-    version = "$minecraftVersion-$modVersion"
-}
 
 group= "riskyken.armourersWorkshop"
 archivesBaseName = "Armourers-Workshop"
 
 minecraft {
-    version = "$minecraftVersion-$forgeVersion"
+    version  = "1.10.2-12.18.3.2185"
+//    version = "$minecraftVersion-$forgeVersion"
     runDir = "eclipse"
-
-    replaceIn "common/lib/LibModInfo.java"
-    replace "@VERSION@", project.version
-	
-    replaceIn "common/lib/LibModInfo.java"
-    replace "DEVELOPMENT_VERSION = true", "DEVELOPMENT_VERSION = false"
-	
-    replaceIn "api/common/lib/LibApi.java"
-    replace "@API_VERSION@", apiVersion
+    mappings = "snapshot_20161111"
 }
 
 dependencies {
-    compile name: "buildcraft", version: "${buildcraftVersion}", classifier: "dev"
+//    compile name: "buildcraft", version: "${buildcraftVersion}", classifier: "dev"
 }
 
 processResources {
