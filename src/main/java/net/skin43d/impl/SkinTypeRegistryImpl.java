@@ -1,6 +1,7 @@
 package net.skin43d.impl;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.skin43d.impl.type.sheild.SkinSheild;
 import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.skin3d.SkinType;
 import net.skin43d.utils.ModLogger;
@@ -30,6 +31,7 @@ public final class SkinTypeRegistryImpl implements SkinTypeRegistry {
     private SkinType skinArrow;
     private SkinType skinBlock;
     private SkinType skinWings;
+    private SkinType skinShield;
 
     private Map<String, SkinType> skinTypeMap;
     private Map<String, SkinPartType> skinPartMap;
@@ -55,10 +57,12 @@ public final class SkinTypeRegistryImpl implements SkinTypeRegistry {
         skinArrow = new SkinArrow();
         skinBlock = new SkinBlock();
         skinWings = new SkinWings();
+        skinShield = new SkinSheild();
 
         registerSkin(skinHead);
         registerSkin(skinChest);
         registerSkin(skinLegs);
+        registerSkin(skinShield);
         //cacheSkin(skinSkirt);
         registerSkin(skinFeet);
         registerSkin(skinSword);

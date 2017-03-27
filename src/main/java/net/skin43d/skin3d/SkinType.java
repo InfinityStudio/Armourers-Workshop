@@ -28,16 +28,6 @@ public interface SkinType {
      */
     String getName();
 
-
-//    @SideOnly(Side.CLIENT)
-//    void registerIcon(IIconRegister register);
-
-//    @SideOnly(Side.CLIENT)
-//    IIcon getIcon();
-//
-//    @SideOnly(Side.CLIENT)
-//    IIcon getEmptySlotIcon();
-
     /**
      * Should the show skin overlay check box be shown in the armourer and mini armourer.
      *

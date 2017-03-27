@@ -181,7 +181,7 @@ public class EntityTextureInfo {
         super.finalize();
     }
 
-    ResourceLocation preRender() {
+    ResourceLocation getReplacedTexture() {
         ensureBaked();
         if (replacementTexture != null) return replacementTexture;
         else return normalTexture;
