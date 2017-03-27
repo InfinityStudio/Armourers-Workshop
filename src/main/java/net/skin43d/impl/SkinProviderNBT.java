@@ -78,6 +78,6 @@ public abstract class SkinProviderNBT extends AbstractSkinProvider {
     protected abstract URL getRemoteSkinLocation(Entity entity, SkinType type, String skinId);
 
     public static void putLocation(Entity entity, SkinPartType type, String location) {
-        entity.getEntityData()
+        entity.getEntityData().setString(type.getRegistryName(), location);
     }
 }

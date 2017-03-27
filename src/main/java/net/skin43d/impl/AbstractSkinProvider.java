@@ -2,6 +2,8 @@ package net.skin43d.impl;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.RemovalListener;
+import com.google.common.cache.RemovalNotification;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import net.minecraft.entity.Entity;
@@ -32,6 +34,16 @@ public abstract class AbstractSkinProvider implements SkinProvider {
         this.skinCache = CacheBuilder.newBuilder()
                 .expireAfterAccess(10, TimeUnit.MINUTES)
                 .concurrencyLevel(1)
+                .removalListener(new RemovalListener<String, Skin>() {
+                    @Override
+                    public void onRemoval(RemovalNotification<String, Skin> notification) {
+                        Skin s = notification.getValue();
+                        if (s != null) {
+                            s.blindPaintTexture();
+                            s.cleanUpDisplayLists();
+                        }
+                    }
+                })
                 .build();
     }
 
