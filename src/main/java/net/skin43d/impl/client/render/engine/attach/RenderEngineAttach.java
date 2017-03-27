@@ -186,7 +186,7 @@ public class RenderEngineAttach implements RenderEngine {
                 distance = 0;
             else
                 distance = Minecraft.getMinecraft().thePlayer.getDistance(player.posX, player.posY, player.posZ);
-            if (distance > Context.instance().getLodDistance()) return;
+            if (distance > Context.instance().getRenderDistance()) return;
 
             //TODO not really sure what EquipmentWardrobeData will handle(except color). Since it has the relationship with slot
             // which will be removed, I comment this out first.
