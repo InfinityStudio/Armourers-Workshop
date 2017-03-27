@@ -1,5 +1,6 @@
 package net.skin43d.impl.client;
 
+import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import net.minecraftforge.fml.common.Loader;
@@ -17,10 +18,11 @@ import net.skin43d.utils.SkinIOUtils;
 import org.apache.logging.log4j.Level;
 import net.skin43d.impl.client.render.bakery.AsyncModelBakery;
 import net.skin43d.impl.client.render.engine.attach.RenderEngineAttach;
-import net.skin43d.impl.client.render.engine.special.RenderEngineSpecial;
+import net.skin43d.impl.client.render.engine.core.RenderEngineSpecial;
 import net.skin43d.impl.skin.Skin;
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.Executors;
 
 /**
@@ -31,8 +33,11 @@ public class ClientContextProxy extends ContextProxy {
     private RenderEngine renderEngine;
     private ListeningExecutorService service;
 
-    private static String testLocation = "D:\\Storage\\Desktop\\Angel Wings.armour";
-    private static Skin skin;
+    private String dir = "D:\\Storage\\Desktop\\testSkin";
+    private String[] skins = new String[]{
+            "D:\\Storage\\Desktop\\Angel Wings.armour",
+            "D:\\Storage\\Desktop\\Pika Hood.armour"
+    };
 
     @Override
     public SkinProvider getSkinProvider() {
@@ -60,10 +65,21 @@ public class ClientContextProxy extends ContextProxy {
         AsyncModelBakery bakery = new AsyncModelBakery(service);
 
         /////TEST CODE//////
-        File file = new File(testLocation);
-        skin = SkinIOUtils.loadSkinFromFile(file);
-        bakery.bake(skin);
-        this.provider = new SkinProviderLocal(skin);
+        File file = new File(dir, "c");
+        List<Skin> ls = Lists.newArrayList();
+        for (File skF : file.listFiles()) {
+            Skin skin = SkinIOUtils.loadSkinFromFile(skF);
+            System.out.println("LOADING " + skin);
+            bakery.bake(skin);
+            ls.add(skin);
+        }
+//        Skin[] skinss = new Skin[skins.length];
+//        for (int i = 0; i < skins.length; i++) {
+//            Skin sk = SkinIOUtils.loadSkinFromFile(new File(skins[i]));
+//            bakery.bake(sk);
+//            skinss[i] = sk;
+//        }
+        this.provider = new SkinProviderLocal(ls.toArray(new Skin[ls.size()]));
         /////TEST CODE//////
     }
 

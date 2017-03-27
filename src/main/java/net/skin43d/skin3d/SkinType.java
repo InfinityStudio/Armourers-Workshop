@@ -1,7 +1,5 @@
 package net.skin43d.skin3d;
 
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 import java.util.List;
 
 

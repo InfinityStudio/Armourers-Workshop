@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  */
 @Mod(modid = ModSkin43D.MOD_ID, name = ModSkin43D.NAME, version = ModSkin43D.VERSION)
 public class ModSkin43D {
-    public static final String MOD_ID = "skin43D", NAME = "Skin For 3D", VERSION = "0.1";
+    public static final String MOD_ID = "skin43d", NAME = "Skin For 3D", VERSION = "0.1";
     public static final String COMMON_PROXY = "net.skin43d.impl.ContextProxy",
             CLIENT_PROXY = "net.skin43d.impl.client.ClientContextProxy";
 

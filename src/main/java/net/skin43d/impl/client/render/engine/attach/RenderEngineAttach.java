@@ -1,35 +1,39 @@
 package net.skin43d.impl.client.render.engine.attach;
 
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.skin43d.utils.ForgeDirection;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.SkinProvider;
 import net.skin43d.impl.Context;
-import net.skin43d.impl.client.render.nbake.PartTranslator;
-import net.skin43d.impl.client.render.engine.special.ModelSkinWings;
-import net.skin43d.skin3d.SkinPartType;
-import net.skin43d.utils.Point3D;
-import org.lwjgl.opengl.GL11;
-import net.skin43d.skin3d.ISkinDye;
-import net.skin43d.skin3d.SkinTypeRegistry;
-import net.skin43d.impl.client.render.engine.RenderEngine;
-import net.skin43d.utils.ModLogger;
 import net.skin43d.impl.client.render.SkinPartRenderer;
+import net.skin43d.impl.client.render.engine.RenderEngine;
+import net.skin43d.impl.client.render.engine.core.ModelSkinSword;
+import net.skin43d.impl.client.render.engine.core.ModelSkinWings;
 import net.skin43d.impl.skin.Skin;
 import net.skin43d.impl.skin.SkinPart;
+import net.skin43d.skin3d.ISkinDye;
+import net.skin43d.skin3d.SkinPartType;
+import net.skin43d.skin3d.SkinType;
+import net.skin43d.skin3d.SkinTypeRegistry;
+import net.skin43d.utils.ForgeDirection;
+import net.skin43d.utils.ModLogger;
+import net.skin43d.utils.Point3D;
+import org.lwjgl.opengl.GL11;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.WeakHashMap;
+import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * @author ci010
@@ -37,9 +41,15 @@ import java.util.WeakHashMap;
 public class RenderEngineAttach implements RenderEngine {
     private final Set<ModelBiped> attachedBipedSet = Collections.newSetFromMap(new WeakHashMap<ModelBiped, Boolean>());
 
-    protected EntityPlayer targetPlayer;
+    private EntityPlayer targetPlayer;
+    private boolean[] renderedSkin = new boolean[7];
+    private Map<SkinType, EntityEquipmentSlot> mapping = Maps.newHashMap();
 
     public RenderEngineAttach() {
+        mapping.put(Context.instance().getSkinRegistry().getSkinChest(), EntityEquipmentSlot.CHEST);
+        mapping.put(Context.instance().getSkinRegistry().getSkinHead(), EntityEquipmentSlot.HEAD);
+        mapping.put(Context.instance().getSkinRegistry().getSkinFeet(), EntityEquipmentSlot.FEET);
+        mapping.put(Context.instance().getSkinRegistry().getSkinLegs(), EntityEquipmentSlot.LEGS);
     }
 
     @SubscribeEvent
@@ -49,26 +59,41 @@ public class RenderEngineAttach implements RenderEngine {
 
     @SubscribeEvent
     public void onRender(RenderPlayerEvent.Pre event) {
+        for (int i = 0; i < renderedSkin.length; i++)
+            renderedSkin[i] = false;
         EntityPlayer player = targetPlayer = event.getEntityPlayer();
-        if (player.getGameProfile() == null)
-            return;
+        if (player.getGameProfile() == null) return;
         attachModelsToBiped(event.getRenderer().getMainModel(), event.getRenderer());
-        //Limit the players limbs if they have a skirt equipped.
-        //A proper lady should not swing her legs around!
-//        if (isPlayerWearingSkirt(playerPointer)) {
-//            EquipmentWardrobeData ewd = ClientProxy.equipmentWardrobeHandler.getEquipmentWardrobeData(playerPointer);
-//            if (ewd != null && ewd.limitLimbs) {
-//                if (player.limbSwingAmount > 0.25F) {
-//                    player.limbSwingAmount = 0.25F;
-//                    player.prevLimbSwingAmount = 0.25F;
-//                }
-//            }
-//        }
+    }
+
+    boolean rendered(EntityEquipmentSlot slot) {
+        return renderedSkin[slot.ordinal()];
+    }
+
+    boolean renderedWings() {
+        return renderedSkin[6];
+    }
+
+    private void hackModel(RenderPlayer renderPlayer) {
+        try {
+            Field layerRenderers = RenderLivingBase.class.getDeclaredField("layerRenderers");
+            layerRenderers.setAccessible(true);
+            List<LayerRenderer> o = (List<LayerRenderer>) layerRenderers.get(renderPlayer);
+            o.set(0, new LayerArmorOverride(renderPlayer, this));
+            o.set(1, new LayerHeldItemOverride(renderPlayer, this));
+            o.set(4, new LayerCapeOverride(renderPlayer, this));
+            o.set(6, new LayerElytraOverride(renderPlayer, this));
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     private void attachModelsToBiped(ModelBiped modelBiped, RenderPlayer renderPlayer) {
         if (attachedBipedSet.contains(modelBiped))
             return;
+        hackModel(renderPlayer);
         SkinTypeRegistry reg = Context.instance().getSkinRegistry();
         attachedBipedSet.add(modelBiped);
         modelBiped.bipedHead.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinPartTypeFromName("armourers:head.base")));
@@ -96,6 +121,7 @@ public class RenderEngineAttach implements RenderEngine {
         MinecraftForge.EVENT_BUS.unregister(this);
     }
 
+
     /**
      * A ModelRenderer that is attached to each ModelRenderer on the
      * players ModelBiped as a sub part.
@@ -105,13 +131,16 @@ public class RenderEngineAttach implements RenderEngine {
     @SideOnly(Side.CLIENT)
     public class ModelRendererAttachment extends ModelRenderer {
         private final SkinPartType skinPart;
+        private final int renderIdx;
         private final Minecraft mc;
-        private PartTranslator partTranslator;
 
         public ModelRendererAttachment(ModelBiped modelBase, SkinPartType skinPart) {
             super(modelBase);
             this.mc = Minecraft.getMinecraft();
             this.skinPart = skinPart;
+            EntityEquipmentSlot slot = mapping.get(skinPart.getBaseType());
+            if (slot != null) renderIdx = slot.ordinal();
+            else renderIdx = 6;
             addBox(0, 0, 0, 0, 0, 0);
         }
 
@@ -190,7 +219,6 @@ public class RenderEngineAttach implements RenderEngine {
 
             //TODO not really sure what EquipmentWardrobeData will handle(except color). Since it has the relationship with slot
             // which will be removed, I comment this out first.
-            byte[] extraColours = null;
             //extra color: [skinRed, skinG, skinB, hairR, hairG, hairB]
             //        EquipmentWardrobeData ewd = ClientProxy.equipmentWardrobeHandler.getEquipmentWardrobeData(new PlayerPointer(player));
             //        if (ewd != null) {
@@ -200,6 +228,7 @@ public class RenderEngineAttach implements RenderEngine {
             //                    (byte) skinColour.getRed(), (byte) skinColour.getGreen(), (byte) skinColour.getBlue(),
             //                    (byte) hairColour.getRed(), (byte) hairColour.getGreen(), (byte) hairColour.getBlue()};
             //        }
+            byte[] extraColours = null;
             SkinProvider provider = Context.instance().getSkinProvider();
             SkinTypeRegistry reg = Context.instance().getSkinRegistry();
 
@@ -231,12 +260,12 @@ public class RenderEngineAttach implements RenderEngine {
                 GL11.glDisable(GL11.GL_CULL_FACE);
                 GL11.glPopMatrix();
             }
-            if (true) {
+            if (Context.instance().useSafeTexture())
                 if (player instanceof AbstractClientPlayer) {
                     AbstractClientPlayer clientPlayer = (AbstractClientPlayer) player;
                     Minecraft.getMinecraft().renderEngine.bindTexture(clientPlayer.getLocationSkin());
                 }
-            }
+            renderedSkin[renderIdx] = true;
             mc.mcProfiler.endSection();
         }
     }

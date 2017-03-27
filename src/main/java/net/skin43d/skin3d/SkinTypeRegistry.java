@@ -1,5 +1,6 @@
 package net.skin43d.skin3d;
 
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.skin3d.SkinType;
 
