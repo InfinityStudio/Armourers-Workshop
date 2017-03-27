@@ -1,26 +1,14 @@
 [
 {
-  "modid": "armourersWorkshop",
-  "name": "Armourer's Workshop",
-  "description": "Minecraft armour customization mod.",
+  "modid": "skin43d",
+  "name": "Skin For 3D",
+  "description": "Minecraft skin customization mod.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "https://github.com/RiskyKen/Armourers-Workshop",
+  "url": "https://github.com/CIJHN/Armourers-Workshop/",
   "updateUrl": "",
-  "authorList": ["RiskyKen"],
-  "credits": "",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-},
-{
-  "modid": "plushieWrapper",
-  "name": "Plushie Wrapper",
-  "description": "Adds a soft plushie wrapper to Minecraft!",
-  "version": "0.0.0",
-  "mcversion": "${mcversion}",
-  "authorList": ["RiskyKen"],
-  "credits": "",
+  "authorList": ["RiskyKen", "ci010"],
+  "credits": "RiskyKen",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

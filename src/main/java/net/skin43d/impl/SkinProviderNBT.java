@@ -4,7 +4,9 @@ import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
 import net.skin43d.impl.client.render.bakery.SkinBakery;
+import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.skin3d.SkinType;
 import net.skin43d.utils.SkinIOUtils;
 import org.apache.commons.io.FileUtils;
@@ -37,6 +39,13 @@ public abstract class SkinProviderNBT extends AbstractSkinProvider {
     @Override
     protected Callable<Skin> requestSkinTask(final Entity entity, final SkinType skinType) {
         final String loc = entity.getEntityData().getString(skinType.getRegistryName());
+        if (loc == null)
+            return new Callable<Skin>() {
+                @Override
+                public Skin call() throws Exception {
+                    return null;
+                }
+            };
         File dir = new File(Minecraft.getMinecraft().mcDataDir, cachedDirName);
         if (!dir.exists()) dir.mkdir();
         final File file = new File(dir, loc);
@@ -67,4 +76,8 @@ public abstract class SkinProviderNBT extends AbstractSkinProvider {
 
     @Nullable
     protected abstract URL getRemoteSkinLocation(Entity entity, SkinType type, String skinId);
+
+    public static void putLocation(Entity entity, SkinPartType type, String location) {
+        entity.getEntityData()
+    }
 }
