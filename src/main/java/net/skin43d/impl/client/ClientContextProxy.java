@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Level;
 import net.skin43d.impl.client.render.bakery.AsyncModelBakery;
 import net.skin43d.impl.client.render.engine.attach.RenderEngineAttach;
 import net.skin43d.impl.client.render.engine.special.RenderEngineSpecial;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
+import net.skin43d.impl.skin.Skin;
 
 import java.io.File;
 import java.util.concurrent.Executors;

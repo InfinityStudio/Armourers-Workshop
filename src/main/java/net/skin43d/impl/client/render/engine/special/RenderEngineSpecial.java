@@ -12,13 +12,12 @@ import net.minecraftforge.common.MinecraftForge;
 import net.skin43d.impl.Context;
 import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
+import net.skin43d.skin3d.ISkinDye;
+import net.skin43d.skin3d.SkinTypeRegistry;
 import net.skin43d.impl.client.render.engine.RenderEngine;
-import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.EquipmentWardrobeData;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
+import net.skin43d.impl.skin.Skin;
 
 import java.awt.*;
 
@@ -64,7 +63,7 @@ public class RenderEngineSpecial implements RenderEngine {
         GL11.glPopMatrix();
     }
 
-    private void render(SkinProvider skinProvider, SkinType type, AbstractModelSkin modelBipedMain,
+    private void render(SkinProvider skinProvider, SkinType type, AbstractSkinModel modelBipedMain,
                         EntityPlayer player, double distance, byte[] extraColours, ModelBiped parent) {
         Skin data = skinProvider.getSkinInfoForEntity(player, type);
         ISkinDye dye = skinProvider.getPlayerDyeData(player, type);
@@ -84,7 +83,7 @@ public class RenderEngineSpecial implements RenderEngine {
 
     private void buildMap() {
         SkinTypeRegistry registry = Context.instance().getSkinRegistry();
-        skinImmutableMap = ImmutableMap.<String, AbstractModelSkin>builder()
+        skinImmutableMap = ImmutableMap.<String, AbstractSkinModel>builder()
                 .put(registry.getSkinChest().getRegistryName(), new ModelSkinChest())
                 .put(registry.getSkinHead().getRegistryName(), new ModelSkinHead())
                 .put(registry.getSkinLegs().getRegistryName(), new ModelSkinLegs())
@@ -96,9 +95,9 @@ public class RenderEngineSpecial implements RenderEngine {
                 .build();
     }
 
-    private ImmutableMap<String, AbstractModelSkin> skinImmutableMap;
+    private ImmutableMap<String, AbstractSkinModel> skinImmutableMap;
 
-    public AbstractModelSkin getModelForEquipmentType(SkinType skinType) {
+    public AbstractSkinModel getModelForEquipmentType(SkinType skinType) {
         return skinImmutableMap.get(skinType);
     }
 

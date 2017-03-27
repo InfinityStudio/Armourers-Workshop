@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.entity.Entity;
 import net.skin43d.SkinProvider;
 import net.skin43d.skin3d.SkinType;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
+import net.skin43d.skin3d.ISkinDye;
+import net.skin43d.impl.skin.Skin;
 
 /**
  * @author ci010

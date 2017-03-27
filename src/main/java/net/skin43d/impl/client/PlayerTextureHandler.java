@@ -1,6 +1,5 @@
 package net.skin43d.impl.client;
 
-import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -13,12 +12,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.skin43d.SkinProvider;
 import net.skin43d.impl.Context;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
-import riskyken.armourersWorkshop.client.render.EntityTextureInfo;
+import net.skin43d.skin3d.ISkinDye;
+import net.skin43d.skin3d.SkinTypeRegistry;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.EquipmentWardrobeData;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
+import net.skin43d.impl.skin.Skin;
 
 import java.util.HashMap;
 

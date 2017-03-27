@@ -1,10 +1,10 @@
 package net.skin43d.impl.client.render.nbake;
 
 import com.google.common.collect.Maps;
-import net.skin43d.impl.client.render.BakedFace;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.render.core.BakedCubes;
-import riskyken.armourersWorkshop.common.skin.data.SkinDye;
+import net.skin43d.impl.client.render.bakery.BakedFace;
+import net.skin43d.skin3d.ISkinDye;
+import net.skin43d.impl.client.render.BakedCubes;
+import net.skin43d.impl.skin.SkinDye;
 
 import java.util.Arrays;
 import java.util.List;

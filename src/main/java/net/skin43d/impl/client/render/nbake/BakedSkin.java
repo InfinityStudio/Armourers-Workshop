@@ -2,7 +2,7 @@ package net.skin43d.impl.client.render.nbake;
 
 import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.skin3d.SkinType;
-import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
+import net.skin43d.impl.client.SkinModelTexture;
 
 /**
  * @author ci010

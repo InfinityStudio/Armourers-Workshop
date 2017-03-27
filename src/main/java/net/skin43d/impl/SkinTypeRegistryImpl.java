@@ -5,17 +5,17 @@ import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.skin3d.SkinType;
 import net.skin43d.utils.ModLogger;
 import org.apache.logging.log4j.Level;
-import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
-import riskyken.armourersWorkshop.common.skin.type.arrow.SkinArrow;
-import riskyken.armourersWorkshop.common.skin.type.block.SkinBlock;
-import riskyken.armourersWorkshop.common.skin.type.bow.SkinBow;
-import riskyken.armourersWorkshop.common.skin.type.chest.SkinChest;
-import riskyken.armourersWorkshop.common.skin.type.feet.SkinFeet;
-import riskyken.armourersWorkshop.common.skin.type.head.SkinHead;
-import riskyken.armourersWorkshop.common.skin.type.legs.SkinLegs;
-import riskyken.armourersWorkshop.common.skin.type.legs.SkinSkirt;
-import riskyken.armourersWorkshop.common.skin.type.sword.SkinSword;
-import riskyken.armourersWorkshop.common.skin.type.wings.SkinWings;
+import net.skin43d.skin3d.SkinTypeRegistry;
+import net.skin43d.impl.type.arrow.SkinArrow;
+import net.skin43d.impl.type.block.SkinBlock;
+import net.skin43d.impl.type.bow.SkinBow;
+import net.skin43d.impl.type.chest.SkinChest;
+import net.skin43d.impl.type.feet.SkinFeet;
+import net.skin43d.impl.type.head.SkinHead;
+import net.skin43d.impl.type.legs.SkinLegs;
+import net.skin43d.impl.type.legs.SkinSkirt;
+import net.skin43d.impl.type.sword.SkinSword;
+import net.skin43d.impl.type.wings.SkinWings;
 
 import java.util.*;
 

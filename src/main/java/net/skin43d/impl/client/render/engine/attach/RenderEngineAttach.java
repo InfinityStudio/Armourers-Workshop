@@ -19,13 +19,13 @@ import net.skin43d.impl.client.render.engine.special.ModelSkinWings;
 import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.utils.Point3D;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
+import net.skin43d.skin3d.ISkinDye;
+import net.skin43d.skin3d.SkinTypeRegistry;
 import net.skin43d.impl.client.render.engine.RenderEngine;
 import net.skin43d.utils.ModLogger;
-import riskyken.armourersWorkshop.client.render.core.SkinPartRenderer;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.data.SkinPart;
+import net.skin43d.impl.client.render.SkinPartRenderer;
+import net.skin43d.impl.skin.Skin;
+import net.skin43d.impl.skin.SkinPart;
 
 import java.util.Collections;
 import java.util.Set;

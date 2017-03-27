@@ -7,9 +7,9 @@ import com.google.common.util.concurrent.ListeningExecutorService;
 import net.minecraft.entity.Entity;
 import net.skin43d.SkinProvider;
 import net.skin43d.skin3d.SkinType;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
+import net.skin43d.skin3d.ISkinDye;
 import net.skin43d.impl.client.render.bakery.SkinBakery;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
+import net.skin43d.impl.skin.Skin;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;

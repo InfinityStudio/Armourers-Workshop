@@ -2,12 +2,12 @@ package net.skin43d.impl.client.render.nbake;
 
 import com.google.common.collect.Lists;
 import net.skin43d.impl.Context;
-import net.skin43d.impl.client.render.BakedFace;
+import net.skin43d.impl.client.render.bakery.BakedFace;
 import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.utils.BitwiseUtils;
-import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.data.SkinPart;
+import net.skin43d.impl.client.SkinModelTexture;
+import net.skin43d.impl.skin.Skin;
+import net.skin43d.impl.skin.SkinPart;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -43,7 +43,7 @@ public class BakeTask implements Callable<BakedSkin> {
 //        BakeSkinPart[] bakeSkinParts = new BakeSkinPart[part.size()];
         for (int i = 0; i < skin.getParts().size(); i++) {
             SkinPart partData = skin.getParts().get(i);
-//            partData.setClientSkinPartData(new ClientSkinPartData());
+//            partData.setBakedPart(new BakedPart());
             int[] totalCubesInPart = new int[Context.instance().getCubeRegistry().getTotalCubes()];
             int[][][] dim = FaceCuller.cullFacesPre(partData, totalCubesInPart);
             FaceCuller.cullFace(partData, dim);

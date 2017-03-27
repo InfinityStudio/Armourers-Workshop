@@ -7,9 +7,9 @@ import net.skin43d.EquipmentWardrobeProvider;
 import net.skin43d.SkinProvider;
 import net.skin43d.impl.client.render.bakery.SkinBakery;
 import riskyken.EquipmentWardrobeData;
-import riskyken.armourersWorkshop.api.common.skin.type.SkinTypeRegistry;
+import net.skin43d.skin3d.SkinTypeRegistry;
 import riskyken.armourersWorkshop.common.data.PlayerPointer;
-import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
+import net.skin43d.impl.cubes.CubeRegistry;
 
 /**
  * @author ci010
@@ -18,6 +18,11 @@ public class ContextProxy extends Context {
     private EquipmentWardrobeProvider equipmentWardrobeHandler;
     private SkinTypeRegistryImpl skinTypeRegistry;
     private CubeRegistry cubeRegistry;
+
+    private int maxLodLevels = 4;
+    private double lodDistance = 32F;
+    private int maxSkinRenderDistance = 128;
+    private boolean useMultipassSkinRendering = false, useSafeTexture = false, wireframeRender = false, disableTexturePainting = false;
 
     protected void preInit(FMLPreInitializationEvent event) {
 
@@ -69,13 +74,14 @@ public class ContextProxy extends Context {
 
     @Override
     public boolean useSafeTexture() {
-        return false;
+        return useSafeTexture;
     }
 
     @Override
     public boolean useMultipassSkinRendering() {
-        return true;
+        return useMultipassSkinRendering;
     }
+
 
     @Override
     public int getNumberOfRenderLayers() {
@@ -86,28 +92,28 @@ public class ContextProxy extends Context {
     }
 
     @Override
-    public int getLodDistance() {
-        return 0;
+    public double getLodDistance() {
+        return lodDistance;
     }
 
     @Override
     public int getMaxLodLevel() {
-        return 0;
+        return maxLodLevels;
     }
 
     @Override
     public int getRenderDistance() {
-        return 0;
+        return maxSkinRenderDistance;
     }
 
     @Override
     public boolean wireframeRender() {
-        return false;
+        return wireframeRender;
     }
 
     @Override
     public boolean disableTexturePainting() {
-        return false;
+        return disableTexturePainting;
     }
 
     @Override

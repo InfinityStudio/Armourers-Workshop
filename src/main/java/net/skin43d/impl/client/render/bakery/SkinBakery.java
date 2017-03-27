@@ -1,8 +1,8 @@
 package net.skin43d.impl.client.render.bakery;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import riskyken.armourersWorkshop.api.common.skin.data.Skin3D;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
+import net.skin43d.skin3d.Skin3D;
+import net.skin43d.impl.skin.Skin;
 
 /**
  * @author ci010

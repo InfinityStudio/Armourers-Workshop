@@ -6,16 +6,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.data.SkinPart;
+import net.skin43d.skin3d.ISkinDye;
+import net.skin43d.impl.skin.Skin;
+import net.skin43d.impl.skin.SkinPart;
 import net.skin43d.utils.ModLogger;
 
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
-public class ModelSkinBow extends AbstractModelSkin {
+public class ModelSkinBow extends AbstractSkinModel {
     public int frame = 0;
 
     @Override

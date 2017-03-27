@@ -24,8 +24,8 @@ import net.minecraftforge.common.DimensionManager;
 import net.skin43d.exception.InvalidCubeTypeException;
 import net.skin43d.exception.NewerFileVersionException;
 import riskyken.armourersWorkshop.common.lib.LibModInfo;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.data.serialize.SkinReader;
+import net.skin43d.impl.skin.Skin;
+import net.skin43d.impl.skin.serialize.SkinReader;
 
 public final class SkinIOUtils {
 

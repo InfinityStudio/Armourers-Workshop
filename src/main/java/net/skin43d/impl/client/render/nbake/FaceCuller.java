@@ -1,11 +1,8 @@
 package net.skin43d.impl.client.render.nbake;
 
 import net.skin43d.utils.ForgeDirection;
-import net.skin43d.impl.Context;
 import net.skin43d.utils.Rectangle3D;
-import riskyken.armourersWorkshop.common.skin.cubes.CubeRegistry;
-import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
-import riskyken.armourersWorkshop.common.skin.data.SkinPart;
+import net.skin43d.impl.skin.SkinPart;
 
 import java.util.*;
 
@@ -18,7 +15,7 @@ public class FaceCuller {
      * @return indexSpace
      */
     public static int[][][] cullFacesPre(SkinPart skinPart, int[] totalCubesInPart) {
-        SkinCubeData cubeData = skinPart.getCubeData();
+        SkinPart.Data cubeData = skinPart.getCubeData();
         Rectangle3D bounds = skinPart.getPartBounds();
 
         int[][][] cubeSpace3D = new int[bounds.getWidth()][bounds.getHeight()][bounds.getDepth()];
@@ -36,7 +33,7 @@ public class FaceCuller {
     }
 
     public static void cullFace(SkinPart part, int[][][] cubeSpace3D) {
-        SkinCubeData cubeData = part.getCubeData();
+        SkinPart.Data cubeData = part.getCubeData();
         Rectangle3D bounds = part.getPartBounds();
         cubeData.setupFaceFlags();
 
@@ -60,7 +57,7 @@ public class FaceCuller {
         }
     }
 
-    private static List<CubeLocation> checkCubesAroundLocation(SkinCubeData cubeData, CubeLocation cubeLocation,
+    private static List<CubeLocation> checkCubesAroundLocation(SkinPart.Data cubeData, CubeLocation cubeLocation,
                                                                Rectangle3D partBounds, int[][][] cubeArray) {
         List<CubeLocation> openList = new ArrayList<CubeLocation>();
         ForgeDirection[] dirs = {ForgeDirection.DOWN, ForgeDirection.UP,
@@ -101,7 +98,7 @@ public class FaceCuller {
     }
 
     private static void flagCubeFace(int x, int y, int z, int face, Rectangle3D partBounds, int[][][] cubeArray,
-                                     SkinCubeData cubeData, boolean needPostRender) {
+                                     SkinPart.Data cubeData, boolean needPostRender) {
         int checkIndex = getIndexForLocation(x, y, z, partBounds, cubeArray);
         if (!needPostRender)
             cubeData.getFaceFlags(checkIndex - 1).set(face, true);

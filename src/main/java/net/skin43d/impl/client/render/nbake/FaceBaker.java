@@ -1,11 +1,10 @@
 package net.skin43d.impl.client.render.nbake;
 
 import net.skin43d.impl.Context;
-import net.skin43d.impl.client.render.BakedFace;
+import net.skin43d.impl.client.render.bakery.BakedFace;
 import net.skin43d.utils.Rectangle3D;
-import riskyken.armourersWorkshop.common.skin.cubes.ICube;
-import riskyken.armourersWorkshop.common.skin.data.SkinCubeData;
-import riskyken.armourersWorkshop.common.skin.data.SkinPart;
+import net.skin43d.impl.cubes.ICube;
+import net.skin43d.impl.skin.SkinPart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,7 @@ public class FaceBaker {
         for (int i = 0; i < renderLists.length; i++)
             renderLists[i] = new ArrayList<BakedFace>();
 
-        SkinCubeData cubeData = partData.getCubeData();
+        SkinPart.Data cubeData = partData.getCubeData();
         Rectangle3D bound = partData.getPartBounds();
 
         for (int ix = 0; ix < bound.getWidth(); ix++) {
@@ -144,7 +143,7 @@ public class FaceBaker {
         return renderLists;
     }
 
-    private static boolean getAverageFaceFlags(int x, int y, int z, byte lodLevel, int[][][] cubeArray, SkinCubeData cubeData, Rectangle3D partBounds, int face) {
+    private static boolean getAverageFaceFlags(int x, int y, int z, byte lodLevel, int[][][] cubeArray, SkinPart.Data cubeData, Rectangle3D partBounds, int face) {
         for (int ix = 0; ix < lodLevel; ix++) {
             for (int iy = 0; iy < lodLevel; iy++) {
                 for (int iz = 0; iz < lodLevel; iz++) {
@@ -162,7 +161,7 @@ public class FaceBaker {
     }
 
     private static byte[] getAverageRGBAT(int x, int y, int z, byte lodLevel, int[][][] cubeArray,
-                                          SkinCubeData cubeData, Rectangle3D partBounds, int face) {
+                                          SkinPart.Data cubeData, Rectangle3D partBounds, int face) {
         int count = 0;
         int r = 0, g = 0, b = 0, a = 0;
         int[] paintTypes = new int[256];

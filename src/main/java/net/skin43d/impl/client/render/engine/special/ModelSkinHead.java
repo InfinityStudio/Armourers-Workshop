@@ -7,15 +7,14 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.api.common.skin.data.ISkinDye;
-import riskyken.armourersWorkshop.client.render.core.ModelHelper;
-import riskyken.armourersWorkshop.client.render.core.skin.AbstractModelSkin;
-import riskyken.armourersWorkshop.client.skin.SkinModelTexture;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
-import riskyken.armourersWorkshop.common.skin.data.SkinPart;
+import net.skin43d.skin3d.ISkinDye;
+import net.skin43d.impl.client.render.ModelHelper;
+import net.skin43d.impl.client.SkinModelTexture;
+import net.skin43d.impl.skin.Skin;
+import net.skin43d.impl.skin.SkinPart;
 
 @SideOnly(Side.CLIENT)
-public class ModelSkinHead extends AbstractModelSkin {
+public class ModelSkinHead extends AbstractSkinModel {
 
     @Override
     public void render(Entity entity, Skin skin, boolean showSkinPaint, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {

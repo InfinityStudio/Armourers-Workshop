@@ -8,7 +8,7 @@ import net.skin43d.impl.client.render.bakery.SkinBakery;
 import net.skin43d.skin3d.SkinType;
 import net.skin43d.utils.SkinIOUtils;
 import org.apache.commons.io.FileUtils;
-import riskyken.armourersWorkshop.common.skin.data.Skin;
+import net.skin43d.impl.skin.Skin;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
