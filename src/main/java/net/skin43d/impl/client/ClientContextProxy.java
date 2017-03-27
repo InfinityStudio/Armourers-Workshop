@@ -34,10 +34,6 @@ public class ClientContextProxy extends ContextProxy {
     private ListeningExecutorService service;
 
     private String dir = "D:\\Storage\\Desktop\\testSkin";
-    private String[] skins = new String[]{
-            "D:\\Storage\\Desktop\\Angel Wings.armour",
-            "D:\\Storage\\Desktop\\Pika Hood.armour"
-    };
 
     @Override
     public SkinProvider getSkinProvider() {
@@ -65,7 +61,7 @@ public class ClientContextProxy extends ContextProxy {
         AsyncModelBakery bakery = new AsyncModelBakery(service);
 
         /////TEST CODE//////
-        File file = new File(dir, "c");
+        File file = new File(dir, "b");
         List<Skin> ls = Lists.newArrayList();
         for (File skF : file.listFiles()) {
             Skin skin = SkinIOUtils.loadSkinFromFile(skF);
