@@ -27,6 +27,7 @@ public class SkinReader {
         int fileVersion = stream.readInt();
         if (fileVersion > context.getFileVersion())
             throw new NewerFileVersionException();
+        System.out.println("reading file version" + fileVersion);
         SkinTypeRegistry skinRegistry = context.getSkinRegistry();
         SkinProperties properties = new SkinProperties();
         SkinType skinType;
@@ -46,6 +47,7 @@ public class SkinReader {
         } else
             properties.readFromStream(stream);
 
+        System.out.println("read property " + properties);
         if (fileVersion < 5) {
             skinType = skinRegistry.getSkinTypeFromLegacyId(stream.readByte() - 1);
         } else {
@@ -54,6 +56,8 @@ public class SkinReader {
                 regName = skinRegistry.getSkinLegs().getRegistryName();
             skinType = skinRegistry.getSkinTypeFromRegistryName(regName);
         }
+
+        System.out.println("read skinType " + skinType);
 
         if (skinType == null) throw new InvalidCubeTypeException();
 
@@ -65,9 +69,10 @@ public class SkinReader {
             }
 
         int size = stream.readByte();
+        System.out.println("detected " + size + " skin parts");
         parts = new ArrayList<SkinPart>();
         for (int i = 0; i < size; i++)
-            parts.add(partSerializer.readSkinPart(stream, context));
+            parts.add(partSerializer.readSkinPart(stream, context, fileVersion));
 
         return new Skin(properties, skinType, paintData, parts);
     }

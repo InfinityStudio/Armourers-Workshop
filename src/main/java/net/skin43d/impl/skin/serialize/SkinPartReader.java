@@ -27,9 +27,9 @@ public class SkinPartReader {
             writeCubeMaker(output, markerBlock);
     }
 
-    public SkinPart readSkinPart(DataInput input, Context context) throws IOException, InvalidCubeTypeException {
+    public SkinPart readSkinPart(DataInput input, Context context, int fileVersion) throws IOException, InvalidCubeTypeException {
         SkinPartType skinPart;
-        if (context.getFileVersion() < 6) {
+        if (fileVersion < 6) {
             skinPart = context.getSkinRegistry().getSkinPartTypeFromId(input.readByte());
             if (skinPart == null) {
                 ModLogger.log(Level.ERROR, "Skin part was null");
@@ -50,9 +50,9 @@ public class SkinPartReader {
         }
 
         SkinPart.Data cubeData = new SkinPart.Data();
-        cubeData.readFromStream(input, context.getFileVersion(), skinPart);
+        cubeData.readFromStream(input, fileVersion, skinPart);
         List<CubeMarkerData> markerBlocks = new ArrayList<CubeMarkerData>();
-        if (context.getFileVersion() > 8) {
+        if (fileVersion > 8) {
             int markerCount = input.readInt();
             for (int i = 0; i < markerCount; i++)
                 markerBlocks.add(readCubeMaker(input));

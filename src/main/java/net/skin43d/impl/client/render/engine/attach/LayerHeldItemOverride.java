@@ -66,6 +66,7 @@ public class LayerHeldItemOverride implements LayerRenderer<EntityLivingBase> {
                     Context.instance().getSkinRegistry().getSkinSword());
             if (skin != null) {
                 attach.sword.npcEquipmentData = skin;
+                GlStateManager.rotate(180, 1, 0, 0);
                 attach.sword.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
             } else {
                 Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, p_188358_2_, p_188358_3_, flag);
