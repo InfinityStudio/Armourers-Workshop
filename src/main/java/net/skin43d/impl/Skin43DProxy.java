@@ -10,13 +10,12 @@ import net.skin43d.SkinProvider;
 import net.skin43d.impl.client.render.bakery.SkinBakery;
 import riskyken.EquipmentWardrobeData;
 import net.skin43d.skin3d.SkinTypeRegistry;
-import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import net.skin43d.impl.cubes.CubeRegistry;
 
 /**
  * @author ci010
  */
-public class ContextProxy extends Context {
+public class Skin43DProxy extends Skin43D {
     private EquipmentWardrobeProvider equipmentWardrobeHandler;
     private SkinTypeRegistryImpl skinTypeRegistry;
     private CubeRegistry cubeRegistry;
@@ -142,5 +141,10 @@ public class ContextProxy extends Context {
     @Override
     public CubeRegistry getCubeRegistry() {
         return cubeRegistry;
+    }
+
+    @Override
+    public Context getContext() {
+        return null;
     }
 }

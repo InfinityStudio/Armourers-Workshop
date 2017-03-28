@@ -2,7 +2,7 @@ package net.skin43d.impl.skin;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 import net.skin43d.utils.Rectangle3D;
@@ -69,7 +69,7 @@ public class Skin implements Skin3D {
         int depth = 1;
 
         for (int i = 0; i < getPartCount(); i++) {
-            if (!(getSkinType() == Context.instance().getSkinRegistry().getSkinBow() && i > 0)) {
+            if (!(getSkinType() == Skin43D.instance().getSkinRegistry().getSkinBow() && i > 0)) {
 
                 SkinPart skinPart = getParts().get(i);
                 Rectangle3D bounds = skinPart.getPartBounds();
@@ -130,7 +130,7 @@ public class Skin implements Skin3D {
         this.paintData = null;
         if (paintData != null) {//Check if the paint data has any paint on it.
             boolean validPaintData = false;
-            for (int i = 0; i < Context.instance().getTextureSize(); i++) {
+            for (int i = 0; i < Skin43D.instance().getTextureSize(); i++) {
                 if (paintData[i] >>> 16 != 255) {
                     validPaintData = true;
                     break;
@@ -222,8 +222,8 @@ public class Skin implements Skin3D {
 
     public int getTotalCubes() {
         int totalCubes = 0;
-        for (int i = 0; i < Context.instance().getCubeRegistry().getTotalCubes(); i++) {
-            ICube cube = Context.instance().getCubeRegistry().getCubeFormId((byte) i);
+        for (int i = 0; i < Skin43D.instance().getCubeRegistry().getTotalCubes(); i++) {
+            ICube cube = Skin43D.instance().getCubeRegistry().getCubeFormId((byte) i);
             totalCubes += getTotalOfCubeType(cube);
         }
         return totalCubes;

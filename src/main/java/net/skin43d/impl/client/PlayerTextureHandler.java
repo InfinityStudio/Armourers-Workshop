@@ -14,9 +14,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.SkinProvider;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.impl.skin.Skin;
-import net.skin43d.skin3d.ISkinDye;
 import net.skin43d.skin3d.SkinTypeRegistry;
 import riskyken.EquipmentWardrobeData;
 
@@ -54,7 +53,7 @@ public class PlayerTextureHandler {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onRender(RenderPlayerEvent.Pre event) {
-        disableTexturePainting = Context.instance().disableTexturePainting();
+        disableTexturePainting = Skin43D.instance().disableTexturePainting();
         if (disableTexturePainting)
             return;
         if (!(event.getEntityLiving() instanceof AbstractClientPlayer))
@@ -62,7 +61,7 @@ public class PlayerTextureHandler {
         AbstractClientPlayer player = (AbstractClientPlayer) event.getEntityLiving();
         if (player.getGameProfile() == null) return;
         UUID uuid = player.getUniqueID();
-//        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(player);
+//        EquipmentWardrobeData ewd = Skin43D.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(player);
 //        if (ewd == null) return;
 
         profiler.startSection("textureBuild");
@@ -74,8 +73,8 @@ public class PlayerTextureHandler {
 
             textureInfo.updateTexture(player.getLocationSkin());
             Skin[] skins = new Skin[4 * 5];
-            SkinProvider skinProvider = Context.instance().getSkinProvider();
-            SkinTypeRegistry reg = Context.instance().getSkinRegistry();
+            SkinProvider skinProvider = Skin43D.instance().getSkinProvider();
+            SkinTypeRegistry reg = Skin43D.instance().getSkinRegistry();
             for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
                 skins[skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinHead());
                 skins[1 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinChest());
@@ -117,7 +116,7 @@ public class PlayerTextureHandler {
         AbstractClientPlayer player = (AbstractClientPlayer) event.getEntityLiving();
         if (player.getGameProfile() == null) return;
         UUID playerPointer = player.getUniqueID();
-//        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(player);
+//        EquipmentWardrobeData ewd = Skin43D.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(player);
 //        if (ewd == null) return;
 
         profiler.startSection("textureReset");

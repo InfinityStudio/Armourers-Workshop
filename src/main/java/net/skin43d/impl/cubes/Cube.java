@@ -1,7 +1,7 @@
 package net.skin43d.impl.cubes;
 
 import net.minecraft.block.Block;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 
 public class Cube implements ICube {
 
@@ -12,7 +12,7 @@ public class Cube implements ICube {
     }
 
     public Cube() {
-        id = Context.instance().getCubeRegistry().getTotalCubes();
+        id = Skin43D.instance().getCubeRegistry().getTotalCubes();
     }
 
     @Override

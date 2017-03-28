@@ -48,7 +48,7 @@ public abstract class AbstractSkinProvider implements SkinProvider {
     }
 
     /**
-     * Force request the skin and cache again.
+     * Force to request the skin and cache again.
      *
      * @param entity   The entity
      * @param skinType The skin type

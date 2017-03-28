@@ -3,8 +3,7 @@ package net.skin43d.impl.client.render;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.util.math.MathHelper;
-import net.skin43d.impl.Context;
-import net.skin43d.impl.client.render.DisplayList;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.impl.client.render.bakery.BakedFace;
 
 import java.util.List;
@@ -48,8 +47,8 @@ public class BakedCubes {
         long time = System.currentTimeMillis();
         if (time < loadedTime + 500) {
             long timePassed = time - loadedTime;
-            return MathHelper.clamp_int((Context.instance().getMaxLodLevel() + 1) - ((int) (timePassed / 125F) + 1), 0,
-                    Context.instance().getMaxLodLevel() + 1);
+            return MathHelper.clamp_int((Skin43D.instance().getMaxLodLevel() + 1) - ((int) (timePassed / 125F) + 1), 0,
+                    Skin43D.instance().getMaxLodLevel() + 1);
         }
         return 0;
     }

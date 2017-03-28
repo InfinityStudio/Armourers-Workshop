@@ -1,6 +1,6 @@
 package net.skin43d.impl.client.render.nbake;
 
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.impl.client.render.bakery.BakedFace;
 import net.skin43d.utils.Rectangle3D;
 import net.skin43d.impl.cubes.ICube;
@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class FaceBaker {
     public static List<BakedFace>[] buildPartDisplayListArray(SkinPart partData, int[][] dyeColour, int[] dyeUseCount, int[][][] cubeArray) {
-        boolean multipassSkinRendering = Context.instance().useMultipassSkinRendering();
+        boolean multipassSkinRendering = Skin43D.instance().useMultipassSkinRendering();
 
-        int lodLevels = Context.instance().getMaxLodLevel();
+        int lodLevels = Skin43D.instance().getMaxLodLevel();
 
         /* LOD Indexs
          *
@@ -31,7 +31,7 @@ public class FaceBaker {
          * 1 = glowing
          */
 
-        List<BakedFace>[] renderLists = new ArrayList[Context.instance().getNumberOfRenderLayers() * (lodLevels + 1)];
+        List<BakedFace>[] renderLists = new ArrayList[Skin43D.instance().getNumberOfRenderLayers() * (lodLevels + 1)];
 
         for (int i = 0; i < renderLists.length; i++)
             renderLists[i] = new ArrayList<BakedFace>();
@@ -106,7 +106,7 @@ public class FaceBaker {
                                 if (showFace) {
                                     byte[] avegC = getAverageRGBAT(ix, iy, iz, lodLevel, cubeArray, cubeData, bound, j);
 
-                                    ICube cube = Context.instance().getCubeRegistry().getCubeFormId(avegC[5]);
+                                    ICube cube = Skin43D.instance().getCubeRegistry().getCubeFormId(avegC[5]);
 
                                     int listIndex = 0;
                                     if (multipassSkinRendering) {
@@ -124,7 +124,7 @@ public class FaceBaker {
                                             listIndex = 1;
                                         }
                                     }
-                                    int lodIndex = ((lod) * Context.instance().getNumberOfRenderLayers()) + listIndex;
+                                    int lodIndex = ((lod) * Skin43D.instance().getNumberOfRenderLayers()) + listIndex;
 
                                     BakedFace ver = new BakedFace(
                                             (byte) (ix + bound.getX()), (byte) (iy + bound.getY()), (byte) (iz + bound.getZ()),

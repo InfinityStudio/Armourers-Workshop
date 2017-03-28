@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.impl.client.render.bakery.BakedFace;
 import net.skin43d.impl.skin.Skin;
 import net.skin43d.impl.skin.SkinPart;
@@ -25,8 +25,8 @@ import java.io.IOException;
 import java.util.Map;
 
 public class EntityTextureInfo {
-    private static final int TEXTURE_WIDTH = Context.instance().getTextureWidth();
-    private static final int TEXTURE_HEIGHT = Context.instance().getTextureHeight();
+    private static final int TEXTURE_WIDTH = Skin43D.instance().getTextureWidth();
+    private static final int TEXTURE_HEIGHT = Skin43D.instance().getTextureHeight();
 
     /**
      * The last texture entity had when the replacement texture was made.
@@ -229,7 +229,7 @@ public class EntityTextureInfo {
                     SkinPart skinPart = skin.getParts().get(j);
                     if (skinPart.getPartType() instanceof ISkinPartTypeTextured) {
                         ISkinPartTypeTextured typeTextured = (ISkinPartTypeTextured) skinPart.getPartType();
-                        SkinTypeRegistry reg = Context.instance().getSkinRegistry();
+                        SkinTypeRegistry reg = Skin43D.instance().getSkinRegistry();
                         Point texLoc = typeTextured.getTextureLocation();
                         Point3D texSize = typeTextured.getTextureModelSize();
                         for (int ix = 0; ix < texSize.getZ() * 2 + texSize.getX() * 2; ix++)

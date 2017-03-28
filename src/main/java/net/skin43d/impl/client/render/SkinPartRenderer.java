@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.impl.client.render.bakery.BakedFace;
 import net.skin43d.impl.client.render.bakery.BakedPart;
 import net.skin43d.impl.skin.SkinPart;
@@ -26,8 +26,8 @@ public class SkinPartRenderer extends ModelBase {
     }
 
     public void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, double distance, boolean doLodLoading) {
-        int lod = MathHelper.floor_double(distance / Context.instance().getLodDistance());
-        lod = MathHelper.clamp_int(lod, 0, Context.instance().getMaxLodLevel());
+        int lod = MathHelper.floor_double(distance / Skin43D.instance().getLodDistance());
+        lod = MathHelper.clamp_int(lod, 0, Skin43D.instance().getMaxLodLevel());
         renderPart(skinPart.getBakedPart(), scale, skinDye, extraColour, lod, doLodLoading);
     }
 
@@ -35,7 +35,7 @@ public class SkinPartRenderer extends ModelBase {
         if (cspd == null) return;
         BakedCubes skinModel = cspd.getModelForDye(skinDye, extraColour);
         cspd.getVertexes();
-        boolean multipassSkinRendering = Context.instance().useMultipassSkinRendering();
+        boolean multipassSkinRendering = Skin43D.instance().useMultipassSkinRendering();
 
         for (int i = 0; i < skinModel.displayList.length; i++) {
             if (skinModel.haveList[i]) {
@@ -48,7 +48,7 @@ public class SkinPartRenderer extends ModelBase {
             }
         }
 
-//        if (Context.instance().useSafeTexture())
+//        if (Skin43D.instance().useSafeTexture())
 //            mc.renderEngine.bindTexture(texture);
 //        else
         GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -87,11 +87,11 @@ public class SkinPartRenderer extends ModelBase {
                                 GL11.glDisable(GL11.GL_LIGHTING);
                                 ModRenderHelper.disableLighting();
                             }
-                            if (Context.instance().wireframeRender()) {
+                            if (Skin43D.instance().wireframeRender()) {
                                 GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
                             }
                             skinModel.displayList[i].render();
-                            if (Context.instance().wireframeRender()) {
+                            if (Skin43D.instance().wireframeRender()) {
                                 GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
                             }
                             if (glowing) {
@@ -104,7 +104,7 @@ public class SkinPartRenderer extends ModelBase {
             }
         }
 
-        if (!Context.instance().useSafeTexture()) {
+        if (!Skin43D.instance().useSafeTexture()) {
             GL11.glEnable(GL11.GL_TEXTURE_2D);
         }
 
@@ -122,12 +122,12 @@ public class SkinPartRenderer extends ModelBase {
     }
 
     private void renderVertexList(List<BakedFace> vertexList, float scale, ISkinDye skinDye, byte[] extraColour, BakedPart cspd) {
-        if (Context.instance().useSafeTexture())
+        if (Skin43D.instance().useSafeTexture())
             Tessellator.getInstance().getBuffer().begin(7, DefaultVertexFormats.POSITION_TEX_COLOR_NORMAL);
         else
             Tessellator.getInstance().getBuffer().begin(7, POS_COLOR_NORMAL);
         for (int i = 0; i < vertexList.size(); i++)
-            vertexList.get(i).render(skinDye, extraColour, cspd, Context.instance().useSafeTexture());
+            vertexList.get(i).render(skinDye, extraColour, cspd, Skin43D.instance().useSafeTexture());
         Tessellator.getInstance().draw();
     }
 }

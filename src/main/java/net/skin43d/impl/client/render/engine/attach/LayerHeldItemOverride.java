@@ -11,8 +11,7 @@ import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.EnumHandSide;
-import net.skin43d.impl.Context;
-import net.skin43d.impl.client.render.engine.core.ModelSkinSword;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.impl.skin.Skin;
 
 /**
@@ -65,8 +64,8 @@ public class LayerHeldItemOverride implements LayerRenderer<EntityLivingBase> {
             boolean flag = handSide == EnumHandSide.LEFT;
             GlStateManager.translate((float) (flag ? -1 : 1) / 16.0F, 0.125F, -0.625F);
             if (itemStack.getItem() instanceof ItemSword) {
-                Skin skin = Context.instance().getSkinProvider().getSkinInfoForEntity(entity,
-                        Context.instance().getSkinRegistry().getSkinSword());
+                Skin skin = Skin43D.instance().getSkinProvider().getSkinInfoForEntity(entity,
+                        Skin43D.instance().getSkinRegistry().getSkinSword());
                 if (skin != null) {
                     attach.sword.npcEquipmentData = skin;
                     GlStateManager.rotate(180, 1, 0, 1F);
@@ -75,8 +74,8 @@ public class LayerHeldItemOverride implements LayerRenderer<EntityLivingBase> {
                 } else
                     Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, itemStack, p_188358_3_, flag);
             } else if (itemStack.getItem() instanceof ItemShield) {
-                Skin skin = Context.instance().getSkinProvider().getSkinInfoForEntity(entity,
-                        Context.instance().getSkinRegistry().getSkinShield());
+                Skin skin = Skin43D.instance().getSkinProvider().getSkinInfoForEntity(entity,
+                        Skin43D.instance().getSkinRegistry().getSkinShield());
                 if (skin != null) {
                     attach.sword.npcEquipmentData = skin;
                     GlStateManager.rotate(180, 1, 0, 1F);

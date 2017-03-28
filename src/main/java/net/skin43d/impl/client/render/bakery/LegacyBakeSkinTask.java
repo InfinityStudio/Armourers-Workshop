@@ -1,6 +1,6 @@
 package net.skin43d.impl.client.render.bakery;
 
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.utils.BitwiseUtils;
 import net.skin43d.impl.client.SkinModelTexture;
 import net.skin43d.impl.skin.Skin;
@@ -34,12 +34,12 @@ public class LegacyBakeSkinTask implements Callable<Skin> {
             SkinBaker.buildPartDisplayListArray(partData, dyeColour, dyeUseCount, cubeSpace);
             partData.clearCubeData();
         }
-        Context context = Context.instance();
+        Skin43D skin43D = Skin43D.instance();
         if (skin.hasPaintData()) {
             skin.skinModelTexture = new SkinModelTexture();
-            for (int ix = 0; ix < context.getTextureWidth(); ix++) {
-                for (int iy = 0; iy < context.getTextureHeight(); iy++) {
-                    int paintColour = skin.getPaintData()[ix + (iy * context.getTextureWidth())];
+            for (int ix = 0; ix < skin43D.getTextureWidth(); ix++) {
+                for (int iy = 0; iy < skin43D.getTextureHeight(); iy++) {
+                    int paintColour = skin.getPaintData()[ix + (iy * skin43D.getTextureWidth())];
                     int paintType = BitwiseUtils.getUByteFromInt(paintColour, 0);
 
                     byte r = (byte) (paintColour >>> 16 & 0xFF);

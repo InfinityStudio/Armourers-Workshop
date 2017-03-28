@@ -1,6 +1,6 @@
 package net.skin43d.impl.skin.serialize;
 
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import org.apache.logging.log4j.Level;
 import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.exception.InvalidCubeTypeException;
@@ -27,10 +27,10 @@ public class SkinPartReader {
             writeCubeMaker(output, markerBlock);
     }
 
-    public SkinPart readSkinPart(DataInput input, Context context, int fileVersion) throws IOException, InvalidCubeTypeException {
+    public SkinPart readSkinPart(DataInput input, Skin43D skin43D, int fileVersion) throws IOException, InvalidCubeTypeException {
         SkinPartType skinPart;
         if (fileVersion < 6) {
-            skinPart = context.getSkinRegistry().getSkinPartTypeFromId(input.readByte());
+            skinPart = skin43D.getSkinRegistry().getSkinPartTypeFromId(input.readByte());
             if (skinPart == null) {
                 ModLogger.log(Level.ERROR, "Skin part was null");
                 throw new IOException("Skin part was null");
@@ -41,7 +41,7 @@ public class SkinPartReader {
                 regName = "armourers:legs.skirt";
             if (regName.equals("armourers:bow.base"))
                 regName = "armourers:bow.frame1";
-            skinPart = context.getSkinRegistry().getSkinPartTypeFromName(regName);
+            skinPart = skin43D.getSkinRegistry().getSkinPartTypeFromName(regName);
 
             if (skinPart == null) {
                 ModLogger.log(Level.ERROR, "Skin part was null - reg name: " + regName);

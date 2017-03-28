@@ -10,13 +10,12 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.skin3d.SkinType;
 import org.lwjgl.opengl.GL11;
 import net.skin43d.skin3d.ISkinDye;
 import net.skin43d.skin3d.SkinTypeRegistry;
 import net.skin43d.impl.client.render.engine.RenderEngine;
-import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.EquipmentWardrobeData;
 import net.skin43d.impl.skin.Skin;
 
@@ -42,11 +41,11 @@ public class RenderEngineSpecial implements RenderEngine {
             return;
 
         double distance = Minecraft.getMinecraft().thePlayer.getDistance(player.posX, player.posY, player.posZ);
-        if (distance > Context.instance().getRenderDistance()) return;
+        if (distance > Skin43D.instance().getRenderDistance()) return;
 
-        SkinProvider skinProvider = Context.instance().getSkinProvider();
-        SkinTypeRegistry skinRegistry = Context.instance().getSkinRegistry();
-        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(player);
+        SkinProvider skinProvider = Skin43D.instance().getSkinProvider();
+        SkinTypeRegistry skinRegistry = Skin43D.instance().getSkinRegistry();
+        EquipmentWardrobeData ewd = Skin43D.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(player);
         byte[] extraColours = null;
         if (ewd != null) {
             Color skinColour = new Color(ewd.skinColour);
@@ -91,7 +90,7 @@ public class RenderEngineSpecial implements RenderEngine {
     }
 
     private void buildMap() {
-        SkinTypeRegistry registry = Context.instance().getSkinRegistry();
+        SkinTypeRegistry registry = Skin43D.instance().getSkinRegistry();
         skinImmutableMap = ImmutableMap.<String, AbstractSkinModel>builder()
                 .put(registry.getSkinChest().getRegistryName(), new ModelSkinChest())
                 .put(registry.getSkinHead().getRegistryName(), new ModelSkinHead())

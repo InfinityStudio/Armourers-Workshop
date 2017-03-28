@@ -1,7 +1,7 @@
 package net.skin43d.impl.client.render.nbake;
 
 import com.google.common.collect.Lists;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.impl.client.render.bakery.BakedFace;
 import net.skin43d.skin3d.SkinPartType;
 import net.skin43d.utils.BitwiseUtils;
@@ -44,19 +44,19 @@ public class BakeTask implements Callable<BakedSkin> {
         for (int i = 0; i < skin.getParts().size(); i++) {
             SkinPart partData = skin.getParts().get(i);
 //            partData.setBakedPart(new BakedPart());
-            int[] totalCubesInPart = new int[Context.instance().getCubeRegistry().getTotalCubes()];
+            int[] totalCubesInPart = new int[Skin43D.instance().getCubeRegistry().getTotalCubes()];
             int[][][] dim = FaceCuller.cullFacesPre(partData, totalCubesInPart);
             FaceCuller.cullFace(partData, dim);
             List<BakedFace>[] lists = FaceBaker.buildPartDisplayListArray(partData, dyeColour, dyeUseCount, dim);
             parts.add(new BakeSkinPart(averageR, averageG, averageB, lists, totalCubesInPart));
             partData.clearCubeData();
         }
-        Context context = Context.instance();
+        Skin43D skin43D = Skin43D.instance();
         if (skin.hasPaintData()) {
             modelTexture = new SkinModelTexture();
-            for (int ix = 0; ix < context.getTextureWidth(); ix++) {
-                for (int iy = 0; iy < context.getTextureHeight(); iy++) {
-                    int paintColour = skin.getPaintData()[ix + (iy * context.getTextureWidth())];
+            for (int ix = 0; ix < skin43D.getTextureWidth(); ix++) {
+                for (int iy = 0; iy < skin43D.getTextureHeight(); iy++) {
+                    int paintColour = skin.getPaintData()[ix + (iy * skin43D.getTextureWidth())];
                     int paintType = BitwiseUtils.getUByteFromInt(paintColour, 0);
 
                     byte r = (byte) (paintColour >>> 16 & 0xFF);

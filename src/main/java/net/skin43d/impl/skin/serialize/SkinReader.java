@@ -2,7 +2,7 @@ package net.skin43d.impl.skin.serialize;
 
 import net.skin43d.exception.InvalidCubeTypeException;
 import net.skin43d.exception.NewerFileVersionException;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.skin3d.SkinType;
 import net.skin43d.skin3d.SkinTypeRegistry;
 import net.skin43d.impl.skin.Skin;
@@ -23,11 +23,11 @@ import static net.skin43d.impl.skin.Skin.*;
 public class SkinReader {
     private SkinPartReader partSerializer = new SkinPartReader();
 
-    public Skin readSkin(DataInput stream, Context context, boolean isShield) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
+    public Skin readSkin(DataInput stream, Skin43D skin43D, boolean isShield) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
         int fileVersion = stream.readInt();
-        if (fileVersion > context.getFileVersion())
+        if (fileVersion > skin43D.getFileVersion())
             throw new NewerFileVersionException();
-        SkinTypeRegistry skinRegistry = context.getSkinRegistry();
+        SkinTypeRegistry skinRegistry = skin43D.getSkinRegistry();
         SkinProperties properties = new SkinProperties();
         SkinType skinType;
         List<SkinPart> parts;
@@ -62,30 +62,30 @@ public class SkinReader {
 
         if (fileVersion > 7)
             if (stream.readBoolean()) {
-                paintData = new int[context.getTextureSize()];
-                for (int i = 0; i < context.getTextureSize(); i++)
+                paintData = new int[skin43D.getTextureSize()];
+                for (int i = 0; i < skin43D.getTextureSize(); i++)
                     paintData[i] = stream.readInt();
             }
 
         int size = stream.readByte();
         parts = new ArrayList<SkinPart>();
         for (int i = 0; i < size; i++)
-            parts.add(partSerializer.readSkinPart(stream, context, fileVersion));
+            parts.add(partSerializer.readSkinPart(stream, skin43D, fileVersion));
 
         return new Skin(properties, skinType, paintData, parts);
     }
 
-    public Skin readSkin(DataInput stream, Context context) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
-        return readSkin(stream, context, false);
+    public Skin readSkin(DataInput stream, Skin43D skin43D) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
+        return readSkin(stream, skin43D, false);
     }
 
-    public void writeSkin(Skin skin, DataOutputStream stream, Context context) throws IOException {
-        stream.writeInt(context.getFileVersion());
+    public void writeSkin(Skin skin, DataOutputStream stream, Skin43D skin43D) throws IOException {
+        stream.writeInt(skin43D.getFileVersion());
         skin.getProperties().writeToStream(stream);
         stream.writeUTF(skin.getSkinType().getRegistryName());
         if (skin.getPaintData() != null) {
             stream.writeBoolean(true);
-            for (int i = 0; i < context.getTextureSize(); i++)
+            for (int i = 0; i < skin43D.getTextureSize(); i++)
                 stream.writeInt(skin.getPaintData()[i]);
         } else
             stream.writeBoolean(false);

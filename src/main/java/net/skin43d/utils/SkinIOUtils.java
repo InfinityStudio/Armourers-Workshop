@@ -5,14 +5,13 @@ import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.Unpooled;
 import net.skin43d.exception.InvalidCubeTypeException;
 import net.skin43d.exception.NewerFileVersionException;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.impl.skin.Skin;
 import net.skin43d.impl.skin.serialize.SkinReader;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 
 import java.io.*;
-import java.nio.ByteBuffer;
 
 public final class SkinIOUtils {
 
@@ -45,7 +44,7 @@ public final class SkinIOUtils {
             ByteBufInputStream stream = new ByteBufInputStream(buffer);
             String name = file.getName().substring(0, file.getName().lastIndexOf('.'));
             boolean isShield = name.endsWith("{L}");
-            return loadSkinFromStream(stream, isShield, Context.instance());
+            return loadSkinFromStream(stream, isShield, Skin43D.instance());
         } catch (FileNotFoundException e) {
             ModLogger.log(Level.WARN, "Skin file not found.");
             ModLogger.log(Level.WARN, file);
@@ -57,7 +56,7 @@ public final class SkinIOUtils {
         return null;
     }
 
-    public static Skin loadSkinFromFileByBuffer(File file, Context context) {
+    public static Skin loadSkinFromFileByBuffer(File file, Skin43D skin43D) {
         try {
             byte[] bytes = new byte[(int) file.length()];
             IOUtils.readFully(new FileInputStream(file), bytes);
@@ -65,7 +64,7 @@ public final class SkinIOUtils {
             ByteBufInputStream stream = new ByteBufInputStream(buffer);
             String name = file.getName().substring(0, file.getName().lastIndexOf('.'));
             boolean isShield = name.endsWith("{L}");
-            return loadSkinFromStream(stream, isShield, context);
+            return loadSkinFromStream(stream, isShield, skin43D);
         } catch (FileNotFoundException e) {
             ModLogger.log(Level.WARN, "Skin file not found.");
             ModLogger.log(Level.WARN, file);
@@ -77,13 +76,13 @@ public final class SkinIOUtils {
         return null;
     }
 
-    public static Skin loadSkinFromStream(InputStream inputStream, boolean isShield, Context context) {
+    public static Skin loadSkinFromStream(InputStream inputStream, boolean isShield, Skin43D skin43D) {
         DataInputStream stream = null;
         Skin skin = null;
 
         try {
             stream = new DataInputStream(new BufferedInputStream(inputStream));
-            skin = new SkinReader().readSkin(stream, context, isShield);
+            skin = new SkinReader().readSkin(stream, skin43D, isShield);
         } catch (FileNotFoundException e) {
             ModLogger.log(Level.WARN, "Skin file not found.");
             e.printStackTrace();

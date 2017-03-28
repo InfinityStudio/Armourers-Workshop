@@ -2,7 +2,7 @@ package net.skin43d.impl.client.render.bakery;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.utils.ForgeDirection;
 import net.skin43d.utils.Rectangle3D;
 import net.skin43d.impl.cubes.ICube;
@@ -30,7 +30,7 @@ public final class SkinBaker {
     public static int[][][] cullFacesOnEquipmentPart(SkinPart skinPart) {
         SkinPart.Data cubeData = skinPart.getCubeData();
         cubeData.setupFaceFlags();
-        skinPart.getBakedPart().totalCubesInPart = new int[Context.instance().getCubeRegistry().getTotalCubes()];
+        skinPart.getBakedPart().totalCubesInPart = new int[Skin43D.instance().getCubeRegistry().getTotalCubes()];
 
         Rectangle3D bounds = skinPart.getPartBounds();
         int[][][] cubeSpace3D = new int[bounds.getWidth()][bounds.getHeight()][bounds.getDepth()];
@@ -165,11 +165,11 @@ public final class SkinBaker {
     }
 
     public static void buildPartDisplayListArray(SkinPart partData, int[][] dyeColour, int[] dyeUseCount, int[][][] cubeArray) {
-        boolean multipassSkinRendering = Context.instance().useMultipassSkinRendering();
+        boolean multipassSkinRendering = Skin43D.instance().useMultipassSkinRendering();
 
         ArrayList<BakedFace>[] renderLists;
 
-        int lodLevels = Context.instance().getMaxLodLevel();
+        int lodLevels = Skin43D.instance().getMaxLodLevel();
         
         /* LOD Indexs
          * 
@@ -184,7 +184,7 @@ public final class SkinBaker {
          * 1 = glowing
          */
 
-        renderLists = (ArrayList<BakedFace>[]) new ArrayList[Context.instance().getNumberOfRenderLayers() * (lodLevels + 1)];
+        renderLists = (ArrayList<BakedFace>[]) new ArrayList[Skin43D.instance().getNumberOfRenderLayers() * (lodLevels + 1)];
 
         for (int i = 0; i < renderLists.length; i++) {
             renderLists[i] = new ArrayList<BakedFace>();
@@ -276,7 +276,7 @@ public final class SkinBaker {
                                 if (showFace) {
                                     byte[] avegC = getAverageRGBAT(ix, iy, iz, lodLevel, cubeArray, cubeData, pb, j);
 
-                                    ICube cube = Context.instance().getCubeRegistry().getCubeFormId(avegC[5]);
+                                    ICube cube = Skin43D.instance().getCubeRegistry().getCubeFormId(avegC[5]);
 
                                     int listIndex = 0;
                                     if (multipassSkinRendering) {
@@ -294,7 +294,7 @@ public final class SkinBaker {
                                             listIndex = 1;
                                         }
                                     }
-                                    int lodIndex = ((lod) * Context.instance().getNumberOfRenderLayers()) + listIndex;
+                                    int lodIndex = ((lod) * Skin43D.instance().getNumberOfRenderLayers()) + listIndex;
 
                                     BakedFace ver = new BakedFace(
                                             (byte) (ix + pb.getX()), (byte) (iy + pb.getY()), (byte) (iz + pb.getZ()),

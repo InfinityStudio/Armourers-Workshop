@@ -3,7 +3,7 @@ package net.skin43d.impl.skin;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.exception.InvalidCubeTypeException;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.impl.client.render.bakery.BakedPart;
 import net.skin43d.impl.cubes.ICube;
 import net.skin43d.impl.cubes.LegacyCubeHelper;
@@ -182,7 +182,7 @@ public class SkinPart implements Skin3D.Part {
         }
 
         public ICube getCube(int index) {
-            return Context.instance().getCubeRegistry().getCubeFormId(cubeId[index]);
+            return Skin43D.instance().getCubeRegistry().getCubeFormId(cubeId[index]);
         }
 
         public void setCubeColour(int index, int side, byte r, byte g, byte b) {

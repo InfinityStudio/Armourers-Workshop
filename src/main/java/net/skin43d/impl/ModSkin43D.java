@@ -9,11 +9,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 /**
  * @author ci010
  */
-@Mod(modid = ModSkin43D.MOD_ID, name = ModSkin43D.NAME, version = ModSkin43D.VERSION)
+@Mod(modid = ModSkin43D.MOD_ID, name = ModSkin43D.NAME, version = ModSkin43D.VERSION, clientSideOnly = true, acceptedMinecraftVersions = "[1.10.2]")
 public class ModSkin43D {
     public static final String MOD_ID = "skin43d", NAME = "Skin For 3D", VERSION = "0.1";
-    public static final String COMMON_PROXY = "net.skin43d.impl.ContextProxy",
-            CLIENT_PROXY = "net.skin43d.impl.client.ClientContextProxy";
+    public static final String COMMON_PROXY = "net.skin43d.impl.Skin43DProxy",
+            CLIENT_PROXY = "net.skin43d.impl.client.ClientSkin43DProxy";
 
     public static final int FILE_VERSION = 12;
 
@@ -22,9 +22,9 @@ public class ModSkin43D {
     public static final int TEXTURE_SIZE = TEXTURE_WIDTH * TEXTURE_HEIGHT;
 
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
-    public static ContextProxy proxy;
+    public static Skin43DProxy proxy;
 
-    static ContextProxy getProxy() {
+    static Skin43DProxy getProxy() {
         return proxy;
     }
 

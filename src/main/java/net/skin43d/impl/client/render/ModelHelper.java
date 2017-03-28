@@ -3,9 +3,8 @@ package net.skin43d.impl.client.render;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import org.lwjgl.opengl.GL11;
-import riskyken.armourersWorkshop.common.data.PlayerPointer;
 import riskyken.EquipmentWardrobeData;
 
 import java.awt.*;
@@ -31,7 +30,7 @@ public final class ModelHelper {
 
     @SideOnly(Side.CLIENT)
     public static int getLocalPlayersSkinColour() {
-        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider()
+        EquipmentWardrobeData ewd = Skin43D.instance().getEquipmentWardrobeProvider()
                 .getEquipmentWardrobeData(Minecraft.getMinecraft().thePlayer);
         if (ewd != null) {
             return ewd.skinColour;
@@ -41,7 +40,7 @@ public final class ModelHelper {
 
     @SideOnly(Side.CLIENT)
     public static int getLocalPlayersHairColour() {
-        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider()
+        EquipmentWardrobeData ewd = Skin43D.instance().getEquipmentWardrobeProvider()
                 .getEquipmentWardrobeData(Minecraft.getMinecraft().thePlayer);
         if (ewd != null) {
             return ewd.hairColour;

@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.texture.AbstractTexture;
@@ -22,15 +22,15 @@ public class SkinModelTexture extends AbstractTexture {
     private final BufferedImage texture;
 
     public SkinModelTexture() {
-        Context context = Context.instance();
-        this.texture = new BufferedImage(context.getTextureWidth(), context.getTextureHeight(), BufferedImage.TYPE_INT_ARGB);
+        Skin43D skin43D = Skin43D.instance();
+        this.texture = new BufferedImage(skin43D.getTextureWidth(), skin43D.getTextureHeight(), BufferedImage.TYPE_INT_ARGB);
     }
 
     public void createTextureForColours(Skin skin, SkinTextureKey cmk) {
-        Context context = Context.instance();
-        for (int ix = 0; ix < context.getTextureWidth(); ix++) {
-            for (int iy = 0; iy < context.getTextureHeight(); iy++) {
-                int paintColour = skin.getPaintData()[ix + (iy * context.getTextureWidth())];
+        Skin43D skin43D = Skin43D.instance();
+        for (int ix = 0; ix < skin43D.getTextureWidth(); ix++) {
+            for (int iy = 0; iy < skin43D.getTextureHeight(); iy++) {
+                int paintColour = skin.getPaintData()[ix + (iy * skin43D.getTextureWidth())];
                 int paintType = BitwiseUtils.getUByteFromInt(paintColour, 0);
                 if (cmk != null) {
                     if (paintType == 255) {

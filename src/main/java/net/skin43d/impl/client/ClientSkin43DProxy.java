@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.skin43d.SkinProvider;
-import net.skin43d.impl.ContextProxy;
+import net.skin43d.impl.Skin43DProxy;
 import net.skin43d.impl.SkinProviderLocal;
 import net.skin43d.impl.Test;
 import net.skin43d.impl.client.render.engine.RenderEngine;
@@ -28,7 +28,7 @@ import java.util.concurrent.Executors;
 /**
  * @author ci010
  */
-public class ClientContextProxy extends ContextProxy {
+public class ClientSkin43DProxy extends Skin43DProxy {
     private SkinProvider provider;
     private RenderEngine renderEngine;
     private ListeningExecutorService service;

@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.SkinProvider;
-import net.skin43d.impl.Context;
+import net.skin43d.impl.Skin43D;
 import net.skin43d.impl.client.render.FirstPersonRenderHelper;
 import net.skin43d.impl.client.render.SkinPartRenderer;
 import net.skin43d.impl.client.render.engine.RenderEngine;
@@ -51,10 +51,10 @@ public class RenderEngineAttach implements RenderEngine {
     private Map<SkinType, EntityEquipmentSlot> mapping = Maps.newHashMap();
 
     public RenderEngineAttach() {
-        mapping.put(Context.instance().getSkinRegistry().getSkinChest(), EntityEquipmentSlot.CHEST);
-        mapping.put(Context.instance().getSkinRegistry().getSkinHead(), EntityEquipmentSlot.HEAD);
-        mapping.put(Context.instance().getSkinRegistry().getSkinFeet(), EntityEquipmentSlot.FEET);
-        mapping.put(Context.instance().getSkinRegistry().getSkinLegs(), EntityEquipmentSlot.LEGS);
+        mapping.put(Skin43D.instance().getSkinRegistry().getSkinChest(), EntityEquipmentSlot.CHEST);
+        mapping.put(Skin43D.instance().getSkinRegistry().getSkinHead(), EntityEquipmentSlot.HEAD);
+        mapping.put(Skin43D.instance().getSkinRegistry().getSkinFeet(), EntityEquipmentSlot.FEET);
+        mapping.put(Skin43D.instance().getSkinRegistry().getSkinLegs(), EntityEquipmentSlot.LEGS);
     }
 
     @SubscribeEvent
@@ -76,11 +76,11 @@ public class RenderEngineAttach implements RenderEngine {
         EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
         if (event.getItemStack() == null) return;
         if (event.getItemStack().getItem() instanceof ItemSword) {
-            Skin sword = Context.instance().getSkinProvider().getSkinInfoForEntity(player, Context.instance().getSkinRegistry().getSkinSword());
+            Skin sword = Skin43D.instance().getSkinProvider().getSkinInfoForEntity(player, Skin43D.instance().getSkinRegistry().getSkinSword());
             if (sword != null) {
                 event.setCanceled(true);
-                FirstPersonRenderHelper.render(sword, this.sword, Context.instance().disableTexturePainting(),
-                        Context.instance().useMultipassSkinRendering(), event);
+                FirstPersonRenderHelper.render(sword, this.sword, Skin43D.instance().disableTexturePainting(),
+                        Skin43D.instance().useMultipassSkinRendering(), event);
             }
         }
     }
@@ -113,7 +113,7 @@ public class RenderEngineAttach implements RenderEngine {
         if (attachedBipedSet.contains(modelBiped))
             return;
         hackModel(renderPlayer);
-        SkinTypeRegistry reg = Context.instance().getSkinRegistry();
+        SkinTypeRegistry reg = Skin43D.instance().getSkinRegistry();
         attachedBipedSet.add(modelBiped);
         modelBiped.bipedHead.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinPartTypeFromName("armourers:head.base")));
         modelBiped.bipedBody.addChild(new ModelRendererAttachment(modelBiped, reg.getSkinPartTypeFromName("armourers:chest.base")));
@@ -234,7 +234,7 @@ public class RenderEngineAttach implements RenderEngine {
                 distance = 0;
             else
                 distance = Minecraft.getMinecraft().thePlayer.getDistance(player.posX, player.posY, player.posZ);
-            if (distance > Context.instance().getRenderDistance()) return;
+            if (distance > Skin43D.instance().getRenderDistance()) return;
 
             //TODO not really sure what EquipmentWardrobeData will handle(except color). Since it has the relationship with slot
             // which will be removed, I comment this out first.
@@ -248,8 +248,8 @@ public class RenderEngineAttach implements RenderEngine {
             //                    (byte) hairColour.getRed(), (byte) hairColour.getGreen(), (byte) hairColour.getBlue()};
             //        }
             byte[] extraColours = null;
-            SkinProvider provider = Context.instance().getSkinProvider();
-            SkinTypeRegistry reg = Context.instance().getSkinRegistry();
+            SkinProvider provider = Skin43D.instance().getSkinProvider();
+            SkinTypeRegistry reg = Skin43D.instance().getSkinRegistry();
 
 //            BakeSkinPart bakedModel = provider.getBakedModel(player, skinPart.getBaseType(), skinPart);
             Skin data = provider.getSkinInfoForEntity(player, skinPart.getBaseType());
@@ -279,7 +279,7 @@ public class RenderEngineAttach implements RenderEngine {
                 GL11.glDisable(GL11.GL_CULL_FACE);
                 GL11.glPopMatrix();
             }
-            if (Context.instance().useSafeTexture())
+            if (Skin43D.instance().useSafeTexture())
                 if (player instanceof AbstractClientPlayer) {
                     AbstractClientPlayer clientPlayer = (AbstractClientPlayer) player;
                     Minecraft.getMinecraft().renderEngine.bindTexture(clientPlayer.getLocationSkin());

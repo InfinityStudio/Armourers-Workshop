@@ -9,8 +9,8 @@ import net.skin43d.skin3d.SkinTypeRegistry;
 /**
  * @author ci010
  */
-public abstract class Context {
-    public static Context instance() {
+public abstract class Skin43D {
+    public static Skin43D instance() {
         return ModSkin43D.proxy;
     }
 
@@ -24,6 +24,34 @@ public abstract class Context {
     public abstract SkinBakery getSkinBakery();
 
     public abstract CubeRegistry getCubeRegistry();
+
+    public abstract Context getContext();
+
+    public interface Context {
+        int getTextureWidth();
+
+        int getTextureHeight();
+
+        int getTextureSize();
+
+        int getFileVersion();
+
+        boolean useSafeTexture();
+
+        boolean useMultipassSkinRendering();
+
+        int getNumberOfRenderLayers();
+
+        double getLodDistance();
+
+        int getMaxLodLevel();
+
+        int getRenderDistance();
+
+        boolean wireframeRender();
+
+        boolean disableTexturePainting();
+    }
 
     public abstract int getTextureWidth();
 
