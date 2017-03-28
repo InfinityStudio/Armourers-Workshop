@@ -18,13 +18,10 @@ public final class SkinIOUtils {
 
     public static boolean saveSkinToFile(File file, Skin skin) {
         File dir = file.getParentFile();
-        if (!dir.exists())
-            dir.mkdirs();
+        if (!dir.exists()) dir.mkdirs();
         DataOutputStream stream = null;
-
         try {
             stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
-//            skin.writeToStream(stream);
             stream.flush();
         } catch (FileNotFoundException e) {
             ModLogger.log(Level.WARN, "Skin file not found.");
@@ -40,35 +37,15 @@ public final class SkinIOUtils {
         return true;
     }
 
-//    public static Skin loadSkinFromFileName(String fileName, EntityPlayerMP player) {
-//        File file = new File(getSkinLibraryDirectory(), "private");
-//        file = new File(file, player.getUniqueID().toString());
-//        file = new File(file, fileName);
-//        return loadSkinFromFile(file);
-//    }
-//
-//    public static Skin loadSkinFromFileName(String fileName) {
-//        File file = new File(getSkinLibraryDirectory(), fileName);
-//        return loadSkinFromFile(file);
-//    }
-
-    public static Skin loadSkinFromFile(File file) {
-        try {
-            return loadSkinFromStream(new FileInputStream(file));
-        } catch (FileNotFoundException e) {
-            ModLogger.log(Level.WARN, "Skin file not found.");
-            ModLogger.log(Level.WARN, file);
-        }
-        return null;
-    }
-
     public static Skin loadSkinFromFileByBuffer(File file) {
         try {
             byte[] bytes = new byte[(int) file.length()];
             IOUtils.readFully(new FileInputStream(file), bytes);
             ByteBuf buffer = Unpooled.wrappedBuffer(bytes);
             ByteBufInputStream stream = new ByteBufInputStream(buffer);
-            return loadSkinFromStream(stream);
+            String name = file.getName().substring(0, file.getName().lastIndexOf('.'));
+            boolean isShield = name.endsWith("{L}");
+            return loadSkinFromStream(stream, isShield);
         } catch (FileNotFoundException e) {
             ModLogger.log(Level.WARN, "Skin file not found.");
             ModLogger.log(Level.WARN, file);
@@ -80,13 +57,13 @@ public final class SkinIOUtils {
         return null;
     }
 
-    public static Skin loadSkinFromStream(InputStream inputStream) {
+    public static Skin loadSkinFromStream(InputStream inputStream, boolean isShield) {
         DataInputStream stream = null;
         Skin skin = null;
 
         try {
             stream = new DataInputStream(new BufferedInputStream(inputStream));
-            skin = new SkinReader().readSkin(stream, Context.instance());
+            skin = new SkinReader().readSkin(stream, Context.instance(), isShield);
         } catch (FileNotFoundException e) {
             ModLogger.log(Level.WARN, "Skin file not found.");
             e.printStackTrace();

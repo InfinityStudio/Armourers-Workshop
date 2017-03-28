@@ -15,7 +15,6 @@ import net.skin43d.impl.skin.Skin;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.Callable;
@@ -55,7 +54,7 @@ public abstract class SkinProviderNBT extends AbstractSkinProvider {
             return new Callable<Skin>() {
                 @Override
                 public Skin call() throws Exception {
-                    return SkinIOUtils.loadSkinFromStream(new FileInputStream(file));
+                    return SkinIOUtils.loadSkinFromFileByBuffer(file);
                 }
             };
         else
@@ -70,7 +69,7 @@ public abstract class SkinProviderNBT extends AbstractSkinProvider {
                         //if there is no such file or internet error, just return null.
                         return null;
                     }
-                    if (file.exists()) return SkinIOUtils.loadSkinFromStream(new FileInputStream(file));
+                    if (file.exists()) return SkinIOUtils.loadSkinFromFileByBuffer(file);
                     return null;
                 }
             };
@@ -83,7 +82,7 @@ public abstract class SkinProviderNBT extends AbstractSkinProvider {
         NBTTagCompound skin43d;
         if (entity.getEntityData().hasKey("skin43d")) {
             skin43d = entity.getEntityData().getCompoundTag("skin43d");
-        } else skin43d = new NBTTagCompound();
+        } else entity.getEntityData().setTag("skin43d", skin43d = new NBTTagCompound());
         skin43d.setString(type.getRegistryName(), location);
     }
 }

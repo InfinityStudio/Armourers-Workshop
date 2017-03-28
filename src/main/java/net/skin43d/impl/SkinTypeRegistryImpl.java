@@ -174,6 +174,11 @@ public final class SkinTypeRegistryImpl implements SkinTypeRegistry {
     }
 
     @Override
+    public SkinType getSkinShield() {
+        return skinShield;
+    }
+
+    @Override
     public SkinType getSkinArrow() {
         return skinArrow;
     }

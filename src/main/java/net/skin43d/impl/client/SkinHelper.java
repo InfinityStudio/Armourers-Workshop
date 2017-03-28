@@ -28,7 +28,6 @@ public final class SkinHelper {
      * Based on @KitsuneKihira texture helper class.
      * https://github.com/kihira/FoxLib/blob/2946cd6033d3039151064ceccfb8d38612d0af02/src/main/scala/kihira/foxlib/client/TextureHelper.scala#L28
      */
-
     public static BufferedImage getBufferedImageSkin(AbstractClientPlayer player) {
         BufferedImage bufferedImage = null;
         ResourceLocation skinloc = DefaultPlayerSkin.getDefaultSkin(player.getUniqueID());
@@ -52,7 +51,6 @@ public final class SkinHelper {
         return bufferedImage;
     }
 
-    //
     public static BufferedImage getBufferedImageSkin(ResourceLocation resourceLocation) {
         Minecraft mc = Minecraft.getMinecraft();
         BufferedImage bufferedImage = null;
@@ -61,8 +59,8 @@ public final class SkinHelper {
         try {
             ITextureObject skintex = mc.getTextureManager().getTexture(resourceLocation);
             if (skintex instanceof ThreadDownloadImageData) {
-                ThreadDownloadImageData imageData = (ThreadDownloadImageData)skintex;
-                bufferedImage  = ObfuscationReflectionHelper.getPrivateValue(ThreadDownloadImageData.class, imageData, "bufferedImage", "field_110560_d", "bpr.h");
+                ThreadDownloadImageData imageData = (ThreadDownloadImageData) skintex;
+                bufferedImage = ObfuscationReflectionHelper.getPrivateValue(ThreadDownloadImageData.class, imageData, "bufferedImage", "field_110560_d", "bpr.h");
             } else {
                 inputStream = Minecraft.getMinecraft().getResourceManager().getResource(resourceLocation).getInputStream();
                 bufferedImage = ImageIO.read(inputStream);
@@ -75,7 +73,8 @@ public final class SkinHelper {
 
         return bufferedImage;
     }
-//
+
+    //
 //    public static BufferedImage getBufferedImageSkin(GameProfile gameProfile) {
 //        BufferedImage bufferedImage = null;
 //        ResourceLocation skinloc = AbstractClientPlayer.locationStevePng;

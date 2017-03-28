@@ -61,7 +61,7 @@ public class ClientContextProxy extends ContextProxy {
         AsyncModelBakery bakery = new AsyncModelBakery(service);
 
         /////TEST CODE//////
-        File file = new File(dir, "c");
+        File file = new File(dir, "d");
         List<Skin> ls = Lists.newArrayList();
         for (File skF : file.listFiles()) {
             Skin skin = SkinIOUtils.loadSkinFromFileByBuffer(skF);

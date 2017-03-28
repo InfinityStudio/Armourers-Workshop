@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.EnumHandSide;
@@ -49,9 +50,9 @@ public class LayerHeldItemOverride implements LayerRenderer<EntityLivingBase> {
         }
     }
 
-    private void renderHeldItem(EntityLivingBase entity, ItemStack p_188358_2_, ItemCameraTransforms.TransformType p_188358_3_, EnumHandSide handSide
+    private void renderHeldItem(EntityLivingBase entity, ItemStack itemStack, ItemCameraTransforms.TransformType p_188358_3_, EnumHandSide handSide
             , float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        if (p_188358_2_ != null) {
+        if (itemStack != null) {
             GlStateManager.pushMatrix();
 
             if (entity.isSneaking()) {
@@ -63,7 +64,7 @@ public class LayerHeldItemOverride implements LayerRenderer<EntityLivingBase> {
             GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
             boolean flag = handSide == EnumHandSide.LEFT;
             GlStateManager.translate((float) (flag ? -1 : 1) / 16.0F, 0.125F, -0.625F);
-            if (p_188358_2_.getItem() instanceof ItemSword) {
+            if (itemStack.getItem() instanceof ItemSword) {
                 Skin skin = Context.instance().getSkinProvider().getSkinInfoForEntity(entity,
                         Context.instance().getSkinRegistry().getSkinSword());
                 if (skin != null) {
@@ -71,11 +72,20 @@ public class LayerHeldItemOverride implements LayerRenderer<EntityLivingBase> {
                     GlStateManager.rotate(180, 1, 0, 1F);
                     GlStateManager.rotate(90, 0, 1, 0);
                     attach.sword.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-                }
-                else
-                    Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, p_188358_2_, p_188358_3_, flag);
+                } else
+                    Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, itemStack, p_188358_3_, flag);
+            } else if (itemStack.getItem() instanceof ItemShield) {
+                Skin skin = Context.instance().getSkinProvider().getSkinInfoForEntity(entity,
+                        Context.instance().getSkinRegistry().getSkinShield());
+                if (skin != null) {
+                    attach.sword.npcEquipmentData = skin;
+                    GlStateManager.rotate(180, 1, 0, 1F);
+                    GlStateManager.rotate(90, 0, 1, 0);
+                    attach.sword.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+                } else
+                    Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, itemStack, p_188358_3_, flag);
             } else
-                Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, p_188358_2_, p_188358_3_, flag);
+                Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, itemStack, p_188358_3_, flag);
 
             GlStateManager.popMatrix();
         }

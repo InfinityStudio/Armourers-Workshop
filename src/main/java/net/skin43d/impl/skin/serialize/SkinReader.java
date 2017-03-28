@@ -23,7 +23,7 @@ import static net.skin43d.impl.skin.Skin.*;
 public class SkinReader {
     private SkinPartReader partSerializer = new SkinPartReader();
 
-    public Skin readSkin(DataInput stream, Context context) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
+    public Skin readSkin(DataInput stream, Context context, boolean isShield) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
         int fileVersion = stream.readInt();
         if (fileVersion > context.getFileVersion())
             throw new NewerFileVersionException();
@@ -55,8 +55,10 @@ public class SkinReader {
             skinType = skinRegistry.getSkinTypeFromRegistryName(regName);
         }
 
-
         if (skinType == null) throw new InvalidCubeTypeException();
+
+        if (skinType == skinRegistry.getSkinSword() && isShield)
+            skinType = skinRegistry.getSkinShield();
 
         if (fileVersion > 7)
             if (stream.readBoolean()) {
@@ -71,6 +73,10 @@ public class SkinReader {
             parts.add(partSerializer.readSkinPart(stream, context, fileVersion));
 
         return new Skin(properties, skinType, paintData, parts);
+    }
+
+    public Skin readSkin(DataInput stream, Context context) throws IOException, NewerFileVersionException, InvalidCubeTypeException {
+        return readSkin(stream, context, false);
     }
 
     public void writeSkin(Skin skin, DataOutputStream stream, Context context) throws IOException {

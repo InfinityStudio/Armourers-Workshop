@@ -50,6 +50,8 @@ public interface SkinTypeRegistry {
 
     SkinType getSkinBow();
 
+    SkinType getSkinShield();
+
     SkinType getSkinArrow();
 
     SkinType getSkinBlock();

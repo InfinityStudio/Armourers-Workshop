@@ -20,10 +20,9 @@ import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.*;
 
 @SideOnly(Side.CLIENT)
 public class SkinPartRenderer extends ModelBase {
-    //    private static final ResourceLocation texture = new ResourceLocation(LibModInfo.ID.toLowerCase(), "textures/armour/cube.png");
     public static final SkinPartRenderer INSTANCE = new SkinPartRenderer();
 
-    public SkinPartRenderer() {
+    private SkinPartRenderer() {
     }
 
     public void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, double distance, boolean doLodLoading) {
@@ -36,7 +35,7 @@ public class SkinPartRenderer extends ModelBase {
         if (cspd == null) return;
         BakedCubes skinModel = cspd.getModelForDye(skinDye, extraColour);
         cspd.getVertexes();
-        boolean multipassSkinRendering = true;//ClientProxy.useMultipassSkinRendering();
+        boolean multipassSkinRendering = Context.instance().useMultipassSkinRendering();
 
         for (int i = 0; i < skinModel.displayList.length; i++) {
             if (skinModel.haveList[i]) {
