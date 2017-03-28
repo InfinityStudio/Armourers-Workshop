@@ -26,7 +26,7 @@ public class Skin43DProxy extends Skin43D {
     private boolean useMultipassSkinRendering = true, useSafeTexture = false, wireframeRender = false, disableTexturePainting = false;
 
     protected void preInit(FMLPreInitializationEvent event) {
-
+//        event.getSuggestedConfigurationFile()
     }
 
     protected void init(FMLInitializationEvent event) {
