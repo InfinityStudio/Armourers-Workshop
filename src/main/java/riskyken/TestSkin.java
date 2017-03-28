@@ -29,21 +29,35 @@ public class TestSkin extends Context {
     private static String steve = "D:\\Storage\\Desktop\\testSkin\\steve1.7.10.png", nsteve = "D:\\Storage\\Desktop\\testSkin\\Steve_skin.png";
 
     public static void main(String[] args) throws IOException {
-        File file = new File(dir, "d");
         TestSkin testSkin = new TestSkin();
         Context.setInstance(testSkin);
         BlockedModelBakery bakery = new BlockedModelBakery();
         BufferedImage bakedTextureBuffer = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
         BufferedImage originalImage = ImageIO.read(new File(nsteve));
 
-        ImageIO.write(bakedTextureBuffer, "png", new File("D:\\Storage\\Desktop\\testSkin\\apply.png"));
-
-        List<Skin> skins = Lists.newArrayList();
+        Skin head = null, chest = null, leg = null, feet = null;
+        File file = new File(dir, "c");
         for (File skF : file.listFiles()) {
             Skin skin = SkinIOUtils.loadSkinFromFileByBuffer(skF, testSkin);
-//            System.out.println("LOADING " + skin);
+            System.out.println("LOADING " + skin);
             bakery.bake(skin);
-            skins.add(skin);
+            if (skin.getSkinType().getName().toUpperCase().equals("HEAD"))
+                head = skin;
+            if (skin.getSkinType().getName().toUpperCase().equals("CHEST"))
+                chest = skin;
+            if (skin.getSkinType().getName().toUpperCase().equals("LEGS"))
+                leg = skin;
+            if (skin.getSkinType().getName().toUpperCase().equals("FEET"))
+                feet = skin;
+        }
+
+
+        Skin[] skins = new Skin[4 * 5];
+        for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
+            skins[skinIndex * 4] = head;
+            skins[1 + skinIndex * 4] = chest;
+            skins[2 + skinIndex * 4] = leg;
+            skins[3 + skinIndex * 4] = feet;
         }
 
         for (int ix = 0; ix < testSkin.getTextureWidth(); ix++)
@@ -51,8 +65,8 @@ public class TestSkin extends Context {
                 bakedTextureBuffer.setRGB(ix, iy, originalImage.getRGB(ix, iy));
         ImageIO.write(bakedTextureBuffer, "png", new File("D:\\Storage\\Desktop\\testSkin\\pre.png"));
 
-        for (int i = 0; i < skins.size(); i++) {
-            Skin skin = skins.get(i);
+        for (int i = 0; i < skins.length; i++) {
+            Skin skin = skins[i];
             if (skin == null || !skin.hasPaintData()) continue;
             System.out.println(skin);
             for (int ix = 0; ix < testSkin.getTextureWidth(); ix++)

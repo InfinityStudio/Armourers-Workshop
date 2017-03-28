@@ -89,7 +89,8 @@ public class EntityTextureInfo {
             lastDyeHashs[i] = -1;
         lastEntitySkinColour = -1;
         lastEntityHairColour = -1;
-        bakedTextureBuffer = new BufferedImage(TEXTURE_WIDTH, TEXTURE_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        //TODO since this is new version of mc, using new texture size
+        bakedTextureBuffer = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
         dirty = true;
         loading = false;
     }
@@ -242,6 +243,11 @@ public class EntityTextureInfo {
                             }
                     }
                 }
+        //try to copy the pixel to fix the new skin problem
+        int[] leg = bakedTextureBuffer.getRGB(0, 16, 16, 16, null, 0, 16);
+        int[] arm = bakedTextureBuffer.getRGB(40, 16, 16, 16, null, 0, 16);
+        bakedTextureBuffer.setRGB(16, 48, 16, 16, leg, 0, 16);
+        bakedTextureBuffer.setRGB(32, 48, 16, 16, arm, 0, 16);
     }
 
     private int dyeColour(int dye, int colour, int dyeIndex, Skin skin) {

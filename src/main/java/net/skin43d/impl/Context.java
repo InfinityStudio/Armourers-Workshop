@@ -13,7 +13,7 @@ public abstract class Context {
     private static Context inst;
 
     public static Context instance() {
-        return inst;
+        return ModSkin43D.proxy;
     }
 
     public static void setInstance(Context context) {
