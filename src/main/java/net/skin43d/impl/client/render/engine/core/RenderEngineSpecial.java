@@ -23,8 +23,11 @@ import net.skin43d.impl.skin.Skin;
 import java.awt.*;
 
 /**
+ * Buggy one
+ *
  * @author ci010
  */
+@Deprecated
 public class RenderEngineSpecial implements RenderEngine {
     public RenderEngineSpecial() {
         buildMap();

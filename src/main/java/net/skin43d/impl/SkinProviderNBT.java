@@ -25,6 +25,7 @@ import java.util.concurrent.Callable;
  * MC Server needs to have a support for this. (Or client transformation/adaption)
  *
  * @author ci010
+ * @see SkinProviderNBT#putLocation(Entity, SkinType, String)
  */
 public abstract class SkinProviderNBT extends AbstractSkinProvider {
     private String cachedDirName;
@@ -40,7 +41,7 @@ public abstract class SkinProviderNBT extends AbstractSkinProvider {
         NBTTagCompound skin43d = null;
         if (entity.getEntityData().hasKey("skin43d")) skin43d = entity.getEntityData().getCompoundTag("skin43d");
         final String loc = skin43d != null ? skin43d.getString(skinType.getRegistryName()) : "";
-        if (loc == null)
+        if (loc.isEmpty())
             return new Callable<Skin>() {
                 @Override
                 public Skin call() throws Exception {
@@ -66,7 +67,8 @@ public abstract class SkinProviderNBT extends AbstractSkinProvider {
                     try {
                         FileUtils.copyURLToFile(url, file);
                     } catch (IOException e) {
-                        //if there is no such file or internet error, just return null.
+                        //if there is no such file or internet error, just return null;
+                        //maybe someday, someone will need to handle this exception;
                         return null;
                     }
                     if (file.exists()) return SkinIOUtils.loadSkinFromFileByBuffer(file);
@@ -78,7 +80,15 @@ public abstract class SkinProviderNBT extends AbstractSkinProvider {
     @Nullable
     protected abstract URL getRemoteSkinLocation(Entity entity, SkinType type, String skinId);
 
-    public static void putLocation(Entity entity, SkinPartType type, String location) {
+    /**
+     * Put the skin location into entity.
+     * The helper method for client adaptor.
+     *
+     * @param entity   The entity will be set skin
+     * @param type     The type of the skin
+     * @param location The location of the skin
+     */
+    public static void putLocation(Entity entity, SkinType type, String location) {
         NBTTagCompound skin43d;
         if (entity.getEntityData().hasKey("skin43d")) {
             skin43d = entity.getEntityData().getCompoundTag("skin43d");

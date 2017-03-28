@@ -1,9 +1,5 @@
 package net.skin43d.skin3d;
 
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.skin43d.skin3d.SkinPartType;
-import net.skin43d.skin3d.SkinType;
-
 import java.util.List;
 
 /**
@@ -13,13 +9,6 @@ import java.util.List;
  * @author RiskyKen
  */
 public interface SkinTypeRegistry {
-
-//    /**
-//     * Register a new skin type.
-//     *
-//     * @param skinType
-//     */
-//    boolean registerSkin(SkinType skinType);
 
     SkinType getSkinTypeFromLegacyId(int id);
 

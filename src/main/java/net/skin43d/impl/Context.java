@@ -3,25 +3,20 @@ package net.skin43d.impl;
 import net.skin43d.EquipmentWardrobeProvider;
 import net.skin43d.SkinProvider;
 import net.skin43d.impl.client.render.bakery.SkinBakery;
-import net.skin43d.skin3d.SkinTypeRegistry;
 import net.skin43d.impl.cubes.CubeRegistry;
+import net.skin43d.skin3d.SkinTypeRegistry;
 
 /**
  * @author ci010
  */
 public abstract class Context {
-    private static Context inst;
-
     public static Context instance() {
         return ModSkin43D.proxy;
     }
 
-    public static void setInstance(Context context) {
-        inst = context;
-    }
-
     public abstract SkinTypeRegistry getSkinRegistry();
 
+    //unused
     public abstract EquipmentWardrobeProvider getEquipmentWardrobeProvider();
 
     public abstract SkinProvider getSkinProvider();

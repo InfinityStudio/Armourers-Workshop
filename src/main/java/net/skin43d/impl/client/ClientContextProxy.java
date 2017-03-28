@@ -54,14 +54,14 @@ public class ClientContextProxy extends ContextProxy {
             this.renderEngine = new RenderEngineAttach();
         else if (type == SkinRenderType.RENDER_EVENT)
             this.renderEngine = new RenderEngineSpecial();
-        else this.renderEngine = new RenderEngineAttach();//TODO handle this exception
+        else this.renderEngine = new RenderEngineAttach();
         this.renderEngine.deploy();
         service = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool());
         MinecraftForge.EVENT_BUS.register(new PlayerTextureHandler());
         AsyncModelBakery bakery = new AsyncModelBakery(service);
 
         /////TEST CODE//////
-        File file = new File(dir, "d");
+        File file = new File(dir, "b");
         List<Skin> ls = Lists.newArrayList();
         for (File skF : file.listFiles()) {
             Skin skin = SkinIOUtils.loadSkinFromFileByBuffer(skF);

@@ -15,6 +15,7 @@ public interface SkinProvider {
     @Nullable
     Skin getSkinInfoForEntity(Entity entity, SkinType skinType);
 
+    //unused
     @Nullable
     ISkinDye getPlayerDyeData(Entity entity, SkinType skinType);
 }
