@@ -92,7 +92,7 @@ public class PlayerTextureHandler {
             textureInfo.updateSkins(skins);
             textureInfo.updateDyes(dyes);
 
-            ResourceLocation replacmentTexture = textureInfo.getReplacedTexture();
+            ResourceLocation nTexture = textureInfo.getReplacedTexture();
             Map<MinecraftProfileTexture.Type, ResourceLocation> mp = textureInfo.getTextureMap();
             if (mp == null)
                 try {
@@ -102,7 +102,7 @@ public class PlayerTextureHandler {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            if (mp != null) mp.put(MinecraftProfileTexture.Type.SKIN, replacmentTexture);
+            if (mp != null) mp.put(MinecraftProfileTexture.Type.SKIN, nTexture);
         }
         profiler.endSection();
     }
@@ -117,8 +117,7 @@ public class PlayerTextureHandler {
         if (player.getGameProfile() == null) return;
         UUID playerPointer = player.getUniqueID();
 //        EquipmentWardrobeData ewd = Context.instance().getEquipmentWardrobeProvider().getEquipmentWardrobeData(player);
-//        if (ewd == null)
-//            return;
+//        if (ewd == null) return;
 
         profiler.startSection("textureReset");
         if (playerTextureMap.containsKey(playerPointer)) {
