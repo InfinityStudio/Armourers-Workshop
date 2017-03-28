@@ -18,6 +18,7 @@ import net.skin43d.impl.Context;
 import net.skin43d.impl.skin.Skin;
 import net.skin43d.skin3d.ISkinDye;
 import net.skin43d.skin3d.SkinTypeRegistry;
+import riskyken.EquipmentWardrobeData;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -45,6 +46,8 @@ public class PlayerTextureHandler {
         }
     }
 
+    private static EquipmentWardrobeData DEFAULT = new EquipmentWardrobeData();
+
     @SubscribeEvent
     public void onConfigChange(ConfigChangedEvent event) {
     }
@@ -66,8 +69,8 @@ public class PlayerTextureHandler {
         if (playerTextureMap.containsKey(uuid)) {
             EntityTextureInfo textureInfo = playerTextureMap.get(uuid);
 
-//            textureInfo.updateHairColour(ewd.hairColour);
-//            textureInfo.updateSkinColour(ewd.skinColour);
+            textureInfo.updateHairColour(DEFAULT.hairColour);
+            textureInfo.updateSkinColour(DEFAULT.skinColour);
             textureInfo.updateTexture(player.getLocationSkin());
             Skin[] skins = new Skin[4 * 5];
             SkinProvider skinProvider = Context.instance().getSkinProvider();
