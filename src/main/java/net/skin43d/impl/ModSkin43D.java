@@ -15,14 +15,8 @@ public class ModSkin43D {
     public static final String COMMON_PROXY = "net.skin43d.impl.Skin43DProxy",
             CLIENT_PROXY = "net.skin43d.impl.client.ClientSkin43DProxy";
 
-    public static final int FILE_VERSION = 12;
-
-    public static final int TEXTURE_WIDTH = 64;
-    public static final int TEXTURE_HEIGHT = 32;
-    public static final int TEXTURE_SIZE = TEXTURE_WIDTH * TEXTURE_HEIGHT;
-
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
-    public static Skin43DProxy proxy;
+    private static Skin43DProxy proxy;
 
     static Skin43DProxy getProxy() {
         return proxy;

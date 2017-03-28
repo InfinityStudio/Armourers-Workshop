@@ -2,6 +2,7 @@ package net.skin43d.impl;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -12,6 +13,8 @@ import riskyken.EquipmentWardrobeData;
 import net.skin43d.skin3d.SkinTypeRegistry;
 import net.skin43d.impl.cubes.CubeRegistry;
 
+import java.io.File;
+
 /**
  * @author ci010
  */
@@ -19,6 +22,7 @@ public class Skin43DProxy extends Skin43D {
     private EquipmentWardrobeProvider equipmentWardrobeHandler;
     private SkinTypeRegistryImpl skinTypeRegistry;
     private CubeRegistry cubeRegistry;
+    private Skin43DConfig context;
 
     private int maxLodLevels = 4;
     private double lodDistance = 32F;
@@ -26,7 +30,8 @@ public class Skin43DProxy extends Skin43D {
     private boolean useMultipassSkinRendering = true, useSafeTexture = false, wireframeRender = false, disableTexturePainting = false;
 
     protected void preInit(FMLPreInitializationEvent event) {
-//        event.getSuggestedConfigurationFile()
+        context = new Skin43DConfig();
+        context.loadConfig(new Configuration(event.getSuggestedConfigurationFile()));
     }
 
     protected void init(FMLInitializationEvent event) {
@@ -52,70 +57,6 @@ public class Skin43DProxy extends Skin43D {
     }
 
     protected void postInit(FMLPostInitializationEvent event) {
-    }
-
-    @Override
-    public int getTextureWidth() {
-        return ModSkin43D.TEXTURE_WIDTH;
-    }
-
-    @Override
-    public int getTextureHeight() {
-        return ModSkin43D.TEXTURE_HEIGHT;
-    }
-
-    @Override
-    public int getTextureSize() {
-        return ModSkin43D.TEXTURE_SIZE;
-    }
-
-    @Override
-    public int getFileVersion() {
-        return ModSkin43D.FILE_VERSION;
-    }
-
-    @Override
-    public boolean useSafeTexture() {
-        return useSafeTexture;
-    }
-
-    @Override
-    public boolean useMultipassSkinRendering() {
-        return useMultipassSkinRendering;
-    }
-
-
-    @Override
-    public int getNumberOfRenderLayers() {
-        if (useMultipassSkinRendering())
-            return 4;
-        else
-            return 2;
-    }
-
-    @Override
-    public double getLodDistance() {
-        return lodDistance;
-    }
-
-    @Override
-    public int getMaxLodLevel() {
-        return maxLodLevels;
-    }
-
-    @Override
-    public int getRenderDistance() {
-        return maxSkinRenderDistance;
-    }
-
-    @Override
-    public boolean wireframeRender() {
-        return wireframeRender;
-    }
-
-    @Override
-    public boolean disableTexturePainting() {
-        return disableTexturePainting;
     }
 
     @Override
@@ -145,6 +86,6 @@ public class Skin43DProxy extends Skin43D {
 
     @Override
     public Context getContext() {
-        return null;
+        return context;
     }
 }

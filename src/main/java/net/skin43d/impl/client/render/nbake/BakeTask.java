@@ -54,9 +54,9 @@ public class BakeTask implements Callable<BakedSkin> {
         Skin43D skin43D = Skin43D.instance();
         if (skin.hasPaintData()) {
             modelTexture = new SkinModelTexture();
-            for (int ix = 0; ix < skin43D.getTextureWidth(); ix++) {
-                for (int iy = 0; iy < skin43D.getTextureHeight(); iy++) {
-                    int paintColour = skin.getPaintData()[ix + (iy * skin43D.getTextureWidth())];
+            for (int ix = 0; ix < skin43D.getContext().getTextureWidth(); ix++) {
+                for (int iy = 0; iy < skin43D.getContext().getTextureHeight(); iy++) {
+                    int paintColour = skin.getPaintData()[ix + (iy * skin43D.getContext().getTextureWidth())];
                     int paintType = BitwiseUtils.getUByteFromInt(paintColour, 0);
 
                     byte r = (byte) (paintColour >>> 16 & 0xFF);

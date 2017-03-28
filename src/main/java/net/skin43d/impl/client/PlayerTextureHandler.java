@@ -53,7 +53,7 @@ public class PlayerTextureHandler {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onRender(RenderPlayerEvent.Pre event) {
-        disableTexturePainting = Skin43D.instance().disableTexturePainting();
+        disableTexturePainting = Skin43D.instance().getContext().disableTexturePainting();
         if (disableTexturePainting)
             return;
         if (!(event.getEntityLiving() instanceof AbstractClientPlayer))

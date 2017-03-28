@@ -47,8 +47,8 @@ public class BakedCubes {
         long time = System.currentTimeMillis();
         if (time < loadedTime + 500) {
             long timePassed = time - loadedTime;
-            return MathHelper.clamp_int((Skin43D.instance().getMaxLodLevel() + 1) - ((int) (timePassed / 125F) + 1), 0,
-                    Skin43D.instance().getMaxLodLevel() + 1);
+            return MathHelper.clamp_int((Skin43D.instance().getContext().getMaxLodLevel() + 1) - ((int) (timePassed / 125F) + 1), 0,
+                    Skin43D.instance().getContext().getMaxLodLevel() + 1);
         }
         return 0;
     }

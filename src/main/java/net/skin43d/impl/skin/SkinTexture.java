@@ -39,11 +39,11 @@ public class SkinTexture {
 
     public SkinTexture() {
         mc = Minecraft.getMinecraft();
-        bufferedSkinImage = new BufferedImage(Skin43D.instance().getTextureWidth(), Skin43D.instance().getTextureHeight(), BufferedImage.TYPE_INT_ARGB);
+        bufferedSkinImage = new BufferedImage(Skin43D.instance().getContext().getTextureWidth(), Skin43D.instance().getContext().getTextureHeight(), BufferedImage.TYPE_INT_ARGB);
         lastProfileHash = -1;
         needsUpdate = true;
         textureId = -1;
-        paintData = new int[Skin43D.instance().getTextureSize()];
+        paintData = new int[Skin43D.instance().getContext().getTextureSize()];
     }
 
     @Override
@@ -112,8 +112,8 @@ public class SkinTexture {
     }
 
     private void applyPlayerToTexture() {
-        for (int ix = 0; ix < Skin43D.instance().getTextureWidth(); ix++) {
-            for (int iy = 0; iy < Skin43D.instance().getTextureHeight(); iy++) {
+        for (int ix = 0; ix < Skin43D.instance().getContext().getTextureWidth(); ix++) {
+            for (int iy = 0; iy < Skin43D.instance().getContext().getTextureHeight(); iy++) {
                 if (bufferedPlayerImage == null) {
                     //ModLogger.log("null player image");
                     break;
@@ -124,9 +124,9 @@ public class SkinTexture {
     }
 
     private void applyPaintToTexture() {
-        for (int ix = 0; ix < Skin43D.instance().getTextureWidth(); ix++) {
-            for (int iy = 0; iy < Skin43D.instance().getTextureHeight(); iy++) {
-                int paintColour = paintData[ix + (iy * Skin43D.instance().getTextureWidth())];
+        for (int ix = 0; ix < Skin43D.instance().getContext().getTextureWidth(); ix++) {
+            for (int iy = 0; iy < Skin43D.instance().getContext().getTextureHeight(); iy++) {
+                int paintColour = paintData[ix + (iy * Skin43D.instance().getContext().getTextureWidth())];
                 PaintType paintType = PaintType.getPaintTypeFromColour(paintColour);
                 if (paintType != PaintType.NONE) {
                     bufferedSkinImage.setRGB(ix, iy, BitwiseUtils.setUByteToInt(paintColour, 0, 255));

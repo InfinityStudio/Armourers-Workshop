@@ -79,8 +79,8 @@ public class RenderEngineAttach implements RenderEngine {
             Skin sword = Skin43D.instance().getSkinProvider().getSkinInfoForEntity(player, Skin43D.instance().getSkinRegistry().getSkinSword());
             if (sword != null) {
                 event.setCanceled(true);
-                FirstPersonRenderHelper.render(sword, this.sword, Skin43D.instance().disableTexturePainting(),
-                        Skin43D.instance().useMultipassSkinRendering(), event);
+                FirstPersonRenderHelper.render(sword, this.sword, Skin43D.instance().getContext().disableTexturePainting(),
+                        Skin43D.instance().getContext().useMultipassSkinRendering(), event);
             }
         }
     }
@@ -234,7 +234,7 @@ public class RenderEngineAttach implements RenderEngine {
                 distance = 0;
             else
                 distance = Minecraft.getMinecraft().thePlayer.getDistance(player.posX, player.posY, player.posZ);
-            if (distance > Skin43D.instance().getRenderDistance()) return;
+            if (distance > Skin43D.instance().getContext().getRenderDistance()) return;
 
             //TODO not really sure what EquipmentWardrobeData will handle(except color). Since it has the relationship with slot
             // which will be removed, I comment this out first.
@@ -279,7 +279,7 @@ public class RenderEngineAttach implements RenderEngine {
                 GL11.glDisable(GL11.GL_CULL_FACE);
                 GL11.glPopMatrix();
             }
-            if (Skin43D.instance().useSafeTexture())
+            if (Skin43D.instance().getContext().useSafeTexture())
                 if (player instanceof AbstractClientPlayer) {
                     AbstractClientPlayer clientPlayer = (AbstractClientPlayer) player;
                     Minecraft.getMinecraft().renderEngine.bindTexture(clientPlayer.getLocationSkin());

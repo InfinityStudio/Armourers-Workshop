@@ -23,14 +23,14 @@ public class SkinModelTexture extends AbstractTexture {
 
     public SkinModelTexture() {
         Skin43D skin43D = Skin43D.instance();
-        this.texture = new BufferedImage(skin43D.getTextureWidth(), skin43D.getTextureHeight(), BufferedImage.TYPE_INT_ARGB);
+        this.texture = new BufferedImage(skin43D.getContext().getTextureWidth(), skin43D.getContext().getTextureHeight(), BufferedImage.TYPE_INT_ARGB);
     }
 
     public void createTextureForColours(Skin skin, SkinTextureKey cmk) {
         Skin43D skin43D = Skin43D.instance();
-        for (int ix = 0; ix < skin43D.getTextureWidth(); ix++) {
-            for (int iy = 0; iy < skin43D.getTextureHeight(); iy++) {
-                int paintColour = skin.getPaintData()[ix + (iy * skin43D.getTextureWidth())];
+        for (int ix = 0; ix < skin43D.getContext().getTextureWidth(); ix++) {
+            for (int iy = 0; iy < skin43D.getContext().getTextureHeight(); iy++) {
+                int paintColour = skin.getPaintData()[ix + (iy * skin43D.getContext().getTextureWidth())];
                 int paintType = BitwiseUtils.getUByteFromInt(paintColour, 0);
                 if (cmk != null) {
                     if (paintType == 255) {

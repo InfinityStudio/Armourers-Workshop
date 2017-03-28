@@ -26,8 +26,8 @@ public class SkinPartRenderer extends ModelBase {
     }
 
     public void renderPart(SkinPart skinPart, float scale, ISkinDye skinDye, byte[] extraColour, double distance, boolean doLodLoading) {
-        int lod = MathHelper.floor_double(distance / Skin43D.instance().getLodDistance());
-        lod = MathHelper.clamp_int(lod, 0, Skin43D.instance().getMaxLodLevel());
+        int lod = MathHelper.floor_double(distance / Skin43D.instance().getContext().getLodDistance());
+        lod = MathHelper.clamp_int(lod, 0, Skin43D.instance().getContext().getMaxLodLevel());
         renderPart(skinPart.getBakedPart(), scale, skinDye, extraColour, lod, doLodLoading);
     }
 
@@ -35,7 +35,7 @@ public class SkinPartRenderer extends ModelBase {
         if (cspd == null) return;
         BakedCubes skinModel = cspd.getModelForDye(skinDye, extraColour);
         cspd.getVertexes();
-        boolean multipassSkinRendering = Skin43D.instance().useMultipassSkinRendering();
+        boolean multipassSkinRendering = Skin43D.instance().getContext().useMultipassSkinRendering();
 
         for (int i = 0; i < skinModel.displayList.length; i++) {
             if (skinModel.haveList[i]) {
@@ -87,11 +87,11 @@ public class SkinPartRenderer extends ModelBase {
                                 GL11.glDisable(GL11.GL_LIGHTING);
                                 ModRenderHelper.disableLighting();
                             }
-                            if (Skin43D.instance().wireframeRender()) {
+                            if (Skin43D.instance().getContext().wireframeRender()) {
                                 GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
                             }
                             skinModel.displayList[i].render();
-                            if (Skin43D.instance().wireframeRender()) {
+                            if (Skin43D.instance().getContext().wireframeRender()) {
                                 GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
                             }
                             if (glowing) {
@@ -104,7 +104,7 @@ public class SkinPartRenderer extends ModelBase {
             }
         }
 
-        if (!Skin43D.instance().useSafeTexture()) {
+        if (!Skin43D.instance().getContext().useSafeTexture()) {
             GL11.glEnable(GL11.GL_TEXTURE_2D);
         }
 
@@ -122,12 +122,12 @@ public class SkinPartRenderer extends ModelBase {
     }
 
     private void renderVertexList(List<BakedFace> vertexList, float scale, ISkinDye skinDye, byte[] extraColour, BakedPart cspd) {
-        if (Skin43D.instance().useSafeTexture())
+        if (Skin43D.instance().getContext().useSafeTexture())
             Tessellator.getInstance().getBuffer().begin(7, DefaultVertexFormats.POSITION_TEX_COLOR_NORMAL);
         else
             Tessellator.getInstance().getBuffer().begin(7, POS_COLOR_NORMAL);
         for (int i = 0; i < vertexList.size(); i++)
-            vertexList.get(i).render(skinDye, extraColour, cspd, Skin43D.instance().useSafeTexture());
+            vertexList.get(i).render(skinDye, extraColour, cspd, Skin43D.instance().getContext().useSafeTexture());
         Tessellator.getInstance().draw();
     }
 }

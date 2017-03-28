@@ -130,7 +130,7 @@ public class Skin implements Skin3D {
         this.paintData = null;
         if (paintData != null) {//Check if the paint data has any paint on it.
             boolean validPaintData = false;
-            for (int i = 0; i < Skin43D.instance().getTextureSize(); i++) {
+            for (int i = 0; i < Skin43D.instance().getContext().getTextureSize(); i++) {
                 if (paintData[i] >>> 16 != 255) {
                     validPaintData = true;
                     break;

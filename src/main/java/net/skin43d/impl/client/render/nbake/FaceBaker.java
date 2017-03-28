@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class FaceBaker {
     public static List<BakedFace>[] buildPartDisplayListArray(SkinPart partData, int[][] dyeColour, int[] dyeUseCount, int[][][] cubeArray) {
-        boolean multipassSkinRendering = Skin43D.instance().useMultipassSkinRendering();
+        boolean multipassSkinRendering = Skin43D.instance().getContext().useMultipassSkinRendering();
 
-        int lodLevels = Skin43D.instance().getMaxLodLevel();
+        int lodLevels = Skin43D.instance().getContext().getMaxLodLevel();
 
         /* LOD Indexs
          *
@@ -31,7 +31,7 @@ public class FaceBaker {
          * 1 = glowing
          */
 
-        List<BakedFace>[] renderLists = new ArrayList[Skin43D.instance().getNumberOfRenderLayers() * (lodLevels + 1)];
+        List<BakedFace>[] renderLists = new ArrayList[Skin43D.instance().getContext().getNumberOfRenderLayers() * (lodLevels + 1)];
 
         for (int i = 0; i < renderLists.length; i++)
             renderLists[i] = new ArrayList<BakedFace>();
@@ -124,7 +124,7 @@ public class FaceBaker {
                                             listIndex = 1;
                                         }
                                     }
-                                    int lodIndex = ((lod) * Skin43D.instance().getNumberOfRenderLayers()) + listIndex;
+                                    int lodIndex = ((lod) * Skin43D.instance().getContext().getNumberOfRenderLayers()) + listIndex;
 
                                     BakedFace ver = new BakedFace(
                                             (byte) (ix + bound.getX()), (byte) (iy + bound.getY()), (byte) (iz + bound.getZ()),

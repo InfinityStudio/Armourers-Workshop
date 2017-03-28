@@ -25,8 +25,8 @@ import java.io.IOException;
 import java.util.Map;
 
 public class EntityTextureInfo {
-    private static final int TEXTURE_WIDTH = Skin43D.instance().getTextureWidth();
-    private static final int TEXTURE_HEIGHT = Skin43D.instance().getTextureHeight();
+    private static final int TEXTURE_WIDTH = Skin43D.instance().getContext().getTextureWidth();
+    private static final int TEXTURE_HEIGHT = Skin43D.instance().getContext().getTextureHeight();
 
     /**
      * The last texture entity had when the replacement texture was made.
