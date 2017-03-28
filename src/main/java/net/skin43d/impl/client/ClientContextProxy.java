@@ -48,7 +48,7 @@ public class ClientContextProxy extends ContextProxy {
     @Override
     protected void init(FMLInitializationEvent event) {
         super.init(event);
-        enableCrossModSupport();
+//        enableCrossModSupport();
         SkinRenderType type = getSkinRenderType();
         if (type == SkinRenderType.MODEL_ATTACHMENT)
             this.renderEngine = new RenderEngineAttach();
@@ -71,6 +71,10 @@ public class ClientContextProxy extends ContextProxy {
         }
         this.provider = new SkinProviderLocal(ls.toArray(new Skin[ls.size()]));
         /////TEST CODE//////
+
+        /*normal code:
+        this.provider = new SkinProviderNBTImpl(bakery, service, "skin43DCache");
+        */
     }
 
     @Override
