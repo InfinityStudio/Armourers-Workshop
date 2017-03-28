@@ -22,7 +22,7 @@ public class ModSkin43D {
     public static final int TEXTURE_SIZE = TEXTURE_WIDTH * TEXTURE_HEIGHT;
 
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
-    private static ContextProxy proxy;
+    public static ContextProxy proxy;
 
     static ContextProxy getProxy() {
         return proxy;

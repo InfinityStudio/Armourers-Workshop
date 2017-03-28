@@ -10,8 +10,14 @@ import net.skin43d.impl.cubes.CubeRegistry;
  * @author ci010
  */
 public abstract class Context {
+    private static Context inst;
+
     public static Context instance() {
-        return ModSkin43D.getProxy();
+        return inst;
+    }
+
+    public static void setInstance(Context context) {
+        inst = context;
     }
 
     public abstract SkinTypeRegistry getSkinRegistry();

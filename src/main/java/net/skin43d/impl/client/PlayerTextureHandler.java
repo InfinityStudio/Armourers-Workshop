@@ -71,6 +71,7 @@ public class PlayerTextureHandler {
 
             textureInfo.updateHairColour(DEFAULT.hairColour);
             textureInfo.updateSkinColour(DEFAULT.skinColour);
+
             textureInfo.updateTexture(player.getLocationSkin());
             Skin[] skins = new Skin[4 * 5];
             SkinProvider skinProvider = Context.instance().getSkinProvider();
@@ -81,16 +82,16 @@ public class PlayerTextureHandler {
                 skins[2 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinLegs());
                 skins[3 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinFeet());
             }
-            ISkinDye[] dyes = new ISkinDye[4 * 5];
-            for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
-                dyes[skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinHead());
-                dyes[1 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinChest());
-                dyes[2 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinLegs());
-                dyes[3 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinFeet());
-            }
+//            ISkinDye[] dyes = new ISkinDye[4 * 5];
+//            for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
+//                dyes[skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinHead());
+//                dyes[1 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinChest());
+//                dyes[2 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinLegs());
+//                dyes[3 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinFeet());
+//            }
 
             textureInfo.updateSkins(skins);
-            textureInfo.updateDyes(dyes);
+//            textureInfo.updateDyes(dyes);
 
             ResourceLocation nTexture = textureInfo.getReplacedTexture();
             Map<MinecraftProfileTexture.Type, ResourceLocation> mp = textureInfo.getTextureMap();

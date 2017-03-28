@@ -1,12 +1,5 @@
 package net.skin43d.impl;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.skin43d.impl.type.sheild.SkinSheild;
-import net.skin43d.skin3d.SkinPartType;
-import net.skin43d.skin3d.SkinType;
-import net.skin43d.utils.ModLogger;
-import org.apache.logging.log4j.Level;
-import net.skin43d.skin3d.SkinTypeRegistry;
 import net.skin43d.impl.type.arrow.SkinArrow;
 import net.skin43d.impl.type.block.SkinBlock;
 import net.skin43d.impl.type.bow.SkinBow;
@@ -15,8 +8,14 @@ import net.skin43d.impl.type.feet.SkinFeet;
 import net.skin43d.impl.type.head.SkinHead;
 import net.skin43d.impl.type.legs.SkinLegs;
 import net.skin43d.impl.type.legs.SkinSkirt;
+import net.skin43d.impl.type.sheild.SkinSheild;
 import net.skin43d.impl.type.sword.SkinSword;
 import net.skin43d.impl.type.wings.SkinWings;
+import net.skin43d.skin3d.SkinPartType;
+import net.skin43d.skin3d.SkinType;
+import net.skin43d.skin3d.SkinTypeRegistry;
+import net.skin43d.utils.ModLogger;
+import org.apache.logging.log4j.Level;
 
 import java.util.*;
 
@@ -39,7 +38,6 @@ public final class SkinTypeRegistryImpl implements SkinTypeRegistry {
     private List<SkinType> skinTypeList;
 
     public SkinTypeRegistryImpl() {
-        MinecraftForge.EVENT_BUS.register(this);
         skinTypeMap = new LinkedHashMap<String, SkinType>();
         skinPartMap = new HashMap<String, SkinPartType>();
         skinTypeList = new ArrayList<SkinType>();

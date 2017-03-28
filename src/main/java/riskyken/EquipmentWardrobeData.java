@@ -103,43 +103,43 @@ public class EquipmentWardrobeData {
         buf.writeInt(this.slotsUnlocked);
     }
     
-    public int autoColourHair(AbstractClientPlayer player) {
-        BufferedImage playerSkin = SkinHelper.getBufferedImageSkin(player);
-
-        int r = 0, g = 0, b = 0;
-
-        for (int ix = 0; ix < 2; ix++) {
-            for (int iy = 0; iy < 1; iy++) {
-                Color c = new Color(playerSkin.getRGB(ix + 11, iy + 3));
-                r += c.getRed();
-                g += c.getGreen();
-                b += c.getBlue();
-            }
-        }
-        r = r / 2;
-        g = g / 2;
-        b = b / 2;
-
-        return new Color(r, g, b).getRGB();
-    }
-
-    public int autoColourSkin(AbstractClientPlayer player) {
-        BufferedImage playerSkin = SkinHelper.getBufferedImageSkin(player);
-
-        int r = 0, g = 0, b = 0;
-
-        for (int ix = 0; ix < 2; ix++) {
-            for (int iy = 0; iy < 1; iy++) {
-                Color c = new Color(playerSkin.getRGB(ix + 11, iy + 13));
-                r += c.getRed();
-                g += c.getGreen();
-                b += c.getBlue();
-            }
-        }
-        r = r / 2;
-        g = g / 2;
-        b = b / 2;
-
-        return new Color(r, g, b).getRGB();
-    }
+//    public int autoColourHair(AbstractClientPlayer player) {
+//        BufferedImage playerSkin = SkinHelper.getBufferedImageSkin(player);
+//
+//        int r = 0, g = 0, b = 0;
+//
+//        for (int ix = 0; ix < 2; ix++) {
+//            for (int iy = 0; iy < 1; iy++) {
+//                Color c = new Color(playerSkin.getRGB(ix + 11, iy + 3));
+//                r += c.getRed();
+//                g += c.getGreen();
+//                b += c.getBlue();
+//            }
+//        }
+//        r = r / 2;
+//        g = g / 2;
+//        b = b / 2;
+//
+//        return new Color(r, g, b).getRGB();
+//    }
+//
+//    public int autoColourSkin(AbstractClientPlayer player) {
+//        BufferedImage playerSkin = SkinHelper.getBufferedImageSkin(player);
+//
+//        int r = 0, g = 0, b = 0;
+//
+//        for (int ix = 0; ix < 2; ix++) {
+//            for (int iy = 0; iy < 1; iy++) {
+//                Color c = new Color(playerSkin.getRGB(ix + 11, iy + 13));
+//                r += c.getRed();
+//                g += c.getGreen();
+//                b += c.getBlue();
+//            }
+//        }
+//        r = r / 2;
+//        g = g / 2;
+//        b = b / 2;
+//
+//        return new Color(r, g, b).getRGB();
+//    }
 }

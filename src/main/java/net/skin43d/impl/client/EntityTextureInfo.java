@@ -265,9 +265,8 @@ public class EntityTextureInfo {
 
     private void createReplacementTexture() {
         TextureManager renderEngine = Minecraft.getMinecraft().renderEngine;
-        if (this.replacementTexture != null) {
+        if (this.replacementTexture != null)
             renderEngine.deleteTexture(this.replacementTexture);
-        }
         SkinTextureObject sto = new SkinTextureObject(this.bakedTextureBuffer);
         //TODO
         this.replacementTexture = new ResourceLocation("skin43d", String.valueOf(this.bakedTextureBuffer.hashCode()));

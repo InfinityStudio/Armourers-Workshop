@@ -1,6 +1,7 @@
 package net.skin43d.impl;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -31,6 +32,7 @@ public class ContextProxy extends Context {
 
     protected void init(FMLInitializationEvent event) {
         skinTypeRegistry = new SkinTypeRegistryImpl();
+        MinecraftForge.EVENT_BUS.register(skinTypeRegistry);
         cubeRegistry = new CubeRegistry();
         equipmentWardrobeHandler = new EquipmentWardrobeProvider() {
             @Override
