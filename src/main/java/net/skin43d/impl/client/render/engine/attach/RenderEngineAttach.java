@@ -6,6 +6,7 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -23,6 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.SkinProvider;
 import net.skin43d.impl.Skin43D;
+import net.skin43d.impl.client.model.IEquipmentModel;
 import net.skin43d.impl.client.render.FirstPersonRenderHelper;
 import net.skin43d.impl.client.render.SkinPartRenderer;
 import net.skin43d.impl.client.render.engine.RenderEngine;
@@ -80,13 +82,22 @@ public class RenderEngineAttach implements RenderEngine {
         EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
         if (event.getItemStack() == null) return;
         Item item = event.getItemStack().getItem();
-        if (item instanceof ItemSword || item instanceof ItemBow || item instanceof ItemShield) {
-            Skin skin = Skin43D.instance().getSkinProvider().getSkinInfoForEntity(player, Skin43D.instance().getSkinRegistry().getSkinSword());
-            if (skin != null) {
-                event.setCanceled(true);
-                FirstPersonRenderHelper.render(skin, this.sword, Skin43D.instance().getContext().disableTexturePainting(),
-                        Skin43D.instance().getContext().useMultipassSkinRendering(), event);
-            }
+        Skin skin = null;
+        IEquipmentModel model = null;
+        if (item instanceof ItemSword) {
+            model = this.sword;
+            skin = Skin43D.instance().getSkinProvider().getSkinInfoForEntity(player, Skin43D.instance().getSkinRegistry().getSkinSword());
+        } else if (item instanceof ItemBow) {
+            model = this.bow;
+            skin = Skin43D.instance().getSkinProvider().getSkinInfoForEntity(player, Skin43D.instance().getSkinRegistry().getSkinBow());
+        } else if (item instanceof ItemShield) {
+            model = this.sword;
+            skin = Skin43D.instance().getSkinProvider().getSkinInfoForEntity(player, Skin43D.instance().getSkinRegistry().getSkinShield());
+        }
+        if (skin != null && model != null) {
+            event.setCanceled(true);
+            FirstPersonRenderHelper.render(skin, model, !Skin43D.instance().getContext().disableTexturePainting(),
+                    Skin43D.instance().getContext().useMultipassSkinRendering(), event);
         }
     }
 

@@ -19,8 +19,7 @@ public class ModelSkinBow extends AbstractSkinModel {
 
     @Override
     public void render(Entity entity, Skin skin, boolean showSkinPaint, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
-        if (skin == null)
-            return;
+        if (skin == null) return;
 
         List<SkinPart> parts = skin.getParts();
         if (entity != null && entity instanceof EntityPlayer) {
@@ -40,27 +39,17 @@ public class ModelSkinBow extends AbstractSkinModel {
 
 //        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinBow);
 
-        if (frame > parts.size() - 1) {
-            frame = parts.size() - 1;
-        }
-
-        if (frame < 0 | frame > parts.size() - 1) {
-            ModLogger.log("wow");
-            return;
-        }
-
+        if (frame > parts.size() - 1) frame = parts.size() - 1;
+        if (frame < 0 | frame > parts.size() - 1) return;
         SkinPart part = parts.get(frame);
-
         GL11.glPushMatrix();
         if (isChild) {
             float f6 = 2.0F;
             GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
             GL11.glTranslatef(0.0F, 24.0F * SCALE, 0.0F);
         }
-
 //        ApiRegistrar.INSTANCE.onRenderEquipmentPart(entity, part.getPartType());
         renderRightArm(part, SCALE, skinDye, extraColour, distance, doLodLoading);
-
         GL11.glPopMatrix();
         GL11.glColor3f(1F, 1F, 1F);
         frame = 0;

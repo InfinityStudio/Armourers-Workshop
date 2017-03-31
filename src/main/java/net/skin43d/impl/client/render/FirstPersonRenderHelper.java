@@ -3,6 +3,7 @@ package net.skin43d.impl.client.render;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
@@ -15,9 +16,9 @@ import net.skin43d.impl.skin.Skin;
  * @author ci010
  */
 public class FirstPersonRenderHelper {
-    private static void transformSideFirstPerson(EnumHandSide hand, float p_187459_2_) {
-        int i = hand == EnumHandSide.RIGHT ? 1 : -1;
-        GlStateManager.translate((float) i * 0.56F, -0.52F + p_187459_2_ * -0.6F, -0.72F);
+    private static void transformSideFirstPerson(EnumHandSide hand, float progress) {
+        int handSide = hand == EnumHandSide.RIGHT ? 1 : -1;
+        GlStateManager.translate((float) handSide * 0.56F, -0.52F + progress * -0.6F, -0.72F);
     }
 
     private static void transformEatFirstPerson(float p_187454_1_, EnumHandSide p_187454_2_, ItemStack p_187454_3_) {
@@ -58,9 +59,9 @@ public class FirstPersonRenderHelper {
         float equipProgress = event.getEquipProgress();
         ItemStack itemStack = event.getItemStack();
         if (itemStack == null) return;
-        boolean flag1 = enumhandside == EnumHandSide.RIGHT;
+        boolean hand = enumhandside == EnumHandSide.RIGHT;
         if (player.isHandActive() && player.getItemInUseCount() > 0 && player.getActiveHand() == event.getHand()) {
-            int j = flag1 ? 1 : -1;
+            int handSide = hand ? 1 : -1;
             switch (itemStack.getItemUseAction()) {
                 case NONE:
                     transformSideFirstPerson(enumhandside, equipProgress);
@@ -75,17 +76,16 @@ public class FirstPersonRenderHelper {
                     break;
                 case BOW:
                     transformSideFirstPerson(enumhandside, equipProgress);
-                    GlStateManager.translate((float) j * -0.2785682F, 0.18344387F, 0.15731531F);
+                    GlStateManager.translate((float) handSide * -0.2785682F, 0.18344387F, 0.15731531F);
                     GlStateManager.rotate(-13.935F, 1.0F, 0.0F, 0.0F);
-                    GlStateManager.rotate((float) j * 35.3F, 0.0F, 1.0F, 0.0F);
-                    GlStateManager.rotate((float) j * -9.785F, 0.0F, 0.0F, 1.0F);
+                    GlStateManager.rotate((float) handSide * 35.3F, 0.0F, 1.0F, 0.0F);
+                    GlStateManager.rotate((float) handSide * -9.785F, 0.0F, 0.0F, 1.0F);
                     float f5 = (float) itemStack.getMaxItemUseDuration() - ((float) player.getItemInUseCount() - partialTicks + 1.0F);
                     float f6 = f5 / 20.0F;
                     f6 = (f6 * f6 + f6 * 2.0F) / 3.0F;
 
-                    if (f6 > 1.0F) {
+                    if (f6 > 1.0F)
                         f6 = 1.0F;
-                    }
 
                     if (f6 > 0.1F) {
                         float f7 = MathHelper.sin((f5 - 0.1F) * 1.3F);
@@ -96,27 +96,23 @@ public class FirstPersonRenderHelper {
 
                     GlStateManager.translate(f6 * 0.0F, f6 * 0.0F, f6 * 0.04F);
                     GlStateManager.scale(1.0F, 1.0F, 1.0F + f6 * 0.2F);
-                    GlStateManager.rotate((float) j * 45.0F, 0.0F, -1.0F, 0.0F);
+                    GlStateManager.rotate((float) handSide * 45.0F, 0.0F, -1.0F, 0.0F);
             }
         } else {
             float f = -0.4F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float) Math.PI);
             float f1 = 0.2F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * ((float) Math.PI * 2F));
             float f2 = -0.2F * MathHelper.sin(swingProgress * (float) Math.PI);
-            int i = flag1 ? 1 : -1;
+            int i = hand ? 1 : -1;
             GlStateManager.translate((float) i * f, f1, f2);
             transformSideFirstPerson(enumhandside, equipProgress);
             transformFirstPerson(enumhandside, swingProgress);
         }
 
-        GlStateManager.rotate(180, 1, 0, 1F);
-        GlStateManager.rotate(90, 0, 1, 0);
-
-////        GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
-//        ModRenderHelper.enableAlphaBlend();
-//        GL11.glEnable(GL11.GL_CULL_FACE);
+        if (itemStack.getItemUseAction() != EnumAction.BOW) {
+            GlStateManager.rotate(180, 1, 0, 1F);
+            GlStateManager.rotate(90, 0, 1, 0);
+        }
         model.render(null, null, skin, showSkinPaint, null, null, true, 0, doLodLoading);
-//        GL11.glPopAttrib();
-//        GL11.glPopMatrix();
         GlStateManager.popMatrix();
     }
 }
