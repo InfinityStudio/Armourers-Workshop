@@ -79,6 +79,7 @@ public abstract class AbstractSkinProvider implements SkinProvider {
     public Skin getSkinInfoForEntity(Entity entity, SkinType skinType) {
         String key = createKey(entity, skinType);
         Skin skin = skinCache.getIfPresent(key);
+        skinCache.put(key, EMPTY);
         if (skin == null) requestSkin(entity, skinType);
         if (skin == EMPTY) return null;
         return skin;

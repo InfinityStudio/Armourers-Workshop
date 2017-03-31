@@ -18,11 +18,11 @@ public class ModelSkinBow extends AbstractSkinModel {
     public int frame = 0;
 
     @Override
-    public void render(Entity entity, Skin armourData, boolean showSkinPaint, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
-        if (armourData == null)
+    public void render(Entity entity, Skin skin, boolean showSkinPaint, ISkinDye skinDye, byte[] extraColour, boolean itemRender, double distance, boolean doLodLoading) {
+        if (skin == null)
             return;
 
-        List<SkinPart> parts = armourData.getParts();
+        List<SkinPart> parts = skin.getParts();
         if (entity != null && entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
             this.isSneak = player.isSneaking();
@@ -62,8 +62,6 @@ public class ModelSkinBow extends AbstractSkinModel {
         renderRightArm(part, SCALE, skinDye, extraColour, distance, doLodLoading);
 
         GL11.glPopMatrix();
-
-
         GL11.glColor3f(1F, 1F, 1F);
         frame = 0;
     }

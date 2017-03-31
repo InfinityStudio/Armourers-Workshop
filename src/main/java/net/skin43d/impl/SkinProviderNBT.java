@@ -51,30 +51,28 @@ public abstract class SkinProviderNBT extends AbstractSkinProvider {
         File dir = new File(Minecraft.getMinecraft().mcDataDir, cachedDirName);
         if (!dir.exists()) dir.mkdir();
         final File file = new File(dir, loc);
-        if (file.exists())
-            return new Callable<Skin>() {
-                @Override
-                public Skin call() throws Exception {
-                    return SkinIOUtils.loadSkinFromFileByBuffer(file);
-                }
-            };
-        else
-            return new Callable<Skin>() {
-                @Override
-                public Skin call() throws Exception {
-                    URL url = getRemoteSkinLocation(entity, skinType, loc);
-                    if (url == null) return null;//unknown skin
-                    try {
-                        FileUtils.copyURLToFile(url, file);
-                    } catch (IOException e) {
-                        //if there is no such file or internet error, just return null;
-                        //maybe someday, someone will need to handle this exception;
-                        return null;
-                    }
-                    if (file.exists()) return SkinIOUtils.loadSkinFromFileByBuffer(file);
+        if (file.exists()) return new Callable<Skin>() {
+            @Override
+            public Skin call() throws Exception {
+                return SkinIOUtils.loadSkinFromFileByBuffer(file);
+            }
+        };
+        else return new Callable<Skin>() {
+            @Override
+            public Skin call() throws Exception {
+                URL url = getRemoteSkinLocation(entity, skinType, loc);
+                if (url == null) return null;//unknown skin
+                try {
+                    FileUtils.copyURLToFile(url, file);
+                } catch (IOException e) {
+                    //if there is no such file or internet error, just return null;
+                    //maybe someday, someone will need to handle this exception;
                     return null;
                 }
-            };
+                if (file.exists()) return SkinIOUtils.loadSkinFromFileByBuffer(file);
+                return null;
+            }
+        };
     }
 
     @Nullable

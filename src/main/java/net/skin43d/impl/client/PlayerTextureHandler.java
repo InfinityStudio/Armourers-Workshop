@@ -11,6 +11,7 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.skin43d.SkinProvider;
@@ -51,6 +52,12 @@ public class PlayerTextureHandler {
     public void onConfigChange(ConfigChangedEvent event) {
     }
 
+    @SubscribeEvent
+    public void reset(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
+        playerTextureMap.clear();
+        System.gc();
+    }
+
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onRender(RenderPlayerEvent.Pre event) {
         disableTexturePainting = Skin43D.instance().getContext().disableTexturePainting();
@@ -81,6 +88,8 @@ public class PlayerTextureHandler {
                 skins[2 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinLegs());
                 skins[3 + skinIndex * 4] = skinProvider.getSkinInfoForEntity(player, reg.getSkinFeet());
             }
+            textureInfo.updateSkins(skins);
+
 //            ISkinDye[] dyes = new ISkinDye[4 * 5];
 //            for (int skinIndex = 0; skinIndex < 5; skinIndex++) {
 //                dyes[skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinHead());
@@ -88,16 +97,14 @@ public class PlayerTextureHandler {
 //                dyes[2 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinLegs());
 //                dyes[3 + skinIndex * 4] = skinProvider.getPlayerDyeData(player, reg.getSkinFeet());
 //            }
-
-            textureInfo.updateSkins(skins);
 //            textureInfo.updateDyes(dyes);
 
             ResourceLocation nTexture = textureInfo.getReplacedTexture();
             Map<MinecraftProfileTexture.Type, ResourceLocation> mp = textureInfo.getTextureMap();
             if (mp == null)
                 try {
-                    mp = (Map<MinecraftProfileTexture.Type, ResourceLocation>) playerTextures.get(Minecraft.getMinecraft().getConnection()
-                            .getPlayerInfo(player.getUniqueID()));
+                    mp = (Map<MinecraftProfileTexture.Type, ResourceLocation>)
+                            playerTextures.get(Minecraft.getMinecraft().getConnection().getPlayerInfo(player.getUniqueID()));
                     textureInfo.setTextureMap(mp);
                 } catch (Exception e) {
                     e.printStackTrace();

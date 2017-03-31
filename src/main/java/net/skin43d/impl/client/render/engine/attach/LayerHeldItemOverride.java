@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -35,7 +36,6 @@ public class LayerHeldItemOverride implements LayerRenderer<EntityLivingBase> {
             GlStateManager.pushMatrix();
 
             if (this.livingEntityRenderer.getMainModel().isChild) {
-                float f = 0.5F;
                 GlStateManager.translate(0.0F, 0.625F, 0.0F);
                 GlStateManager.rotate(-20.0F, -1.0F, 0.0F, 0.0F);
                 GlStateManager.scale(0.5F, 0.5F, 0.5F);
@@ -71,6 +71,16 @@ public class LayerHeldItemOverride implements LayerRenderer<EntityLivingBase> {
                     GlStateManager.rotate(180, 1, 0, 1F);
                     GlStateManager.rotate(90, 0, 1, 0);
                     attach.sword.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+                } else
+                    Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, itemStack, p_188358_3_, flag);
+            } else if (itemStack.getItem() instanceof ItemBow) {
+                Skin skin = Skin43D.instance().getSkinProvider().getSkinInfoForEntity(entity,
+                        Skin43D.instance().getSkinRegistry().getSkinBow());
+                if (skin != null) {
+                    attach.bow.npcEquipmentData = skin;
+                    GlStateManager.rotate(180, 1, 0, 1F);
+                    GlStateManager.rotate(90, 0, 1, 0);
+                    attach.bow.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
                 } else
                     Minecraft.getMinecraft().getItemRenderer().renderItemSide(entity, itemStack, p_188358_3_, flag);
             } else if (itemStack.getItem() instanceof ItemShield) {

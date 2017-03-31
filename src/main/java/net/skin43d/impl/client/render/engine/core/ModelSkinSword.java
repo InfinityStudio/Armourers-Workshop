@@ -36,25 +36,18 @@ public class ModelSkinSword extends AbstractSkinModel {
 //        }
 
 //        ApiRegistrar.INSTANCE.onRenderEquipment(entity, SkinTypeRegistryImpl.skinSword);
-
         for (int i = 0; i < parts.size(); i++) {
             SkinPart part = parts.get(i);
-
             GL11.glPushMatrix();
             if (isChild) {
                 float f6 = 2.0F;
                 GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
                 GL11.glTranslatef(0.0F, 24.0F * SCALE, 0.0F);
             }
-
-            if (part.getPartType().getPartName().equals("base")) {
+            if (part.getPartType().getPartName().equals("base"))
                 renderRightArm(part, SCALE, skinDye, extraColour, distance, doLodLoading);
-            }
-
             GL11.glPopMatrix();
-
         }
-
 
         GL11.glColor3f(1F, 1F, 1F);
     }

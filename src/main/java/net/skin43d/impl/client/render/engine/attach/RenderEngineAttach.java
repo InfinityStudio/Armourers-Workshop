@@ -11,6 +11,9 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
@@ -23,6 +26,7 @@ import net.skin43d.impl.Skin43D;
 import net.skin43d.impl.client.render.FirstPersonRenderHelper;
 import net.skin43d.impl.client.render.SkinPartRenderer;
 import net.skin43d.impl.client.render.engine.RenderEngine;
+import net.skin43d.impl.client.render.engine.core.ModelSkinBow;
 import net.skin43d.impl.client.render.engine.core.ModelSkinSword;
 import net.skin43d.impl.client.render.engine.core.ModelSkinWings;
 import net.skin43d.impl.skin.Skin;
@@ -45,7 +49,7 @@ import java.util.*;
 public class RenderEngineAttach implements RenderEngine {
     private final Set<ModelBiped> attachedBipedSet = Collections.newSetFromMap(new WeakHashMap<ModelBiped, Boolean>());
     ModelSkinSword sword = new ModelSkinSword();
-
+    ModelSkinBow bow = new ModelSkinBow();
     private EntityPlayer targetPlayer;
     private boolean[] renderedSkin = new boolean[7];
     private Map<SkinType, EntityEquipmentSlot> mapping = Maps.newHashMap();
@@ -75,11 +79,12 @@ public class RenderEngineAttach implements RenderEngine {
     public void renderFirstPersonRight(RenderSpecificHandEvent event) {
         EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
         if (event.getItemStack() == null) return;
-        if (event.getItemStack().getItem() instanceof ItemSword) {
-            Skin sword = Skin43D.instance().getSkinProvider().getSkinInfoForEntity(player, Skin43D.instance().getSkinRegistry().getSkinSword());
-            if (sword != null) {
+        Item item = event.getItemStack().getItem();
+        if (item instanceof ItemSword || item instanceof ItemBow || item instanceof ItemShield) {
+            Skin skin = Skin43D.instance().getSkinProvider().getSkinInfoForEntity(player, Skin43D.instance().getSkinRegistry().getSkinSword());
+            if (skin != null) {
                 event.setCanceled(true);
-                FirstPersonRenderHelper.render(sword, this.sword, Skin43D.instance().getContext().disableTexturePainting(),
+                FirstPersonRenderHelper.render(skin, this.sword, Skin43D.instance().getContext().disableTexturePainting(),
                         Skin43D.instance().getContext().useMultipassSkinRendering(), event);
             }
         }
@@ -251,7 +256,6 @@ public class RenderEngineAttach implements RenderEngine {
             SkinProvider provider = Skin43D.instance().getSkinProvider();
             SkinTypeRegistry reg = Skin43D.instance().getSkinRegistry();
 
-//            BakeSkinPart bakedModel = provider.getBakedModel(player, skinPart.getBaseType(), skinPart);
             Skin data = provider.getSkinInfoForEntity(player, skinPart.getBaseType());
             SkinPart partData = null;
             if (data != null) partData = data.getSkinPartFromType(skinPart);

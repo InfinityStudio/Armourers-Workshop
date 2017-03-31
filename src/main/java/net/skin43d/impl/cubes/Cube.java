@@ -34,9 +34,4 @@ public class Cube implements ICube {
     public Block getMinecraftBlock() {
         return null;
     }
-
-//    @Override
-//    public Block getMinecraftBlock() {
-//        return ModBlocks.colourable;
-//    }
 }

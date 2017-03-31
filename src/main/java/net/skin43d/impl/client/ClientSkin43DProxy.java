@@ -61,7 +61,7 @@ public class ClientSkin43DProxy extends Skin43DProxy {
         AsyncModelBakery bakery = new AsyncModelBakery(service);
 
         /////TEST CODE//////
-        File file = new File(dir, "b");
+        File file = new File(dir, "a");
         List<Skin> ls = Lists.newArrayList();
         for (File skF : file.listFiles()) {
             Skin skin = SkinIOUtils.loadSkinFromFileByBuffer(skF);
